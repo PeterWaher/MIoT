@@ -5,4 +5,4 @@ Welcome. This repository contains the projects published in the *Mastering Inter
 
 | Chapter | Title | Project |
 |:-------:|:------|:--------|
-| 1 | Preparing our first Raspberry Pi project | [FirstApp](tree/master/FirstApp) |
+| 1 | Preparing our first Raspberry Pi project | [FirstApp](FirstApp) |
