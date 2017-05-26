@@ -169,21 +169,21 @@ namespace FirstApp
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
-			if (arduino != null)
+			if (this.arduino != null)
 			{
-				arduino.digitalWrite(13, PinState.LOW);
-				arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				arduino.pinMode(1, PinMode.INPUT);      // Relay.
-
-				arduino.Dispose();
-				arduino = null;
+				this.arduino.digitalWrite(13, PinState.LOW);
+				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
+				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+				
+				this.arduino.Dispose();
+				this.arduino = null;
 			}
 
-			if (arduinoUsb != null)
+			if (this.arduinoUsb != null)
 			{
-				arduinoUsb.end();
-				arduinoUsb.Dispose();
-				arduinoUsb = null;
+				this.arduinoUsb.end();
+				this.arduinoUsb.Dispose();
+				this.arduinoUsb = null;
 			}
 
 			Log.Terminate();
