@@ -65,6 +65,12 @@ namespace Sensor
 				await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.D0.Text = Value.ToString());
 		}
 
+		public async void LightUpdated(double Value, int NrDec, string Unit)
+		{
+			string s = Value.ToString("F" + NrDec.ToString()) + " " + Unit;
+			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Light.Text = s);
+		}
+
 		public async void AddLogMessage(string Message)
 		{
 			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>

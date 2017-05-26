@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -32,6 +33,13 @@ namespace Sensor
 	{
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
+		private Timer sampleTimer = null;
+
+		private const int windowSize = 10;
+		private const int spikePos = windowSize / 2;
+		private int?[] windowA0 = new int?[windowSize];
+		private int nrA0 = 0;
+		private int sumA0 = 0;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -121,6 +129,8 @@ namespace Sensor
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+
+							this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
 						};
 
 						this.arduino.AnalogPinUpdated += (pin, value) =>
@@ -157,6 +167,64 @@ namespace Sensor
 			}
 		}
 
+		private void SampleValues(object State)
+		{
+			ushort A0 = this.arduino.analogRead("A0");
+			PinState D0 = this.arduino.digitalRead(0);
+
+			if (this.windowA0[0].HasValue)
+			{
+				this.sumA0 -= this.windowA0[0].Value;
+				this.nrA0--;
+			}
+
+			Array.Copy(this.windowA0, 1, this.windowA0, 0, windowSize - 1);
+			this.windowA0[windowSize - 1] = A0;
+			this.sumA0 += A0;
+			this.nrA0++;
+
+			double AvgA0 = ((double)this.sumA0) / this.nrA0;
+
+			if (this.nrA0 >= windowSize - 2)
+			{
+				int NrLt = 0;
+				int NrGt = 0;
+
+				foreach (int? Value in this.windowA0)
+				{
+					if (Value.HasValue)
+					{
+						if (Value.Value < AvgA0)
+							NrLt++;
+						else if (Value.Value > AvgA0)
+							NrGt++;
+					}
+				}
+
+				if (NrLt == 1 || NrGt == 1)
+				{
+					int? v = this.windowA0[spikePos];
+
+					if (v.HasValue)
+					{
+						if ((NrLt == 1 && v.Value < AvgA0) || (NrGt == 1 && v.Value > AvgA0))
+						{
+							this.sumA0 -= v.Value;
+							this.nrA0--;
+							this.windowA0[spikePos] = null;
+
+							AvgA0 = ((double)this.sumA0) / this.nrA0;
+
+							Log.Informational("Spike removed.", new KeyValuePair<string, object>("A0", v.Value));
+						}
+					}
+				}
+			}
+
+			double Light = (100.0 * AvgA0) / 1024;
+			MainPage.Instance.LightUpdated(Light, 2, "%");
+		}
+
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
 		/// </summary>
@@ -178,21 +246,27 @@ namespace Sensor
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
-			if (arduino != null)
+			if (this.sampleTimer != null)
 			{
-				arduino.digitalWrite(13, PinState.LOW);
-				arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				arduino.pinMode(1, PinMode.INPUT);      // Relay.
-
-				arduino.Dispose();
-				arduino = null;
+				this.sampleTimer.Dispose();
+				this.sampleTimer = null;
 			}
 
-			if (arduinoUsb != null)
+			if (this.arduino != null)
 			{
-				arduinoUsb.end();
-				arduinoUsb.Dispose();
-				arduinoUsb = null;
+				this.arduino.digitalWrite(13, PinState.LOW);
+				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
+				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+
+				this.arduino.Dispose();
+				this.arduino = null;
+			}
+
+			if (this.arduinoUsb != null)
+			{
+				this.arduinoUsb.end();
+				this.arduinoUsb.Dispose();
+				this.arduinoUsb = null;
 			}
 
 			Log.Terminate();

@@ -13,6 +13,8 @@
       <TextBlock FontSize="40" FontWeight="Bold" Name="D0"/>
       <TextBlock Text="A0:" Margin="0,20,0,0"/>
       <TextBlock FontSize="40" FontWeight="Bold" Name="A0"/>
+      <TextBlock Text="Light:" Margin="0,20,0,0"/>
+      <TextBlock FontSize="40" FontWeight="Bold" Name="Light"/>
       <TextBlock Text="Events:" Margin="0,20,0,0"/>
       <StackPanel Name="EventsPanel"/>
     </StackPanel>
