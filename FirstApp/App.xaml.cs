@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Popups;
@@ -74,7 +75,7 @@ namespace FirstApp
 				}
 				// Ensure the current window is active
 				Window.Current.Activate();
-				this.Init();
+				Task.Run((Action)this.Init);
 			}
 		}
 
