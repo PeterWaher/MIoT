@@ -15,6 +15,7 @@
       <TextBlock FontSize="40" FontWeight="Bold" Name="A0"/>
       <TextBlock Text="Light:" Margin="0,20,0,0"/>
       <TextBlock FontSize="40" FontWeight="Bold" Name="Light"/>
+      <CheckBox Name="OutputToFile" Click="OutputToFile_Click">Output values to file.</CheckBox>
       <TextBlock Text="Events:" Margin="0,20,0,0"/>
       <StackPanel Name="EventsPanel"/>
     </StackPanel>

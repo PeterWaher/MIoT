@@ -184,6 +184,7 @@ namespace Sensor
 			this.nrA0++;
 
 			double AvgA0 = ((double)this.sumA0) / this.nrA0;
+			int? v;
 
 			if (this.nrA0 >= windowSize - 2)
 			{
@@ -203,7 +204,7 @@ namespace Sensor
 
 				if (NrLt == 1 || NrGt == 1)
 				{
-					int? v = this.windowA0[spikePos];
+					v = this.windowA0[spikePos];
 
 					if (v.HasValue)
 					{
@@ -221,8 +222,23 @@ namespace Sensor
 				}
 			}
 
-			double Light = (100.0 * AvgA0) / 1024;
-			MainPage.Instance.LightUpdated(Light, 2, "%");
+			int i, n;
+
+			for (AvgA0 = i = n = 0; i < spikePos; i++)
+			{
+				if ((v = this.windowA0[i]).HasValue)
+				{
+					n++;
+					AvgA0 += v.Value;
+				}
+			}
+
+			if (n > 0)
+			{
+				AvgA0 /= n;
+				double Light = (100.0 * AvgA0) / 1024;
+				MainPage.Instance.LightUpdated(Light, 2, "%");
+			}
 		}
 
 		/// <summary>
