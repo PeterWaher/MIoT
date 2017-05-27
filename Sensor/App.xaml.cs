@@ -22,7 +22,10 @@ using Microsoft.Maker.Serial;
 using Waher.Events;
 using Waher.Persistence;
 using Waher.Persistence.Files;
+using Waher.Persistence.Filters;
 using Waher.Script;
+
+using Sensor.History;
 
 namespace Sensor
 {
@@ -40,6 +43,12 @@ namespace Sensor
 		private int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
+
+		private int? lastMinute = null;
+		private double? minLight = null;
+		private double? maxLight = null;
+		private DateTime minLightAt = DateTime.MinValue;
+		private DateTime maxLightAt = DateTime.MinValue;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -167,77 +176,126 @@ namespace Sensor
 			}
 		}
 
-		private void SampleValues(object State)
+		private async void SampleValues(object State)
 		{
-			ushort A0 = this.arduino.analogRead("A0");
-			PinState D0 = this.arduino.digitalRead(0);
-
-			if (this.windowA0[0].HasValue)
+			try
 			{
-				this.sumA0 -= this.windowA0[0].Value;
-				this.nrA0--;
-			}
+				ushort A0 = this.arduino.analogRead("A0");
+				PinState D0 = this.arduino.digitalRead(0);
 
-			Array.Copy(this.windowA0, 1, this.windowA0, 0, windowSize - 1);
-			this.windowA0[windowSize - 1] = A0;
-			this.sumA0 += A0;
-			this.nrA0++;
-
-			double AvgA0 = ((double)this.sumA0) / this.nrA0;
-			int? v;
-
-			if (this.nrA0 >= windowSize - 2)
-			{
-				int NrLt = 0;
-				int NrGt = 0;
-
-				foreach (int? Value in this.windowA0)
+				if (this.windowA0[0].HasValue)
 				{
-					if (Value.HasValue)
-					{
-						if (Value.Value < AvgA0)
-							NrLt++;
-						else if (Value.Value > AvgA0)
-							NrGt++;
-					}
+					this.sumA0 -= this.windowA0[0].Value;
+					this.nrA0--;
 				}
 
-				if (NrLt == 1 || NrGt == 1)
+				Array.Copy(this.windowA0, 1, this.windowA0, 0, windowSize - 1);
+				this.windowA0[windowSize - 1] = A0;
+				this.sumA0 += A0;
+				this.nrA0++;
+
+				double AvgA0 = ((double)this.sumA0) / this.nrA0;
+				int? v;
+
+				if (this.nrA0 >= windowSize - 2)
 				{
-					v = this.windowA0[spikePos];
+					int NrLt = 0;
+					int NrGt = 0;
 
-					if (v.HasValue)
+					foreach (int? Value in this.windowA0)
 					{
-						if ((NrLt == 1 && v.Value < AvgA0) || (NrGt == 1 && v.Value > AvgA0))
+						if (Value.HasValue)
 						{
-							this.sumA0 -= v.Value;
-							this.nrA0--;
-							this.windowA0[spikePos] = null;
+							if (Value.Value < AvgA0)
+								NrLt++;
+							else if (Value.Value > AvgA0)
+								NrGt++;
+						}
+					}
 
-							AvgA0 = ((double)this.sumA0) / this.nrA0;
+					if (NrLt == 1 || NrGt == 1)
+					{
+						v = this.windowA0[spikePos];
 
-							Log.Informational("Spike removed.", new KeyValuePair<string, object>("A0", v.Value));
+						if (v.HasValue)
+						{
+							if ((NrLt == 1 && v.Value < AvgA0) || (NrGt == 1 && v.Value > AvgA0))
+							{
+								this.sumA0 -= v.Value;
+								this.nrA0--;
+								this.windowA0[spikePos] = null;
+
+								AvgA0 = ((double)this.sumA0) / this.nrA0;
+
+								Log.Informational("Spike removed.", new KeyValuePair<string, object>("A0", v.Value));
+							}
 						}
 					}
 				}
-			}
 
-			int i, n;
+				int i, n;
 
-			for (AvgA0 = i = n = 0; i < spikePos; i++)
-			{
-				if ((v = this.windowA0[i]).HasValue)
+				for (AvgA0 = i = n = 0; i < spikePos; i++)
 				{
-					n++;
-					AvgA0 += v.Value;
+					if ((v = this.windowA0[i]).HasValue)
+					{
+						n++;
+						AvgA0 += v.Value;
+					}
+				}
+
+				if (n > 0)
+				{
+					AvgA0 /= n;
+					double Light = (100.0 * AvgA0) / 1024;
+					MainPage.Instance.LightUpdated(Light, 2, "%");
+
+					DateTime Timestamp = DateTime.Now;
+
+					if (!this.minLight.HasValue || Light < this.minLight.Value)
+					{
+						this.minLight = Light;
+						this.minLightAt = Timestamp;
+					}
+
+					if (!this.maxLight.HasValue || Light > this.maxLight.Value)
+					{
+						this.maxLight = Light;
+						this.maxLightAt = Timestamp;
+					}
+
+					if (!this.lastMinute.HasValue)
+						this.lastMinute = Timestamp.Minute;
+					else if (this.lastMinute.Value != Timestamp.Minute)
+					{
+						this.lastMinute = Timestamp.Minute;
+
+						LastMinute Rec = new LastMinute()
+						{
+							Timestamp = Timestamp,
+							Light = Light,
+							Movement = D0,
+							MinLight = this.minLight,
+							MinLightAt = this.minLightAt,
+							MaxLight = this.maxLight,
+							MaxLightAt = this.maxLightAt
+						};
+
+						await Database.Insert(Rec);
+
+						this.minLight = null;
+						this.minLightAt = DateTime.MinValue;
+						this.maxLight = null;
+						this.maxLightAt = DateTime.MinValue;
+
+						foreach (LastMinute Rec2 in await Database.Find<LastMinute>(new FilterFieldLesserThan("Timestamp", Timestamp.AddMinutes(-100))))
+							await Database.Delete(Rec2);
+					}
 				}
 			}
-
-			if (n > 0)
+			catch (Exception ex)
 			{
-				AvgA0 /= n;
-				double Light = (100.0 * AvgA0) / 1024;
-				MainPage.Instance.LightUpdated(Light, 2, "%");
+				Log.Critical(ex);
 			}
 		}
 

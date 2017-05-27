@@ -97,6 +97,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="History\Base.cs" />
+    <Compile Include="History\LastDay.cs" />
+    <Compile Include="History\LastHour.cs" />
+    <Compile Include="History\LastMinute.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
