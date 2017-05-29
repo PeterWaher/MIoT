@@ -154,15 +154,14 @@ namespace Actuator
 
 		internal static App Instance => instance;
 
-		internal void TurnRelay(bool On, string Actor)
+		internal void SetOutput(bool On, string Actor)
 		{
 			if (this.arduino != null)
 			{
 				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
 
-				Log.Informational("Turning relay " + (On ? "ON" : "OFF") + ".", string.Empty);
-
-
+				Log.Informational("Setting Control Parameter.", string.Empty, Actor, 
+					new KeyValuePair<string, object>("Output", On));
 			}
 		}
 

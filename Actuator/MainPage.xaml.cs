@@ -79,7 +79,7 @@ namespace Actuator
 
 		private void Relay_Click(object sender, RoutedEventArgs e)
 		{
-			App.Instance.TurnRelay(this.Relay.IsChecked.HasValue && this.Relay.IsChecked.Value, "Windows user");
+			App.Instance.SetOutput(this.Relay.IsChecked.HasValue && this.Relay.IsChecked.Value, "Windows user");
 		}
 	}
 }

@@ -2448,6 +2448,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        }
+      },
       "Waher.Script/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -4988,6 +5001,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
+        }
+      },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
       "Waher.Script/1.0.0": {
@@ -7538,6 +7564,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        }
+      },
       "Waher.Script/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -10054,6 +10093,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
+        }
+      },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
       "Waher.Script/1.0.0": {
@@ -12613,6 +12665,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        }
+      },
       "Waher.Script/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -15129,6 +15194,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
+        }
+      },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
       "Waher.Script/1.0.0": {
@@ -17686,6 +17764,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
+        }
+      },
+      "Waher.Runtime.Settings/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Persistence": "1.0.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
       "Waher.Script/1.0.0": {
@@ -26337,6 +26428,16 @@
         "waher.runtime.cache.nuspec"
       ]
     },
+    "Waher.Runtime.Settings/1.0.0": {
+      "sha512": "OoZuwYued9fq/s3pfPlMU48dvnXylSckur3i76C2oy1TEyjN1h+3RxO8OggnqTPb45d6nIYAcUjJ6/+dNvFfdw==",
+      "type": "package",
+      "path": "waher.runtime.settings/1.0.0",
+      "files": [
+        "lib/netstandard1.3/Waher.Runtime.Settings.dll",
+        "waher.runtime.settings.1.0.0.nupkg.sha512",
+        "waher.runtime.settings.nuspec"
+      ]
+    },
     "Waher.Script/1.0.0": {
       "sha512": "zQRrImLw5cI80iyoy+ax4naVk1FI5YlYedHWigoqQL87IeKxRPK9fOwYWibL+DT12HwI3PSeCM2mqZ54qWyGSA==",
       "type": "package",
@@ -26374,6 +26475,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.3",
       "Waher.Events >= 1.0.1",
       "Waher.Persistence.FilesLW >= 1.0.1",
+      "Waher.Runtime.Settings >= 1.0.0",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0": []
@@ -26393,6 +26495,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "Waher.Events": "1.0.1",
       "Waher.Persistence.FilesLW": "1.0.1",
+      "Waher.Runtime.Settings": "1.0.0",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
