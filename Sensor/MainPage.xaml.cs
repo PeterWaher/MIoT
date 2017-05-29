@@ -165,6 +165,18 @@ namespace Sensor
 			}
 		}
 
+		private class Events : EventSink
+		{
+			public Events() : base(string.Empty)
+			{
+			}
+
+			public override void Queue(Event Event)
+			{
+				MainPage.instance.AddLogMessage(Event.Message);
+			}
+		}
+
 		private bool WriteNewRecord(StreamWriter w, DateTime TP, ref DateTime Prev, ref bool First)
 		{
 			if (First)
@@ -208,18 +220,6 @@ namespace Sensor
 			w.Write("),");
 
 			return true;
-		}
-
-		private class Events : EventSink
-		{
-			public Events() : base(string.Empty)
-			{
-			}
-
-			public override void Queue(Event Event)
-			{
-				MainPage.instance.AddLogMessage(Event.Message);
-			}
 		}
 
 		private void OutputToFile_Click(object sender, RoutedEventArgs e)
