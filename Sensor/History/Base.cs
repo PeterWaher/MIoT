@@ -34,5 +34,11 @@ namespace Sensor.History
 
 		[DefaultValueDateTimeMinValue]
 		public DateTime MaxLightAt = DateTime.MinValue;
+
+		[DefaultValueNull]
+		public double? AvgLight = null;
+
+		[DefaultValueNull]
+		public double? AvgMovement = null;
 	}
 }

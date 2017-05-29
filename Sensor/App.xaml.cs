@@ -47,6 +47,9 @@ namespace Sensor
 		private int? lastMinute = null;
 		private double? minLight = null;
 		private double? maxLight = null;
+		private double sumLight = 0;
+		private int sumMovement = 0;
+		private int nrTerms = 0;
 		private DateTime minLightAt = DateTime.MinValue;
 		private DateTime maxLightAt = DateTime.MinValue;
 
@@ -250,6 +253,10 @@ namespace Sensor
 					double Light = (100.0 * AvgA0) / 1024;
 					MainPage.Instance.LightUpdated(Light, 2, "%");
 
+					this.sumLight += Light;
+					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
+					this.nrTerms++;
+
 					DateTime Timestamp = DateTime.Now;
 
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
@@ -278,7 +285,9 @@ namespace Sensor
 							MinLight = this.minLight,
 							MinLightAt = this.minLightAt,
 							MaxLight = this.maxLight,
-							MaxLightAt = this.maxLightAt
+							MaxLightAt = this.maxLightAt,
+							AvgLight = (this.nrTerms == 0 ? (double?)null : this.sumLight / this.nrTerms),
+							AvgMovement = (this.nrTerms == 0 ? (double?)null : this.sumMovement / this.nrTerms)
 						};
 
 						await Database.Insert(Rec);
@@ -287,9 +296,142 @@ namespace Sensor
 						this.minLightAt = DateTime.MinValue;
 						this.maxLight = null;
 						this.maxLightAt = DateTime.MinValue;
+						this.sumLight = 0;
+						this.sumMovement = 0;
+						this.nrTerms = 0;
 
 						foreach (LastMinute Rec2 in await Database.Find<LastMinute>(new FilterFieldLesserThan("Timestamp", Timestamp.AddMinutes(-100))))
 							await Database.Delete(Rec2);
+
+						if (Timestamp.Minute == 0)
+						{
+							DateTime From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, Timestamp.Hour, 0, 0).AddHours(-1);
+							DateTime To = From.AddHours(1);
+							int NLight = 0;
+							int NMovement = 0;
+
+							LastHour HourRec = new LastHour()
+							{
+								Timestamp = Timestamp,
+								Light = Light,
+								Movement = D0,
+								MinLight = Rec.MinLight,
+								MinLightAt = Rec.MinLightAt,
+								MaxLight = Rec.MaxLight,
+								MaxLightAt = Rec.MaxLightAt,
+								AvgLight = 0,
+								AvgMovement = 0
+							};
+
+							foreach (LastMinute Rec2 in await Database.Find<LastMinute>(0, 60, new FilterAnd(
+								new FilterFieldLesserThan("Timestamp", To),
+								new FilterFieldGreaterOrEqualTo("Timestamp", From))))
+							{
+								if (Rec2.AvgLight.HasValue)
+								{
+									HourRec.AvgLight += Rec2.AvgLight.Value;
+									NLight++;
+								}
+
+								if (Rec2.AvgMovement.HasValue)
+								{
+									HourRec.AvgMovement += Rec2.AvgMovement.Value;
+									NMovement++;
+								}
+
+								if (Rec2.MinLight<HourRec.MinLight)
+								{
+									HourRec.MinLight = Rec2.MinLight;
+									HourRec.MinLightAt = Rec.MinLightAt;
+								}
+
+								if (Rec2.MaxLight < HourRec.MaxLight)
+								{
+									HourRec.MaxLight = Rec2.MaxLight;
+									HourRec.MaxLightAt = Rec.MaxLightAt;
+								}
+							}
+
+							if (NLight == 0)
+								HourRec.AvgLight = null;
+							else
+								HourRec.AvgLight /= NLight;
+
+							if (NMovement == 0)
+								HourRec.AvgMovement = null;
+							else
+								HourRec.AvgMovement /= NMovement;
+
+							await Database.Insert(HourRec);
+
+							foreach (LastHour Rec2 in await Database.Find<LastHour>(new FilterFieldLesserThan("Timestamp", Timestamp.AddHours(-100))))
+								await Database.Delete(Rec2);
+
+							if (Timestamp.Hour == 0)
+							{
+								From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, 0, 0, 0).AddDays(-1);
+								To = From.AddDays(1);
+								NLight = 0;
+								NMovement = 0;
+
+								LastDay DayRec = new LastDay()
+								{
+									Timestamp = Timestamp,
+									Light = Light,
+									Movement = D0,
+									MinLight = HourRec.MinLight,
+									MinLightAt = HourRec.MinLightAt,
+									MaxLight = HourRec.MaxLight,
+									MaxLightAt = HourRec.MaxLightAt,
+									AvgLight = 0,
+									AvgMovement = 0
+								};
+
+								foreach (LastHour Rec2 in await Database.Find<LastHour>(0, 24, new FilterAnd(
+									new FilterFieldLesserThan("Timestamp", To),
+									new FilterFieldGreaterOrEqualTo("Timestamp", From))))
+								{
+									if (Rec2.AvgLight.HasValue)
+									{
+										DayRec.AvgLight += Rec2.AvgLight.Value;
+										NLight++;
+									}
+
+									if (Rec2.AvgMovement.HasValue)
+									{
+										DayRec.AvgMovement += Rec2.AvgMovement.Value;
+										NMovement++;
+									}
+
+									if (Rec2.MinLight < DayRec.MinLight)
+									{
+										DayRec.MinLight = Rec2.MinLight;
+										DayRec.MinLightAt = Rec.MinLightAt;
+									}
+
+									if (Rec2.MaxLight < DayRec.MaxLight)
+									{
+										DayRec.MaxLight = Rec2.MaxLight;
+										DayRec.MaxLightAt = Rec.MaxLightAt;
+									}
+								}
+
+								if (NLight == 0)
+									DayRec.AvgLight = null;
+								else
+									DayRec.AvgLight /= NLight;
+
+								if (NMovement == 0)
+									DayRec.AvgMovement = null;
+								else
+									DayRec.AvgMovement /= NMovement;
+
+								await Database.Insert(DayRec);
+
+								foreach (LastDay Rec2 in await Database.Find<LastDay>(new FilterFieldLesserThan("Timestamp", Timestamp.AddDays(-100))))
+									await Database.Delete(Rec2);
+							}
+						}
 					}
 				}
 			}
