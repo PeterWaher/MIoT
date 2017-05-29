@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FirstApp")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Chapter 1, Mastering Internet of Things, Preparing our first Raspberry Pi project")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Waher Data AB")]
 [assembly: AssemblyProduct("FirstApp")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © Waher Data AB 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
