@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define GPIO
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Devices.Gpio;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Popups;
@@ -25,6 +28,7 @@ using Waher.Events;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
+using Waher.Runtime.Settings;
 using Waher.Script;
 
 namespace Actuator
@@ -36,8 +40,14 @@ namespace Actuator
 	{
 		private static App instance = null;
 
+#if GPIO
+		private const int gpioOutputPin = 5;
+		private GpioController gpio = null;
+		private GpioPin gpioPin = null;
+#else
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
+#endif
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -97,10 +107,41 @@ namespace Actuator
 			try
 			{
 				Log.Informational("Starting application.");
-				Types.Initialize(typeof(FilesProvider).GetTypeInfo().Assembly, typeof(App).GetTypeInfo().Assembly);
+
+				Types.Initialize(
+					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(App).GetTypeInfo().Assembly,
+					typeof(RuntimeSettings).GetTypeInfo().Assembly);
+
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
 
+#if GPIO
+				gpio = GpioController.GetDefault();
+				if (gpio != null)
+				{
+					if (gpio.TryOpenPin(gpioOutputPin, GpioSharingMode.Exclusive, out this.gpioPin, out GpioOpenStatus Status) &&
+						Status == GpioOpenStatus.PinOpened)
+					{
+						if (this.gpioPin.IsDriveModeSupported(GpioPinDriveMode.Output))
+						{
+							this.gpioPin.SetDriveMode(GpioPinDriveMode.Output);
+
+							bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.gpioPin.Write(LastOn ? GpioPinValue.High : GpioPinValue.Low);
+
+							await MainPage.Instance.OutputSet(LastOn);
+
+							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
+								new KeyValuePair<string, object>("Output", LastOn));
+						}
+						else
+							Log.Error("Output mode not supported for GPIO pin " + gpioOutputPin.ToString());
+					}
+					else
+						Log.Error("Unable to get access to GPIO pin " + gpioOutputPin.ToString());
+				}
+#else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				foreach (DeviceInformation DeviceInfo in Devices)
 				{
@@ -113,19 +154,33 @@ namespace Actuator
 							Log.Informational("USB connection established.");
 
 						this.arduino = new RemoteDevice(this.arduinoUsb);
-						this.arduino.DeviceReady += () =>
+						this.arduino.DeviceReady += async () =>
 						{
-							Log.Informational("Device ready.");
+							try
+							{
+								Log.Informational("Device ready.");
 
-							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-							this.arduino.digitalWrite(13, PinState.HIGH);
+								this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
+								this.arduino.digitalWrite(13, PinState.HIGH);
 
-							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
+								this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
 
-							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(1, 0);             // Relay set to 0
+								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 
-							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+								bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
+								this.arduino.digitalWrite(1, LastOn ? PinState.HIGH : PinState.LOW);
+
+								await MainPage.Instance.OutputSet(LastOn);
+
+								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
+									new KeyValuePair<string, object>("Output", LastOn));
+
+								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+							}
+							catch (Exception ex)
+							{
+								Log.Critical(ex);
+							}
 						};
 
 						this.arduinoUsb.ConnectionFailed += message =>
@@ -142,6 +197,7 @@ namespace Actuator
 						break;
 					}
 				}
+#endif
 			}
 			catch (Exception ex)
 			{
@@ -154,14 +210,24 @@ namespace Actuator
 
 		internal static App Instance => instance;
 
-		internal void SetOutput(bool On, string Actor)
+		internal async Task SetOutput(bool On, string Actor)
 		{
+#if GPIO
+			if (this.gpioPin != null)
+			{
+				this.gpioPin.Write(On ? GpioPinValue.High : GpioPinValue.Low);
+#else
 			if (this.arduino != null)
 			{
 				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
+#endif
+				await RuntimeSettings.SetAsync("Actuator.Output", On);
 
-				Log.Informational("Setting Control Parameter.", string.Empty, Actor, 
+				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
+
+				if (Actor != null)
+					await MainPage.Instance.OutputSet(On);
 			}
 		}
 
@@ -189,6 +255,13 @@ namespace Actuator
 			if (instance == this)
 				instance = null;
 
+#if GPIO
+			if (this.gpioPin != null)
+			{
+				this.gpioPin.Dispose();
+				this.gpioPin = null;
+			}
+#else
 			if (this.arduino != null)
 			{
 				this.arduino.digitalWrite(13, PinState.LOW);
@@ -205,7 +278,7 @@ namespace Actuator
 				this.arduinoUsb.Dispose();
 				this.arduinoUsb = null;
 			}
-
+#endif
 			Log.Terminate();
 
 			deferral.Complete();

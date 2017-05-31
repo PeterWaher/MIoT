@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -31,7 +31,7 @@ namespace Actuator
         {
             this.InitializeComponent();
 
-			this.events = new MainPage.Events();
+			this.events = new Events();
 			Log.Register(this.events);
 
 			if (instance == null)
@@ -65,21 +65,15 @@ namespace Actuator
 			});
 		}
 
-		private class Events : EventSink
-		{
-			public Events() : base(string.Empty)
-			{
-			}
-
-			public override void Queue(Event Event)
-			{
-				MainPage.instance.AddLogMessage(Event.Message);
-			}
-		}
-
 		private void Relay_Click(object sender, RoutedEventArgs e)
 		{
-			App.Instance.SetOutput(this.Relay.IsChecked.HasValue && this.Relay.IsChecked.Value, "Windows user");
+			bool On = this.Relay.IsChecked.HasValue && this.Relay.IsChecked.Value;
+			Task.Run(() => App.Instance.SetOutput(On, null));
+		}
+
+		internal async Task OutputSet(bool On)
+		{
+			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Relay.IsChecked = On);
 		}
 	}
 }
