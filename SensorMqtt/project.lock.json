@@ -26383,16 +26383,16 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\My Projects\\MIoT\\Sensor\\Sensor.csproj",
-      "projectName": "Sensor",
-      "projectPath": "C:\\My Projects\\MIoT\\Sensor\\Sensor.csproj",
-      "projectJsonPath": "C:\\My Projects\\MIoT\\Sensor\\project.json",
+      "projectUniqueName": "C:\\My Projects\\MIoT\\SensorMqtt\\SensorMqtt.csproj",
+      "projectName": "SensorMqtt",
+      "projectPath": "C:\\My Projects\\MIoT\\SensorMqtt\\SensorMqtt.csproj",
+      "projectJsonPath": "C:\\My Projects\\MIoT\\SensorMqtt\\project.json",
       "projectStyle": "ProjectJson"
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "Waher.Events": "1.0.1",
-      "Waher.Persistence.FilesLW": "[1.0.2, )",
+      "Waher.Persistence.FilesLW": "1.0.2",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {

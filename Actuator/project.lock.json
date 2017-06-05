@@ -2420,13 +2420,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -2448,6 +2448,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -2459,19 +2472,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -4975,13 +4975,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -5003,6 +5003,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -5014,19 +5027,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -7536,13 +7536,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -7564,6 +7564,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -7575,19 +7588,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -10067,13 +10067,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -10095,6 +10095,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -10106,19 +10119,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -12637,13 +12637,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -12665,6 +12665,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -12676,19 +12689,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -15168,13 +15168,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -15196,6 +15196,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -15207,19 +15220,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -17738,13 +17738,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.1": {
+      "Waher.Persistence.FilesLW/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.0",
           "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Script": "1.0.0"
+          "Waher.Runtime.Inventory": "1.0.0"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -17766,6 +17766,19 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
+      "Waher.Runtime.Inventory/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "NETStandard.Library": "1.6.1",
+          "Waher.Events": "1.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
+        }
+      },
       "Waher.Runtime.Settings/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -17777,19 +17790,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
-        }
-      },
-      "Waher.Script/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
-        },
-        "compile": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -26408,13 +26408,13 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.1": {
-      "sha512": "24d2/csyMf6UithiIZx136ljMj45qkKIKZ3UuKj2h0Cx/aMMVwE0GOR+vPQgmmgr7gYPpwRSNKorRyvietwWQQ==",
+    "Waher.Persistence.FilesLW/1.0.2": {
+      "sha512": "sitZcM8M/UNmqtNRbyKymJFgPDtO+SzxWX2F+Y5p4pMBjYKpqvMAskaXgi/wbxuCdMisdW5u94BlbSC31EGBuw==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.1",
+      "path": "waher.persistence.fileslw/1.0.2",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.1.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.2.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -26428,6 +26428,16 @@
         "waher.runtime.cache.nuspec"
       ]
     },
+    "Waher.Runtime.Inventory/1.0.0": {
+      "sha512": "x2aIs3WnyVrLTSdR4ayqBjpWQIRL9frQ453VFHauqqmUGTFODY9pEubx1G+HNRiVkF1S0eB0GnsAZ5UlH24LEw==",
+      "type": "package",
+      "path": "waher.runtime.inventory/1.0.0",
+      "files": [
+        "lib/netstandard1.3/Waher.Runtime.Inventory.dll",
+        "waher.runtime.inventory.1.0.0.nupkg.sha512",
+        "waher.runtime.inventory.nuspec"
+      ]
+    },
     "Waher.Runtime.Settings/1.0.0": {
       "sha512": "OoZuwYued9fq/s3pfPlMU48dvnXylSckur3i76C2oy1TEyjN1h+3RxO8OggnqTPb45d6nIYAcUjJ6/+dNvFfdw==",
       "type": "package",
@@ -26436,16 +26446,6 @@
         "lib/netstandard1.3/Waher.Runtime.Settings.dll",
         "waher.runtime.settings.1.0.0.nupkg.sha512",
         "waher.runtime.settings.nuspec"
-      ]
-    },
-    "Waher.Script/1.0.0": {
-      "sha512": "zQRrImLw5cI80iyoy+ax4naVk1FI5YlYedHWigoqQL87IeKxRPK9fOwYWibL+DT12HwI3PSeCM2mqZ54qWyGSA==",
-      "type": "package",
-      "path": "waher.script/1.0.0",
-      "files": [
-        "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.0.nupkg.sha512",
-        "waher.script.nuspec"
       ]
     },
     "Windows-Remote-Arduino/1.4.0": {
@@ -26474,7 +26474,7 @@
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.3",
       "Waher.Events >= 1.0.1",
-      "Waher.Persistence.FilesLW >= 1.0.1",
+      "Waher.Persistence.FilesLW >= 1.0.2",
       "Waher.Runtime.Settings >= 1.0.0",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -26494,7 +26494,7 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "Waher.Events": "1.0.1",
-      "Waher.Persistence.FilesLW": "1.0.1",
+      "Waher.Persistence.FilesLW": "[1.0.2, )",
       "Waher.Runtime.Settings": "1.0.0",
       "Windows-Remote-Arduino": "1.4.0"
     },

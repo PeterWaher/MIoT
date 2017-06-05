@@ -25,9 +25,9 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 
-using Sensor.History;
+using SensorMqtt.History;
 
-namespace Sensor
+namespace SensorMqtt
 {
 	/// <summary>
 	/// Provides application-specific behavior to supplement the default Application class.

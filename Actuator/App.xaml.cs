@@ -29,7 +29,7 @@ using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Settings;
-using Waher.Script;
+using Waher.Runtime.Inventory;
 
 namespace Actuator
 {
