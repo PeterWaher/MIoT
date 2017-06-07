@@ -20,6 +20,9 @@ using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
 using Waher.Events;
+using Waher.Networking;
+using Waher.Networking.MQTT;
+using Waher.Networking.Sniffers;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
@@ -37,6 +40,7 @@ namespace SensorMqtt
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
+		private MqttClient mqttClient = null;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -166,6 +170,10 @@ namespace SensorMqtt
 						};
 
 						this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
+
+						this.mqttClient = new MqttClient("iot.eclipse.org", 1883, false, "UnitTest", string.Empty, new LogSniffer());
+						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT state changed: " + state.ToString());
+
 						break;
 					}
 				}
@@ -461,6 +469,12 @@ namespace SensorMqtt
 		private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
+
+			if (this.mqttClient != null)
+			{
+				this.mqttClient.Dispose();
+				this.mqttClient = null;
+			}
 
 			if (this.sampleTimer != null)
 			{
