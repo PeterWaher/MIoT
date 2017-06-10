@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -27,6 +28,7 @@ using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
+using Waher.Runtime.Settings;
 
 using SensorMqtt.History;
 
@@ -56,6 +58,7 @@ namespace SensorMqtt
 		private int nrTerms = 0;
 		private DateTime minLightAt = DateTime.MinValue;
 		private DateTime maxLightAt = DateTime.MinValue;
+		private string deviceId;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -114,7 +117,12 @@ namespace SensorMqtt
 			try
 			{
 				Log.Informational("Starting application.");
-				Types.Initialize(typeof(FilesProvider).GetTypeInfo().Assembly, typeof(App).GetTypeInfo().Assembly);
+
+				Types.Initialize(
+					typeof(FilesProvider).GetTypeInfo().Assembly, 
+					typeof(RuntimeSettings).GetTypeInfo().Assembly, 
+					typeof(App).GetTypeInfo().Assembly);
+
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
 
@@ -157,6 +165,9 @@ namespace SensorMqtt
 						this.arduino.DigitalPinUpdated += (pin, value) =>
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
+
+							if (pin == 0)
+								this.PublishMovement(value == PinState.HIGH);
 						};
 
 						this.arduinoUsb.ConnectionFailed += message =>
@@ -171,7 +182,16 @@ namespace SensorMqtt
 
 						this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
 
-						this.mqttClient = new MqttClient("iot.eclipse.org", 1883, false, "UnitTest", string.Empty, new LogSniffer());
+						this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
+						if (string.IsNullOrEmpty(this.deviceId))
+						{
+							this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+							await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
+						}
+
+						Log.Informational("Device ID: " + this.deviceId);
+
+						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);   // Add a sniffer to view communication: , new LogSniffer());
 						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT state changed: " + state.ToString());
 
 						break;
@@ -259,7 +279,7 @@ namespace SensorMqtt
 				{
 					AvgA0 /= n;
 					double Light = (100.0 * AvgA0) / 1024;
-					MainPage.Instance.LightUpdated(Light, 2, "%");
+					this.PublishLight(Light, 2, "%");
 
 					this.sumLight += Light;
 					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
@@ -347,7 +367,7 @@ namespace SensorMqtt
 									NMovement++;
 								}
 
-								if (Rec2.MinLight<HourRec.MinLight)
+								if (Rec2.MinLight < HourRec.MinLight)
 								{
 									HourRec.MinLight = Rec2.MinLight;
 									HourRec.MinLightAt = Rec.MinLightAt;
@@ -446,6 +466,32 @@ namespace SensorMqtt
 			catch (Exception ex)
 			{
 				Log.Critical(ex);
+			}
+		}
+
+		public void PublishLight(double Light, int NrDec, string Unit)
+		{
+			MainPage.Instance.LightUpdated(Light, 2, "%");
+
+			if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+			{
+				string ValueStr = Light.ToString("F" + NrDec.ToString()).
+					Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
+
+				if (!string.IsNullOrEmpty(Unit))
+					ValueStr += " " + Unit;
+
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Light", MqttQualityOfService.AtLeastOne, false,
+					Encoding.UTF8.GetBytes(ValueStr));
+			}
+		}
+
+		public void PublishMovement(bool On)
+		{
+			if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+			{
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtLeastOne, false,
+					Encoding.UTF8.GetBytes(On.ToString()));
 			}
 		}
 
