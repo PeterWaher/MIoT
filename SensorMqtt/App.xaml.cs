@@ -59,6 +59,12 @@ namespace SensorMqtt
 		private DateTime minLightAt = DateTime.MinValue;
 		private DateTime maxLightAt = DateTime.MinValue;
 		private string deviceId;
+		private double? lastLight = null;
+		private bool? lastMovement = null;
+		private double? lastPublishedLight = null;
+		private bool? lastPublishedMovement = null;
+		private DateTime lastLightPublishTime = DateTime.MinValue;
+		private DateTime lastMovementPublishTime = DateTime.MinValue;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -119,8 +125,8 @@ namespace SensorMqtt
 				Log.Informational("Starting application.");
 
 				Types.Initialize(
-					typeof(FilesProvider).GetTypeInfo().Assembly, 
-					typeof(RuntimeSettings).GetTypeInfo().Assembly, 
+					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -191,8 +197,9 @@ namespace SensorMqtt
 
 						Log.Informational("Device ID: " + this.deviceId);
 
-						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);   // Add a sniffer to view communication: , new LogSniffer());
-						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT state changed: " + state.ToString());
+						//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
+						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
+						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
 
 						break;
 					}
@@ -279,7 +286,7 @@ namespace SensorMqtt
 				{
 					AvgA0 /= n;
 					double Light = (100.0 * AvgA0) / 1024;
-					this.PublishLight(Light, 2, "%");
+					this.PublishLight(Light);
 
 					this.sumLight += Light;
 					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
@@ -469,30 +476,82 @@ namespace SensorMqtt
 			}
 		}
 
-		public void PublishLight(double Light, int NrDec, string Unit)
+		private void PublishLight(double Light)
 		{
-			MainPage.Instance.LightUpdated(Light, 2, "%");
+			DateTime Now = DateTime.Now;
 
-			if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+			this.lastLight = Light;
+
+			if ((!this.lastPublishedLight.HasValue ||
+				(Math.Abs(this.lastPublishedLight.Value - Light) >= 1.0) ||
+				(Now - this.lastLightPublishTime).TotalSeconds >= 15.0) &&
+				this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
 			{
-				string ValueStr = Light.ToString("F" + NrDec.ToString()).
-					Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
+				this.lastPublishedLight = Light;
+				this.lastLightPublishTime = Now;
 
-				if (!string.IsNullOrEmpty(Unit))
-					ValueStr += " " + Unit;
+				string ValueStr = ToString(Light, 2) + " %";
 
 				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Light", MqttQualityOfService.AtLeastOne, false,
 					Encoding.UTF8.GetBytes(ValueStr));
+
+				this.PublishLastJson();
+			}
+
+			MainPage.Instance.LightUpdated(Light, 2, "%");
+		}
+
+		internal static string ToString(double Value, int NrDec)
+		{
+			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
+		}
+
+		private void PublishMovement(bool On)
+		{
+			DateTime Now = DateTime.Now;
+
+			this.lastMovement = On;
+
+			if ((!this.lastPublishedMovement.HasValue ||
+				(this.lastPublishedMovement.Value ^ On) ||
+				(Now - this.lastMovementPublishTime).TotalSeconds >= 15.0) &&
+				this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+			{
+				this.lastPublishedMovement = On;
+				this.lastMovementPublishTime = Now;
+
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtLeastOne, false,
+					Encoding.UTF8.GetBytes(On.ToString()));
+
+				this.PublishLastJson();
 			}
 		}
 
-		public void PublishMovement(bool On)
+		private void PublishLastJson()
 		{
-			if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+			StringBuilder Json = new StringBuilder();
+
+			Json.Append("{\"ts\":\"");
+			Json.Append(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			Json.Append('"');
+
+			if (this.lastLight.HasValue)
 			{
-				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtLeastOne, false,
-					Encoding.UTF8.GetBytes(On.ToString()));
+				Json.Append(",\"light\":{\"value\":");
+				Json.Append(ToString(this.lastLight.Value, 2));
+				Json.Append(",\"unit\":\"%\"}");
 			}
+
+			if (this.lastMovement.HasValue)
+			{
+				Json.Append(",\"movement\":");
+				Json.Append(this.lastMovement.Value ? "true" : "false");
+			}
+
+			Json.Append('}');
+
+			this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtLeastOne, false,
+				Encoding.UTF8.GetBytes(Json.ToString()));
 		}
 
 		/// <summary>
