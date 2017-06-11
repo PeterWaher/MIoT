@@ -143,7 +143,7 @@ namespace Sensor
 
 			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 			{
-				this.EventsPanel.Children.Insert(0, new TextBlock() { Text = Message });
+				this.EventsPanel.Children.Insert(0, new TextBlock() { Text = Message, TextWrapping = TextWrapping.Wrap });
 
 				while (this.EventsPanel.Children.Count > 1000)
 					this.EventsPanel.Children.RemoveAt(1000);
