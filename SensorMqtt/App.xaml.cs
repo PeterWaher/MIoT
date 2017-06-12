@@ -187,23 +187,22 @@ namespace SensorMqtt
 						};
 
 						this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
-
-						this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
-						if (string.IsNullOrEmpty(this.deviceId))
-						{
-							this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
-							await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
-						}
-
-						Log.Informational("Device ID: " + this.deviceId);
-
-						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
-						//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
-						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
-
 						break;
 					}
 				}
+
+				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
+				if (string.IsNullOrEmpty(this.deviceId))
+				{
+					this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+					await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
+				}
+
+				Log.Informational("Device ID: " + this.deviceId);
+
+				this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
+				//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
+				this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
 			}
 			catch (Exception ex)
 			{
