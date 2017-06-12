@@ -1,0 +1,21 @@
+﻿{
+  "dependencies": {
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
+    "Waher.Events": "1.0.1",
+    "Waher.Networking.MQTT.UWP": "1.0.2",
+    "Waher.Persistence.FilesLW": "1.0.2",
+    "Waher.Runtime.Settings": "1.0.0",
+    "Windows-Remote-Arduino": "1.4.0"
+  },
+  "frameworks": {
+    "uap10.0": {}
+  },
+  "runtimes": {
+    "win10-arm": {},
+    "win10-arm-aot": {},
+    "win10-x86": {},
+    "win10-x86-aot": {},
+    "win10-x64": {},
+    "win10-x64-aot": {}
+  }
+}
