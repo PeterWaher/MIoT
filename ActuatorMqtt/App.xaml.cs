@@ -216,6 +216,9 @@ namespace ActuatorMqtt
 				this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
 				//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
 				this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
+
+				DateTime Now = DateTime.Now;
+				this.reconnectionTimer = new Timer(this.CheckConnection, null, 120000 - Now.Millisecond - Now.Second * 1000, 60000);
 			}
 			catch (Exception ex)
 			{
@@ -223,6 +226,19 @@ namespace ActuatorMqtt
 
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
+			}
+		}
+
+		private void CheckConnection(object State)
+		{
+			try
+			{
+				if (this.mqttClient != null && (this.mqttClient.State == MqttState.Error || this.mqttClient.State == MqttState.Offline))
+					this.mqttClient.Reconnect();
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
 			}
 		}
 
@@ -246,6 +262,23 @@ namespace ActuatorMqtt
 
 				if (Actor != null)
 					await MainPage.Instance.OutputSet(On);
+
+				if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
+				{
+					this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/On", MqttQualityOfService.AtLeastOnce, true,
+						Encoding.UTF8.GetBytes(On.ToString()));
+
+					StringBuilder Json = new StringBuilder();
+
+					Json.Append("{\"ts\":\"");
+					Json.Append(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+					Json.Append("\",\"on\":");
+					Json.Append(On ? "true" : "false");
+					Json.Append('}');
+
+					byte[] Data = Encoding.UTF8.GetBytes(Json.ToString());
+					this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtLeastOnce, true, Data);
+				}
 			}
 		}
 
@@ -272,6 +305,18 @@ namespace ActuatorMqtt
 
 			if (instance == this)
 				instance = null;
+
+			if (this.mqttClient != null)
+			{
+				this.mqttClient.Dispose();
+				this.mqttClient = null;
+			}
+
+			if (this.reconnectionTimer != null)
+			{
+				this.reconnectionTimer.Dispose();
+				this.reconnectionTimer = null;
+			}
 
 #if GPIO
 			if (this.gpioPin != null)
