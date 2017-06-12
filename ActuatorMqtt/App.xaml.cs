@@ -215,7 +215,32 @@ namespace ActuatorMqtt
 
 				this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
 				//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
-				this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
+				this.mqttClient.OnStateChanged += (sender, state) =>
+				{
+					Log.Informational("MQTT client state changed: " + state.ToString());
+
+					if (state == MqttState.Connected)
+						this.mqttClient.SUBSCRIBE("Waher/MIOT/" + this.deviceId + "/Set/+", MqttQualityOfService.AtLeastOnce);
+				};
+
+				this.mqttClient.OnContentReceived += async (sender, e) =>
+				{
+					try
+					{
+						if (e.Topic.EndsWith("/On"))
+						{
+							string s = Encoding.UTF8.GetString(e.Data);
+							s = s.Substring(0, 1).ToUpper() + s.Substring(1).ToLower();
+
+							if (bool.TryParse(s, out bool On))
+								await this.SetOutput(On, "MQTT");
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
 
 				DateTime Now = DateTime.Now;
 				this.reconnectionTimer = new Timer(this.CheckConnection, null, 120000 - Now.Millisecond - Now.Second * 1000, 60000);
