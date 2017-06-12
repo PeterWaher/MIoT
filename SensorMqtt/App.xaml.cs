@@ -197,8 +197,8 @@ namespace SensorMqtt
 
 						Log.Informational("Device ID: " + this.deviceId);
 
-						//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
-						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
+						this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
+						//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
 						this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
 
 						break;
@@ -218,6 +218,7 @@ namespace SensorMqtt
 		{
 			try
 			{
+				DateTime Timestamp = DateTime.Now;
 				ushort A0 = this.arduino.analogRead("A0");
 				PinState D0 = this.arduino.digitalRead(0);
 
@@ -291,8 +292,6 @@ namespace SensorMqtt
 					this.sumLight += Light;
 					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
-
-					DateTime Timestamp = DateTime.Now;
 
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
 					{
@@ -469,6 +468,12 @@ namespace SensorMqtt
 						}
 					}
 				}
+
+				if (Timestamp.Second == 0 && this.mqttClient != null &&
+					(this.mqttClient.State == MqttState.Error || this.mqttClient.State == MqttState.Offline))
+				{
+					this.mqttClient.Reconnect();
+				}
 			}
 			catch (Exception ex)
 			{
@@ -483,7 +488,7 @@ namespace SensorMqtt
 			this.lastLight = Light;
 
 			if ((!this.lastPublishedLight.HasValue ||
-				(Math.Abs(this.lastPublishedLight.Value - Light) >= 1.0) ||
+				Math.Abs(this.lastPublishedLight.Value - Light) >= 1.0 ||
 				(Now - this.lastLightPublishTime).TotalSeconds >= 15.0) &&
 				this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
 			{
@@ -492,7 +497,7 @@ namespace SensorMqtt
 
 				string ValueStr = ToString(Light, 2) + " %";
 
-				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Light", MqttQualityOfService.AtLeastOne, false,
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Light", MqttQualityOfService.AtMostOnce, false,
 					Encoding.UTF8.GetBytes(ValueStr));
 
 				this.PublishLastJson();
@@ -513,14 +518,14 @@ namespace SensorMqtt
 			this.lastMovement = On;
 
 			if ((!this.lastPublishedMovement.HasValue ||
-				(this.lastPublishedMovement.Value ^ On) ||
+				this.lastPublishedMovement.Value ^ On ||
 				(Now - this.lastMovementPublishTime).TotalSeconds >= 15.0) &&
 				this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
 			{
 				this.lastPublishedMovement = On;
 				this.lastMovementPublishTime = Now;
 
-				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtLeastOne, false,
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtMostOnce, false,
 					Encoding.UTF8.GetBytes(On.ToString()));
 
 				this.PublishLastJson();
@@ -550,8 +555,8 @@ namespace SensorMqtt
 
 			Json.Append('}');
 
-			this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtLeastOne, false,
-				Encoding.UTF8.GetBytes(Json.ToString()));
+			byte[] Data = Encoding.UTF8.GetBytes(Json.ToString());
+			this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtMostOnce, false, Data);
 		}
 
 		/// <summary>
