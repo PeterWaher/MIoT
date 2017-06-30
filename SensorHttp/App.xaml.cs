@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.Devices.Enumeration;
+using Windows.Storage;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
 using Waher.Events;
@@ -127,7 +128,7 @@ namespace SensorHttp
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
@@ -200,6 +201,11 @@ namespace SensorHttp
 
 				this.httpServer = new HttpServer();
 				//this.httpServer = new HttpServer(new LogSniffer());
+
+				StorageFile File = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Root/favicon.ico"));
+				string Root = File.Path;
+				Root = Root.Substring(0, Root.Length - 11);
+				this.httpServer.Register(new HttpFolderResource("/", Root, false, false, true, false));
 
 				this.httpServer.Register("/Momentary", (req, resp) =>
 				{
@@ -546,11 +552,14 @@ namespace SensorHttp
 		{
 			Response.ContentType = "application/xml";
 
+			Response.Write("<?xml version='1.0' encoding='");
+			Response.Write(Response.Encoding.WebName);
+			Response.Write("'?>");
+
 			string SchemaUrl = Request.Header.GetURL();
 			int i = SchemaUrl.IndexOf("/Momentary");
 			SchemaUrl = SchemaUrl.Substring(0, i) + "/schema.xsd";
 
-			Response.Write("<?xml version='1.0'?>");
 			Response.Write("<Momentary timestamp='");
 			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
 			Response.Write("' xmlns='");
@@ -576,6 +585,26 @@ namespace SensorHttp
 
 		private void ReturnMomentaryAsJson(HttpRequest Request, HttpResponse Response)
 		{
+			Response.ContentType = "application/json";
+
+			Response.Write("{\"ts\":\"");
+			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			Response.Write('"');
+
+			if (this.lastLight.HasValue)
+			{
+				Response.Write(",\"light\":{\"value\":");
+				Response.Write(ToString(this.lastLight.Value, 2));
+				Response.Write(",\"unit\":\"%\"}");
+			}
+
+			if (this.lastMovement.HasValue)
+			{
+				Response.Write(",\"movement\":");
+				Response.Write(this.lastMovement.Value ? "true" : "false");
+			}
+
+			Response.Write('}');
 		}
 
 		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)

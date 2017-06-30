@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="schema"
+    targetNamespace="http://waher.se/MIoT/SensorHttp.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://waher.se/MIoT/SensorHttp.xsd"
+    xmlns:mstns="http://waher.se/MIoT/SensorHttp.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Momentary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Light" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:attribute name="value" type="xs:double" use="required"/>
+            <xs:attribute name="unit" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Movement" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:attribute name="value" type="xs:boolean" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="timestamp" type="xs:dateTime" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
