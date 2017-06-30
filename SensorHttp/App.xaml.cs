@@ -61,8 +61,6 @@ namespace SensorHttp
 		private string deviceId;
 		private double? lastLight = null;
 		private bool? lastMovement = null;
-		private double? lastPublishedLight = null;
-		private bool? lastPublishedMovement = null;
 		private DateTime lastLightPublishTime = DateTime.MinValue;
 		private DateTime lastMovementPublishTime = DateTime.MinValue;
 
@@ -171,6 +169,9 @@ namespace SensorHttp
 						this.arduino.DigitalPinUpdated += (pin, value) =>
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
+
+							if (pin == 0)
+								this.lastMovement = (value == PinState.HIGH);
 						};
 
 						this.arduinoUsb.ConnectionFailed += message =>
@@ -197,34 +198,73 @@ namespace SensorHttp
 
 				Log.Informational("Device ID: " + this.deviceId);
 
-				//this.httpServer = new HttpServer();
+				this.httpServer = new HttpServer();
+				//this.httpServer = new HttpServer(new LogSniffer());
 
-				this.httpServer = new HttpServer(new LogSniffer());
-
-				this.httpServer.Register("/Hello", (req, resp) =>
+				this.httpServer.Register("/Momentary", (req, resp) =>
 				{
-					resp.ContentType = "text/plain";
-					resp.Write("World!");
-				});
+					if (req.Header.Accept != null)
+					{
+						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png"))
+						{
+							case "text/xml":
+							case "application/xml":
+								this.ReturnMomentaryAsXml(req, resp);
+								break;
 
-				this.httpServer.Register("/Light", (req, resp) =>
-				{
-					if (req.Header.Accept == null ||
-						req.Header.Accept.IsAcceptable("text/xml") ||
-						req.Header.Accept.IsAcceptable("application/xml"))
-					{
-						resp.ContentType = "text/plain";
-						resp.Write("Hello");
-					}
-					else if (req.Header.Accept.IsAcceptable("application/json"))
-					{
-					}
-					else if (req.Header.Accept.IsAcceptable("image/png"))
-					{
+							case "application/json":
+								this.ReturnMomentaryAsJson(req, resp);
+								break;
+
+							case "image/png":
+								this.ReturnMomentaryAsPng(req, resp);
+								break;
+
+							default:
+								throw new NotAcceptableException();
+						}
 					}
 					else
-						throw new NotAcceptableException();
+						this.ReturnMomentaryAsXml(req, resp);
 				});
+
+				/*
+				this.httpServer.Register("/History", async (req, resp) =>
+				{
+					try
+					{
+						if (req.Header.Accept != null)
+						{
+							switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png"))
+							{
+								case "text/xml":
+								case "application/xml":
+									this.ReturnMomentaryAsXml(req, resp);
+									break;
+
+								case "application/json":
+									this.ReturnMomentaryAsJson(req, resp);
+									break;
+
+								case "image/png":
+									this.ReturnMomentaryAsPng(req, resp);
+									break;
+
+								default:
+									throw new NotAcceptableException();
+							}
+						}
+						else
+							this.ReturnMomentaryAsXml(req, resp);
+
+						resp.SendResponse();
+					}
+					catch (Exception ex)
+					{
+						resp.SendResponse(ex);
+					}
+				});
+				*/
 			}
 			catch (Exception ex)
 			{
@@ -308,6 +348,7 @@ namespace SensorHttp
 				{
 					AvgA0 /= n;
 					double Light = (100.0 * AvgA0) / 1024;
+					this.lastLight = Light;
 					MainPage.Instance.LightUpdated(Light, 2, "%");
 
 					this.sumLight += Light;
@@ -494,6 +535,51 @@ namespace SensorHttp
 			{
 				Log.Critical(ex);
 			}
+		}
+
+		internal static string ToString(double Value, int NrDec)
+		{
+			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
+		}
+
+		private void ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
+		{
+			Response.ContentType = "application/xml";
+
+			string SchemaUrl = Request.Header.GetURL();
+			int i = SchemaUrl.IndexOf("/Momentary");
+			SchemaUrl = SchemaUrl.Substring(0, i) + "/schema.xsd";
+
+			Response.Write("<?xml version='1.0'?>");
+			Response.Write("<Momentary timestamp='");
+			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			Response.Write("' xmlns='");
+			Response.Write(SchemaUrl);
+			Response.Write("'>");
+
+			if (this.lastLight.HasValue)
+			{
+				Response.Write("<Light value='");
+				Response.Write(ToString(this.lastLight.Value, 2));
+				Response.Write("' unit='%'/>");
+			}
+
+			if (this.lastMovement.HasValue)
+			{
+				Response.Write("<Movement value='");
+				Response.Write(this.lastMovement.Value ? "true" : "false");
+				Response.Write("'/>");
+			}
+
+			Response.Write("</Momentary>");
+		}
+
+		private void ReturnMomentaryAsJson(HttpRequest Request, HttpResponse Response)
+		{
+		}
+
+		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
+		{
 		}
 
 		/// <summary>

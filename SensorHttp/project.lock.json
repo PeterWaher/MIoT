@@ -2448,7 +2448,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -5098,7 +5098,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -7743,7 +7743,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -10358,7 +10358,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -13012,7 +13012,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -15627,7 +15627,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -18281,7 +18281,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.0": {
+      "Waher.Networking.HTTP.UWP/1.0.1": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -27028,10 +27028,10 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.HTTP.UWP/1.0.0": {
-      "sha512": "zaodONrmQKxUPIqJiiWqcjku9mqM2IOFXpFgtSCqHR1ZG6gD11qLjG+p3M50g+Mlldt/2nvmSu6WqfFRJmALmQ==",
+    "Waher.Networking.HTTP.UWP/1.0.1": {
+      "sha512": "cWsThYgBaOUy54e3kt13Dw7bGnj/ykHVrhsUqTdddGzdFI8Oz8KC8BduiKzEPBm9YBrOgtpmN00DLZg61cw5Kw==",
       "type": "package",
-      "path": "waher.networking.http.uwp/1.0.0",
+      "path": "waher.networking.http.uwp/1.0.1",
       "files": [
         "ref/uap10.0/Waher.Networking.HTTP.UWP.XML",
         "ref/uap10.0/Waher.Networking.HTTP.UWP.dll",
@@ -27043,7 +27043,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
-        "waher.networking.http.uwp.1.0.0.nupkg.sha512",
+        "waher.networking.http.uwp.1.0.1.nupkg.sha512",
         "waher.networking.http.uwp.nuspec"
       ]
     },
@@ -27145,7 +27145,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.3",
       "Waher.Events >= 1.0.2",
       "Waher.Networking >= 1.0.1",
-      "Waher.Networking.HTTP.UWP >= 1.0.0",
+      "Waher.Networking.HTTP.UWP >= 1.0.1",
       "Waher.Persistence >= 1.0.1",
       "Waher.Persistence.FilesLW >= 1.0.3",
       "Waher.Runtime.Inventory >= 1.0.2",
@@ -27169,7 +27169,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "Waher.Events": "1.0.2",
       "Waher.Networking": "1.0.1",
-      "Waher.Networking.HTTP.UWP": "1.0.0",
+      "Waher.Networking.HTTP.UWP": "1.0.1",
       "Waher.Persistence": "1.0.1",
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Inventory": "1.0.2",
