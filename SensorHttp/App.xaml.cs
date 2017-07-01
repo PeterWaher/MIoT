@@ -21,6 +21,7 @@ using Windows.Devices.Enumeration;
 using Windows.Storage;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+using SkiaSharp;
 using Waher.Events;
 using Waher.Networking;
 using Waher.Networking.HTTP;
@@ -126,6 +127,7 @@ namespace SensorHttp
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(Waher.Content.Images.ImageCodec).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
@@ -209,6 +211,9 @@ namespace SensorHttp
 
 				this.httpServer.Register("/Momentary", (req, resp) =>
 				{
+					this.ReturnMomentaryAsPng(req, resp);
+					return;
+
 					if (req.Header.Accept != null)
 					{
 						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png"))
@@ -609,6 +614,38 @@ namespace SensorHttp
 
 		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
 		{
+			if (!Request.Header.TryGetQueryParameter("Width", out string s) || !int.TryParse(s, out int Width))
+				Width = 512;
+			else if (Width <= 0)
+				throw new BadRequestException();
+
+			if (!Request.Header.TryGetQueryParameter("Height", out s) || !int.TryParse(s, out int Height))
+				Height = 512;
+			else if (Width <= 0)
+				throw new BadRequestException();
+
+			using (SKSurface Surface = SKSurface.Create(Width, Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))
+			{
+				SKCanvas Canvas = Surface.Canvas;
+				SKPaint Needle = new SKPaint()
+				{
+					Color = SKColors.Black,
+					Style = SKPaintStyle.Stroke
+				};
+
+				Canvas.Clear(SKColors.White);
+
+				float NeedleX0 = Width * 0.5f;
+				float NeedleY0 = Height * 0.9f;
+				double Angle = (this.lastLight.Value - 50) * Math.PI / 180;
+				float Radius = Height * 0.6f;
+				float NeedleX1 = (float)(Radius * Math.Sin(Angle) + NeedleX0);
+				float NeedleY1 = (float)(NeedleY0 - Radius * Math.Cos(Angle));
+
+				Canvas.DrawLine(NeedleX0, NeedleY0, NeedleX1, NeedleY1, Needle);
+
+				Response.Return(Surface.Snapshot());
+			}
 		}
 
 		/// <summary>
