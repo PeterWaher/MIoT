@@ -22,6 +22,8 @@ using Windows.Storage;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
 using SkiaSharp;
+using Waher.Content;
+using Waher.Content.Images;
 using Waher.Events;
 using Waher.Networking;
 using Waher.Networking.HTTP;
@@ -127,7 +129,8 @@ namespace SensorHttp
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
-					typeof(Waher.Content.Images.ImageCodec).GetTypeInfo().Assembly,
+					typeof(IContentEncoder).GetTypeInfo().Assembly,
+					typeof(ImageCodec).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
@@ -207,16 +210,13 @@ namespace SensorHttp
 				StorageFile File = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Root/favicon.ico"));
 				string Root = File.Path;
 				Root = Root.Substring(0, Root.Length - 11);
-				this.httpServer.Register(new HttpFolderResource("/", Root, false, false, true, false));
+				this.httpServer.Register(new HttpFolderResource(string.Empty, Root, false, false, true, false));
 
 				this.httpServer.Register("/Momentary", (req, resp) =>
 				{
-					this.ReturnMomentaryAsPng(req, resp);
-					return;
-
 					if (req.Header.Accept != null)
 					{
-						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png"))
+						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png", "image/jpeg", "image/webp"))
 						{
 							case "text/xml":
 							case "application/xml":
@@ -229,6 +229,14 @@ namespace SensorHttp
 
 							case "image/png":
 								this.ReturnMomentaryAsPng(req, resp);
+								break;
+
+							case "image/jpg":
+								this.ReturnMomentaryAsJpg(req, resp);
+								break;
+
+							case "image/webp":
+								this.ReturnMomentaryAsWebp(req, resp);
 								break;
 
 							default:
@@ -614,12 +622,37 @@ namespace SensorHttp
 
 		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
 		{
-			if (!Request.Header.TryGetQueryParameter("Width", out string s) || !int.TryParse(s, out int Width))
+			Response.Return(this.GenerateGauge(Request.Header));
+		}
+
+		private void ReturnMomentaryAsJpg(HttpRequest Request, HttpResponse Response)
+		{
+			SKImage Gauge = this.GenerateGauge(Request.Header);
+			SKData Data = Gauge.Encode(SKEncodedImageFormat.Jpeg, 90);
+			byte[] Binary = Data.ToArray();
+
+			Response.ContentType = "image/jpeg";
+			Response.Write(Binary);
+		}
+
+		private void ReturnMomentaryAsWebp(HttpRequest Request, HttpResponse Response)
+		{
+			SKImage Gauge = this.GenerateGauge(Request.Header);
+			SKData Data = Gauge.Encode(SKEncodedImageFormat.Webp, 90);
+			byte[] Binary = Data.ToArray();
+
+			Response.ContentType = "image/webp";
+			Response.Write(Binary);
+		}
+
+		private SKImage GenerateGauge(HttpRequestHeader Header)
+		{
+			if (!Header.TryGetQueryParameter("Width", out string s) || !int.TryParse(s, out int Width))
 				Width = 480;
 			else if (Width <= 0)
 				throw new BadRequestException();
 
-			if (!Request.Header.TryGetQueryParameter("Height", out s) || !int.TryParse(s, out int Height))
+			if (!Header.TryGetQueryParameter("Height", out s) || !int.TryParse(s, out int Height))
 				Height = 300;
 			else if (Width <= 0)
 				throw new BadRequestException();
@@ -731,7 +764,7 @@ namespace SensorHttp
 					Needle.Dispose();
 				}
 
-				Response.Return(Surface.Snapshot());
+				return Surface.Snapshot();
 			}
 		}
 
