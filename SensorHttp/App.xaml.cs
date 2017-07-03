@@ -615,34 +615,76 @@ namespace SensorHttp
 		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
 		{
 			if (!Request.Header.TryGetQueryParameter("Width", out string s) || !int.TryParse(s, out int Width))
-				Width = 512;
+				Width = 480;
 			else if (Width <= 0)
 				throw new BadRequestException();
 
 			if (!Request.Header.TryGetQueryParameter("Height", out s) || !int.TryParse(s, out int Height))
-				Height = 512;
+				Height = 360;
 			else if (Width <= 0)
 				throw new BadRequestException();
 
 			using (SKSurface Surface = SKSurface.Create(Width, Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))
 			{
 				SKCanvas Canvas = Surface.Canvas;
-				SKPaint Needle = new SKPaint()
-				{
-					Color = SKColors.Black,
-					Style = SKPaintStyle.Stroke
-				};
-
 				Canvas.Clear(SKColors.White);
 
 				float NeedleX0 = Width * 0.5f;
 				float NeedleY0 = Height * 0.9f;
-				double Angle = (this.lastLight.Value - 50) * Math.PI / 180;
-				float Radius = Height * 0.6f;
-				float NeedleX1 = (float)(Radius * Math.Sin(Angle) + NeedleX0);
-				float NeedleY1 = (float)(NeedleY0 - Radius * Math.Cos(Angle));
+				float OuterRadius = (float)Math.Min(Height * 0.8, Width * 0.4);
+				float InnerRadius = OuterRadius * 0.6f;
+				float NeedleRadius = OuterRadius * 0.95f;
+				float NutRadius = OuterRadius * 0.05f;
+				SKRect Rect;
+				SKPath Path = new SKPath();
+				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0), new SKColor[] { SKColors.Black, SKColors.White }, new float[] { 0, 1 });
+				SKPaint GaugeBackground = new SKPaint()
+				{
+					IsAntialias = true,
+					Style = SKPaintStyle.Fill,
+					Shader = Gradient
+				};
 
-				Canvas.DrawLine(NeedleX0, NeedleY0, NeedleX1, NeedleY1, Needle);
+				Rect = new SKRect(NeedleX0 - OuterRadius, NeedleY0 - OuterRadius, NeedleX0 + OuterRadius, NeedleY0 + OuterRadius);
+				Path.ArcTo(Rect, -180, 180, true);
+
+				Rect = new SKRect(NeedleX0 - InnerRadius, NeedleY0 - InnerRadius, NeedleX0 + InnerRadius, NeedleY0 + InnerRadius);
+				Path.ArcTo(Rect, 0, -180, false);
+
+				Path.LineTo(NeedleX0 - OuterRadius, NeedleY0);
+
+				Canvas.DrawPath(Path, GaugeBackground);
+
+				GaugeBackground.Dispose();
+				Gradient.Dispose();
+				Path.Dispose();
+
+				if (this.lastLight.HasValue)
+				{
+					float AngleDeg = (float)(this.lastLight.Value - 50) * 90.0f / 50;
+					double AngleRed = AngleDeg * Math.PI / 180;
+					float NeedleX1 = (float)(NeedleRadius * Math.Sin(AngleRed) + NeedleX0);
+					float NeedleY1 = (float)(NeedleY0 - NeedleRadius * Math.Cos(AngleRed));
+
+					Path = new SKPath();
+					Rect = new SKRect(NeedleX0 - NutRadius, NeedleY0 - NutRadius, NeedleX0 + NutRadius, NeedleY0 + NutRadius);
+					Path.ArcTo(Rect, AngleDeg - 180, -180, true);
+
+					Path.LineTo(NeedleX1, NeedleY1);
+					Path.Close();
+
+					SKPaint Needle = new SKPaint()
+					{
+						IsAntialias = true,
+						Color = SKColors.Black,
+						Style = SKPaintStyle.Fill
+					};
+
+					Canvas.DrawPath(Path, Needle);
+
+					Path.Dispose();
+					Needle.Dispose();
+				}
 
 				Response.Return(Surface.Snapshot());
 			}
