@@ -620,7 +620,7 @@ namespace SensorHttp
 				throw new BadRequestException();
 
 			if (!Request.Header.TryGetQueryParameter("Height", out s) || !int.TryParse(s, out int Height))
-				Height = 360;
+				Height = 300;
 			else if (Width <= 0)
 				throw new BadRequestException();
 
@@ -632,17 +632,26 @@ namespace SensorHttp
 				float NeedleX0 = Width * 0.5f;
 				float NeedleY0 = Height * 0.9f;
 				float OuterRadius = (float)Math.Min(Height * 0.8, Width * 0.4);
+				float LabelRadius = OuterRadius * 1.01f;
 				float InnerRadius = OuterRadius * 0.6f;
 				float NeedleRadius = OuterRadius * 0.95f;
 				float NutRadius = OuterRadius * 0.05f;
 				SKRect Rect;
 				SKPath Path = new SKPath();
-				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0), new SKColor[] { SKColors.Black, SKColors.White }, new float[] { 0, 1 });
+				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0), 
+					new SKColor[] { (lastMovement.HasValue && lastMovement.Value ? SKColors.Green : SKColors.Black), SKColors.White }, 
+					new float[] { 0, 1 });
 				SKPaint GaugeBackground = new SKPaint()
 				{
 					IsAntialias = true,
 					Style = SKPaintStyle.Fill,
 					Shader = Gradient
+				};
+				SKPaint GaugeOutline = new SKPaint()
+				{
+					IsAntialias = true,
+					Style = SKPaintStyle.Stroke,
+					Color = SKColors.Black
 				};
 
 				Rect = new SKRect(NeedleX0 - OuterRadius, NeedleY0 - OuterRadius, NeedleX0 + OuterRadius, NeedleY0 + OuterRadius);
@@ -650,21 +659,64 @@ namespace SensorHttp
 
 				Rect = new SKRect(NeedleX0 - InnerRadius, NeedleY0 - InnerRadius, NeedleX0 + InnerRadius, NeedleY0 + InnerRadius);
 				Path.ArcTo(Rect, 0, -180, false);
-
-				Path.LineTo(NeedleX0 - OuterRadius, NeedleY0);
+				Path.Close();
 
 				Canvas.DrawPath(Path, GaugeBackground);
+				Canvas.DrawPath(Path, GaugeOutline);
 
 				GaugeBackground.Dispose();
+				GaugeOutline.Dispose();
 				Gradient.Dispose();
 				Path.Dispose();
+
+				SKPaint Font = new SKPaint()
+				{
+					IsAntialias = true,
+					Color = SKColors.Black,
+					HintingLevel = SKPaintHinting.Full,
+					TextSize = Height * 0.05f
+				};
+
+				SKPaint Needle = new SKPaint()
+				{
+					IsAntialias = true,
+					Color = SKColors.Black,
+					Style = SKPaintStyle.Fill
+				};
+
+				Font.GetFontMetrics(out SKFontMetrics FontMetrics);
+				float TextHeight = FontMetrics.Descent - FontMetrics.Ascent;
+				float TextWidth;
+
+				for (int i = 0; i <= 100; i += 10)
+				{
+					s = i.ToString() + "%";
+					TextWidth = Font.MeasureText(s);
+
+					float LabelDeg = -90 + i * 1.8f;
+					float LabelRad = (float)(LabelDeg * Math.PI / 180);
+					float LabelX = (float)(LabelRadius * Math.Sin(LabelRad) + NeedleX0);
+					float LabelY = (float)(NeedleY0 - LabelRadius * Math.Cos(LabelRad));
+					float OuterX = (float)(OuterRadius * Math.Sin(LabelRad) + NeedleX0);
+					float OuterY = (float)(NeedleY0 - OuterRadius * Math.Cos(LabelRad));
+					float NeedleX1 = (float)(NeedleRadius * Math.Sin(LabelRad) + NeedleX0);
+					float NeedleY1 = (float)(NeedleY0 - NeedleRadius * Math.Cos(LabelRad));
+
+					Canvas.DrawLine(OuterX, OuterY, NeedleX1, NeedleY1, Needle);
+
+					Canvas.Translate(LabelX, LabelY);
+					Canvas.RotateDegrees(LabelDeg);
+					Canvas.Translate(-TextWidth * 0.5f, -TextHeight * 0.5f);
+					Canvas.DrawText(s, 0, 0, Font);
+					Canvas.ResetMatrix();
+				}
 
 				if (this.lastLight.HasValue)
 				{
 					float AngleDeg = (float)(this.lastLight.Value - 50) * 90.0f / 50;
-					double AngleRed = AngleDeg * Math.PI / 180;
-					float NeedleX1 = (float)(NeedleRadius * Math.Sin(AngleRed) + NeedleX0);
-					float NeedleY1 = (float)(NeedleY0 - NeedleRadius * Math.Cos(AngleRed));
+					double AngleRad = AngleDeg * Math.PI / 180;
+					float NeedleX1 = (float)(NeedleRadius * Math.Sin(AngleRad) + NeedleX0);
+					float NeedleY1 = (float)(NeedleY0 - NeedleRadius * Math.Cos(AngleRad));
 
 					Path = new SKPath();
 					Rect = new SKRect(NeedleX0 - NutRadius, NeedleY0 - NutRadius, NeedleX0 + NutRadius, NeedleY0 + NutRadius);
@@ -672,13 +724,6 @@ namespace SensorHttp
 
 					Path.LineTo(NeedleX1, NeedleY1);
 					Path.Close();
-
-					SKPaint Needle = new SKPaint()
-					{
-						IsAntialias = true,
-						Color = SKColors.Black,
-						Style = SKPaintStyle.Fill
-					};
 
 					Canvas.DrawPath(Path, Needle);
 
