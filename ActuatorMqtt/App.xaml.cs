@@ -116,8 +116,8 @@ namespace ActuatorMqtt
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
-					typeof(App).GetTypeInfo().Assembly,
-					typeof(RuntimeSettings).GetTypeInfo().Assembly);
+					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
