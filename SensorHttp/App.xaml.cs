@@ -803,6 +803,9 @@ namespace SensorHttp
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
+			if (instance == this)
+				instance = null;
+
 			if (this.httpServer != null)
 			{
 				this.httpServer.Dispose();
