@@ -12,6 +12,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Devices.Gpio;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +25,12 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+using Waher.Content;
+using Waher.Content.Images;
+using Waher.Content.Markdown;
+using Waher.Content.Markdown.Web;
 using Waher.Events;
+using Waher.Networking.HTTP;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
@@ -48,6 +54,9 @@ namespace ActuatorHttp
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 #endif
+		private string deviceId;
+		private HttpServer httpServer = null;
+		private bool? output = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -110,8 +119,12 @@ namespace ActuatorHttp
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
-					typeof(App).GetTypeInfo().Assembly,
-					typeof(RuntimeSettings).GetTypeInfo().Assembly);
+					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(IContentEncoder).GetTypeInfo().Assembly,
+					typeof(ImageCodec).GetTypeInfo().Assembly,
+					typeof(MarkdownDocument).GetTypeInfo().Assembly,
+					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
+					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
@@ -127,13 +140,13 @@ namespace ActuatorHttp
 						{
 							this.gpioPin.SetDriveMode(GpioPinDriveMode.Output);
 
-							bool LastOn = await RuntimeSettings.GetAsync("ActuatorHttp.Output", false);
-							this.gpioPin.Write(LastOn ? GpioPinValue.High : GpioPinValue.Low);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.gpioPin.Write(this.output.Value ? GpioPinValue.High : GpioPinValue.Low);
 
-							await MainPage.Instance.OutputSet(LastOn);
+							await MainPage.Instance.OutputSet(this.output.Value);
 
 							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-								new KeyValuePair<string, object>("Output", LastOn));
+								new KeyValuePair<string, object>("Output", this.output.Value));
 						}
 						else
 							Log.Error("Output mode not supported for GPIO pin " + gpioOutputPin.ToString());
@@ -167,13 +180,13 @@ namespace ActuatorHttp
 
 								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 
-								bool LastOn = await RuntimeSettings.GetAsync("ActuatorHttp.Output", false);
-								this.arduino.digitalWrite(1, LastOn ? PinState.HIGH : PinState.LOW);
+								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
 
-								await MainPage.Instance.OutputSet(LastOn);
+								await MainPage.Instance.OutputSet(this.output.Value);
 
 								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-									new KeyValuePair<string, object>("Output", LastOn));
+									new KeyValuePair<string, object>("Output", this.output.Value));
 
 								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							}
@@ -198,6 +211,52 @@ namespace ActuatorHttp
 					}
 				}
 #endif
+				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
+				if (string.IsNullOrEmpty(this.deviceId))
+				{
+					this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+					await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
+				}
+
+				Log.Informational("Device ID: " + this.deviceId);
+
+				this.httpServer = new HttpServer();
+				//this.httpServer = new HttpServer(new LogSniffer());
+
+				StorageFile File = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Root/favicon.ico"));
+				string Root = File.Path;
+				Root = Root.Substring(0, Root.Length - 11);
+				this.httpServer.Register(new HttpFolderResource(string.Empty, Root, false, false, true, true));
+
+				this.httpServer.Register("/", (req, resp) =>
+				{
+					throw new TemporaryRedirectException("/Index.md");
+				});
+
+				this.httpServer.Register("/Momentary", (req, resp) =>
+				{
+					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
+
+					if (req.Header.Accept != null)
+					{
+						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json"))
+						{
+							case "text/xml":
+							case "application/xml":
+								this.ReturnMomentaryAsXml(req, resp);
+								break;
+
+							case "application/json":
+								this.ReturnMomentaryAsJson(req, resp);
+								break;
+
+							default:
+								throw new NotAcceptableException();
+						}
+					}
+					else
+						this.ReturnMomentaryAsXml(req, resp);
+				});
 			}
 			catch (Exception ex)
 			{
@@ -206,6 +265,51 @@ namespace ActuatorHttp
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
 			}
+		}
+
+		private void ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
+		{
+			Response.ContentType = "application/xml";
+
+			Response.Write("<?xml version='1.0' encoding='");
+			Response.Write(Response.Encoding.WebName);
+			Response.Write("'?>");
+
+			string SchemaUrl = Request.Header.GetURL();
+			int i = SchemaUrl.IndexOf("/Momentary");
+			SchemaUrl = SchemaUrl.Substring(0, i) + "/schema.xsd";
+
+			Response.Write("<Momentary timestamp='");
+			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			Response.Write("' xmlns='");
+			Response.Write(SchemaUrl);
+			Response.Write("'>");
+
+			if (this.output.HasValue)
+			{
+				Response.Write("<Output value='");
+				Response.Write(this.output.Value ? "true" : "false");
+				Response.Write("'/>");
+			}
+
+			Response.Write("</Momentary>");
+		}
+
+		private void ReturnMomentaryAsJson(HttpRequest Request, HttpResponse Response)
+		{
+			Response.ContentType = "application/json";
+
+			Response.Write("{\"ts\":\"");
+			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			Response.Write('"');
+
+			if (this.output.HasValue)
+			{
+				Response.Write(",\"output\":");
+				Response.Write(this.output.Value ? "true" : "false");
+			}
+
+			Response.Write('}');
 		}
 
 		internal static App Instance => instance;
@@ -221,7 +325,8 @@ namespace ActuatorHttp
 			{
 				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
 #endif
-				await RuntimeSettings.SetAsync("ActuatorHttp.Output", On);
+				await RuntimeSettings.SetAsync("Actuator.Output", On);
+				this.output = On;
 
 				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
@@ -254,6 +359,12 @@ namespace ActuatorHttp
 
 			if (instance == this)
 				instance = null;
+
+			if (this.httpServer != null)
+			{
+				this.httpServer.Dispose();
+				this.httpServer = null;
+			}
 
 #if GPIO
 			if (this.gpioPin != null)
