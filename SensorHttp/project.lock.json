@@ -2513,6 +2513,35 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x86"
+          }
+        }
+      },
       "Waher.Content.Xml/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -5251,6 +5280,24 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        }
+      },
       "Waher.Content.Xml/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -7984,6 +8031,24 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        }
+      },
       "Waher.Content.Xml/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -10685,6 +10750,24 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
       "Waher.Content.Xml/1.0.2": {
@@ -13429,6 +13512,24 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        }
+      },
       "Waher.Content.Xml/1.0.2": {
         "type": "package",
         "dependencies": {
@@ -16130,6 +16231,24 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
       "Waher.Content.Xml/1.0.2": {
@@ -18872,6 +18991,24 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.2",
+          "Waher.Content.Emoji": "1.0.1",
+          "Waher.Content.Markdown": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Script": "1.0.3",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
       "Waher.Content.Xml/1.0.2": {
@@ -27730,6 +27867,25 @@
         "waher.content.markdown.nuspec"
       ]
     },
+    "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "sha512": "VxIL5EEAVCclBTdCpI8Pd/ifK145m095dLKDX9n20n3bREBsAvgvzfC80Ydq2GP1gZndg3tRa83YY/+L1yGN1A==",
+      "type": "package",
+      "path": "waher.content.markdown.web.uwp/1.0.2",
+      "files": [
+        "ref/uap10.0/Waher.Content.Markdown.Web.UWP.XML",
+        "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
+        "ref/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
+        "ref/uap10.0/Waher.Content.Markdown.Web.UWP.pri",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
+        "waher.content.markdown.web.uwp.1.0.2.nupkg.sha512",
+        "waher.content.markdown.web.uwp.nuspec"
+      ]
+    },
     "Waher.Content.Xml/1.0.2": {
       "sha512": "hGQr/zFdLfRMi1UfMJTx0uJUnMX+lEclffR4PFytPvKGV8HyHjLNwTaynIoTynL3Y6ys8ol8KCAQvyBYQ3iYFQ==",
       "type": "package",
@@ -27900,6 +28056,7 @@
       "Waher.Content >= 1.0.2",
       "Waher.Content.Images >= 1.0.2",
       "Waher.Content.Markdown >= 1.0.1",
+      "Waher.Content.Markdown.Web.UWP >= 1.0.2",
       "Waher.Events >= 1.0.2",
       "Waher.Networking >= 1.0.1",
       "Waher.Networking.HTTP.UWP >= 1.0.1",
@@ -27927,6 +28084,7 @@
       "Waher.Content": "1.0.2",
       "Waher.Content.Images": "1.0.2",
       "Waher.Content.Markdown": "1.0.1",
+      "Waher.Content.Markdown.Web.UWP": "1.0.2",
       "Waher.Events": "1.0.2",
       "Waher.Networking": "1.0.1",
       "Waher.Networking.HTTP.UWP": "1.0.1",

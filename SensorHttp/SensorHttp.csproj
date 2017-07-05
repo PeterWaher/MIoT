@@ -90,6 +90,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="Assets\Root\Index.html" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +117,8 @@
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
     <Content Include="Assets\Root\Index.md" />
+    <Content Include="Assets\Root\Main.css" />
+    <Content Include="Assets\Root\UpdateGauge.js" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />

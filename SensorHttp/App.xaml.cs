@@ -24,6 +24,8 @@ using Microsoft.Maker.Serial;
 using SkiaSharp;
 using Waher.Content;
 using Waher.Content.Images;
+using Waher.Content.Markdown;
+using Waher.Content.Markdown.Web;
 using Waher.Events;
 using Waher.Networking;
 using Waher.Networking.HTTP;
@@ -43,6 +45,8 @@ namespace SensorHttp
 	/// </summary>
 	sealed partial class App : Application
 	{
+		private static App instance = null;
+
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
@@ -125,12 +129,15 @@ namespace SensorHttp
 			try
 			{
 				Log.Informational("Starting application.");
+				instance = this;
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ImageCodec).GetTypeInfo().Assembly,
+					typeof(MarkdownDocument).GetTypeInfo().Assembly,
+					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
@@ -210,10 +217,17 @@ namespace SensorHttp
 				StorageFile File = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/Root/favicon.ico"));
 				string Root = File.Path;
 				Root = Root.Substring(0, Root.Length - 11);
-				this.httpServer.Register(new HttpFolderResource(string.Empty, Root, false, false, true, false));
+				this.httpServer.Register(new HttpFolderResource(string.Empty, Root, false, false, true, true));
+
+				this.httpServer.Register("/", (req, resp) =>
+				{
+					throw new TemporaryRedirectException("/Index.md");
+				});
 
 				this.httpServer.Register("/Momentary", (req, resp) =>
 				{
+					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
+
 					if (req.Header.Accept != null)
 					{
 						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png", "image/jpeg", "image/webp"))
@@ -821,6 +835,28 @@ namespace SensorHttp
 			Log.Terminate();
 
 			deferral.Complete();
+		}
+
+		public static string Light
+		{
+			get
+			{
+				if (instance.lastLight.HasValue)
+					return ToString(instance.lastLight.Value, 2) + "%";
+				else
+					return string.Empty;
+			}
+		}
+
+		public static string Movement
+		{
+			get
+			{
+				if (instance.lastMovement.HasValue)
+					return instance.lastMovement.Value ? "Detected" : "Not detected";
+				else
+					return string.Empty;
+			}
 		}
 	}
 }
