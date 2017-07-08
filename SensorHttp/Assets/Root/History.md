@@ -9,48 +9,32 @@ Historical values
 
 The following graphs display historical values of the sensor.
 
-Legend
-------------
-
-| Color                                    | Meaning                           |
-|:----------------------------------------:|:----------------------------------|
-| <span style='color:green'>Green</span>   | Average light during period.      |
-| <span style='color:orange'>Orange</span> | Momentary light at end of period. |
-| <span style='color:red'>Red</span>       | Maximum light during period.      |
-| <span style='color:blue'>Blue</span>     | Minimum light during period.      |
-
-
 Minutes
 -------------
 
 {
-Records:=SensorHttp.App.GetLastMinutes();
-plot2dline(Records.MinLightAt, Records.MinLight, "Blue")+
-	plot2dline(Records.MaxLightAt, Records.MaxLight, "Red")+
-	plot2dline(Records.Timestamp, Records.Light, "Orange")+
-	plot2dline(Records.Timestamp, Records.AvgLight, "Green");
+DrawGraph(Records):=
+(
+	MinTP:=Records.MinLightAt;
+	Min:=Records.MinLight;
+	MaxTP:=Records.MaxLightAt;
+	Max:=Records.MaxLight;
+	TP:=join(MinTP, reverse(MaxTP));
+	Values:=join(Min, reverse(Max));
+	polygon2d(TP, Values, rgba(0,0,255,32))+
+		plot2dline(Records.Timestamp, Records.AvgLight, "Red");
+);
+DrawGraph(SensorHttp.App.GetLastMinutes());
 }
 
 
 Hours
 -------------
 
-{
-Records:=SensorHttp.App.GetLastHours();
-plot2dline(Records.MinLightAt, Records.MinLight, "Blue")+
-	plot2dline(Records.MaxLightAt, Records.MaxLight, "Red")+
-	plot2dline(Records.Timestamp, Records.Light, "Orange")+
-	plot2dline(Records.Timestamp, Records.AvgLight, "Green");
-}
+{DrawGraph(SensorHttp.App.GetLastHours());}
 
 
 Days
 -------------
 
-{
-Records:=SensorHttp.App.GetLastDays();
-plot2dline(Records.MinLightAt, Records.MinLight, "Blue")+
-	plot2dline(Records.MaxLightAt, Records.MaxLight, "Red")+
-	plot2dline(Records.Timestamp, Records.Light, "Orange")+
-	plot2dline(Records.Timestamp, Records.AvgLight, "Green");
-}
+{DrawGraph(SensorHttp.App.GetLastDays());}
