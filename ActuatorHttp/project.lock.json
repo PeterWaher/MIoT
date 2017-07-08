@@ -2513,13 +2513,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -2596,7 +2596,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -2705,7 +2705,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5280,13 +5280,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -5352,7 +5352,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -5450,7 +5450,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8031,13 +8031,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -8103,7 +8103,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -8201,7 +8201,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10752,13 +10752,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -10824,7 +10824,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -10922,7 +10922,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13512,13 +13512,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -13584,7 +13584,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -13682,7 +13682,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16233,13 +16233,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -16305,7 +16305,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -16403,7 +16403,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -18993,13 +18993,13 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/1.0.2": {
+      "Waher.Content.Markdown.Web.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Markdown": "1.0.1",
-          "Waher.Networking.HTTP.UWP": "1.0.1",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Script": "1.0.3",
           "Waher.Security": "1.0.0"
@@ -19065,7 +19065,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.1": {
+      "Waher.Networking.HTTP.UWP/1.0.3": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.2",
@@ -19163,7 +19163,7 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.2": {
+      "Waher.Script.Graphs/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -27867,10 +27867,10 @@
         "waher.content.markdown.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Web.UWP/1.0.2": {
-      "sha512": "VxIL5EEAVCclBTdCpI8Pd/ifK145m095dLKDX9n20n3bREBsAvgvzfC80Ydq2GP1gZndg3tRa83YY/+L1yGN1A==",
+    "Waher.Content.Markdown.Web.UWP/1.0.4": {
+      "sha512": "lwnmICErlP4WoJdSew205I3F1Cveym/QaQI5riwRQHjsdXsf0wBTGCmEqK50sfP0OYv07hfZdMrRM1dogsIwmA==",
       "type": "package",
-      "path": "waher.content.markdown.web.uwp/1.0.2",
+      "path": "waher.content.markdown.web.uwp/1.0.4",
       "files": [
         "ref/uap10.0/Waher.Content.Markdown.Web.UWP.XML",
         "ref/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
@@ -27882,7 +27882,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
-        "waher.content.markdown.web.uwp.1.0.2.nupkg.sha512",
+        "waher.content.markdown.web.uwp.1.0.4.nupkg.sha512",
         "waher.content.markdown.web.uwp.nuspec"
       ]
     },
@@ -27927,10 +27927,10 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.HTTP.UWP/1.0.1": {
-      "sha512": "cWsThYgBaOUy54e3kt13Dw7bGnj/ykHVrhsUqTdddGzdFI8Oz8KC8BduiKzEPBm9YBrOgtpmN00DLZg61cw5Kw==",
+    "Waher.Networking.HTTP.UWP/1.0.3": {
+      "sha512": "dl1X0iXVbzsUp8QU9DKHErN3/cE74cwGZm272ZMqlMQNoMHIuqOSc4UjNj3+Au41KS3ldYuLPEfWdBK+QpIdVg==",
       "type": "package",
-      "path": "waher.networking.http.uwp/1.0.1",
+      "path": "waher.networking.http.uwp/1.0.3",
       "files": [
         "ref/uap10.0/Waher.Networking.HTTP.UWP.XML",
         "ref/uap10.0/Waher.Networking.HTTP.UWP.dll",
@@ -27942,7 +27942,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
-        "waher.networking.http.uwp.1.0.1.nupkg.sha512",
+        "waher.networking.http.uwp.1.0.3.nupkg.sha512",
         "waher.networking.http.uwp.nuspec"
       ]
     },
@@ -28006,14 +28006,13 @@
         "waher.script.nuspec"
       ]
     },
-    "Waher.Script.Graphs/1.0.2": {
-      "sha512": "y/3Tio+fdV3xyp5cVOHpD7f71HczCExT8FndyQpjtfh8kcu7Ipqr2nDGt0iZ+PasejBN0S+mqbC5S9OF27nt6Q==",
+    "Waher.Script.Graphs/1.0.1": {
+      "sha512": "rrtkEgFqh/yvZQzQ6lxh+a/kJW38cPY/Q0nmCB4FpJB0139OBzdeYBw6JtB4ZDZ8ix+0XKJfpFELFg2jF73rXg==",
       "type": "package",
-      "path": "waher.script.graphs/1.0.2",
+      "path": "waher.script.graphs/1.0.1",
       "files": [
-        "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Script.Graphs.dll",
-        "waher.script.graphs.1.0.2.nupkg.sha512",
+        "waher.script.graphs.1.0.1.nupkg.sha512",
         "waher.script.graphs.nuspec"
       ]
     },
@@ -28057,16 +28056,16 @@
       "Waher.Content.Emoji >= 1.0.1",
       "Waher.Content.Images >= 1.0.2",
       "Waher.Content.Markdown >= 1.0.1",
-      "Waher.Content.Markdown.Web.UWP >= 1.0.2",
+      "Waher.Content.Markdown.Web.UWP >= 1.0.4",
       "Waher.Events >= 1.0.2",
       "Waher.Networking >= 1.0.1",
-      "Waher.Networking.HTTP.UWP >= 1.0.1",
+      "Waher.Networking.HTTP.UWP >= 1.0.3",
       "Waher.Persistence >= 1.0.1",
       "Waher.Persistence.FilesLW >= 1.0.3",
       "Waher.Runtime.Inventory >= 1.0.2",
       "Waher.Runtime.Settings >= 1.0.1",
       "Waher.Script >= 1.0.3",
-      "Waher.Script.Graphs >= 1.0.2",
+      "Waher.Security >= 1.0.0",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0": []
@@ -28088,16 +28087,16 @@
       "Waher.Content.Emoji": "1.0.1",
       "Waher.Content.Images": "1.0.2",
       "Waher.Content.Markdown": "1.0.1",
-      "Waher.Content.Markdown.Web.UWP": "1.0.2",
+      "Waher.Content.Markdown.Web.UWP": "1.0.4",
       "Waher.Events": "1.0.2",
       "Waher.Networking": "1.0.1",
-      "Waher.Networking.HTTP.UWP": "1.0.1",
+      "Waher.Networking.HTTP.UWP": "1.0.3",
       "Waher.Persistence": "1.0.1",
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Inventory": "1.0.2",
       "Waher.Runtime.Settings": "1.0.1",
       "Waher.Script": "1.0.3",
-      "Waher.Script.Graphs": "1.0.2",
+      "Waher.Security": "1.0.0",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
