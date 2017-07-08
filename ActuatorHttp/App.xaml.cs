@@ -264,7 +264,7 @@ namespace ActuatorHttp
 					{
 						if (!req.HasData)
 							throw new BadRequestException();
-
+						
 						string s = req.DecodeData() as string;
 						if (s == null || !CommonTypes.TryParse(s, out bool OutputValue))
 							throw new BadRequestException();
