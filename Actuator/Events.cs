@@ -28,7 +28,7 @@ namespace Actuator
 				sb.Append(Event.Actor);
 			}
 
-			foreach (KeyValuePair<string,object> Parameter in Event.Tags)
+			foreach (KeyValuePair<string, object> Parameter in Event.Tags)
 			{
 				sb.Append(" [");
 				sb.Append(Parameter.Key);
@@ -36,6 +36,12 @@ namespace Actuator
 				if (Parameter.Value != null)
 					sb.Append(Parameter.Value.ToString());
 				sb.Append("]");
+			}
+
+			if (Event.Type >= EventType.Critical && !string.IsNullOrEmpty(Event.StackTrace))
+			{
+				sb.Append("\r\n\r\n");
+				sb.Append(Event.StackTrace);
 			}
 
 			MainPage.Instance.AddLogMessage(sb.ToString());
