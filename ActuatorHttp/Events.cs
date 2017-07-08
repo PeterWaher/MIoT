@@ -38,6 +38,12 @@ namespace ActuatorHttp
 				sb.Append("]");
 			}
 
+			if (Event.Type >= EventType.Critical && !string.IsNullOrEmpty(Event.StackTrace))
+			{
+				sb.Append("\r\n\r\n");
+				sb.Append(Event.StackTrace);
+			}
+
 			MainPage.Instance.AddLogMessage(sb.ToString());
 		}
 	}

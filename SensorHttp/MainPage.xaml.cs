@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
+using System.Text;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -173,7 +172,37 @@ namespace SensorHttp
 
 			public override void Queue(Event Event)
 			{
-				MainPage.instance.AddLogMessage(Event.Message);
+				StringBuilder sb = new StringBuilder(Event.Message);
+
+				if (!string.IsNullOrEmpty(Event.Object))
+				{
+					sb.Append(' ');
+					sb.Append(Event.Object);
+				}
+
+				if (!string.IsNullOrEmpty(Event.Actor))
+				{
+					sb.Append(' ');
+					sb.Append(Event.Actor);
+				}
+
+				foreach (KeyValuePair<string, object> Parameter in Event.Tags)
+				{
+					sb.Append(" [");
+					sb.Append(Parameter.Key);
+					sb.Append("=");
+					if (Parameter.Value != null)
+						sb.Append(Parameter.Value.ToString());
+					sb.Append("]");
+				}
+
+				if (Event.Type >= EventType.Critical && !string.IsNullOrEmpty(Event.StackTrace))
+				{
+					sb.Append("\r\n\r\n");
+					sb.Append(Event.StackTrace);
+				}
+
+				MainPage.Instance.AddLogMessage(sb.ToString());
 			}
 		}
 
