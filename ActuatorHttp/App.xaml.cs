@@ -257,6 +257,50 @@ namespace ActuatorHttp
 					else
 						this.ReturnMomentaryAsXml(req, resp);
 				});
+
+				this.httpServer.Register("/Set", null, async (req, resp) =>
+				{
+					try
+					{
+						if (!req.HasData)
+							throw new BadRequestException();
+
+						string s = req.DecodeData() as string;
+						if (s == null || !CommonTypes.TryParse(s, out bool OutputValue))
+							throw new BadRequestException();
+
+						if (req.Header.Accept != null)
+						{
+							switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json"))
+							{
+								case "text/xml":
+								case "application/xml":
+									await this.SetOutput(OutputValue, req.RemoteEndPoint);
+									this.ReturnMomentaryAsXml(req, resp);
+									break;
+
+								case "application/json":
+									await this.SetOutput(OutputValue, req.RemoteEndPoint);
+									this.ReturnMomentaryAsJson(req, resp);
+									break;
+
+								default:
+									throw new NotAcceptableException();
+							}
+						}
+						else
+						{
+							await this.SetOutput(OutputValue, req.RemoteEndPoint);
+							this.ReturnMomentaryAsXml(req, resp);
+						}
+
+						resp.SendResponse();
+					}
+					catch (Exception ex)
+					{
+						resp.SendResponse(ex);
+					}
+				}, false);
 			}
 			catch (Exception ex)
 			{
@@ -393,6 +437,17 @@ namespace ActuatorHttp
 			Log.Terminate();
 
 			deferral.Complete();
+		}
+
+		public static string Output
+		{
+			get
+			{
+				if (instance.output.HasValue)
+					return instance.output.Value ? "ON" : "OFF";
+				else
+					return string.Empty;
+			}
 		}
 	}
 }

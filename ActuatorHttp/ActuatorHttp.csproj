@@ -122,6 +122,7 @@
     <Content Include="Assets\Root\favicon.ico" />
     <Content Include="Assets\Root\Index.html" />
     <Content Include="Assets\Root\Main.css" />
+    <Content Include="Assets\Root\ToggleOutput.js" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
