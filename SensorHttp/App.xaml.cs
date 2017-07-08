@@ -35,6 +35,8 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
+using Waher.Script;
+using Waher.Script.Graphs;
 
 using SensorHttp.History;
 
@@ -138,6 +140,8 @@ namespace SensorHttp
 					typeof(ImageCodec).GetTypeInfo().Assembly,
 					typeof(MarkdownDocument).GetTypeInfo().Assembly,
 					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
+					typeof(Expression).GetTypeInfo().Assembly,
+					typeof(Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
@@ -860,6 +864,57 @@ namespace SensorHttp
 				else
 					return string.Empty;
 			}
+		}
+
+		public static LastMinute[] GetLastMinutes()
+		{
+			Task<LastMinute[]> T = GetLastMinutesAsync();
+			T.Wait();
+			return T.Result;
+		}
+
+		public static async Task<LastMinute[]> GetLastMinutesAsync()
+		{
+			List<LastMinute> Result = new List<LastMinute>();
+
+			foreach (LastMinute Rec in await Database.Find<LastMinute>("Timestamp"))
+				Result.Add(Rec);
+
+			return Result.ToArray();
+		}
+
+		public static LastHour[] GetLastHours()
+		{
+			Task<LastHour[]> T = GetLastHoursAsync();
+			T.Wait();
+			return T.Result;
+		}
+
+		public static async Task<LastHour[]> GetLastHoursAsync()
+		{
+			List<LastHour> Result = new List<LastHour>();
+
+			foreach (LastHour Rec in await Database.Find<LastHour>("Timestamp"))
+				Result.Add(Rec);
+
+			return Result.ToArray();
+		}
+
+		public static LastDay[] GetLastDays()
+		{
+			Task<LastDay[]> T = GetLastDaysAsync();
+			T.Wait();
+			return T.Result;
+		}
+
+		public static async Task<LastDay[]> GetLastDaysAsync()
+		{
+			List<LastDay> Result = new List<LastDay>();
+
+			foreach (LastDay Rec in await Database.Find<LastDay>("Timestamp"))
+				Result.Add(Rec);
+
+			return Result.ToArray();
 		}
 	}
 }
