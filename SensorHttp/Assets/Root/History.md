@@ -2,7 +2,7 @@
 Author: Peter Waher
 Description: This page displays historical values of the sensor.
 Cache-Control: max-age=0, no-cache, no-store
-CSS: Main.css
+Master: Menu.md
 
 Historical values
 ============================
@@ -21,7 +21,8 @@ DrawGraph(Records):=
 	Max:=Records.MaxLight;
 	TP:=join(MinTP, reverse(MaxTP));
 	Values:=join(Min, reverse(Max));
-	polygon2d(TP, Values, rgba(0,0,255,32))+
+	plot2darea(Records.Timestamp, Records.AvgMovement, "Green")+
+		polygon2d(TP, Values, rgba(0,0,255,32))+
 		plot2dline(Records.Timestamp, Records.AvgLight, "Red");
 );
 DrawGraph(SensorHttp.App.GetLastMinutes());

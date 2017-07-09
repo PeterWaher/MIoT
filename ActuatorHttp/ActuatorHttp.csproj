@@ -94,6 +94,7 @@
     <Content Include="Assets\Root\schema.xsd">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Assets\Root\Menu.md" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

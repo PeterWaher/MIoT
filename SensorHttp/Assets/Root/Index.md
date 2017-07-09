@@ -1,15 +1,14 @@
-﻿Title: Sensor
+﻿Title: Momentary
 Author: Peter Waher
 Description: This page displays the current state of the sensor.
 Cache-Control: max-age=0, no-cache, no-store
-CSS: Main.css
 Javascript: UpdateGauge.js
+Master: Menu.md
 
 Current state
 ============================
 
 The following table contains the current state of the sensor.
-For historical data, click [here](/History.md).
 
 | Sensor    | Value                     |
 |:----------|:--------------------------|
