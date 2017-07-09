@@ -2691,7 +2691,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2705,12 +2705,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -5436,7 +5436,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5450,12 +5450,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -8187,7 +8187,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8201,12 +8201,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -10908,7 +10908,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10922,12 +10922,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -13668,7 +13668,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13682,12 +13682,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -16389,7 +16389,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16403,12 +16403,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -19149,7 +19149,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.4": {
+      "Waher.Script/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19163,12 +19163,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.3": {
+      "Waher.Script.Graphs/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.58.0",
-          "Waher.Script": "1.0.4"
+          "Waher.Script": "1.0.5"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -27997,25 +27997,25 @@
         "waher.runtime.settings.nuspec"
       ]
     },
-    "Waher.Script/1.0.4": {
-      "sha512": "c4q65BXwiglWkXNw2UG5b6rBunnd1q41mBVb63smo5m4Jv2ANjmj32psok3gVv8tl8lbIaG5454NPYvKwRqy2Q==",
+    "Waher.Script/1.0.5": {
+      "sha512": "f93D/DkZ0s5TEICQY7wkpZQx4uERYCKgI30z/fJhFArxwl49W1OVS82gdMKKB2wXthuhvFcnn0jyZ6BFSvcW4g==",
       "type": "package",
-      "path": "waher.script/1.0.4",
+      "path": "waher.script/1.0.5",
       "files": [
         "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.4.nupkg.sha512",
+        "waher.script.1.0.5.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
-    "Waher.Script.Graphs/1.0.3": {
-      "sha512": "Tfj6gE9t0wxdNWQIigQAcpJiE0M2K/egXCVSxYlCuv9ZD7zMIqZRH0Hf1x3XmU0u9sTyyz9b4o9bw9KdjflNtw==",
+    "Waher.Script.Graphs/1.0.5": {
+      "sha512": "SsDRiESjo+JfgjGY9BhFuEojxyXwnb3fml/0aGwU2U3lW8dyTkFsoIjD+giWDCH/YJQfjt+yIZt/9Fmm3S9IfQ==",
       "type": "package",
-      "path": "waher.script.graphs/1.0.3",
+      "path": "waher.script.graphs/1.0.5",
       "files": [
         "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Script.Graphs.dll",
-        "waher.script.graphs.1.0.3.nupkg.sha512",
+        "waher.script.graphs.1.0.5.nupkg.sha512",
         "waher.script.graphs.nuspec"
       ]
     },
@@ -28057,7 +28057,6 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.3",
       "SkiaSharp >= 1.58.1",
       "Waher.Content >= 1.0.2",
-      "Waher.Content.Emoji >= 1.0.1",
       "Waher.Content.Images >= 1.0.2",
       "Waher.Content.Markdown >= 1.0.2",
       "Waher.Content.Markdown.Web.UWP >= 1.0.4",
@@ -28068,8 +28067,8 @@
       "Waher.Persistence.FilesLW >= 1.0.3",
       "Waher.Runtime.Inventory >= 1.0.2",
       "Waher.Runtime.Settings >= 1.0.1",
-      "Waher.Script >= 1.0.4",
-      "Waher.Script.Graphs >= 1.0.3",
+      "Waher.Script >= 1.0.5",
+      "Waher.Script.Graphs >= 1.0.5",
       "Waher.Security >= 1.0.0",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -28090,7 +28089,6 @@
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "SkiaSharp": "1.58.1",
       "Waher.Content": "1.0.2",
-      "Waher.Content.Emoji": "1.0.1",
       "Waher.Content.Images": "1.0.2",
       "Waher.Content.Markdown": "1.0.2",
       "Waher.Content.Markdown.Web.UWP": "1.0.4",
@@ -28101,8 +28099,8 @@
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Inventory": "1.0.2",
       "Waher.Runtime.Settings": "1.0.1",
-      "Waher.Script": "1.0.4",
-      "Waher.Script.Graphs": "[1.0.3, )",
+      "Waher.Script": "1.0.5",
+      "Waher.Script.Graphs": "[1.0.5, )",
       "Waher.Security": "1.0.0",
       "Windows-Remote-Arduino": "1.4.0"
     },
