@@ -38,6 +38,7 @@ using Waher.Runtime.Settings;
 using Waher.Script;
 using Waher.Script.Graphs;
 using Waher.Security;
+using Waher.Security.JWT;
 
 using SensorHttp.History;
 
@@ -55,6 +56,8 @@ namespace SensorHttp
 		private Timer sampleTimer = null;
 		private HttpServer httpServer = null;
 		private IUserSource users = new Users();
+		private JwtFactory tokenFactory = new JwtFactory();
+		private JwtAuthentication tokenAuthentication;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -217,6 +220,8 @@ namespace SensorHttp
 
 				Log.Informational("Device ID: " + this.deviceId);
 
+				this.tokenAuthentication = new JwtAuthentication(this.deviceId, this.users, this.tokenFactory);
+
 				this.httpServer = new HttpServer();
 				//this.httpServer = new HttpServer(new LogSniffer());
 
@@ -265,7 +270,21 @@ namespace SensorHttp
 					}
 					else
 						this.ReturnMomentaryAsXml(req, resp);
-				});
+				}, this.tokenAuthentication);
+
+				this.httpServer.Register("/MomentaryPng", (req, resp) =>
+				{
+					IUser User;
+
+					if (!req.Session.TryGetVariable("User", out Variable v) ||
+						(User = v.ValueObject as IUser) == null)
+					{
+						throw new ForbiddenException();
+					}
+
+					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
+					this.ReturnMomentaryAsPng(req, resp);
+				}, true, false, true);
 
 				/*
 				this.httpServer.Register("/History", async (req, resp) =>
@@ -302,7 +321,7 @@ namespace SensorHttp
 					{
 						resp.SendResponse(ex);
 					}
-				});
+				}, this.tokenAuthentication);
 				*/
 
 				this.httpServer.Register("/Login", null, (req, resp) =>
@@ -347,6 +366,23 @@ namespace SensorHttp
 					throw new SeeOtherException(req.Header.Referer.Value);
 
 				}, true, false, true);
+
+				this.httpServer.Register("/GetSessionToken", null, (req, resp) =>
+				{
+					IUser User;
+
+					if (!req.Session.TryGetVariable("User", out Variable v) ||
+						(User = v.ValueObject as IUser) == null)
+					{
+						throw new ForbiddenException();
+					}
+
+					string Token = this.tokenFactory.Create(new KeyValuePair<string, object>("sub", User.UserName));
+
+					resp.ContentType = JwtCodec.ContentType;
+					resp.Write(Token);
+				}, true, false, true);
+
 			}
 			catch (Exception ex)
 			{
@@ -356,6 +392,7 @@ namespace SensorHttp
 				await Dialog.ShowAsync();
 			}
 		}
+
 
 		public class Users : IUserSource
 		{

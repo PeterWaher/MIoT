@@ -2731,6 +2731,32 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Security.JWT.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x86"
+          }
+        }
+      },
       "Windows-Remote-Arduino/1.4.0": {
         "type": "package",
         "compile": {
@@ -5474,6 +5500,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Security.dll": {}
+        }
+      },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -8227,6 +8268,21 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        }
+      },
       "Windows-Remote-Arduino/1.4.0": {
         "type": "package",
         "compile": {
@@ -10946,6 +11002,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Security.dll": {}
+        }
+      },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -13708,6 +13779,21 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        }
+      },
       "Windows-Remote-Arduino/1.4.0": {
         "type": "package",
         "compile": {
@@ -16427,6 +16513,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Security.dll": {}
+        }
+      },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -19187,6 +19288,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/Waher.Security.dll": {}
+        }
+      },
+      "Waher.Security.JWT.UWP/1.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "1.0.3",
+          "Waher.Networking.HTTP.UWP": "1.0.3",
+          "Waher.Runtime.Inventory": "1.0.2",
+          "Waher.Security": "1.0.0"
+        },
+        "compile": {
+          "ref/uap10.0/Waher.Security.JWT.UWP.dll": {}
+        },
+        "runtime": {
+          "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll": {}
         }
       },
       "Windows-Remote-Arduino/1.4.0": {
@@ -28031,6 +28147,25 @@
         "waher.security.nuspec"
       ]
     },
+    "Waher.Security.JWT.UWP/1.0.1": {
+      "sha512": "mBAJjpQihpy8k5u2Up4RHxeh12TWLQy0f+PlQicAgy+0JXCdv5PgGgBu6MlaxcWIueez0HA45JbpvHvp1zKndA==",
+      "type": "package",
+      "path": "waher.security.jwt.uwp/1.0.1",
+      "files": [
+        "ref/uap10.0/Waher.Security.JWT.UWP.XML",
+        "ref/uap10.0/Waher.Security.JWT.UWP.dll",
+        "ref/uap10.0/Waher.Security.JWT.UWP.pdb",
+        "ref/uap10.0/Waher.Security.JWT.UWP.pri",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Security.JWT.UWP.dll",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.dll",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
+        "waher.security.jwt.uwp.1.0.1.nupkg.sha512",
+        "waher.security.jwt.uwp.nuspec"
+      ]
+    },
     "Windows-Remote-Arduino/1.4.0": {
       "sha512": "vPlj+ezITu1WuVgO5SFSncKJLWDjy8EiQfmHO45uan0/Lo74/7TDM9bz/02+JpVAytmazcx6gl16E6EK/gSjyg==",
       "type": "package",
@@ -28071,6 +28206,7 @@
       "Waher.Script >= 1.0.5",
       "Waher.Script.Graphs >= 1.0.5",
       "Waher.Security >= 1.0.0",
+      "Waher.Security.JWT.UWP >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0": []
@@ -28089,7 +28225,7 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
       "SkiaSharp": "1.58.1",
-      "Waher.Content": "[1.0.3, )",
+      "Waher.Content": "1.0.3",
       "Waher.Content.Images": "1.0.2",
       "Waher.Content.Markdown": "1.0.2",
       "Waher.Content.Markdown.Web.UWP": "1.0.4",
@@ -28103,6 +28239,7 @@
       "Waher.Script": "1.0.5",
       "Waher.Script.Graphs": "1.0.5",
       "Waher.Security": "1.0.0",
+      "Waher.Security.JWT.UWP": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {

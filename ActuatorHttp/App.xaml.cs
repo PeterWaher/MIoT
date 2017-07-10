@@ -38,6 +38,7 @@ using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 using Waher.Script;
 using Waher.Security;
+using Waher.Security.JWT;
 
 namespace ActuatorHttp
 {
@@ -59,6 +60,8 @@ namespace ActuatorHttp
 		private string deviceId;
 		private HttpServer httpServer = null;
 		private IUserSource users = new Users();
+		private JwtFactory tokenFactory = new JwtFactory();
+		private JwtAuthentication tokenAuthentication;
 		private bool? output = null;
 
 		/// <summary>
@@ -224,6 +227,8 @@ namespace ActuatorHttp
 
 				Log.Informational("Device ID: " + this.deviceId);
 
+				this.tokenAuthentication = new JwtAuthentication(this.deviceId, this.users, this.tokenFactory);
+
 				this.httpServer = new HttpServer();
 				//this.httpServer = new HttpServer(new LogSniffer());
 
@@ -260,7 +265,7 @@ namespace ActuatorHttp
 					}
 					else
 						this.ReturnMomentaryAsXml(req, resp);
-				});
+				}, this.tokenAuthentication);
 
 				this.httpServer.Register("/Set", null, async (req, resp) =>
 				{
@@ -304,7 +309,7 @@ namespace ActuatorHttp
 					{
 						resp.SendResponse(ex);
 					}
-				}, false);
+				}, false, this.tokenAuthentication);
 
 				this.httpServer.Register("/Login", null, (req, resp) =>
 				{
@@ -347,6 +352,22 @@ namespace ActuatorHttp
 
 					throw new SeeOtherException(req.Header.Referer.Value);
 
+				}, true, false, true);
+
+				this.httpServer.Register("/GetSessionToken", null, (req, resp) =>
+				{
+					IUser User;
+
+					if (!req.Session.TryGetVariable("User", out Variable v) ||
+						(User = v.ValueObject as IUser) == null)
+					{
+						throw new ForbiddenException();
+					}
+
+					string Token = this.tokenFactory.Create(new KeyValuePair<string, object>("sub", User.UserName));
+
+					resp.ContentType = JwtCodec.ContentType;
+					resp.Write(Token);
 				}, true, false, true);
 
 			}

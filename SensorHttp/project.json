@@ -16,6 +16,7 @@
     "Waher.Script": "1.0.5",
     "Waher.Script.Graphs": "1.0.5",
     "Waher.Security": "1.0.0",
+    "Waher.Security.JWT.UWP": "1.0.1",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {
