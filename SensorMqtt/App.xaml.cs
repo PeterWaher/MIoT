@@ -320,7 +320,7 @@ namespace SensorMqtt
 							MaxLight = this.maxLight,
 							MaxLightAt = this.maxLightAt,
 							AvgLight = (this.nrTerms == 0 ? (double?)null : this.sumLight / this.nrTerms),
-							AvgMovement = (this.nrTerms == 0 ? (double?)null : ((double)this.sumMovement) / this.nrTerms)
+							AvgMovement = (this.nrTerms == 0 ? (double?)null : (this.sumMovement * 100.0) / this.nrTerms)
 						};
 
 						await Database.Insert(Rec);
