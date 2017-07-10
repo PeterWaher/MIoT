@@ -37,6 +37,7 @@ using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Script;
 using Waher.Script.Graphs;
+using Waher.Security;
 
 using SensorHttp.History;
 
@@ -53,6 +54,7 @@ namespace SensorHttp
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private HttpServer httpServer = null;
+		private IUserSource users = new Users();
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -302,6 +304,49 @@ namespace SensorHttp
 					}
 				});
 				*/
+
+				this.httpServer.Register("/Login", null, (req, resp) =>
+				{
+					if (!req.HasData || req.Session == null)
+						throw new BadRequestException();
+
+					object Obj = req.DecodeData();
+					Dictionary<string, string> Form = Obj as Dictionary<string, string>;
+
+					if (Form == null ||
+						!Form.TryGetValue("UserName", out string UserName) ||
+						!Form.TryGetValue("Password", out string Password))
+					{
+						throw new BadRequestException();
+					}
+
+					string From = null;
+
+					if (req.Session.TryGetVariable("from", out Variable v))
+						From = v.ValueObject as string;
+
+					if (string.IsNullOrEmpty(From))
+						From = "/Index.md";
+
+					IUser User = this.Login(UserName, Password);
+					if (User != null)
+					{
+						Log.Informational("User logged in.", UserName, req.RemoteEndPoint, "LoginSuccessful", EventLevel.Minor);
+
+						req.Session["User"] = User;
+						req.Session.Remove("LoginError");
+
+						throw new SeeOtherException(From);
+					}
+					else
+					{
+						Log.Warning("Invalid login attempt.", UserName, req.RemoteEndPoint, "LoginFailure", EventLevel.Minor);
+						req.Session["LoginError"] = "Invalid login credentials provided.";
+					}
+
+					throw new SeeOtherException(req.Header.Referer.Value);
+
+				}, true, false, true);
 			}
 			catch (Exception ex)
 			{
@@ -310,6 +355,61 @@ namespace SensorHttp
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
 			}
+		}
+
+		public class Users : IUserSource
+		{
+			public bool TryGetUser(string UserName, out IUser User)
+			{
+				if (UserName == "MIoT")
+					User = new User();
+				else
+					User = null;
+
+				return User != null;
+			}
+		}
+
+		public class User : IUser
+		{
+			public string UserName => "MIoT";
+			public string PasswordHash => instance.CalcHash("rox");
+			public string PasswordHashType => "SHA-256";
+
+			public bool HasPrivilege(string Privilege)
+			{
+				return false;
+			}
+		}
+
+		private string CalcHash(string Password)
+		{
+			return Waher.Security.Hashes.ComputeSHA256HashString(Encoding.UTF8.GetBytes(Password + ":" + this.deviceId));
+		}
+
+		private IUser Login(string UserName, string Password)
+		{
+			if (this.users.TryGetUser(UserName, out IUser User))
+			{
+				switch (User.PasswordHashType)
+				{
+					case "":
+						if (Password == User.PasswordHash)
+							return User;
+						break;
+
+					case "SHA-256":
+						if (this.CalcHash(Password) == User.PasswordHash)
+							return User;
+						break;
+
+					default:
+						Log.Error("Unsupported Hash function: " + User.PasswordHashType);
+						break;
+				}
+			}
+
+			return null;
 		}
 
 		private async void SampleValues(object State)
@@ -689,8 +789,8 @@ namespace SensorHttp
 				float NutRadius = OuterRadius * 0.05f;
 				SKRect Rect;
 				SKPath Path = new SKPath();
-				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0), 
-					new SKColor[] { (lastMovement.HasValue && lastMovement.Value ? SKColors.Green : SKColors.Black), SKColors.White }, 
+				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0),
+					new SKColor[] { (lastMovement.HasValue && lastMovement.Value ? SKColors.Green : SKColors.Black), SKColors.White },
 					new float[] { 0, 1 });
 				SKPaint GaugeBackground = new SKPaint()
 				{

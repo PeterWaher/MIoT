@@ -36,6 +36,8 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
+using Waher.Script;
+using Waher.Security;
 
 namespace ActuatorHttp
 {
@@ -56,6 +58,7 @@ namespace ActuatorHttp
 #endif
 		private string deviceId;
 		private HttpServer httpServer = null;
+		private IUserSource users = new Users();
 		private bool? output = null;
 
 		/// <summary>
@@ -124,6 +127,7 @@ namespace ActuatorHttp
 					typeof(ImageCodec).GetTypeInfo().Assembly,
 					typeof(MarkdownDocument).GetTypeInfo().Assembly,
 					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
+					typeof(Expression).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -301,6 +305,50 @@ namespace ActuatorHttp
 						resp.SendResponse(ex);
 					}
 				}, false);
+
+				this.httpServer.Register("/Login", null, (req, resp) =>
+				{
+					if (!req.HasData || req.Session == null)
+						throw new BadRequestException();
+
+					object Obj = req.DecodeData();
+					Dictionary<string, string> Form = Obj as Dictionary<string, string>;
+
+					if (Form == null ||
+						!Form.TryGetValue("UserName", out string UserName) ||
+						!Form.TryGetValue("Password", out string Password))
+					{
+						throw new BadRequestException();
+					}
+
+					string From = null;
+
+					if (req.Session.TryGetVariable("from", out Variable v))
+						From = v.ValueObject as string;
+
+					if (string.IsNullOrEmpty(From))
+						From = "/Index.md";
+
+					IUser User = this.Login(UserName, Password);
+					if (User != null)
+					{
+						Log.Informational("User logged in.", UserName, req.RemoteEndPoint, "LoginSuccessful", EventLevel.Minor);
+
+						req.Session["User"] = User;
+						req.Session.Remove("LoginError");
+
+						throw new SeeOtherException(From);
+					}
+					else
+					{
+						Log.Warning("Invalid login attempt.", UserName, req.RemoteEndPoint, "LoginFailure", EventLevel.Minor);
+						req.Session["LoginError"] = "Invalid login credentials provided.";
+					}
+
+					throw new SeeOtherException(req.Header.Referer.Value);
+
+				}, true, false, true);
+
 			}
 			catch (Exception ex)
 			{
@@ -309,6 +357,61 @@ namespace ActuatorHttp
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
 			}
+		}
+
+		public class Users : IUserSource
+		{
+			public bool TryGetUser(string UserName, out IUser User)
+			{
+				if (UserName == "MIoT")
+					User = new User();
+				else
+					User = null;
+
+				return User != null;
+			}
+		}
+
+		public class User : IUser
+		{
+			public string UserName => "MIoT";
+			public string PasswordHash => instance.CalcHash("rox");
+			public string PasswordHashType => "SHA-256";
+
+			public bool HasPrivilege(string Privilege)
+			{
+				return false;
+			}
+		}
+
+		private string CalcHash(string Password)
+		{
+			return Waher.Security.Hashes.ComputeSHA256HashString(Encoding.UTF8.GetBytes(Password + ":" + this.deviceId));
+		}
+
+		private IUser Login(string UserName, string Password)
+		{
+			if (this.users.TryGetUser(UserName, out IUser User))
+			{
+				switch (User.PasswordHashType)
+				{
+					case "":
+						if (Password == User.PasswordHash)
+							return User;
+						break;
+
+					case "SHA-256":
+						if (this.CalcHash(Password) == User.PasswordHash)
+							return User;
+						break;
+
+					default:
+						Log.Error("Unsupported Hash function: " + User.PasswordHashType);
+						break;
+				}
+			}
+
+			return null;
 		}
 
 		private void ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)

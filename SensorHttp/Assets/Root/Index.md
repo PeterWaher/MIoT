@@ -4,6 +4,8 @@ Description: This page displays the current state of the sensor.
 Cache-Control: max-age=0, no-cache, no-store
 Javascript: UpdateGauge.js
 Master: Menu.md
+UserVariable: User
+Login: Login.md
 
 Current state
 ============================

@@ -3,6 +3,8 @@ Author: Peter Waher
 Description: This page displays historical values of the sensor.
 Cache-Control: max-age=0, no-cache, no-store
 Master: Menu.md
+UserVariable: User
+Login: Login.md
 
 Historical values
 ============================

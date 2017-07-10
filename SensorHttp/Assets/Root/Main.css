@@ -385,3 +385,8 @@ div.footnotes + p
 {
     display:none;
 }
+
+.error
+{
+    color:red;
+}

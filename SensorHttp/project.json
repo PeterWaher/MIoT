@@ -2,7 +2,7 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
     "SkiaSharp": "1.58.1",
-    "Waher.Content": "1.0.2",
+    "Waher.Content": "1.0.3",
     "Waher.Content.Images": "1.0.2",
     "Waher.Content.Markdown": "1.0.2",
     "Waher.Content.Markdown.Web.UWP": "1.0.4",

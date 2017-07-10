@@ -93,6 +93,7 @@
     <Content Include="Assets\Root\Index.html" />
     <Content Include="Assets\Root\History.md" />
     <Content Include="Assets\Root\Menu.md" />
+    <Content Include="Assets\Root\Login.md" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
