@@ -76,8 +76,6 @@ namespace SensorHttp
 		private string deviceId;
 		private double? lastLight = null;
 		private bool? lastMovement = null;
-		private DateTime lastLightPublishTime = DateTime.MinValue;
-		private DateTime lastMovementPublishTime = DateTime.MinValue;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
