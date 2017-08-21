@@ -1,7 +1,9 @@
 Mastering Internet of Things
 ================================
 
-Welcome. This repository contains the projects published in the *Mastering Internet of Things* book by Peter Waher. The following projects are included:
+Welcome. This repository contains the projects published in the book
+[*Mastering Internet of Things*](https://www.packtpub.com/networking-and-servers/mastering-internet-things) 
+by Peter Waher. The following projects are included:
 
 | Chapter | Title                                             | Project(s)                                                |
 |--------:|:--------------------------------------------------|:----------------------------------------------------------|
