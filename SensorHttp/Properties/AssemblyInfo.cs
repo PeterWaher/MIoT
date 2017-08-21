@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("SensorHttp")]
-[assembly: AssemblyDescription("Chapter 5, Mastering Internet of Things, Publishing data using HTTP")]
+[assembly: AssemblyDescription("Chapter 5, Mastering Internet of Things, Publishing data using HTTP, and Chapter 6, Creating web pages for your devices.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Waher Data AB")]
 [assembly: AssemblyProduct("SensorHttp")]
