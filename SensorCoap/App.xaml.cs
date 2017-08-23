@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -19,9 +20,11 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+using Waher.Content;
 using Waher.Events;
 using Waher.Networking.CoAP;
 using Waher.Networking.CoAP.ContentFormats;
+using Waher.Networking.CoAP.Options;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
@@ -61,6 +64,7 @@ namespace SensorCoap
 		private bool? lastMotion = null;
 		private CoapResource lightResource = null;
 		private CoapResource motionResource = null;
+		private CoapResource momentaryResource = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -119,7 +123,14 @@ namespace SensorCoap
 			try
 			{
 				Log.Informational("Starting application.");
-				Types.Initialize(typeof(FilesProvider).GetTypeInfo().Assembly, typeof(App).GetTypeInfo().Assembly);
+
+				Types.Initialize(
+					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(IContentEncoder).GetTypeInfo().Assembly,
+					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
+					typeof(App).GetTypeInfo().Assembly);
+
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
 
@@ -167,6 +178,7 @@ namespace SensorCoap
 							{
 								this.lastMotion = (value == PinState.HIGH);
 								this.motionResource?.TriggerAll();
+								this.momentaryResource?.TriggerAll();
 							}
 						};
 
@@ -197,9 +209,15 @@ namespace SensorCoap
 				this.coapEndpoint = new CoapEndpoint();
 				//this.coapEndpoint = new CoapEndpoint(new LogSniffer());
 
-				this.lightResource = this.coapEndpoint.Register("/light", (req, resp) =>
+				this.lightResource = this.coapEndpoint.Register("/Light", (req, resp) =>
 				{
-					string s = ToString(this.lastLight.Value, 2);
+					string s;
+
+					if (this.lastLight.HasValue)
+						s = ToString(this.lastLight.Value, 2) + " %";
+					else
+						s = "-";
+
 					resp.Respond(CoapCode.Content, s, 64);
 
 				}, Notifications.Unacknowledged, "Light, in %.", null, null,
@@ -207,33 +225,39 @@ namespace SensorCoap
 
 				this.lightResource?.TriggerAll(new TimeSpan(0, 0, 5));
 
-				this.motionResource = this.coapEndpoint.Register("/motion", (req, resp) =>
+				this.motionResource = this.coapEndpoint.Register("/Motion", (req, resp) =>
 				{
-					string s = this.lastMotion.Value ? "true" : "false";
+					string s;
+
+					if (this.lastMotion.HasValue)
+						s = this.lastMotion.Value ? "true" : "false";
+					else
+						s = "-";
+
 					resp.Respond(CoapCode.Content, s, 64);
 
 				}, Notifications.Acknowledged, "Motion detector.", null, null,
 					new int[] { PlainText.ContentFormatCode });
 
-				this.coapEndpoint.Register("/all", (req, resp) =>
+				this.motionResource?.TriggerAll(new TimeSpan(0, 1, 0));
+
+				this.momentaryResource = this.coapEndpoint.Register("/Momentary", (req, resp) =>
 				{
 					if (req.IsAcceptable(Xml.ContentFormatCode))
-					{
 						this.ReturnMomentaryAsXml(req, resp);
-					}
 					else if (req.IsAcceptable(Json.ContentFormatCode))
-					{
 						this.ReturnMomentaryAsJson(req, resp);
-					}
 					else if (req.IsAcceptable(PlainText.ContentFormatCode))
-					{
 						this.ReturnMomentaryAsPlainText(req, resp);
-					}
-					else
+					else if (req.Accept.HasValue)
 						throw new CoapException(CoapCode.NotAcceptable);
+					else
+						this.ReturnMomentaryAsPlainText(req, resp);
+
 				}, Notifications.Acknowledged, "Momentary values.", null, null,
 					new int[] { Xml.ContentFormatCode, Json.ContentFormatCode, PlainText.ContentFormatCode });
 
+				this.momentaryResource?.TriggerAll(new TimeSpan(0, 0, 5));
 			}
 			catch (Exception ex)
 			{
@@ -247,6 +271,82 @@ namespace SensorCoap
 		internal static string ToString(double Value, int NrDec)
 		{
 			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
+		}
+
+		private void ReturnMomentaryAsXml(CoapMessage Request, CoapResponse Response)
+		{
+			StringBuilder s = new StringBuilder();
+
+			s.Append("<m ts='");
+			s.Append(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			s.Append("'>");
+
+			if (this.lastLight.HasValue)
+			{
+				s.Append("<l u='%'>");
+				s.Append(ToString(this.lastLight.Value, 2));
+				s.Append("</l>");
+			}
+
+			if (this.lastMotion.HasValue)
+			{
+				s.Append("<md>");
+				s.Append(this.lastMotion.Value ? "true" : "false");
+				s.Append("</md>");
+			}
+
+			s.Append("</m>");
+
+			Response.Respond(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Xml.ContentFormatCode));
+		}
+
+		private void ReturnMomentaryAsJson(CoapMessage Request, CoapResponse Response)
+		{
+			StringBuilder s = new StringBuilder();
+
+			s.Append("{\"ts\":\"");
+			s.Append(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			s.Append('"');
+
+			if (this.lastLight.HasValue)
+			{
+				s.Append(",\"l\":{\"v\":");
+				s.Append(ToString(this.lastLight.Value, 2));
+				s.Append(",\"u\":\"%\"}");
+			}
+
+			if (this.lastMotion.HasValue)
+			{
+				s.Append(",\"md\":");
+				s.Append(this.lastMotion.Value ? "true" : "false");
+			}
+
+			s.Append('}');
+
+			Response.Respond(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Json.ContentFormatCode));
+		}
+
+		private void ReturnMomentaryAsPlainText(CoapMessage Request, CoapResponse Response)
+		{
+			StringBuilder s = new StringBuilder();
+
+			s.Append("Timestamp: ");
+			s.AppendLine(DateTime.Now.ToUniversalTime().ToString());
+
+			if (this.lastLight.HasValue)
+			{
+				s.Append("Light: ");
+				s.Append(ToString(this.lastLight.Value, 2));
+				s.AppendLine(" %");
+			}
+
+			if (this.lastMotion.HasValue)
+			{
+				s.Append("Motion detected: ");
+				s.AppendLine(this.lastMotion.Value ? "true" : "false");
+			}
+
+			Response.Respond(CoapCode.Content, s.ToString(), 64);
 		}
 
 		private async void SampleValues(object State)

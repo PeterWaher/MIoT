@@ -1119,21 +1119,21 @@
           }
         }
       },
-      "System.Net.NameResolution/4.3.0": {
+      "System.Net.NameResolution/4.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.Handles": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.Handles": "4.0.1",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netstandard1.3/System.Net.NameResolution.dll": {}
@@ -1149,22 +1149,22 @@
           }
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -1723,10 +1723,10 @@
           }
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -2435,12 +2435,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -2451,10 +2448,21 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
-        "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+        "runtimeTargets": {
+          "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {
+            "assetType": "runtime",
+            "rid": "win10-x86"
+          }
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -3937,22 +3945,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -4450,10 +4458,10 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -5096,12 +5104,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -5112,10 +5117,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -6604,22 +6609,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -7117,10 +7122,10 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -7763,12 +7768,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -7779,10 +7781,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -9241,22 +9243,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -9754,10 +9756,10 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -10400,12 +10402,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -10416,10 +10415,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -11917,22 +11916,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -12430,10 +12429,10 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -13076,12 +13075,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -13092,10 +13088,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -14554,22 +14550,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -15067,10 +15063,10 @@
           "runtimes/win/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -15713,12 +15709,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -15729,10 +15722,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -17230,22 +17223,22 @@
           "runtimes/win/lib/netcore50/System.Net.NameResolution.dll": {}
         }
       },
-      "System.Net.NetworkInformation/4.3.0": {
+      "System.Net.NetworkInformation/4.1.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.1.0",
-          "Microsoft.Win32.Primitives": "4.3.0",
-          "System.Collections": "4.3.0",
-          "System.Diagnostics.Tracing": "4.3.0",
-          "System.Globalization": "4.3.0",
-          "System.Net.Primitives": "4.3.0",
-          "System.Resources.ResourceManager": "4.3.0",
-          "System.Runtime": "4.3.0",
-          "System.Runtime.Extensions": "4.3.0",
-          "System.Runtime.InteropServices": "4.3.0",
-          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
-          "System.Threading": "4.3.0",
-          "System.Threading.Tasks": "4.3.0"
+          "Microsoft.NETCore.Platforms": "1.0.1",
+          "Microsoft.Win32.Primitives": "4.0.1",
+          "System.Collections": "4.0.11",
+          "System.Diagnostics.Tracing": "4.1.0",
+          "System.Globalization": "4.0.11",
+          "System.Net.Primitives": "4.0.11",
+          "System.Resources.ResourceManager": "4.0.1",
+          "System.Runtime": "4.1.0",
+          "System.Runtime.Extensions": "4.1.0",
+          "System.Runtime.InteropServices": "4.1.0",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.0.1",
+          "System.Threading": "4.0.11",
+          "System.Threading.Tasks": "4.0.11"
         },
         "compile": {
           "ref/netcore50/System.Net.NetworkInformation.dll": {}
@@ -17743,10 +17736,10 @@
           "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.RuntimeInformation.dll": {}
         }
       },
-      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
+      "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
         "type": "package",
         "dependencies": {
-          "System.Runtime": "4.3.0"
+          "System.Runtime": "4.1.0"
         },
         "compile": {
           "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll": {}
@@ -18389,12 +18382,9 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP/1.0.1": {
+      "Waher.Networking.CoAP.UWP/1.0.2": {
         "type": "package",
         "dependencies": {
-          "NETStandard.Library": "1.6.1",
-          "System.Net.NameResolution": "4.3.0",
-          "System.Net.NetworkInformation": "4.3.0",
           "Waher.Content": "1.0.3",
           "Waher.Events": "1.0.2",
           "Waher.Networking": "1.0.1",
@@ -18405,10 +18395,10 @@
           "Waher.Security.DTLS": "1.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Networking.CoAP.dll": {}
+          "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
       "Waher.Persistence/1.0.1": {
@@ -23876,6 +23866,46 @@
         "system.net.http.rtc.nuspec"
       ]
     },
+    "System.Net.NameResolution/4.0.0": {
+      "sha512": "JdqRdM1Qym3YehqdKIi5LHrpypP4JMfxKQSNCJ2z4WawkG0il+N3XfNeJOxll2XrTnG7WgYYPoeiu/KOwg0DQw==",
+      "type": "package",
+      "path": "system.net.nameresolution/4.0.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net46/System.Net.NameResolution.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net46/System.Net.NameResolution.dll",
+        "ref/netstandard1.3/System.Net.NameResolution.dll",
+        "ref/netstandard1.3/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/de/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/es/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/fr/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/it/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/ja/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/ko/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/ru/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/zh-hans/System.Net.NameResolution.xml",
+        "ref/netstandard1.3/zh-hant/System.Net.NameResolution.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netstandard1.3/System.Net.NameResolution.dll",
+        "runtimes/win/lib/net46/System.Net.NameResolution.dll",
+        "runtimes/win/lib/netcore50/System.Net.NameResolution.dll",
+        "runtimes/win/lib/netstandard1.3/System.Net.NameResolution.dll",
+        "system.net.nameresolution.4.0.0.nupkg.sha512",
+        "system.net.nameresolution.nuspec"
+      ]
+    },
     "System.Net.NameResolution/4.3.0": {
       "sha512": "AFYl08R7MrsrEjqpQWTZWBadqXyTzNDaWpMqyxhb0d6sGhV6xMDKueuBXlLL30gz+DIRY6MpdgnHWlCh5wmq9w==",
       "type": "package",
@@ -23916,10 +23946,10 @@
         "system.net.nameresolution.nuspec"
       ]
     },
-    "System.Net.NetworkInformation/4.3.0": {
-      "sha512": "zNVmWVry0pAu7lcrRBhwwU96WUdbsrGL3azyzsbXmVNptae1+Za+UgOe9Z6s8iaWhPn7/l4wQqhC56HZWq7tkg==",
+    "System.Net.NetworkInformation/4.1.0": {
+      "sha512": "Q0rfeiW6QsiZuicGjrFA7cRr2+kXex0JIljTTxzI09GIftB8k+aNL31VsQD1sI2g31cw7UGDTgozA/FgeNSzsQ==",
       "type": "package",
-      "path": "system.net.networkinformation/4.3.0",
+      "path": "system.net.networkinformation/4.1.0",
       "files": [
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -23985,7 +24015,7 @@
         "runtimes/win/lib/net46/System.Net.NetworkInformation.dll",
         "runtimes/win/lib/netcore50/System.Net.NetworkInformation.dll",
         "runtimes/win/lib/netstandard1.3/System.Net.NetworkInformation.dll",
-        "system.net.networkinformation.4.3.0.nupkg.sha512",
+        "system.net.networkinformation.4.1.0.nupkg.sha512",
         "system.net.networkinformation.nuspec"
       ]
     },
@@ -25284,15 +25314,13 @@
         "system.runtime.interopservices.runtimeinformation.nuspec"
       ]
     },
-    "System.Runtime.InteropServices.WindowsRuntime/4.3.0": {
-      "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
+    "System.Runtime.InteropServices.WindowsRuntime/4.0.1": {
+      "sha512": "oIIXM4w2y3MiEZEXA+RTtfPV+SZ1ymbFdWppHlUciNdNIL0/Uo3HW9q9iN2O7T7KUmRdvjA7C2Gv4exAyW4zEQ==",
       "type": "package",
-      "path": "system.runtime.interopservices.windowsruntime/4.3.0",
+      "path": "system.runtime.interopservices.windowsruntime/4.0.1",
       "files": [
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
-        "lib/MonoAndroid10/_._",
-        "lib/MonoTouch10/_._",
         "lib/net45/_._",
         "lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
         "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll",
@@ -25301,12 +25329,6 @@
         "lib/wp80/_._",
         "lib/wpa81/_._",
         "lib/xamarinios1/_._",
-        "lib/xamarinios10/_._",
-        "lib/xamarinmac20/_._",
-        "lib/xamarintvos10/_._",
-        "lib/xamarinwatchos10/_._",
-        "ref/MonoAndroid10/_._",
-        "ref/MonoTouch10/_._",
         "ref/net45/_._",
         "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
         "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.xml",
@@ -25334,12 +25356,8 @@
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "ref/xamarinios10/_._",
-        "ref/xamarinmac20/_._",
-        "ref/xamarintvos10/_._",
-        "ref/xamarinwatchos10/_._",
         "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
-        "system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
+        "system.runtime.interopservices.windowsruntime.4.0.1.nupkg.sha512",
         "system.runtime.interopservices.windowsruntime.nuspec"
       ]
     },
@@ -27131,15 +27149,23 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.CoAP/1.0.1": {
-      "sha512": "uHL5+wlfVyXGEwpDqX378XVQkuiQPmRjCsJGRcdIrC26aotZVg7SQNPPikjuZwuVmlFNES/4zto1ZbBXLGyp4A==",
+    "Waher.Networking.CoAP.UWP/1.0.2": {
+      "sha512": "aH5c9gFYXLPWh0hntM5hvgBRy8BRFsDK8N6HirKMo6dda9MqOI+M/3+Qa6IGMKDSELOHQkf2slKHxNq5wZrsQw==",
       "type": "package",
-      "path": "waher.networking.coap/1.0.1",
+      "path": "waher.networking.coap.uwp/1.0.2",
       "files": [
-        "lib/netstandard1.3/Waher.Networking.CoAP.dll",
-        "lib/netstandard1.3/Waher.Networking.CoAP.xml",
-        "waher.networking.coap.1.0.1.nupkg.sha512",
-        "waher.networking.coap.nuspec"
+        "ref/uap10.0/Waher.Networking.CoAP.UWP.XML",
+        "ref/uap10.0/Waher.Networking.CoAP.UWP.dll",
+        "ref/uap10.0/Waher.Networking.CoAP.UWP.pdb",
+        "ref/uap10.0/Waher.Networking.CoAP.UWP.pri",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll",
+        "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.pdb",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll",
+        "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.pdb",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll",
+        "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.pdb",
+        "waher.networking.coap.uwp.1.0.2.nupkg.sha512",
+        "waher.networking.coap.uwp.nuspec"
       ]
     },
     "Waher.Persistence/1.0.1": {
@@ -27260,12 +27286,9 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
-      "Waher.Events >= 1.0.2",
-      "Waher.Networking.CoAP >= 1.0.1",
-      "Waher.Persistence >= 1.0.1",
+      "Waher.Networking.CoAP.UWP >= 1.0.2",
       "Waher.Persistence.FilesLW >= 1.0.3",
       "Waher.Runtime.Settings >= 1.0.1",
-      "Waher.Security.DTLS >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0": []
@@ -27283,12 +27306,9 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
-      "Waher.Events": "1.0.2",
-      "Waher.Networking.CoAP": "1.0.1",
-      "Waher.Persistence": "1.0.1",
+      "Waher.Networking.CoAP.UWP": "1.0.2",
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Settings": "1.0.1",
-      "Waher.Security.DTLS": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
