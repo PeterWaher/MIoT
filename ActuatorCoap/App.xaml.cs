@@ -34,6 +34,7 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
+using Waher.Security;
 
 namespace ActuatorCoap
 {
@@ -54,6 +55,7 @@ namespace ActuatorCoap
 #endif
 		private string deviceId;
 		private CoapEndpoint coapEndpoint = null;
+		private IUserSource users = new Users();
 		private bool? output = null;
 		private CoapResource outputResource = null;
 
@@ -217,8 +219,34 @@ namespace ActuatorCoap
 
 				Log.Informational("Device ID: " + this.deviceId);
 
-				this.coapEndpoint = new CoapEndpoint();
-				//this.coapEndpoint = new CoapEndpoint(new LogSniffer());
+				/************************************************************************************
+				 * To create an unencrypted CoAP Endpoint on the default CoAP port:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint();
+				 *    
+				 * To create an unencrypted CoAP Endpoint on the default CoAP port, 
+				 * with a sniffer that outputs communication to the window:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(new LogSniffer());
+				 * 
+				 * To create a DTLS encrypted CoAP endpoint, on the default CoAPS port, using
+				 * the users defined in the IUserSource users:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(CoapEndpoint.DefaultCoapsPort, this.users);
+				 *
+				 * To create a CoAP endpoint, that listens to both the default CoAP port, for
+				 * unencrypted communication, and the default CoAPS port, for encrypted,
+				 * authenticated and authorized communication, using
+				 * the users defined in the IUserSource users. Only users having the given
+				 * privilege (if not empty) will be authorized to access resources on the endpoint:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
+				 *    	new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, "PRIVILEGE", false, false);
+				 * 
+				 ************************************************************************************/
+
+				this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
+					new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
 
 				this.outputResource = this.coapEndpoint.Register("/Output", (req, resp) =>
 				{
@@ -263,6 +291,36 @@ namespace ActuatorCoap
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
 			}
+		}
+
+		public class Users : IUserSource
+		{
+			public bool TryGetUser(string UserName, out IUser User)
+			{
+				if (UserName == "MIoT")
+					User = new User();
+				else
+					User = null;
+
+				return User != null;
+			}
+		}
+
+		public class User : IUser
+		{
+			public string UserName => "MIoT";
+			public string PasswordHash => instance.CalcHash("rox");
+			public string PasswordHashType => "SHA-256";
+
+			public bool HasPrivilege(string Privilege)
+			{
+				return false;
+			}
+		}
+
+		private string CalcHash(string Password)
+		{
+			return Waher.Security.Hashes.ComputeSHA256HashString(Encoding.UTF8.GetBytes(Password + ":" + this.deviceId));
 		}
 
 		internal static App Instance => instance;

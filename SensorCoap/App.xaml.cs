@@ -30,6 +30,7 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
+using Waher.Security;
 
 using SensorCoap.History;
 
@@ -40,10 +41,12 @@ namespace SensorCoap
 	/// </summary>
 	sealed partial class App : Application
 	{
+		private static App instance = null;
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private CoapEndpoint coapEndpoint = null;
+		private IUserSource users = new Users();
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -113,6 +116,7 @@ namespace SensorCoap
 					rootFrame.Navigate(typeof(MainPage), e.Arguments);
 				}
 				// Ensure the current window is active
+				instance = this;
 				Window.Current.Activate();
 				Task.Run((Action)this.Init);
 			}
@@ -206,8 +210,34 @@ namespace SensorCoap
 
 				Log.Informational("Device ID: " + this.deviceId);
 
-				this.coapEndpoint = new CoapEndpoint();
-				//this.coapEndpoint = new CoapEndpoint(new LogSniffer());
+				/************************************************************************************
+				 * To create an unencrypted CoAP Endpoint on the default CoAP port:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint();
+				 *    
+				 * To create an unencrypted CoAP Endpoint on the default CoAP port, 
+				 * with a sniffer that outputs communication to the window:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(new LogSniffer());
+				 * 
+				 * To create a DTLS encrypted CoAP endpoint, on the default CoAPS port, using
+				 * the users defined in the IUserSource users:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(CoapEndpoint.DefaultCoapsPort, this.users);
+				 *
+				 * To create a CoAP endpoint, that listens to both the default CoAP port, for
+				 * unencrypted communication, and the default CoAPS port, for encrypted,
+				 * authenticated and authorized communication, using
+				 * the users defined in the IUserSource users. Only users having the given
+				 * privilege (if not empty) will be authorized to access resources on the endpoint:
+				 * 
+				 *    this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
+				 *    	new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, "PRIVILEGE", false, false);
+				 * 
+				 ************************************************************************************/
+
+				this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
+					new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
 
 				this.lightResource = this.coapEndpoint.Register("/Light", (req, resp) =>
 				{
@@ -266,6 +296,36 @@ namespace SensorCoap
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await Dialog.ShowAsync();
 			}
+		}
+
+		public class Users : IUserSource
+		{
+			public bool TryGetUser(string UserName, out IUser User)
+			{
+				if (UserName == "MIoT")
+					User = new User();
+				else
+					User = null;
+
+				return User != null;
+			}
+		}
+
+		public class User : IUser
+		{
+			public string UserName => "MIoT";
+			public string PasswordHash => instance.CalcHash("rox");
+			public string PasswordHashType => "SHA-256";
+
+			public bool HasPrivilege(string Privilege)
+			{
+				return false;
+			}
+		}
+
+		private string CalcHash(string Password)
+		{
+			return Waher.Security.Hashes.ComputeSHA256HashString(Encoding.UTF8.GetBytes(Password + ":" + this.deviceId));
 		}
 
 		internal static string ToString(double Value, int NrDec)
@@ -633,6 +693,9 @@ namespace SensorCoap
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
+			if (instance == this)
+				instance = null;
+
 			if (this.sampleTimer != null)
 			{
 				this.sampleTimer.Dispose();
@@ -660,5 +723,6 @@ namespace SensorCoap
 
 			deferral.Complete();
 		}
+
 	}
 }
