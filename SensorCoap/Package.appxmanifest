@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="bbd6afea-2e22-48bb-95c9-2a001671c35c" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>SensorCoap</DisplayName>
-    <PublisherDisplayName>Peter</PublisherDisplayName>
+    <PublisherDisplayName>Peter Waher</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

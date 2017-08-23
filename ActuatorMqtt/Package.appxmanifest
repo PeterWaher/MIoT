@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="dfd59262-d3ef-4c0f-9fd3-afefc1e04f0f" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ActuatorMqtt</DisplayName>
-    <PublisherDisplayName>Peter</PublisherDisplayName>
+    <PublisherDisplayName>Peter Waher</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -16,7 +16,7 @@
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="ActuatorMqtt.App">
       <uap:VisualElements DisplayName="ActuatorMqtt" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="ActuatorMqtt" BackgroundColor="white">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\LargeTile.png" Square71x71Logo="Assets\SmallTile.png" ShortName="Actuator (MQTT)">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="white" />
       </uap:VisualElements>
