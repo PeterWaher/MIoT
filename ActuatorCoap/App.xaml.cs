@@ -24,7 +24,11 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+using Waher.Content;
 using Waher.Events;
+using Waher.Networking.CoAP;
+using Waher.Networking.CoAP.ContentFormats;
+using Waher.Networking.CoAP.Options;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
@@ -48,6 +52,10 @@ namespace ActuatorCoap
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 #endif
+		private string deviceId;
+		private CoapEndpoint coapEndpoint = null;
+		private bool? output = null;
+		private CoapResource outputResource = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -111,6 +119,8 @@ namespace ActuatorCoap
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(IContentEncoder).GetTypeInfo().Assembly,
+					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -127,13 +137,13 @@ namespace ActuatorCoap
 						{
 							this.gpioPin.SetDriveMode(GpioPinDriveMode.Output);
 
-							bool LastOn = await RuntimeSettings.GetAsync("ActuatorCoap.Output", false);
-							this.gpioPin.Write(LastOn ? GpioPinValue.High : GpioPinValue.Low);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.gpioPin.Write(this.output.Value ? GpioPinValue.High : GpioPinValue.Low);
 
-							await MainPage.Instance.OutputSet(LastOn);
+							await MainPage.Instance.OutputSet(this.output.Value);
 
 							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-								new KeyValuePair<string, object>("Output", LastOn));
+								new KeyValuePair<string, object>("Output", this.output.Value));
 						}
 						else
 							Log.Error("Output mode not supported for GPIO pin " + gpioOutputPin.ToString());
@@ -167,13 +177,13 @@ namespace ActuatorCoap
 
 								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 
-								bool LastOn = await RuntimeSettings.GetAsync("ActuatorCoap.Output", false);
-								this.arduino.digitalWrite(1, LastOn ? PinState.HIGH : PinState.LOW);
+								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
 
-								await MainPage.Instance.OutputSet(LastOn);
+								await MainPage.Instance.OutputSet(this.output.Value);
 
 								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-									new KeyValuePair<string, object>("Output", LastOn));
+									new KeyValuePair<string, object>("Output", this.output.Value));
 
 								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							}
@@ -198,6 +208,53 @@ namespace ActuatorCoap
 					}
 				}
 #endif
+				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
+				if (string.IsNullOrEmpty(this.deviceId))
+				{
+					this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+					await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
+				}
+
+				Log.Informational("Device ID: " + this.deviceId);
+
+				this.coapEndpoint = new CoapEndpoint();
+				//this.coapEndpoint = new CoapEndpoint(new LogSniffer());
+
+				this.outputResource = this.coapEndpoint.Register("/Output", (req, resp) =>
+				{
+					string s;
+
+					if (this.output.HasValue)
+						s = this.output.Value ? "true" : "false";
+					else
+						s = "-";
+
+					resp.Respond(CoapCode.Content, s, 64);
+
+				}, async (req, resp) =>
+				{
+					try
+					{
+						string s = req.Decode() as string;
+						if (s == null && req.Payload != null)
+							s = Encoding.UTF8.GetString(req.Payload);
+
+						if (s == null || !CommonTypes.TryParse(s, out bool Output))
+							resp.RST(CoapCode.BadRequest);
+						else
+						{
+							resp.Respond(CoapCode.Changed);
+							await this.SetOutput(Output, req.From.ToString());
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				}, Notifications.Acknowledged, "Digital Output.", null, null,
+					new int[] { PlainText.ContentFormatCode });
+
+				this.outputResource?.TriggerAll(new TimeSpan(0, 1, 0));
 			}
 			catch (Exception ex)
 			{
@@ -221,13 +278,16 @@ namespace ActuatorCoap
 			{
 				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
 #endif
-				await RuntimeSettings.SetAsync("ActuatorCoap.Output", On);
+				await RuntimeSettings.SetAsync("Actuator.Output", On);
+				this.output = On;
 
 				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
 
 				if (Actor != null)
 					await MainPage.Instance.OutputSet(On);
+
+				this.outputResource?.TriggerAll();
 			}
 		}
 
@@ -283,5 +343,6 @@ namespace ActuatorCoap
 
 			deferral.Complete();
 		}
+
 	}
 }
