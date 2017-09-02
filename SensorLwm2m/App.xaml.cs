@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -294,7 +295,8 @@ namespace SensorLwm2m
 				Log.Emergency(ex);
 
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
-				await Dialog.ShowAsync();
+				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+					async () => await Dialog.ShowAsync());
 			}
 		}
 

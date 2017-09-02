@@ -28221,7 +28221,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "[5.4.0, )",
+      "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
       "Waher.Content": "1.0.3",
       "Waher.Content.Emoji": "1.0.1",
       "Waher.Content.Images": "1.0.2",

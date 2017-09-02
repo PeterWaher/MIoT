@@ -28222,6 +28222,8 @@
       }
     },
     "dependencies": {
+      "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+      "SkiaSharp": "1.59.1",
       "Waher.Content": "1.0.3",
       "Waher.Content.Images": "1.0.2",
       "Waher.Content.Markdown": "1.0.2",
@@ -28237,15 +28239,7 @@
       "Waher.Script.Graphs": "1.0.5",
       "Waher.Security": "1.0.0",
       "Waher.Security.JWT.UWP": "1.0.1",
-      "Windows-Remote-Arduino": "1.4.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[5.4.0, )"
-      },
-      "SkiaSharp": {
-        "target": "Package",
-        "version": "[1.59.1, )"
-      }
+      "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
       "uap10.0.10586": {}

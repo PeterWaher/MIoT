@@ -27307,13 +27307,10 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+      "Waher.Networking.CoAP.UWP": "1.0.4",
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Settings": "1.0.1",
-      "Windows-Remote-Arduino": "1.4.0",
-      "Waher.Networking.CoAP.UWP": {
-        "target": "Package",
-        "version": "[1.0.4, )"
-      }
+      "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
       "uap10.0.10586": {}

@@ -26714,27 +26714,12 @@
       }
     },
     "dependencies": {
-      "Windows-Remote-Arduino": "1.4.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[5.4.0, )"
-      },
-      "Waher.Events": {
-        "target": "Package",
-        "version": "[1.0.2, )"
-      },
-      "Waher.Networking.MQTT.UWP": {
-        "target": "Package",
-        "version": "[1.0.4, )"
-      },
-      "Waher.Persistence.FilesLW": {
-        "target": "Package",
-        "version": "[1.0.3, )"
-      },
-      "Waher.Runtime.Settings": {
-        "target": "Package",
-        "version": "[1.0.1, )"
-      }
+      "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+      "Waher.Events": "1.0.2",
+      "Waher.Networking.MQTT.UWP": "1.0.4",
+      "Waher.Persistence.FilesLW": "1.0.3",
+      "Waher.Runtime.Settings": "1.0.1",
+      "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
       "uap10.0.10586": {}

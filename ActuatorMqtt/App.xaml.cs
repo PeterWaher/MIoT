@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Devices.Gpio;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -250,7 +251,8 @@ namespace ActuatorMqtt
 				Log.Emergency(ex);
 
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
-				await Dialog.ShowAsync();
+				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+					async () => await Dialog.ShowAsync());
 			}
 		}
 
