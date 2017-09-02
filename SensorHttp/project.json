@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
-    "SkiaSharp": "1.58.1",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+    "SkiaSharp": "1.59.1",
     "Waher.Content": "1.0.3",
     "Waher.Content.Images": "1.0.2",
     "Waher.Content.Markdown": "1.0.2",
@@ -20,7 +20,7 @@
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.10586": {}
   },
   "runtimes": {
     "win10-arm": {},

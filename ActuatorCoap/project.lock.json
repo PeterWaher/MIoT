@@ -2435,7 +2435,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -2445,7 +2445,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -2570,7 +2570,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5104,7 +5104,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -5114,7 +5114,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -5228,7 +5228,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -7765,7 +7765,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -7775,7 +7775,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -7889,7 +7889,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10399,7 +10399,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -10409,7 +10409,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -10523,7 +10523,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13069,7 +13069,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -13079,7 +13079,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -13193,7 +13193,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15703,7 +15703,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -15713,7 +15713,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -15827,7 +15827,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -18373,7 +18373,7 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.CoAP.UWP/1.0.3": {
+      "Waher.Networking.CoAP.UWP/1.0.4": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.3",
@@ -18383,7 +18383,7 @@
           "Waher.Runtime.Inventory": "1.0.2",
           "Waher.Runtime.Timing": "1.0.1",
           "Waher.Security": "1.0.0",
-          "Waher.Security.DTLS": "1.0.1"
+          "Waher.Security.DTLS": "1.0.2"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
@@ -18497,7 +18497,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.DTLS/1.0.1": {
+      "Waher.Security.DTLS/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -27140,10 +27140,10 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.CoAP.UWP/1.0.3": {
-      "sha512": "gFa9uh1+MhQf5CYKECfdGVSXo4kB7Lr/4SCl88+BC8E8MWB+U5RVdfaHusp9qA+7kjYsb1javWRQGamgBgp70Q==",
+    "Waher.Networking.CoAP.UWP/1.0.4": {
+      "sha512": "ohtbpkDVtrZVk6c8d7bIvT3fdx/fde+Ga+hnO0XzxHNv1lpYkWv7ZMMpj7xgY9KwFux2yAZ+dEsyqC++AXXUOQ==",
       "type": "package",
-      "path": "waher.networking.coap.uwp/1.0.3",
+      "path": "waher.networking.coap.uwp/1.0.4",
       "files": [
         "ref/uap10.0/Waher.Networking.CoAP.UWP.XML",
         "ref/uap10.0/Waher.Networking.CoAP.UWP.dll",
@@ -27155,7 +27155,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.pdb",
-        "waher.networking.coap.uwp.1.0.3.nupkg.sha512",
+        "waher.networking.coap.uwp.1.0.4.nupkg.sha512",
         "waher.networking.coap.uwp.nuspec"
       ]
     },
@@ -27241,14 +27241,14 @@
         "waher.security.nuspec"
       ]
     },
-    "Waher.Security.DTLS/1.0.1": {
-      "sha512": "y0NIS0q69/6Mf26tfO4UgLR2C8goPaF5yww0YTtDyZWkNTvGOdAw4ynXZXqXVMU2BmjM8UHqHz/WCe6J71g5lA==",
+    "Waher.Security.DTLS/1.0.2": {
+      "sha512": "0RjIsplpLf/ZCaWbCV0aVxZCsmyuZWJOJCve+Rnr3W5wq08yJe2BqOwlemTVsu1NSdY/Pqk+2Gha6/ro4+utzA==",
       "type": "package",
-      "path": "waher.security.dtls/1.0.1",
+      "path": "waher.security.dtls/1.0.2",
       "files": [
         "lib/netstandard1.3/Waher.Security.DTLS.dll",
         "lib/netstandard1.3/Waher.Security.DTLS.xml",
-        "waher.security.dtls.1.0.1.nupkg.sha512",
+        "waher.security.dtls.1.0.2.nupkg.sha512",
         "waher.security.dtls.nuspec"
       ]
     },
@@ -27277,7 +27277,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
-      "Waher.Networking.CoAP.UWP >= 1.0.3",
+      "Waher.Networking.CoAP.UWP >= 1.0.4",
       "Waher.Persistence.FilesLW >= 1.0.3",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
@@ -27307,7 +27307,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
-      "Waher.Networking.CoAP.UWP": "1.0.3",
+      "Waher.Networking.CoAP.UWP": "[1.0.4, )",
       "Waher.Persistence.FilesLW": "1.0.3",
       "Waher.Runtime.Settings": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"

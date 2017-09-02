@@ -29,33 +29,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -239,14 +239,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -2396,7 +2396,7 @@
           }
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2408,7 +2408,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2420,13 +2420,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -2435,11 +2435,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -2448,11 +2448,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -2541,33 +2541,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -2698,14 +2698,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -4938,7 +4938,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -4950,7 +4950,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -4962,13 +4962,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -4977,11 +4977,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -4990,11 +4990,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -5050,33 +5050,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -5208,14 +5208,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -7483,7 +7483,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7495,7 +7495,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7507,13 +7507,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -7522,11 +7522,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -7535,11 +7535,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -7595,33 +7595,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -7755,14 +7755,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -10001,7 +10001,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10013,7 +10013,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10025,13 +10025,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -10040,11 +10040,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -10053,11 +10053,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -10113,33 +10113,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -10274,14 +10274,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -12555,7 +12555,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12567,7 +12567,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12579,13 +12579,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -12594,11 +12594,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -12607,11 +12607,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -12667,33 +12667,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -12827,14 +12827,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -15073,7 +15073,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15085,7 +15085,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15097,13 +15097,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -15112,11 +15112,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -15125,11 +15125,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -15185,33 +15185,33 @@
           "lib/netcore50/Microsoft.CSharp.dll": {}
         }
       },
-      "Microsoft.Net.Native.Compiler/1.6.2": {
+      "Microsoft.Net.Native.Compiler/1.7.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Net.Native.SharedLibrary-arm": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x64": "1.6.1",
-          "Microsoft.Net.Native.SharedLibrary-x86": "1.6.1"
+          "Microsoft.Net.Native.SharedLibrary-arm": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x64": "1.7.0",
+          "Microsoft.Net.Native.SharedLibrary-x86": "1.7.0"
         },
         "build": {
           "build/Microsoft.Net.Native.Compiler.props": {},
           "build/Microsoft.Net.Native.Compiler.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-arm.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-arm.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x64.props": {},
           "build/Microsoft.Net.Native.SharedLibrary-x64.targets": {}
         }
       },
-      "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
+      "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
         "type": "package",
         "build": {
           "build/Microsoft.Net.Native.SharedLibrary-x86.props": {},
@@ -15346,14 +15346,14 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
           "Microsoft.NETCore.Portable.Compatibility": "1.0.2",
           "Microsoft.NETCore.Runtime.CoreCLR": "1.0.3",
           "Microsoft.NETCore.Targets": "1.0.2",
-          "Microsoft.Net.Native.Compiler": "1.6.2",
+          "Microsoft.Net.Native.Compiler": "1.7.0",
           "Microsoft.Win32.Primitives": "4.0.1",
           "System.Collections.NonGeneric": "4.0.1",
           "System.Collections.Specialized": "4.0.1",
@@ -17627,7 +17627,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.1": {
+      "Waher.Events/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17639,7 +17639,7 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Persistence/1.0.0": {
+      "Waher.Persistence/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17651,13 +17651,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.2": {
+      "Waher.Persistence.FilesLW/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.0",
-          "Waher.Runtime.Cache": "1.0.0",
-          "Waher.Runtime.Inventory": "1.0.0"
+          "Waher.Persistence": "1.0.1",
+          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Runtime.Inventory": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -17666,11 +17666,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.0": {
+      "Waher.Runtime.Cache/1.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.0"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -17679,11 +17679,11 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.0": {
+      "Waher.Runtime.Inventory/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.1"
+          "Waher.Events": "1.0.2"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
@@ -17770,14 +17770,14 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "Microsoft.Net.Native.Compiler/1.6.2": {
-      "sha512": "28VesDpHpRatYNlydGB2JbCpjOo2Ils4v2J/O46lHKpLgmCrf6UzAwWnUZq5fhLzJETWb+a0AlENY3hABASQEg==",
+    "Microsoft.Net.Native.Compiler/1.7.0": {
+      "sha512": "g46kdqDNrrVx3CiUoSe2QDkUPi/hsncwGK2k0jti5e6PZkiUWlplhkjGHS/Xrp4dx6+KhC3tuUtStHaNX7emMQ==",
       "type": "package",
-      "path": "microsoft.net.native.compiler/1.6.2",
+      "path": "microsoft.net.native.compiler/1.7.0",
       "files": [
         "build/Microsoft.Net.Native.Compiler.props",
         "build/Microsoft.Net.Native.Compiler.targets",
-        "microsoft.net.native.compiler.1.6.2.nupkg.sha512",
+        "microsoft.net.native.compiler.1.7.0.nupkg.sha512",
         "microsoft.net.native.compiler.nuspec",
         "tools/LibraryXML/Callisto.rd.xml",
         "tools/LibraryXML/GalaSoft.MvvmLight.Extras.Win8.rd.xml",
@@ -17813,7 +17813,7 @@
         "tools/Packages/Microsoft.NETNative.Analyzer/1.0.0/tools/install.ps1",
         "tools/Packages/Microsoft.NETNative.Analyzer/1.0.0/tools/uninstall.ps1",
         "tools/Runtime/arm/CommandProvider.dll",
-        "tools/Runtime/arm/Microsoft.NET.Native.Runtime.1.6.appx",
+        "tools/Runtime/arm/Microsoft.NET.Native.Runtime.1.7.appx",
         "tools/Runtime/arm/SymbolProvider.dll",
         "tools/Runtime/arm/mrt100_app.pdb",
         "tools/Runtime/arm/mrt100dac_winarm.dll",
@@ -17829,7 +17829,7 @@
         "tools/Runtime/arm/mrt100sos_x86.dll",
         "tools/Runtime/arm/msdia120.dll",
         "tools/Runtime/x64/CommandProvider.dll",
-        "tools/Runtime/x64/Microsoft.NET.Native.Runtime.1.6.appx",
+        "tools/Runtime/x64/Microsoft.NET.Native.Runtime.1.7.appx",
         "tools/Runtime/x64/SymbolProvider.dll",
         "tools/Runtime/x64/mrt100_app.pdb",
         "tools/Runtime/x64/mrt100dac_winamd64.dll",
@@ -17839,7 +17839,7 @@
         "tools/Runtime/x64/mrt100sos.dll",
         "tools/Runtime/x64/msdia120.dll",
         "tools/Runtime/x86/CommandProvider.dll",
-        "tools/Runtime/x86/Microsoft.NET.Native.Runtime.1.6.appx",
+        "tools/Runtime/x86/Microsoft.NET.Native.Runtime.1.7.appx",
         "tools/Runtime/x86/SymbolProvider.dll",
         "tools/Runtime/x86/mrt100_app.pdb",
         "tools/Runtime/x86/mrt100dac_winx86.dll",
@@ -18008,22 +18008,22 @@
         "tools/arm/ilc/tools/McgEngine.dll",
         "tools/arm/ilc/tools/MdTransform.dll",
         "tools/arm/ilc/tools/MethodBodyEditor.dll",
-        "tools/arm/ilc/tools/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "tools/arm/ilc/tools/Microsoft.ApplicationInsights.UniversalTelemetryChannel.dll",
-        "tools/arm/ilc/tools/Microsoft.ApplicationInsights.dll",
         "tools/arm/ilc/tools/Microsoft.Build.ILTasks.dll",
         "tools/arm/ilc/tools/Microsoft.Cci.dll",
+        "tools/arm/ilc/tools/Microsoft.DiaSymReader.Converter.dll",
+        "tools/arm/ilc/tools/Microsoft.DiaSymReader.dll",
         "tools/arm/ilc/tools/Microsoft.Diagnostics.Tracing.EventSource.dll",
         "tools/arm/ilc/tools/Microsoft.NetNative.IL2IL.dll",
         "tools/arm/ilc/tools/Microsoft.NetNative.Instrumentation.dll",
-        "tools/arm/ilc/tools/Microsoft.Threading.Tasks.Extensions.dll",
-        "tools/arm/ilc/tools/Microsoft.Threading.Tasks.dll",
         "tools/arm/ilc/tools/Microsoft.VisualStudio.RemoteControl.dll",
         "tools/arm/ilc/tools/Microsoft.VisualStudio.Telemetry.dll",
         "tools/arm/ilc/tools/Microsoft.VisualStudio.Utilities.Internal.dll",
         "tools/arm/ilc/tools/NativeFormatWriter.dll",
         "tools/arm/ilc/tools/Newtonsoft.Json.dll",
         "tools/arm/ilc/tools/ReducerEngine.dll",
+        "tools/arm/ilc/tools/System.Collections.Immutable.dll",
+        "tools/arm/ilc/tools/System.Reflection.Metadata.dll",
+        "tools/arm/ilc/tools/System.ValueTuple.dll",
         "tools/arm/ilc/tools/TypeNameUtilities.dll",
         "tools/arm/ilc/tools/WCFDispatchProxy.dll",
         "tools/arm/ilc/tools/c2n.dll",
@@ -18083,6 +18083,7 @@
         "tools/arm/ilc/tools/msvcdis140.dll",
         "tools/arm/ilc/tools/msvcp140.dll",
         "tools/arm/ilc/tools/nutc_driver.exe",
+        "tools/arm/ilc/tools/nutc_driver.exe.config",
         "tools/arm/ilc/tools/pgocvt.exe",
         "tools/arm/ilc/tools/pgodb140.dll",
         "tools/arm/ilc/tools/pgomgr.exe",
@@ -18271,22 +18272,22 @@
         "tools/x64/ilc/tools/McgEngine.dll",
         "tools/x64/ilc/tools/MdTransform.dll",
         "tools/x64/ilc/tools/MethodBodyEditor.dll",
-        "tools/x64/ilc/tools/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "tools/x64/ilc/tools/Microsoft.ApplicationInsights.UniversalTelemetryChannel.dll",
-        "tools/x64/ilc/tools/Microsoft.ApplicationInsights.dll",
         "tools/x64/ilc/tools/Microsoft.Build.ILTasks.dll",
         "tools/x64/ilc/tools/Microsoft.Cci.dll",
+        "tools/x64/ilc/tools/Microsoft.DiaSymReader.Converter.dll",
+        "tools/x64/ilc/tools/Microsoft.DiaSymReader.dll",
         "tools/x64/ilc/tools/Microsoft.Diagnostics.Tracing.EventSource.dll",
         "tools/x64/ilc/tools/Microsoft.NetNative.IL2IL.dll",
         "tools/x64/ilc/tools/Microsoft.NetNative.Instrumentation.dll",
-        "tools/x64/ilc/tools/Microsoft.Threading.Tasks.Extensions.dll",
-        "tools/x64/ilc/tools/Microsoft.Threading.Tasks.dll",
         "tools/x64/ilc/tools/Microsoft.VisualStudio.RemoteControl.dll",
         "tools/x64/ilc/tools/Microsoft.VisualStudio.Telemetry.dll",
         "tools/x64/ilc/tools/Microsoft.VisualStudio.Utilities.Internal.dll",
         "tools/x64/ilc/tools/NativeFormatWriter.dll",
         "tools/x64/ilc/tools/Newtonsoft.Json.dll",
         "tools/x64/ilc/tools/ReducerEngine.dll",
+        "tools/x64/ilc/tools/System.Collections.Immutable.dll",
+        "tools/x64/ilc/tools/System.Reflection.Metadata.dll",
+        "tools/x64/ilc/tools/System.ValueTuple.dll",
         "tools/x64/ilc/tools/TypeNameUtilities.dll",
         "tools/x64/ilc/tools/WCFDispatchProxy.dll",
         "tools/x64/ilc/tools/c2n.dll",
@@ -18346,6 +18347,7 @@
         "tools/x64/ilc/tools/msvcdis140.dll",
         "tools/x64/ilc/tools/msvcp140.dll",
         "tools/x64/ilc/tools/nutc_driver.exe",
+        "tools/x64/ilc/tools/nutc_driver.exe.config",
         "tools/x64/ilc/tools/pgocvt.exe",
         "tools/x64/ilc/tools/pgodb140.dll",
         "tools/x64/ilc/tools/pgomgr.exe",
@@ -18534,22 +18536,22 @@
         "tools/x86/ilc/tools/McgEngine.dll",
         "tools/x86/ilc/tools/MdTransform.dll",
         "tools/x86/ilc/tools/MethodBodyEditor.dll",
-        "tools/x86/ilc/tools/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "tools/x86/ilc/tools/Microsoft.ApplicationInsights.UniversalTelemetryChannel.dll",
-        "tools/x86/ilc/tools/Microsoft.ApplicationInsights.dll",
         "tools/x86/ilc/tools/Microsoft.Build.ILTasks.dll",
         "tools/x86/ilc/tools/Microsoft.Cci.dll",
+        "tools/x86/ilc/tools/Microsoft.DiaSymReader.Converter.dll",
+        "tools/x86/ilc/tools/Microsoft.DiaSymReader.dll",
         "tools/x86/ilc/tools/Microsoft.Diagnostics.Tracing.EventSource.dll",
         "tools/x86/ilc/tools/Microsoft.NetNative.IL2IL.dll",
         "tools/x86/ilc/tools/Microsoft.NetNative.Instrumentation.dll",
-        "tools/x86/ilc/tools/Microsoft.Threading.Tasks.Extensions.dll",
-        "tools/x86/ilc/tools/Microsoft.Threading.Tasks.dll",
         "tools/x86/ilc/tools/Microsoft.VisualStudio.RemoteControl.dll",
         "tools/x86/ilc/tools/Microsoft.VisualStudio.Telemetry.dll",
         "tools/x86/ilc/tools/Microsoft.VisualStudio.Utilities.Internal.dll",
         "tools/x86/ilc/tools/NativeFormatWriter.dll",
         "tools/x86/ilc/tools/Newtonsoft.Json.dll",
         "tools/x86/ilc/tools/ReducerEngine.dll",
+        "tools/x86/ilc/tools/System.Collections.Immutable.dll",
+        "tools/x86/ilc/tools/System.Reflection.Metadata.dll",
+        "tools/x86/ilc/tools/System.ValueTuple.dll",
         "tools/x86/ilc/tools/TypeNameUtilities.dll",
         "tools/x86/ilc/tools/WCFDispatchProxy.dll",
         "tools/x86/ilc/tools/c2n.dll",
@@ -18609,6 +18611,7 @@
         "tools/x86/ilc/tools/msvcdis140.dll",
         "tools/x86/ilc/tools/msvcp140.dll",
         "tools/x86/ilc/tools/nutc_driver.exe",
+        "tools/x86/ilc/tools/nutc_driver.exe.config",
         "tools/x86/ilc/tools/pgocvt.exe",
         "tools/x86/ilc/tools/pgodb140.dll",
         "tools/x86/ilc/tools/pgomgr.exe",
@@ -18665,14 +18668,14 @@
         "tools/x86/mrt100etw.dll"
       ]
     },
-    "Microsoft.Net.Native.SharedLibrary-arm/1.6.1": {
-      "sha512": "PmgXdc9F6HPU2J9s4rtzkgTqGcMx3ycradUvxRK82WTL0ltknTX4/+ZDgqYUiEdOMHwkXoAHnKcQfsIC3GQ2Ng==",
+    "Microsoft.Net.Native.SharedLibrary-arm/1.7.0": {
+      "sha512": "eI4KNNMOpgpBkdXHFgmXD2l5gNdJJOV+ntN1Fwwnm93Rr7pmD8MGssJpI7wo7+uieaFIfAZ2waZjEnRR4Uu90A==",
       "type": "package",
-      "path": "microsoft.net.native.sharedlibrary-arm/1.6.1",
+      "path": "microsoft.net.native.sharedlibrary-arm/1.7.0",
       "files": [
         "build/Microsoft.Net.Native.SharedLibrary-arm.props",
         "build/Microsoft.Net.Native.SharedLibrary-arm.targets",
-        "microsoft.net.native.sharedlibrary-arm.1.6.1.nupkg.sha512",
+        "microsoft.net.native.sharedlibrary-arm.1.7.0.nupkg.sha512",
         "microsoft.net.native.sharedlibrary-arm.nuspec",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltoc",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltocpdb",
@@ -18826,10 +18829,9 @@
         "tools/SharedLibrary/chk/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.6.appx",
+        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.7.appx",
         "tools/SharedLibrary/chk/Native/SharedLibrary.dll",
         "tools/SharedLibrary/chk/Native/SharedLibrary.pdb",
-        "tools/SharedLibrary/chk/Native/SharedLibrary.pdb.srcsrv.txt",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Collections.Concurrent.SR.resw",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Collections.SR.resw",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Diagnostics.Tracing.SR.resw",
@@ -19031,10 +19033,9 @@
         "tools/SharedLibrary/ret/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.6.appx",
+        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.7.appx",
         "tools/SharedLibrary/ret/Native/SharedLibrary.dll",
         "tools/SharedLibrary/ret/Native/SharedLibrary.pdb",
-        "tools/SharedLibrary/ret/Native/SharedLibrary.pdb.srcsrv.txt",
         "tools/SharedLibrary/ret/SharedAssemblyILMergeInfo.csv",
         "tools/SharedLibrary/ret/SharedAssemblyList.txt",
         "tools/SharedLibrary/ret/SharedLibrary.iltransformtoc.ildll",
@@ -19065,14 +19066,14 @@
         "tools/SharedLibrary/ret/Toc/System.Text.RegularExpressions.toc"
       ]
     },
-    "Microsoft.Net.Native.SharedLibrary-x64/1.6.1": {
-      "sha512": "AEd9UK6oq46NBMO29LquKza/cyaIsrrfFRMZbmDlOArS5sMVOUGga3vBDebwgRzmYtUdFFmRu3XaaKhVrncEbw==",
+    "Microsoft.Net.Native.SharedLibrary-x64/1.7.0": {
+      "sha512": "3nrUuvayvlOdmx7yzUBu2PzKeQmZ0mwqhMfarOzt6X1tKjIrOONCFqH148rP7TgQDJBfKVSShB1f+BedF69emw==",
       "type": "package",
-      "path": "microsoft.net.native.sharedlibrary-x64/1.6.1",
+      "path": "microsoft.net.native.sharedlibrary-x64/1.7.0",
       "files": [
         "build/Microsoft.Net.Native.SharedLibrary-x64.props",
         "build/Microsoft.Net.Native.SharedLibrary-x64.targets",
-        "microsoft.net.native.sharedlibrary-x64.1.6.1.nupkg.sha512",
+        "microsoft.net.native.sharedlibrary-x64.1.7.0.nupkg.sha512",
         "microsoft.net.native.sharedlibrary-x64.nuspec",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltoc",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltocpdb",
@@ -19226,10 +19227,9 @@
         "tools/SharedLibrary/chk/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.6.appx",
+        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.7.appx",
         "tools/SharedLibrary/chk/Native/SharedLibrary.dll",
         "tools/SharedLibrary/chk/Native/SharedLibrary.pdb",
-        "tools/SharedLibrary/chk/Native/SharedLibrary.pdb.srcsrv.txt",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Collections.Concurrent.SR.resw",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Collections.SR.resw",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Diagnostics.Tracing.SR.resw",
@@ -19431,10 +19431,9 @@
         "tools/SharedLibrary/ret/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.6.appx",
+        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.7.appx",
         "tools/SharedLibrary/ret/Native/SharedLibrary.dll",
         "tools/SharedLibrary/ret/Native/SharedLibrary.pdb",
-        "tools/SharedLibrary/ret/Native/SharedLibrary.pdb.srcsrv.txt",
         "tools/SharedLibrary/ret/SharedAssemblyILMergeInfo.csv",
         "tools/SharedLibrary/ret/SharedAssemblyList.txt",
         "tools/SharedLibrary/ret/SharedLibrary.iltransformtoc.ildll",
@@ -19465,14 +19464,14 @@
         "tools/SharedLibrary/ret/Toc/System.Text.RegularExpressions.toc"
       ]
     },
-    "Microsoft.Net.Native.SharedLibrary-x86/1.6.1": {
-      "sha512": "jurbK0IemAFs0NDxXRCVMmC18p3NLKkk3SU+kqjzuOQyUiz9KTl4+ZOUDBRNcPGWnwuT5DIKdv6kYvywj0LjPw==",
+    "Microsoft.Net.Native.SharedLibrary-x86/1.7.0": {
+      "sha512": "nC682cBwXA/ITw1BKnPxMBp93uHHFPmG/X9P+mQt1yCJBXnEcNi7XzzOROmqMuNwwtk5ci/cQE4HQDytn3O39g==",
       "type": "package",
-      "path": "microsoft.net.native.sharedlibrary-x86/1.6.1",
+      "path": "microsoft.net.native.sharedlibrary-x86/1.7.0",
       "files": [
         "build/Microsoft.Net.Native.SharedLibrary-x86.props",
         "build/Microsoft.Net.Native.SharedLibrary-x86.targets",
-        "microsoft.net.native.sharedlibrary-x86.1.6.1.nupkg.sha512",
+        "microsoft.net.native.sharedlibrary-x86.1.7.0.nupkg.sha512",
         "microsoft.net.native.sharedlibrary-x86.nuspec",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltoc",
         "tools/SharedLibrary/chk/AnalysisILToc/System.Collections.Concurrent.iltocpdb",
@@ -19626,7 +19625,7 @@
         "tools/SharedLibrary/chk/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/chk/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.6.appx",
+        "tools/SharedLibrary/chk/Native/Microsoft.NET.Native.Framework.Debug.1.7.appx",
         "tools/SharedLibrary/chk/Native/SharedLibrary.dll",
         "tools/SharedLibrary/chk/Native/SharedLibrary.pdb",
         "tools/SharedLibrary/chk/ResW/FxResources.System.Collections.Concurrent.SR.resw",
@@ -19830,10 +19829,9 @@
         "tools/SharedLibrary/ret/ILTransformed/System.Text.RegularExpressions.ilpdb",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdildll",
         "tools/SharedLibrary/ret/MDIL/SharedLibrary.mdilpdb",
-        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.6.appx",
+        "tools/SharedLibrary/ret/Native/Microsoft.NET.Native.Framework.1.7.appx",
         "tools/SharedLibrary/ret/Native/SharedLibrary.dll",
         "tools/SharedLibrary/ret/Native/SharedLibrary.pdb",
-        "tools/SharedLibrary/ret/Native/SharedLibrary.pdb.srcsrv.txt",
         "tools/SharedLibrary/ret/SharedAssemblyILMergeInfo.csv",
         "tools/SharedLibrary/ret/SharedAssemblyList.txt",
         "tools/SharedLibrary/ret/SharedLibrary.iltransformtoc.ildll",
@@ -20007,14 +20005,14 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.UniversalWindowsPlatform/5.3.3": {
-      "sha512": "aCy8WhdcWqIl+gUoY905OWPCP1NqVOtT4Oejn7SIZb9KPKkB5cUfvLEmsY3xwud0TIaJaExKTUhrFluzKtSblQ==",
+    "Microsoft.NETCore.UniversalWindowsPlatform/5.4.0": {
+      "sha512": "n4RuBnnZXGZbpXJb49CuZxc6Yu8WeRTzkg1dutyT8a4PczoST7uRVZpH3bRAOa6+dpulzP0qUH60+xPGxmzsWA==",
       "type": "package",
-      "path": "microsoft.netcore.universalwindowsplatform/5.3.3",
+      "path": "microsoft.netcore.universalwindowsplatform/5.4.0",
       "files": [
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
-        "microsoft.netcore.universalwindowsplatform.5.3.3.nupkg.sha512",
+        "microsoft.netcore.universalwindowsplatform.5.4.0.nupkg.sha512",
         "microsoft.netcore.universalwindowsplatform.nuspec"
       ]
     },
@@ -26288,53 +26286,53 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.0.1": {
-      "sha512": "q+N3uODM+2vs++nfhuvhJm+5TRBEfiabNN2auiFZqGh0gqmpxGRF/7vqIP8QxStl3vY5lXHG3tPc041G8aYYPQ==",
+    "Waher.Events/1.0.2": {
+      "sha512": "vHDWVYh1+kwkNRmPVCSm0lZNP/3d4Y7Wu9/mPt6qBRoxX+Hv61VE+rfkhM8+7M1Rkk1FwsAEPH0K82h8i4mFDQ==",
       "type": "package",
-      "path": "waher.events/1.0.1",
+      "path": "waher.events/1.0.2",
       "files": [
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.0.1.nupkg.sha512",
+        "waher.events.1.0.2.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
-    "Waher.Persistence/1.0.0": {
-      "sha512": "bHMXxsp8xB9GBEX2UN8pcj6iLuhiobcvj81A9VuscsyCn7moYUOENFpua5pTBPZiN4WVQ7fU8xQN1gxBidZWxw==",
+    "Waher.Persistence/1.0.1": {
+      "sha512": "XEwfwnNF94YPiIWBqnHWg0bElj0tnH1fM4dkV/MYCcT/oPUFC9ZVpoLuUCI0gH+KSB+i7ZyvMNl7I5d7BVD7kg==",
       "type": "package",
-      "path": "waher.persistence/1.0.0",
+      "path": "waher.persistence/1.0.1",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.dll",
-        "waher.persistence.1.0.0.nupkg.sha512",
+        "waher.persistence.1.0.1.nupkg.sha512",
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.2": {
-      "sha512": "sitZcM8M/UNmqtNRbyKymJFgPDtO+SzxWX2F+Y5p4pMBjYKpqvMAskaXgi/wbxuCdMisdW5u94BlbSC31EGBuw==",
+    "Waher.Persistence.FilesLW/1.0.3": {
+      "sha512": "3WMm53sZgKBilfu8ONtdIcARHeNMugJu0Og1RUYbEOucWPDyrCTGBHop7ldonK8VB5TnmwBIQ2Z2dQQLfL5PdA==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.2",
+      "path": "waher.persistence.fileslw/1.0.3",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.2.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.3.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
-    "Waher.Runtime.Cache/1.0.0": {
-      "sha512": "wuJaM2U+cf33QhOQsIf9Zd83pUzkpfDtcXirr5HUfqinQrgTBeYjxmskwBeFeosFIHbEBwWrquEtUYqNXkTR2Q==",
+    "Waher.Runtime.Cache/1.0.1": {
+      "sha512": "SSzE3bRwcf7spHdP0MPOA3h5d9WwkIdQG3XxUiyGQchR/W7xXkWFiGMgXdlW/0WhOCFRAHt82GtjYNbI2ZqyWg==",
       "type": "package",
-      "path": "waher.runtime.cache/1.0.0",
+      "path": "waher.runtime.cache/1.0.1",
       "files": [
         "lib/netstandard1.3/Waher.Runtime.Cache.dll",
-        "waher.runtime.cache.1.0.0.nupkg.sha512",
+        "waher.runtime.cache.1.0.1.nupkg.sha512",
         "waher.runtime.cache.nuspec"
       ]
     },
-    "Waher.Runtime.Inventory/1.0.0": {
-      "sha512": "x2aIs3WnyVrLTSdR4ayqBjpWQIRL9frQ453VFHauqqmUGTFODY9pEubx1G+HNRiVkF1S0eB0GnsAZ5UlH24LEw==",
+    "Waher.Runtime.Inventory/1.0.2": {
+      "sha512": "uiKVUvlhYk05HWGAv+3SqPG4uIBGqFrSQN7YYsM1qRZ8Ej9dh3jGZWaQPfkYhxvnrCVGF9ZkzXcEir7fRaVqzQ==",
       "type": "package",
-      "path": "waher.runtime.inventory/1.0.0",
+      "path": "waher.runtime.inventory/1.0.2",
       "files": [
         "lib/netstandard1.3/Waher.Runtime.Inventory.dll",
-        "waher.runtime.inventory.1.0.0.nupkg.sha512",
+        "waher.runtime.inventory.1.0.2.nupkg.sha512",
         "waher.runtime.inventory.nuspec"
       ]
     },
@@ -26362,9 +26360,9 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.3.3",
-      "Waher.Events >= 1.0.1",
-      "Waher.Persistence.FilesLW >= 1.0.2",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
+      "Waher.Events >= 1.0.2",
+      "Waher.Persistence.FilesLW >= 1.0.3",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -26391,10 +26389,19 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
-      "Waher.Events": "1.0.1",
-      "Waher.Persistence.FilesLW": "1.0.2",
-      "Windows-Remote-Arduino": "1.4.0"
+      "Windows-Remote-Arduino": "1.4.0",
+      "Microsoft.NETCore.UniversalWindowsPlatform": {
+        "target": "Package",
+        "version": "[5.4.0, )"
+      },
+      "Waher.Events": {
+        "target": "Package",
+        "version": "[1.0.2, )"
+      },
+      "Waher.Persistence.FilesLW": {
+        "target": "Package",
+        "version": "[1.0.3, )"
+      }
     },
     "frameworks": {
       "uap10.0.10586": {}

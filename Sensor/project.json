@@ -1,12 +1,12 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.3.3",
-    "Waher.Events": "1.0.1",
-    "Waher.Persistence.FilesLW": "1.0.2",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
+    "Waher.Events": "1.0.2",
+    "Waher.Persistence.FilesLW": "1.0.3",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {
-    "uap10.0": {}
+    "uap10.0.10586": {}
   },
   "runtimes": {
     "win10-arm": {},
