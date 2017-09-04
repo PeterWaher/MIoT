@@ -32,6 +32,7 @@ using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Security;
+using Waher.Security.DTLS;
 
 using SensorCoap.History;
 
@@ -134,6 +135,7 @@ namespace SensorCoap
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
+					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
