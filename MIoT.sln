@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActuatorCoap", "ActuatorCoa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorLwm2m", "SensorLwm2m\SensorLwm2m.csproj", "{84CDCBAF-8260-4884-9D19-D63DDC95F368}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActuatorLwm2m", "ActuatorLwm2m\ActuatorLwm2m.csproj", "{58805A4B-110B-43E1-ADCA-86AFAFEC462C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -255,6 +257,28 @@ Global
 		{84CDCBAF-8260-4884-9D19-D63DDC95F368}.Release|x86.ActiveCfg = Release|x86
 		{84CDCBAF-8260-4884-9D19-D63DDC95F368}.Release|x86.Build.0 = Release|x86
 		{84CDCBAF-8260-4884-9D19-D63DDC95F368}.Release|x86.Deploy.0 = Release|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|Any CPU.Build.0 = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|ARM.ActiveCfg = Debug|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|ARM.Build.0 = Debug|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|ARM.Deploy.0 = Debug|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x64.ActiveCfg = Debug|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x64.Build.0 = Debug|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x64.Deploy.0 = Debug|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x86.ActiveCfg = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x86.Build.0 = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Debug|x86.Deploy.0 = Debug|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|Any CPU.ActiveCfg = Release|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|ARM.ActiveCfg = Release|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|ARM.Build.0 = Release|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|ARM.Deploy.0 = Release|ARM
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x64.ActiveCfg = Release|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x64.Build.0 = Release|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x64.Deploy.0 = Release|x64
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x86.ActiveCfg = Release|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x86.Build.0 = Release|x86
+		{58805A4B-110B-43E1-ADCA-86AFAFEC462C}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
