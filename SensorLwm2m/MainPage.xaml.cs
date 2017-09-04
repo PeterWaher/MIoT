@@ -42,7 +42,7 @@ namespace SensorLwm2m
 		{
 			this.InitializeComponent();
 
-			this.events = new MainPage.Events();
+			this.events = new Events();
 			Log.Register(this.events);
 
 			if (instance == null)
@@ -161,48 +161,6 @@ namespace SensorLwm2m
 					w.Write(Message);
 					w.Write("\"]");
 				}
-			}
-		}
-
-		private class Events : EventSink
-		{
-			public Events() : base(string.Empty)
-			{
-			}
-
-			public override void Queue(Event Event)
-			{
-				StringBuilder sb = new StringBuilder(Event.Message);
-
-				if (!string.IsNullOrEmpty(Event.Object))
-				{
-					sb.Append(' ');
-					sb.Append(Event.Object);
-				}
-
-				if (!string.IsNullOrEmpty(Event.Actor))
-				{
-					sb.Append(' ');
-					sb.Append(Event.Actor);
-				}
-
-				foreach (KeyValuePair<string, object> Parameter in Event.Tags)
-				{
-					sb.Append(" [");
-					sb.Append(Parameter.Key);
-					sb.Append("=");
-					if (Parameter.Value != null)
-						sb.Append(Parameter.Value.ToString());
-					sb.Append("]");
-				}
-
-				if (Event.Type >= EventType.Critical && !string.IsNullOrEmpty(Event.StackTrace))
-				{
-					sb.Append("\r\n\r\n");
-					sb.Append(Event.StackTrace);
-				}
-
-				MainPage.Instance.AddLogMessage(sb.ToString());
 			}
 		}
 
