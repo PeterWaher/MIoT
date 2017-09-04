@@ -36,6 +36,7 @@ using Waher.Persistence.Filters;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 using Waher.Security;
+using Waher.Security.DTLS;
 
 namespace ActuatorCoap
 {
@@ -124,6 +125,7 @@ namespace ActuatorCoap
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
+					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +

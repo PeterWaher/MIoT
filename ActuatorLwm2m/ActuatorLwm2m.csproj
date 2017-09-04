@@ -96,6 +96,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Events.cs" />
+    <Compile Include="IPSO\Actuation.cs" />
+    <Compile Include="IPSO\DigitalOutput.cs" />
+    <Compile Include="IPSO\ActuationInstance.cs" />
+    <Compile Include="IPSO\DigitalOutputInstance.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

@@ -30,12 +30,17 @@ using Waher.Events;
 using Waher.Networking.CoAP;
 using Waher.Networking.CoAP.ContentFormats;
 using Waher.Networking.CoAP.Options;
+using Waher.Networking.LWM2M;
+using Waher.Networking.LWM2M.Events;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 using Waher.Security;
+using Waher.Security.DTLS;
+
+using ActuatorLwm2m.IPSO;
 
 namespace ActuatorLwm2m
 {
@@ -59,6 +64,9 @@ namespace ActuatorLwm2m
 		private IUserSource users = new Users();
 		private bool? output = null;
 		private CoapResource outputResource = null;
+		private Lwm2mClient lwm2mClient = null;
+		private DigitalOutputInstance digitalOutput0 = null;
+		private ActuationInstance actuation0 = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -124,6 +132,8 @@ namespace ActuatorLwm2m
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
+					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
+					typeof(Lwm2mClient).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -143,6 +153,8 @@ namespace ActuatorLwm2m
 							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.gpioPin.Write(this.output.Value ? GpioPinValue.High : GpioPinValue.Low);
 
+							this.digitalOutput0?.Set(this.output.Value);
+							this.actuation0?.Set(this.output.Value);
 							await MainPage.Instance.OutputSet(this.output.Value);
 
 							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
@@ -183,6 +195,8 @@ namespace ActuatorLwm2m
 								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
 
+								this.digitalOutput0?.Set(this.output.Value);
+								this.actuation0?.Set(this.output.Value);
 								await MainPage.Instance.OutputSet(this.output.Value);
 
 								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
@@ -284,6 +298,103 @@ namespace ActuatorLwm2m
 					new int[] { PlainText.ContentFormatCode });
 
 				this.outputResource?.TriggerAll(new TimeSpan(0, 1, 0));
+
+				this.lwm2mClient = new Lwm2mClient("MIoT:Actuator:" + this.deviceId, this.coapEndpoint,
+					new Lwm2mSecurityObject(),
+					new Lwm2mServerObject(),
+					new Lwm2mAccessControlObject(),
+					new Lwm2mDeviceObject("Waher Data AB", "ActuatorLwm2m", this.deviceId, "1.0", "Actuator", "1.0", "1.0"),
+					new DigitalOutput(this.digitalOutput0 = new DigitalOutputInstance(0, this.output.HasValue && this.output.Value, "Relay")),
+					new Actuation(this.actuation0 = new ActuationInstance(0, this.output.HasValue && this.output.Value, "Relay")));
+
+				this.digitalOutput0.OnRemoteUpdate += async (Sender, e) =>
+				{
+					try
+					{
+						await this.SetOutput(((DigitalOutputInstance)Sender).Value, e.Request.From.ToString());
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				this.actuation0.OnRemoteUpdate += async (Sender, e)=>
+				{
+					try
+					{
+						await this.SetOutput(((ActuationInstance)Sender).Value, e.Request.From.ToString());
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				await this.lwm2mClient.LoadBootstrapInfo();
+
+				this.lwm2mClient.OnStateChanged += (sender, e) =>
+				{
+					Log.Informational("LWM2M state changed to " + this.lwm2mClient.State.ToString() + ".");
+				};
+
+				this.lwm2mClient.OnBootstrapCompleted += (sender, e) =>
+				{
+					Log.Informational("Bootstrap procedure completed.");
+				};
+
+				this.lwm2mClient.OnBootstrapFailed += (sender, e) =>
+				{
+					Log.Error("Bootstrap procedure failed.");
+
+					this.coapEndpoint.ScheduleEvent(async (P) =>
+					{
+						try
+						{
+							await this.RequestBootstrap();
+						}
+						catch (Exception ex)
+						{
+							Log.Critical(ex);
+						}
+					}, DateTime.Now.AddMinutes(15), null);
+				};
+
+				this.lwm2mClient.OnRegistrationSuccessful += (sender, e) =>
+				{
+					Log.Informational("Server registration completed.");
+				};
+
+				this.lwm2mClient.OnRegistrationFailed += (sender, e) =>
+				{
+					Log.Error("Server registration failed.");
+				};
+
+				this.lwm2mClient.OnDeregistrationSuccessful += (sender, e) =>
+				{
+					Log.Informational("Server deregistration completed.");
+				};
+
+				this.lwm2mClient.OnDeregistrationFailed += (sender, e) =>
+				{
+					Log.Error("Server deregistration failed.");
+				};
+
+				this.lwm2mClient.OnRebootRequest += async (sender, e) =>
+				{
+					Log.Warning("Reboot is requested.");
+
+					try
+					{
+						await this.RequestBootstrap();
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				await this.RequestBootstrap();
 			}
 			catch (Exception ex)
 			{
@@ -293,6 +404,24 @@ namespace ActuatorLwm2m
 				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
 					async () => await Dialog.ShowAsync());
 			}
+		}
+
+		private async Task RequestBootstrap()
+		{
+			//if (!await this.lwm2mClient.RequestBootstrap())   Due to an error in the Leshan bootstrap server hosted at eclipse.org, 
+			//                                                  the bootstrap information provided will be erroneous.
+
+			await this.lwm2mClient.RequestBootstrap(new Lwm2mServerReference("leshan.eclipse.org", 5783));
+
+			/* If you're not using a bootstrap server, you need to register your client with the LWM2M servers yourself.
+			 * This can be done as follows:
+			 * 
+			 *    this.lwm2mClient.Register(60, new Lwm2mServerReference("leshan.eclipse.org"));
+			 * 
+			 * Make sure to update the registration before the lifetime of the registration (60) elapses:
+			 * 
+			 *    this.lwm2mClient.RegisterUpdate();
+			 */
 		}
 
 		public class Users : IUserSource
@@ -340,6 +469,8 @@ namespace ActuatorLwm2m
 #endif
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
 				this.output = On;
+				this.digitalOutput0?.Set(On);
+				this.actuation0?.Set(On);
 
 				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
