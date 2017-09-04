@@ -99,6 +99,18 @@
     <Compile Include="History\LastDay.cs" />
     <Compile Include="History\LastHour.cs" />
     <Compile Include="History\LastMinute.cs" />
+    <Compile Include="IPSO\PercentageSensor.cs" />
+    <Compile Include="IPSO\PercentageSensorInstance.cs" />
+    <Compile Include="IPSO\PresenceSensor.cs" />
+    <Compile Include="IPSO\PresenceSensorInstance.cs" />
+    <Compile Include="IPSO\IlluminanceSensor.cs" />
+    <Compile Include="IPSO\IlluminanceSensorInstance.cs" />
+    <Compile Include="IPSO\GenericSensorInstance.cs" />
+    <Compile Include="IPSO\GenericSensor.cs" />
+    <Compile Include="IPSO\AnalogInput.cs" />
+    <Compile Include="IPSO\DigitalInput.cs" />
+    <Compile Include="IPSO\AnalogInputInstance.cs" />
+    <Compile Include="IPSO\DigitalInputInstance.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -169,18 +181,67 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>5.4.0</Version>
     </PackageReference>
-    <PackageReference Include="Waher.Networking.LWM2M.UWP">
-      <Version>1.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.3</Version>
-    </PackageReference>
-    <PackageReference Include="Waher.Runtime.Settings">
-      <Version>1.0.1</Version>
-    </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\IoTGateway\Content\Waher.Content\Waher.Content.csproj">
+      <Project>{1df39356-86d7-49c6-a3d2-2141895edbe5}</Project>
+      <Name>Waher.Content</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Events\Waher.Events\Waher.Events.csproj">
+      <Project>{67ce844b-8092-48f0-9f69-285b486ef8fd}</Project>
+      <Name>Waher.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Networking\Waher.Networking.CoAP.UWP\Waher.Networking.CoAP.UWP.csproj">
+      <Project>{d179c961-74c2-4f9e-886d-f219f0435948}</Project>
+      <Name>Waher.Networking.CoAP.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Networking\Waher.Networking.LWM2M.UWP\Waher.Networking.LWM2M.UWP.csproj">
+      <Project>{7be3baa3-01fe-4eed-ad2b-8011b8ade737}</Project>
+      <Name>Waher.Networking.LWM2M.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Networking\Waher.Networking\Waher.Networking.csproj">
+      <Project>{8c8a2f9e-b81c-4504-ad6e-71fafdddd5a9}</Project>
+      <Name>Waher.Networking</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Persistence\Waher.Persistence.FilesLW\Waher.Persistence.FilesLW.csproj">
+      <Project>{440bb31b-9875-41a8-bb6b-79e2f50973ed}</Project>
+      <Name>Waher.Persistence.FilesLW</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Persistence\Waher.Persistence\Waher.Persistence.csproj">
+      <Project>{5808af5a-a9ed-4690-ad21-2223f1ea448a}</Project>
+      <Name>Waher.Persistence</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Runtime\Waher.Runtime.Cache\Waher.Runtime.Cache.csproj">
+      <Project>{48a873ec-f9b9-4247-b3e4-9fd43b3aee36}</Project>
+      <Name>Waher.Runtime.Cache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Runtime\Waher.Runtime.Inventory\Waher.Runtime.Inventory.csproj">
+      <Project>{9165adb2-5fab-412e-9e34-4b1ee4276b2d}</Project>
+      <Name>Waher.Runtime.Inventory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Runtime\Waher.Runtime.Settings\Waher.Runtime.Settings.csproj">
+      <Project>{9e51d51b-dd26-4357-8b8f-735295040881}</Project>
+      <Name>Waher.Runtime.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Runtime\Waher.Runtime.Timing\Waher.Runtime.Timing.csproj">
+      <Project>{1b3a96af-f200-4bec-8075-1226cc6b39ea}</Project>
+      <Name>Waher.Runtime.Timing</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Script\Waher.Script\Waher.Script.csproj">
+      <Project>{4dc1c783-b6e9-47dd-b754-3b97f48c37c3}</Project>
+      <Name>Waher.Script</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Security\Waher.Security.DTLS\Waher.Security.DTLS.csproj">
+      <Project>{8c7c8f1f-f24e-40bd-8693-3d1f2067b117}</Project>
+      <Name>Waher.Security.DTLS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\IoTGateway\Security\Waher.Security\Waher.Security.csproj">
+      <Project>{4e63351f-9e7e-47fe-a6b7-312f7a7258e9}</Project>
+      <Name>Waher.Security</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

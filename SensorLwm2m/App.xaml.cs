@@ -26,14 +26,17 @@ using Waher.Events;
 using Waher.Networking.CoAP;
 using Waher.Networking.CoAP.ContentFormats;
 using Waher.Networking.CoAP.Options;
+using Waher.Networking.LWM2M;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Security;
+using Waher.Security.DTLS;
 
 using SensorLwm2m.History;
+using SensorLwm2m.IPSO;
 
 namespace SensorLwm2m
 {
@@ -48,6 +51,7 @@ namespace SensorLwm2m
 		private Timer sampleTimer = null;
 		private CoapEndpoint coapEndpoint = null;
 		private IUserSource users = new Users();
+		private Lwm2mClient lwm2mClient = null;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -69,6 +73,13 @@ namespace SensorLwm2m
 		private CoapResource lightResource = null;
 		private CoapResource motionResource = null;
 		private CoapResource momentaryResource = null;
+		private DigitalInputInstance digitalInput0;
+		private AnalogInputInstance analogInput0;
+		private GenericSensorInstance genericSensor0;
+		private GenericSensorInstance genericSensor1;
+		private IlluminanceSensorInstance illuminanceSensor0;
+		private PresenceSensorInstance presenceSensor0;
+		private PercentageSensorInstance percentageSensor0;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -134,6 +145,8 @@ namespace SensorLwm2m
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ICoapContentFormat).GetTypeInfo().Assembly,
+					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
+					typeof(Lwm2mClient).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -181,7 +194,11 @@ namespace SensorLwm2m
 
 							if (pin == 0)
 							{
-								this.lastMotion = (value == PinState.HIGH);
+								bool Input = (value == PinState.HIGH);
+								this.lastMotion = Input;
+								this.digitalInput0?.Set(Input);
+								this.presenceSensor0?.Set(Input);
+								this.genericSensor0?.Set(Input ? 1.0 : 0.0);
 								this.motionResource?.TriggerAll();
 								this.momentaryResource?.TriggerAll();
 							}
@@ -237,8 +254,11 @@ namespace SensorLwm2m
 				 * 
 				 ************************************************************************************/
 
-				this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
-					new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
+				//this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
+				//	new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
+
+				this.coapEndpoint = new CoapEndpoint(new int[] { 5783 }, new int[] { 5784 }, null, null,
+					false, false);
 
 				this.lightResource = this.coapEndpoint.Register("/Light", (req, resp) =>
 				{
@@ -289,6 +309,84 @@ namespace SensorLwm2m
 					new int[] { Xml.ContentFormatCode, Json.ContentFormatCode, PlainText.ContentFormatCode });
 
 				this.momentaryResource?.TriggerAll(new TimeSpan(0, 0, 5));
+
+				this.lwm2mClient = new Lwm2mClient("MIoT:Sensor:" + this.deviceId, this.coapEndpoint,
+					new Lwm2mSecurityObject(),
+					new Lwm2mServerObject(),
+					new Lwm2mAccessControlObject(),
+					new Lwm2mDeviceObject("Waher Data AB", "SensorLwm2m", this.deviceId, "1.0", "Sensor", "1.0", "1.0"),
+					new DigitalInput(this.digitalInput0 = new DigitalInputInstance(0, this.lastMotion, "Motion Detector", "PIR")),
+					new AnalogInput(this.analogInput0 = new AnalogInputInstance(0, this.lastLight, 0, 100, "Ambient Light Sensor", "%")),
+					new GenericSensor(this.genericSensor0 = new GenericSensorInstance(0, null, string.Empty, 0, 1, "Motion Detector", "PIR"),
+						this.genericSensor1 = new GenericSensorInstance(1, this.lastLight, "%", 0, 100, "Ambient Light Sensor", "%")),
+					new IlluminanceSensor(this.illuminanceSensor0 = new IlluminanceSensorInstance(0, this.lastLight, "%", 0, 100)),
+					new PresenceSensor(this.presenceSensor0 = new PresenceSensorInstance(0, this.lastMotion, "PIR")),
+					new PercentageSensor(this.percentageSensor0 = new PercentageSensorInstance(0, this.lastLight, 0, 100, "Ambient Light Sensor")));
+
+				await this.lwm2mClient.LoadBootstrapInfo();
+
+				this.lwm2mClient.OnStateChanged += (sender, e) =>
+				{
+					Log.Informational("LWM2M state changed to " + this.lwm2mClient.State.ToString() + ".");
+				};
+
+				this.lwm2mClient.OnBootstrapCompleted += (sender, e) =>
+				{
+					Log.Informational("Bootstrap procedure completed.");
+				};
+
+				this.lwm2mClient.OnBootstrapFailed += (sender, e) =>
+				{
+					Log.Error("Bootstrap procedure failed.");
+
+					this.coapEndpoint.ScheduleEvent(async (P) =>
+					{
+						try
+						{
+							await this.RequestBootstrap();
+						}
+						catch (Exception ex)
+						{
+							Log.Critical(ex);
+						}
+					}, DateTime.Now.AddMinutes(15), null);
+				};
+
+				this.lwm2mClient.OnRegistrationSuccessful += (sender, e) =>
+				{
+					Log.Informational("Server registration completed.");
+				};
+
+				this.lwm2mClient.OnRegistrationFailed += (sender, e) =>
+				{
+					Log.Error("Server registration failed.");
+				};
+
+				this.lwm2mClient.OnDeregistrationSuccessful += (sender, e) =>
+				{
+					Log.Informational("Server deregistration completed.");
+				};
+
+				this.lwm2mClient.OnDeregistrationFailed += (sender, e) =>
+				{
+					Log.Error("Server deregistration failed.");
+				};
+
+				this.lwm2mClient.OnRebootRequest += async (sender, e) =>
+				{
+					Log.Warning("Reboot is requested.");
+
+					try
+					{
+						await this.RequestBootstrap();
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				await this.RequestBootstrap();
 			}
 			catch (Exception ex)
 			{
@@ -298,6 +396,24 @@ namespace SensorLwm2m
 				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
 					async () => await Dialog.ShowAsync());
 			}
+		}
+
+		private async Task RequestBootstrap()
+		{
+			//if (!await this.lwm2mClient.RequestBootstrap())   Due to an error in the Leshan bootstrap server hosted at eclipse.org, 
+			//                                                  the bootstrap information provided will be erroneous.
+
+			await this.lwm2mClient.RequestBootstrap(new Lwm2mServerReference("leshan.eclipse.org", 5783));
+
+			/* If you're not using a bootstrap server, you need to register your client with the LWM2M servers yourself.
+			 * This can be done as follows:
+			 * 
+			 *    this.lwm2mClient.Register(60, new Lwm2mServerReference("leshan.eclipse.org"));
+			 * 
+			 * Make sure to update the registration before the lifetime of the registration (60) elapses:
+			 * 
+			 *    this.lwm2mClient.RegisterUpdate();
+			 */
 		}
 
 		public class Users : IUserSource
@@ -484,6 +600,10 @@ namespace SensorLwm2m
 					AvgA0 /= n;
 					double Light = (100.0 * AvgA0) / 1024;
 					this.lastLight = Light;
+					this.analogInput0?.Set(Light);
+					this.genericSensor1?.Set(Light);
+					this.illuminanceSensor0?.Set(Light);
+					this.percentageSensor0?.Set(Light);
 					MainPage.Instance.LightUpdated(Light, 2, "%");
 
 					this.sumLight += Light;
