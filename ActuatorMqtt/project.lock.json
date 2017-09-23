@@ -2457,13 +2457,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -2485,7 +2485,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5038,13 +5038,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -5066,7 +5066,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -7622,13 +7622,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -7650,7 +7650,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10179,13 +10179,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -10207,7 +10207,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -12772,13 +12772,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -12800,7 +12800,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15329,13 +15329,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -15357,7 +15357,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -17922,13 +17922,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.3": {
+      "Waher.Persistence.FilesLW/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.1",
           "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Runtime.Inventory": "1.0.2"
+          "Waher.Runtime.Inventory": "1.0.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
@@ -17950,7 +17950,7 @@
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
         }
       },
-      "Waher.Runtime.Inventory/1.0.2": {
+      "Waher.Runtime.Inventory/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -26619,13 +26619,14 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.3": {
-      "sha512": "3WMm53sZgKBilfu8ONtdIcARHeNMugJu0Og1RUYbEOucWPDyrCTGBHop7ldonK8VB5TnmwBIQ2Z2dQQLfL5PdA==",
+    "Waher.Persistence.FilesLW/1.0.4": {
+      "sha512": "C0kiaHfZgG7jFo1RFgZuITeO8Hr9gCFnJ2OH2Xm3JL3Ls4gKbkMlOPwuZHzm1+Oul5hI4KgT/+8xnE3hqZj4rg==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.3",
+      "path": "waher.persistence.fileslw/1.0.4",
       "files": [
+        "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.3.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.4.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -26639,13 +26640,14 @@
         "waher.runtime.cache.nuspec"
       ]
     },
-    "Waher.Runtime.Inventory/1.0.2": {
-      "sha512": "uiKVUvlhYk05HWGAv+3SqPG4uIBGqFrSQN7YYsM1qRZ8Ej9dh3jGZWaQPfkYhxvnrCVGF9ZkzXcEir7fRaVqzQ==",
+    "Waher.Runtime.Inventory/1.0.3": {
+      "sha512": "1LiZiRQ5kysEB4tWYOTnSBGYvlHzCdNKV+eOLKYgC7HAitDosbcyjEVTSN3p2dGJzeKTIhSwthT6x1YRx3fwhA==",
       "type": "package",
-      "path": "waher.runtime.inventory/1.0.2",
+      "path": "waher.runtime.inventory/1.0.3",
       "files": [
+        "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Runtime.Inventory.dll",
-        "waher.runtime.inventory.1.0.2.nupkg.sha512",
+        "waher.runtime.inventory.1.0.3.nupkg.sha512",
         "waher.runtime.inventory.nuspec"
       ]
     },
@@ -26686,7 +26688,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
       "Waher.Events >= 1.0.2",
       "Waher.Networking.MQTT.UWP >= 1.0.4",
-      "Waher.Persistence.FilesLW >= 1.0.3",
+      "Waher.Persistence.FilesLW >= 1.0.4",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -26717,7 +26719,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
       "Waher.Events": "1.0.2",
       "Waher.Networking.MQTT.UWP": "1.0.4",
-      "Waher.Persistence.FilesLW": "1.0.3",
+      "Waher.Persistence.FilesLW": "1.0.4",
       "Waher.Runtime.Settings": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"
     },
