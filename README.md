@@ -15,3 +15,4 @@ by Peter Waher. The following projects are included:
 |       6 | Creating web pages for your devices               | [SensorHttp](SensorHttp)<br/>[ActuatorHttp](ActuatorHttp)     |
 |       7 | Communicating more efficiently using CoAP         | [SensorCoap](SensorCoap)<br/>[ActuatorCoap](ActuatorCoap)     |
 |       8 | Interoperability                                  | [SensorLwm2m](SensorLwm2m)<br/>[ActuatorLwm2m](ActuatorLwm2m) |
+|       9 | Social interaction with your devices using XMPP   | [SensorXmpp](SensorXmpp)<br/>[ActuatorXmpp](ActuatorXmpp)     |
