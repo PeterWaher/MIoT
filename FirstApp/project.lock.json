@@ -2396,7 +2396,7 @@
           }
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -4885,7 +4885,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7377,7 +7377,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -9842,7 +9842,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12343,7 +12343,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -14808,7 +14808,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17309,7 +17309,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.2": {
+      "Waher.Events/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -25915,13 +25915,14 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.0.2": {
-      "sha512": "vHDWVYh1+kwkNRmPVCSm0lZNP/3d4Y7Wu9/mPt6qBRoxX+Hv61VE+rfkhM8+7M1Rkk1FwsAEPH0K82h8i4mFDQ==",
+    "Waher.Events/1.0.3": {
+      "sha512": "/5m93zYS3blm66BGd2rJh8jdveN20M0ztnbRbhMjdANT7kF5j72KtA6kkOxK0E4Gq+8wNd+mqj8yJ78RRdZcWA==",
       "type": "package",
-      "path": "waher.events/1.0.2",
+      "path": "waher.events/1.0.3",
       "files": [
+        "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.0.2.nupkg.sha512",
+        "waher.events.1.0.3.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -25950,7 +25951,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
-      "Waher.Events >= 1.0.2",
+      "Waher.Events >= 1.0.3",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -25978,7 +25979,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
-      "Waher.Events": "1.0.2",
+      "Waher.Events": "1.0.3",
       "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
