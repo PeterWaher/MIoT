@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Waher.Persistence.Attributes;
 
-namespace Sensor.History
+namespace SensorXmpp.History
 {
 	[CollectionName("MinuteValues")]
 	public class LastMinute : Base

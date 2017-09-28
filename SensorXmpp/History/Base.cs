@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Waher.Persistence.Attributes;
 
-namespace Sensor.History
+namespace SensorXmpp.History
 {
 	[TypeName(TypeNameSerialization.None)]
 	[Index("Timestamp")]
@@ -21,7 +21,7 @@ namespace Sensor.History
 		public double Light = 0;
 
 		[DefaultValue(PinState.LOW)]
-		public PinState Movement = PinState.LOW;
+		public PinState Motion = PinState.LOW;
 
 		[DefaultValueNull]
 		public double? MinLight = null;
@@ -39,6 +39,6 @@ namespace Sensor.History
 		public double? AvgLight = null;
 
 		[DefaultValueNull]
-		public double? AvgMovement = null;
+		public double? AvgMotion = null;
 	}
 }
