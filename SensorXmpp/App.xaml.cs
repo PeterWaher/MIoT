@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
@@ -21,6 +22,7 @@ using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
 using Waher.Content;
+using Waher.Content.Xml;
 using Waher.Events;
 using Waher.Networking.XMPP;
 using Waher.Networking.XMPP.Chat;
@@ -65,7 +67,8 @@ namespace SensorXmpp
 		private double? lastLight = null;
 		private bool? lastMotion = null;
 		private SensorServer sensorServer = null;
-		private SensorServer chatServer = null;
+		private ChatServer chatServer = null;
+		private DateTime lastPublish = DateTime.MinValue;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -130,6 +133,10 @@ namespace SensorXmpp
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(XmppClient).GetTypeInfo().Assembly,
+					typeof(Waher.Content.Markdown.MarkdownDocument).GetTypeInfo().Assembly,
+					typeof(Waher.Content.Xml.XML).GetTypeInfo().Assembly,
+					typeof(Waher.Script.Expression).GetTypeInfo().Assembly,
+					typeof(Waher.Script.Graphs.Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -178,7 +185,13 @@ namespace SensorXmpp
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
 							if (pin == 0)
+							{
 								this.lastMotion = (value == PinState.HIGH);
+								this.PublishMomentaryValues();
+
+								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublish, "Motion", this.lastMotion.Value,
+									FieldType.Momentary, FieldQoS.AutomaticReadout));
+							}
 						};
 
 						this.arduinoUsb.ConnectionFailed += message =>
@@ -222,8 +235,8 @@ namespace SensorXmpp
 				}
 				else
 				{
-					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en", 
-						typeof(App).GetTypeInfo().Assembly, new LogSniffer())
+					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en",
+						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
@@ -268,7 +281,7 @@ namespace SensorXmpp
 						};
 
 						this.xmppClient.AllowRegistration();                // Allows registration on servers that do not require signatures.
-						//this.xmppClient.AllowRegistration(Key, Secret);	// Allows registration on servers requiring a signature of the registration request.
+																			//this.xmppClient.AllowRegistration(Key, Secret);	// Allows registration on servers requiring a signature of the registration request.
 
 						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
 						this.xmppClient.OnConnectionError += this.ConnectionError;
@@ -444,7 +457,6 @@ namespace SensorXmpp
 				}
 			};
 
-			this.xmppClient.OnChatMessage += (Sender, e) => Log.Informational("Chat: " + e.Body, this.xmppClient.BareJID, e.From);
 			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
 			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
@@ -462,6 +474,31 @@ namespace SensorXmpp
 
 			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+
+			this.chatServer = new ChatServer(this.xmppClient, this.sensorServer);
+		}
+
+		private void PublishMomentaryValues()
+		{
+			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected || !this.lastLight.HasValue || !this.lastMotion.HasValue)
+				return;
+
+			DateTime Now = DateTime.Now;
+
+			List<Field> Fields = new List<Field>()
+			{
+				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout),
+				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)
+			};
+
+			StringBuilder Xml = new StringBuilder();
+			XmlWriter w = XmlWriter.Create(Xml, XML.WriterSettings(false, true));
+			SensorDataServerRequest.OutputFields(w, Fields);
+			w.Flush();
+
+			this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
+
+			this.lastPublish = Now;
 		}
 
 		private async void TestConnectionStateChanged(object Sender, XmppState State)
@@ -578,6 +615,9 @@ namespace SensorXmpp
 
 					DateTime Timestamp = DateTime.Now;
 
+					this.sensorServer?.NewMomentaryValues(new QuantityField(ThingReference.Empty, Timestamp, "Light", Light, 2, "%",
+						FieldType.Momentary, FieldQoS.AutomaticReadout));
+
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
 					{
 						this.minLight = Light;
@@ -589,6 +629,9 @@ namespace SensorXmpp
 						this.maxLight = Light;
 						this.maxLightAt = Timestamp;
 					}
+
+					if ((Timestamp - this.lastPublish).TotalSeconds >= 5)
+						this.PublishMomentaryValues();
 
 					if (!this.lastMinute.HasValue)
 						this.lastMinute = Timestamp.Minute;
@@ -780,6 +823,24 @@ namespace SensorXmpp
 		private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
+
+			if (this.chatServer != null)
+			{
+				this.chatServer.Dispose();
+				this.chatServer = null;
+			}
+
+			if (this.sensorServer != null)
+			{
+				this.sensorServer.Dispose();
+				this.sensorServer = null;
+			}
+
+			if (this.xmppClient != null)
+			{
+				this.xmppClient.Dispose();
+				this.xmppClient = null;
+			}
 
 			if (this.sampleTimer != null)
 			{
