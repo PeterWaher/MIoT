@@ -287,44 +287,6 @@ namespace SensorHttp
 					this.ReturnMomentaryAsPng(req, resp);
 				}, true, false, true);
 
-				/*
-				this.httpServer.Register("/History", async (req, resp) =>
-				{
-					try
-					{
-						if (req.Header.Accept != null)
-						{
-							switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png"))
-							{
-								case "text/xml":
-								case "application/xml":
-									this.ReturnMomentaryAsXml(req, resp);
-									break;
-
-								case "application/json":
-									this.ReturnMomentaryAsJson(req, resp);
-									break;
-
-								case "image/png":
-									this.ReturnMomentaryAsPng(req, resp);
-									break;
-
-								default:
-									throw new NotAcceptableException();
-							}
-						}
-						else
-							this.ReturnMomentaryAsXml(req, resp);
-
-						resp.SendResponse();
-					}
-					catch (Exception ex)
-					{
-						resp.SendResponse(ex);
-					}
-				}, this.tokenAuthentication);
-				*/
-
 				this.httpServer.Register("/Login", null, (req, resp) =>
 				{
 					if (!req.HasData || req.Session == null)
