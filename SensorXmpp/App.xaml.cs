@@ -236,7 +236,7 @@ namespace SensorXmpp
 				else
 				{
 					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en",
-						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
+						typeof(App).GetTypeInfo().Assembly, new LogSniffer())     // Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
@@ -480,6 +480,7 @@ namespace SensorXmpp
 
 		private void PublishMomentaryValues()
 		{
+			return;
 			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected || !this.lastLight.HasValue || !this.lastMotion.HasValue)
 				return;
 
