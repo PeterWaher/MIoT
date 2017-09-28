@@ -55,17 +55,17 @@ namespace SensorMqtt
 		private double? minLight = null;
 		private double? maxLight = null;
 		private double sumLight = 0;
-		private int sumMovement = 0;
+		private int sumMotion = 0;
 		private int nrTerms = 0;
 		private DateTime minLightAt = DateTime.MinValue;
 		private DateTime maxLightAt = DateTime.MinValue;
 		private string deviceId;
 		private double? lastLight = null;
-		private bool? lastMovement = null;
+		private bool? lastMotion = null;
 		private double? lastPublishedLight = null;
-		private bool? lastPublishedMovement = null;
+		private bool? lastPublishedMotion = null;
 		private DateTime lastLightPublishTime = DateTime.MinValue;
-		private DateTime lastMovementPublishTime = DateTime.MinValue;
+		private DateTime lastMotionPublishTime = DateTime.MinValue;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -153,7 +153,9 @@ namespace SensorMqtt
 							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-							MainPage.Instance.DigitalPinUpdated(0, this.arduino.digitalRead(0));
+							PinState Pin0 = this.arduino.digitalRead(0);
+							this.lastMotion = Pin0 == PinState.HIGH;
+							MainPage.Instance.DigitalPinUpdated(0, Pin0);
 
 							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 							this.arduino.digitalWrite(1, 0);             // Relay set to 0
@@ -174,7 +176,7 @@ namespace SensorMqtt
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
 							if (pin == 0)
-								this.PublishMovement(value == PinState.HIGH);
+								this.PublishMotion(value == PinState.HIGH);
 						};
 
 						this.arduinoUsb.ConnectionFailed += message =>
@@ -291,7 +293,7 @@ namespace SensorMqtt
 					this.PublishLight(Light);
 
 					this.sumLight += Light;
-					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
+					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
 
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
@@ -316,13 +318,13 @@ namespace SensorMqtt
 						{
 							Timestamp = Timestamp,
 							Light = Light,
-							Movement = D0,
+							Motion = D0,
 							MinLight = this.minLight,
 							MinLightAt = this.minLightAt,
 							MaxLight = this.maxLight,
 							MaxLightAt = this.maxLightAt,
 							AvgLight = (this.nrTerms == 0 ? (double?)null : this.sumLight / this.nrTerms),
-							AvgMovement = (this.nrTerms == 0 ? (double?)null : (this.sumMovement * 100.0) / this.nrTerms)
+							AvgMotion = (this.nrTerms == 0 ? (double?)null : (this.sumMotion * 100.0) / this.nrTerms)
 						};
 
 						await Database.Insert(Rec);
@@ -332,7 +334,7 @@ namespace SensorMqtt
 						this.maxLight = null;
 						this.maxLightAt = DateTime.MinValue;
 						this.sumLight = 0;
-						this.sumMovement = 0;
+						this.sumMotion = 0;
 						this.nrTerms = 0;
 
 						foreach (LastMinute Rec2 in await Database.Find<LastMinute>(new FilterFieldLesserThan("Timestamp", Timestamp.AddMinutes(-100))))
@@ -343,19 +345,19 @@ namespace SensorMqtt
 							DateTime From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, Timestamp.Hour, 0, 0).AddHours(-1);
 							DateTime To = From.AddHours(1);
 							int NLight = 0;
-							int NMovement = 0;
+							int NMotion = 0;
 
 							LastHour HourRec = new LastHour()
 							{
 								Timestamp = Timestamp,
 								Light = Light,
-								Movement = D0,
+								Motion = D0,
 								MinLight = Rec.MinLight,
 								MinLightAt = Rec.MinLightAt,
 								MaxLight = Rec.MaxLight,
 								MaxLightAt = Rec.MaxLightAt,
 								AvgLight = 0,
-								AvgMovement = 0
+								AvgMotion = 0
 							};
 
 							foreach (LastMinute Rec2 in await Database.Find<LastMinute>(0, 60, new FilterAnd(
@@ -368,10 +370,10 @@ namespace SensorMqtt
 									NLight++;
 								}
 
-								if (Rec2.AvgMovement.HasValue)
+								if (Rec2.AvgMotion.HasValue)
 								{
-									HourRec.AvgMovement += Rec2.AvgMovement.Value;
-									NMovement++;
+									HourRec.AvgMotion += Rec2.AvgMotion.Value;
+									NMotion++;
 								}
 
 								if (Rec2.MinLight < HourRec.MinLight)
@@ -392,10 +394,10 @@ namespace SensorMqtt
 							else
 								HourRec.AvgLight /= NLight;
 
-							if (NMovement == 0)
-								HourRec.AvgMovement = null;
+							if (NMotion == 0)
+								HourRec.AvgMotion = null;
 							else
-								HourRec.AvgMovement /= NMovement;
+								HourRec.AvgMotion /= NMotion;
 
 							await Database.Insert(HourRec);
 
@@ -407,19 +409,19 @@ namespace SensorMqtt
 								From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, 0, 0, 0).AddDays(-1);
 								To = From.AddDays(1);
 								NLight = 0;
-								NMovement = 0;
+								NMotion = 0;
 
 								LastDay DayRec = new LastDay()
 								{
 									Timestamp = Timestamp,
 									Light = Light,
-									Movement = D0,
+									Motion = D0,
 									MinLight = HourRec.MinLight,
 									MinLightAt = HourRec.MinLightAt,
 									MaxLight = HourRec.MaxLight,
 									MaxLightAt = HourRec.MaxLightAt,
 									AvgLight = 0,
-									AvgMovement = 0
+									AvgMotion = 0
 								};
 
 								foreach (LastHour Rec2 in await Database.Find<LastHour>(0, 24, new FilterAnd(
@@ -432,10 +434,10 @@ namespace SensorMqtt
 										NLight++;
 									}
 
-									if (Rec2.AvgMovement.HasValue)
+									if (Rec2.AvgMotion.HasValue)
 									{
-										DayRec.AvgMovement += Rec2.AvgMovement.Value;
-										NMovement++;
+										DayRec.AvgMotion += Rec2.AvgMotion.Value;
+										NMotion++;
 									}
 
 									if (Rec2.MinLight < DayRec.MinLight)
@@ -456,10 +458,10 @@ namespace SensorMqtt
 								else
 									DayRec.AvgLight /= NLight;
 
-								if (NMovement == 0)
-									DayRec.AvgMovement = null;
+								if (NMotion == 0)
+									DayRec.AvgMotion = null;
 								else
-									DayRec.AvgMovement /= NMovement;
+									DayRec.AvgMotion /= NMotion;
 
 								await Database.Insert(DayRec);
 
@@ -512,21 +514,21 @@ namespace SensorMqtt
 			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
 		}
 
-		private void PublishMovement(bool On)
+		private void PublishMotion(bool On)
 		{
 			DateTime Now = DateTime.Now;
 
-			this.lastMovement = On;
+			this.lastMotion = On;
 
-			if ((!this.lastPublishedMovement.HasValue ||
-				this.lastPublishedMovement.Value ^ On ||
-				(Now - this.lastMovementPublishTime).TotalSeconds >= 15.0) &&
+			if ((!this.lastPublishedMotion.HasValue ||
+				this.lastPublishedMotion.Value ^ On ||
+				(Now - this.lastMotionPublishTime).TotalSeconds >= 15.0) &&
 				this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
 			{
-				this.lastPublishedMovement = On;
-				this.lastMovementPublishTime = Now;
+				this.lastPublishedMotion = On;
+				this.lastMotionPublishTime = Now;
 
-				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Movement", MqttQualityOfService.AtMostOnce, false,
+				this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/Motion", MqttQualityOfService.AtMostOnce, false,
 					Encoding.UTF8.GetBytes(On.ToString()));
 
 				this.PublishLastJson();
@@ -548,10 +550,10 @@ namespace SensorMqtt
 				Json.Append(",\"unit\":\"%\"}");
 			}
 
-			if (this.lastMovement.HasValue)
+			if (this.lastMotion.HasValue)
 			{
-				Json.Append(",\"movement\":");
-				Json.Append(this.lastMovement.Value ? "true" : "false");
+				Json.Append(",\"motion\":");
+				Json.Append(this.lastMotion.Value ? "true" : "false");
 			}
 
 			Json.Append('}');

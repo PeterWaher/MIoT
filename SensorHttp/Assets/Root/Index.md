@@ -15,7 +15,7 @@ The following table contains the current state of the sensor.
 | Sensor    | Value                     |
 |:----------|:--------------------------|
 | Light     | {SensorHttp.App.Light}    |
-| Movement  | {SensorHttp.App.Movement} |
+| Motion    | {SensorHttp.App.Motion}   |
 
-![Light Gauge is green, if movement is detected.](/MomentaryPng)
+![Light Gauge is green, if motion is detected.](/MomentaryPng)
 

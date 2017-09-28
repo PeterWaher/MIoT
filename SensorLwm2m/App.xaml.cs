@@ -172,7 +172,9 @@ namespace SensorLwm2m
 							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-							MainPage.Instance.DigitalPinUpdated(0, this.arduino.digitalRead(0));
+							PinState Pin0 = this.arduino.digitalRead(0);
+							this.lastMotion = Pin0 == PinState.HIGH;
+							MainPage.Instance.DigitalPinUpdated(0, Pin0);
 
 							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 							this.arduino.digitalWrite(1, 0);             // Relay set to 0

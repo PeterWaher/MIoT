@@ -14,7 +14,7 @@
             <xs:attribute name="unit" type="xs:string" use="required"/>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Movement" minOccurs="0" maxOccurs="1">
+        <xs:element name="Motion" minOccurs="0" maxOccurs="1">
           <xs:complexType>
             <xs:attribute name="value" type="xs:boolean" use="required"/>
           </xs:complexType>

@@ -49,7 +49,7 @@ namespace Sensor
 		private double? minLight = null;
 		private double? maxLight = null;
 		private double sumLight = 0;
-		private int sumMovement = 0;
+		private int sumMotion = 0;
 		private int nrTerms = 0;
 		private DateTime minLightAt = DateTime.MinValue;
 		private DateTime maxLightAt = DateTime.MinValue;
@@ -256,7 +256,7 @@ namespace Sensor
 					MainPage.Instance.LightUpdated(Light, 2, "%");
 
 					this.sumLight += Light;
-					this.sumMovement += (D0 == PinState.HIGH ? 1 : 0);
+					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
 
 					DateTime Timestamp = DateTime.Now;
@@ -283,13 +283,13 @@ namespace Sensor
 						{
 							Timestamp = Timestamp,
 							Light = Light,
-							Movement = D0,
+							Motion = D0,
 							MinLight = this.minLight,
 							MinLightAt = this.minLightAt,
 							MaxLight = this.maxLight,
 							MaxLightAt = this.maxLightAt,
 							AvgLight = (this.nrTerms == 0 ? (double?)null : this.sumLight / this.nrTerms),
-							AvgMovement = (this.nrTerms == 0 ? (double?)null : (this.sumMovement * 100.0) / this.nrTerms)
+							AvgMotion = (this.nrTerms == 0 ? (double?)null : (this.sumMotion * 100.0) / this.nrTerms)
 						};
 
 						await Database.Insert(Rec);
@@ -299,7 +299,7 @@ namespace Sensor
 						this.maxLight = null;
 						this.maxLightAt = DateTime.MinValue;
 						this.sumLight = 0;
-						this.sumMovement = 0;
+						this.sumMotion = 0;
 						this.nrTerms = 0;
 
 						foreach (LastMinute Rec2 in await Database.Find<LastMinute>(new FilterFieldLesserThan("Timestamp", Timestamp.AddMinutes(-100))))
@@ -310,19 +310,19 @@ namespace Sensor
 							DateTime From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, Timestamp.Hour, 0, 0).AddHours(-1);
 							DateTime To = From.AddHours(1);
 							int NLight = 0;
-							int NMovement = 0;
+							int NMotion = 0;
 
 							LastHour HourRec = new LastHour()
 							{
 								Timestamp = Timestamp,
 								Light = Light,
-								Movement = D0,
+								Motion = D0,
 								MinLight = Rec.MinLight,
 								MinLightAt = Rec.MinLightAt,
 								MaxLight = Rec.MaxLight,
 								MaxLightAt = Rec.MaxLightAt,
 								AvgLight = 0,
-								AvgMovement = 0
+								AvgMotion = 0
 							};
 
 							foreach (LastMinute Rec2 in await Database.Find<LastMinute>(0, 60, new FilterAnd(
@@ -335,10 +335,10 @@ namespace Sensor
 									NLight++;
 								}
 
-								if (Rec2.AvgMovement.HasValue)
+								if (Rec2.AvgMotion.HasValue)
 								{
-									HourRec.AvgMovement += Rec2.AvgMovement.Value;
-									NMovement++;
+									HourRec.AvgMotion += Rec2.AvgMotion.Value;
+									NMotion++;
 								}
 
 								if (Rec2.MinLight<HourRec.MinLight)
@@ -359,10 +359,10 @@ namespace Sensor
 							else
 								HourRec.AvgLight /= NLight;
 
-							if (NMovement == 0)
-								HourRec.AvgMovement = null;
+							if (NMotion == 0)
+								HourRec.AvgMotion = null;
 							else
-								HourRec.AvgMovement /= NMovement;
+								HourRec.AvgMotion /= NMotion;
 
 							await Database.Insert(HourRec);
 
@@ -374,19 +374,19 @@ namespace Sensor
 								From = new DateTime(Timestamp.Year, Timestamp.Month, Timestamp.Day, 0, 0, 0).AddDays(-1);
 								To = From.AddDays(1);
 								NLight = 0;
-								NMovement = 0;
+								NMotion = 0;
 
 								LastDay DayRec = new LastDay()
 								{
 									Timestamp = Timestamp,
 									Light = Light,
-									Movement = D0,
+									Motion = D0,
 									MinLight = HourRec.MinLight,
 									MinLightAt = HourRec.MinLightAt,
 									MaxLight = HourRec.MaxLight,
 									MaxLightAt = HourRec.MaxLightAt,
 									AvgLight = 0,
-									AvgMovement = 0
+									AvgMotion = 0
 								};
 
 								foreach (LastHour Rec2 in await Database.Find<LastHour>(0, 24, new FilterAnd(
@@ -399,10 +399,10 @@ namespace Sensor
 										NLight++;
 									}
 
-									if (Rec2.AvgMovement.HasValue)
+									if (Rec2.AvgMotion.HasValue)
 									{
-										DayRec.AvgMovement += Rec2.AvgMovement.Value;
-										NMovement++;
+										DayRec.AvgMotion += Rec2.AvgMotion.Value;
+										NMotion++;
 									}
 
 									if (Rec2.MinLight < DayRec.MinLight)
@@ -423,10 +423,10 @@ namespace Sensor
 								else
 									DayRec.AvgLight /= NLight;
 
-								if (NMovement == 0)
-									DayRec.AvgMovement = null;
+								if (NMotion == 0)
+									DayRec.AvgMotion = null;
 								else
-									DayRec.AvgMovement /= NMovement;
+									DayRec.AvgMotion /= NMotion;
 
 								await Database.Insert(DayRec);
 

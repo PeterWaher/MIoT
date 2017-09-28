@@ -14,7 +14,7 @@
                 var Cells = document.getElementsByTagName("TD");
 
                 Cells[1].firstChild.innerHTML = Data.light.value + Data.light.unit;
-                Cells[3].firstChild.innerHTML = Data.movement ? "Detected" : "Not detected";
+                Cells[3].firstChild.innerHTML = Data.motion ? "Detected" : "Not detected";
             }
 
             delete xhttp;
