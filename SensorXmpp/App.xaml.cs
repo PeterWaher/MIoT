@@ -68,7 +68,8 @@ namespace SensorXmpp
 		private bool? lastMotion = null;
 		private SensorServer sensorServer = null;
 		private ChatServer chatServer = null;
-		private DateTime lastPublish = DateTime.MinValue;
+		private DateTime lastPublished = DateTime.MinValue;
+		private double? lastPublishedLight = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -186,11 +187,15 @@ namespace SensorXmpp
 
 							if (pin == 0)
 							{
-								this.lastMotion = (value == PinState.HIGH);
-								this.PublishMomentaryValues();
+								bool Motion = (value == PinState.HIGH);
+								if (!this.lastMotion.HasValue || (this.lastMotion.Value != Motion))
+								{
+									this.lastMotion = Motion;
+									this.PublishMomentaryValues();
 
-								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublish, "Motion", this.lastMotion.Value,
-									FieldType.Momentary, FieldQoS.AutomaticReadout));
+									this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished, "Motion", Motion,
+										FieldType.Momentary, FieldQoS.AutomaticReadout));
+								}
 							}
 						};
 
@@ -498,7 +503,8 @@ namespace SensorXmpp
 
 			this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
 
-			this.lastPublish = Now;
+			this.lastPublished = Now;
+			this.lastPublishedLight = this.lastLight.Value;
 		}
 
 		private async void TestConnectionStateChanged(object Sender, XmppState State)
@@ -629,8 +635,13 @@ namespace SensorXmpp
 						this.maxLightAt = Timestamp;
 					}
 
-					if ((Timestamp - this.lastPublish).TotalSeconds >= 5)
+					double SecondsSinceLast = (Timestamp - this.lastPublished).TotalSeconds;
+					if (!this.lastPublishedLight.HasValue || 
+						(SecondsSinceLast >= 5 && (Math.Abs(this.lastPublishedLight.Value - Light) >= 1)) || 
+						SecondsSinceLast >= 60)
+					{
 						this.PublishMomentaryValues();
+					}
 
 					if (!this.lastMinute.HasValue)
 						this.lastMinute = Timestamp.Minute;
