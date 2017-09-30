@@ -538,6 +538,7 @@ namespace SensorXmpp
 		{
 			try
 			{
+				DateTime Timestamp = DateTime.Now;
 				ushort A0 = this.arduino.analogRead("A0");
 				PinState D0 = this.arduino.digitalRead(0);
 
@@ -612,8 +613,6 @@ namespace SensorXmpp
 					this.sumLight += Light;
 					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
-
-					DateTime Timestamp = DateTime.Now;
 
 					this.sensorServer?.NewMomentaryValues(new QuantityField(ThingReference.Empty, Timestamp, "Light", Light, 2, "%",
 						FieldType.Momentary, FieldQoS.AutomaticReadout));
@@ -795,6 +794,12 @@ namespace SensorXmpp
 							}
 						}
 					}
+				}
+
+				if (Timestamp.Second == 0 && this.xmppClient != null &&
+					(this.xmppClient.State == XmppState.Error || this.xmppClient.State == XmppState.Offline))
+				{
+					this.xmppClient.Reconnect();
 				}
 			}
 			catch (Exception ex)

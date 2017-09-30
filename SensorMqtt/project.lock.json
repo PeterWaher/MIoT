@@ -2421,10 +2421,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -5013,10 +5013,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -7597,10 +7597,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -10154,10 +10154,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -12747,10 +12747,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -15304,10 +15304,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -17897,10 +17897,10 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.4": {
+      "Waher.Networking.MQTT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.2",
+          "Waher.Events": "1.0.3",
           "Waher.Networking": "1.0.1"
         },
         "compile": {
@@ -26591,10 +26591,10 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.MQTT.UWP/1.0.4": {
-      "sha512": "ZPTeiS6RjxZRJbgckltvESn42OPiMl6mkVWx4sak5IgrR4bp99iJd4Xt1/RFDQ2o9GKi4g+klK3iRxPtwQpIHA==",
+    "Waher.Networking.MQTT.UWP/1.0.5": {
+      "sha512": "HurrnMCGEostPirNGX/wI4+HzQGAo6s65FB3IvdAgBag/g5kN518ILSpizRbuCYeVtJ9f/CyWOi1kUX5vizVJA==",
       "type": "package",
-      "path": "waher.networking.mqtt.uwp/1.0.4",
+      "path": "waher.networking.mqtt.uwp/1.0.5",
       "files": [
         "ref/uap10.0/Waher.Networking.MQTT.UWP.XML",
         "ref/uap10.0/Waher.Networking.MQTT.UWP.dll",
@@ -26606,7 +26606,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.MQTT.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.MQTT.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.MQTT.UWP.pdb",
-        "waher.networking.mqtt.uwp.1.0.4.nupkg.sha512",
+        "waher.networking.mqtt.uwp.1.0.5.nupkg.sha512",
         "waher.networking.mqtt.uwp.nuspec"
       ]
     },
@@ -26688,7 +26688,7 @@
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
       "Waher.Events >= 1.0.3",
-      "Waher.Networking.MQTT.UWP >= 1.0.4",
+      "Waher.Networking.MQTT.UWP >= 1.0.5",
       "Waher.Persistence.FilesLW >= 1.0.4",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
@@ -26719,7 +26719,7 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
       "Waher.Events": "1.0.3",
-      "Waher.Networking.MQTT.UWP": "1.0.4",
+      "Waher.Networking.MQTT.UWP": "1.0.5",
       "Waher.Persistence.FilesLW": "1.0.4",
       "Waher.Runtime.Settings": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"
