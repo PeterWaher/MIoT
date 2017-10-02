@@ -243,7 +243,7 @@ namespace SensorXmpp
 				else
 				{
 					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en",
-						typeof(App).GetTypeInfo().Assembly, new LogSniffer())     // Add "new LogSniffer()" to the end, to output communication to the log.
+						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,

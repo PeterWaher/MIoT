@@ -197,7 +197,7 @@
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.4</Version>
+      <Version>1.0.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.0.4</Version>
