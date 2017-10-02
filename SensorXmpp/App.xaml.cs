@@ -25,6 +25,7 @@ using Waher.Content;
 using Waher.Content.Xml;
 using Waher.Events;
 using Waher.Networking.XMPP;
+using Waher.Networking.XMPP.BitsOfBinary;
 using Waher.Networking.XMPP.Chat;
 using Waher.Networking.XMPP.Sensor;
 using Waher.Persistence;
@@ -67,6 +68,7 @@ namespace SensorXmpp
 		private double? lastLight = null;
 		private bool? lastMotion = null;
 		private SensorServer sensorServer = null;
+		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
 		private DateTime lastPublished = DateTime.MinValue;
 		private double? lastPublishedLight = null;
@@ -241,7 +243,7 @@ namespace SensorXmpp
 				else
 				{
 					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en",
-						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
+						typeof(App).GetTypeInfo().Assembly, new LogSniffer())     // Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
@@ -365,7 +367,7 @@ namespace SensorXmpp
 							if (Rec.AvgMotion.HasValue)
 							{
 								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Minute, Average",
-									Rec.AvgMotion.Value, 2, string.Empty, FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
+									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
 							}
 
 							if (Rec.MinLight.HasValue)
@@ -401,7 +403,7 @@ namespace SensorXmpp
 							if (Rec.AvgMotion.HasValue)
 							{
 								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Hour, Average",
-									Rec.AvgMotion.Value, 2, string.Empty, FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
+									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
 							}
 
 							if (Rec.MinLight.HasValue)
@@ -437,7 +439,7 @@ namespace SensorXmpp
 							if (Rec.AvgMotion.HasValue)
 							{
 								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Day, Average",
-									Rec.AvgMotion.Value, 2, string.Empty, FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
+									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
 							}
 
 							if (Rec.MinLight.HasValue)
@@ -480,7 +482,8 @@ namespace SensorXmpp
 			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
-			this.chatServer = new ChatServer(this.xmppClient, this.sensorServer);
+			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
+			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
 		}
 
 		private void PublishMomentaryValues()
@@ -501,7 +504,7 @@ namespace SensorXmpp
 			SensorDataServerRequest.OutputFields(w, Fields);
 			w.Flush();
 
-			this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
+			//this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
 
 			this.lastPublished = Now;
 			this.lastPublishedLight = this.lastLight.Value;
@@ -844,6 +847,12 @@ namespace SensorXmpp
 			{
 				this.chatServer.Dispose();
 				this.chatServer = null;
+			}
+
+			if (this.bobClient != null)
+			{
+				this.bobClient.Dispose();
+				this.bobClient = null;
 			}
 
 			if (this.sensorServer != null)
