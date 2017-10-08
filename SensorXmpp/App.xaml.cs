@@ -242,7 +242,7 @@ namespace SensorXmpp
 				}
 				else
 				{
-					this.xmppClient = new XmppClient("waher.se", 5222, UserName, PasswordHash, PasswordHashMethod, "en",
+					this.xmppClient = new XmppClient(Host, Port, UserName, PasswordHash, PasswordHashMethod, "en",
 						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
@@ -252,6 +252,8 @@ namespace SensorXmpp
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
 					this.AttachFeatures();
+
+					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
 				}
 			}
@@ -292,6 +294,8 @@ namespace SensorXmpp
 
 						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
 						this.xmppClient.OnConnectionError += this.ConnectionError;
+
+						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 						this.xmppClient.Connect();
 						break;
 
@@ -308,6 +312,9 @@ namespace SensorXmpp
 		private void StateChanged(object Sender, XmppState State)
 		{
 			Log.Informational("Changing state: " + State.ToString());
+
+			if (State == XmppState.Connected)
+				Log.Informational("Connected as " + this.xmppClient.FullJID);
 		}
 
 		private void ConnectionError(object Sender, Exception ex)
@@ -381,6 +388,12 @@ namespace SensorXmpp
 								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MaxLightAt, "Light, Minute, Maximum",
 									Rec.MaxLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
 							}
+						}
+
+						if (Fields.Count > 0)
+						{
+							e.ReportFields(false, Fields);
+							Fields.Clear();
 						}
 
 						foreach (LastHour Rec in await Database.Find<LastHour>(new FilterAnd(
