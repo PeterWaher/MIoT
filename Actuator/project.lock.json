@@ -2396,7 +2396,7 @@
           }
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2420,7 +2420,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -4951,7 +4951,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -4975,7 +4975,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -7509,7 +7509,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7533,7 +7533,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10040,7 +10040,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10064,7 +10064,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -12607,7 +12607,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12631,7 +12631,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15138,7 +15138,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15162,7 +15162,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -17705,7 +17705,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.3": {
+      "Waher.Events/1.0.4": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17729,7 +17729,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.4": {
+      "Waher.Persistence.FilesLW/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -26377,14 +26377,14 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.0.3": {
-      "sha512": "/5m93zYS3blm66BGd2rJh8jdveN20M0ztnbRbhMjdANT7kF5j72KtA6kkOxK0E4Gq+8wNd+mqj8yJ78RRdZcWA==",
+    "Waher.Events/1.0.4": {
+      "sha512": "itAyhauaGz9ie122SlujmUZqfEXHNBAiSXRD6OJ82qPGuoTGKXIsSGsvWYBu8KfGQnTdI9UJUc35bDa4fbkzBw==",
       "type": "package",
-      "path": "waher.events/1.0.3",
+      "path": "waher.events/1.0.4",
       "files": [
         "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.0.3.nupkg.sha512",
+        "waher.events.1.0.4.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -26398,14 +26398,14 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.4": {
-      "sha512": "C0kiaHfZgG7jFo1RFgZuITeO8Hr9gCFnJ2OH2Xm3JL3Ls4gKbkMlOPwuZHzm1+Oul5hI4KgT/+8xnE3hqZj4rg==",
+    "Waher.Persistence.FilesLW/1.0.6": {
+      "sha512": "img5BwwF6n43c4gOMskzj8I/z3XYOmrlL6kX+7PKiRET+IeGI1RPyYo3G/Yx0DzNnxge9W6dDG0w5c3UgJXogg==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.4",
+      "path": "waher.persistence.fileslw/1.0.6",
       "files": [
         "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.4.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.6.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -26465,8 +26465,8 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.4.0",
-      "Waher.Events >= 1.0.3",
-      "Waher.Persistence.FilesLW >= 1.0.4",
+      "Waher.Events >= 1.0.4",
+      "Waher.Persistence.FilesLW >= 1.0.6",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -26495,8 +26495,8 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "5.4.0",
-      "Waher.Events": "1.0.3",
-      "Waher.Persistence.FilesLW": "1.0.4",
+      "Waher.Events": "1.0.4",
+      "Waher.Persistence.FilesLW": "1.0.6",
       "Waher.Runtime.Settings": "1.0.1",
       "Windows-Remote-Arduino": "1.4.0"
     },

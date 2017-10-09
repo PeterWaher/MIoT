@@ -182,7 +182,7 @@
       <Version>1.0.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.2</Version>
@@ -197,10 +197,10 @@
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.5</Version>
+      <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.4</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
