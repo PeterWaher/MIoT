@@ -13,6 +13,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.Devices.Gpio;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -65,7 +66,7 @@ namespace ActuatorXmpp
 		private SensorServer sensorServer = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
-		private Timer minuteTimer = null; 
+		private Timer minuteTimer = null;
 		private bool? output = null;
 
 		/// <summary>
@@ -345,7 +346,17 @@ namespace ActuatorXmpp
 			this.controlServer = new ControlServer(this.xmppClient,
 				new BooleanControlParameter("Output", "Actuator", "Output:", "Digital output.",
 					(Node) => this.output,
-					async (Node, Value) => await this.SetOutput(Value, "XMPP")));
+					async (Node, Value) =>
+					{
+						try
+						{
+							await this.SetOutput(Value, "XMPP");
+						}
+						catch (Exception ex)
+						{
+							Log.Critical(ex);
+						}
+					}));
 
 			this.sensorServer = new SensorServer(this.xmppClient, true);
 			this.sensorServer.OnExecuteReadoutRequest += (sender, e) =>

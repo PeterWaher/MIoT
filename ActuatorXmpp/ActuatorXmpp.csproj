@@ -99,8 +99,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChatServer.cs" />
     <Compile Include="Events.cs" />
+    <Compile Include="LogSniffer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -184,6 +184,9 @@
     <PackageReference Include="Waher.Events">
       <Version>1.0.4</Version>
     </PackageReference>
+    <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
+      <Version>1.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.2</Version>
     </PackageReference>
@@ -194,7 +197,7 @@
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.0.6</Version>
