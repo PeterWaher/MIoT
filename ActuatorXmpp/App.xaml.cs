@@ -25,7 +25,15 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Devices.Enumeration;
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+using Waher.Content;
 using Waher.Events;
+using Waher.Networking.XMPP;
+using Waher.Networking.XMPP.BitsOfBinary;
+using Waher.Networking.XMPP.Chat;
+using Waher.Networking.XMPP.Control;
+using Waher.Networking.XMPP.Sensor;
+using Waher.Things;
+using Waher.Things.SensorData;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
@@ -49,6 +57,13 @@ namespace ActuatorXmpp
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 #endif
+		private string deviceId;
+		private XmppClient xmppClient = null;
+		private ControlServer controlServer = null;
+		private SensorServer sensorServer = null;
+		private BobClient bobClient = null;
+		private ChatServer chatServer = null;
+		private bool? output = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -112,6 +127,12 @@ namespace ActuatorXmpp
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(IContentEncoder).GetTypeInfo().Assembly,
+					typeof(XmppClient).GetTypeInfo().Assembly,
+					typeof(Waher.Content.Markdown.MarkdownDocument).GetTypeInfo().Assembly,
+					typeof(Waher.Content.Xml.XML).GetTypeInfo().Assembly,
+					typeof(Waher.Script.Expression).GetTypeInfo().Assembly,
+					typeof(Waher.Script.Graphs.Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -128,13 +149,13 @@ namespace ActuatorXmpp
 						{
 							this.gpioPin.SetDriveMode(GpioPinDriveMode.Output);
 
-							bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
-							this.gpioPin.Write(LastOn ? GpioPinValue.High : GpioPinValue.Low);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.gpioPin.Write(this.output ? GpioPinValue.High : GpioPinValue.Low);
 
-							await MainPage.Instance.OutputSet(LastOn);
+							await MainPage.Instance.OutputSet(this.output);
 
 							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-								new KeyValuePair<string, object>("Output", LastOn));
+								new KeyValuePair<string, object>("Output", this.output));
 						}
 						else
 							Log.Error("Output mode not supported for GPIO pin " + gpioOutputPin.ToString());
@@ -168,13 +189,13 @@ namespace ActuatorXmpp
 
 								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 
-								bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
-								this.arduino.digitalWrite(1, LastOn ? PinState.HIGH : PinState.LOW);
+								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
 
-								await MainPage.Instance.OutputSet(LastOn);
+								await MainPage.Instance.OutputSet(this.output.Value);
 
 								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-									new KeyValuePair<string, object>("Output", LastOn));
+									new KeyValuePair<string, object>("Output", this.output));
 
 								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							}
@@ -199,6 +220,47 @@ namespace ActuatorXmpp
 					}
 				}
 #endif
+				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
+				if (string.IsNullOrEmpty(this.deviceId))
+				{
+					this.deviceId = Guid.NewGuid().ToString().Replace("-", string.Empty);
+					await RuntimeSettings.SetAsync("DeviceId", this.deviceId);
+				}
+
+				Log.Informational("Device ID: " + this.deviceId);
+
+				string Host = await RuntimeSettings.GetAsync("XmppHost", "waher.se");
+				int Port = (int)await RuntimeSettings.GetAsync("XmppPort", 5222);
+				string UserName = await RuntimeSettings.GetAsync("XmppUserName", string.Empty);
+				string PasswordHash = await RuntimeSettings.GetAsync("XmppPasswordHash", string.Empty);
+				string PasswordHashMethod = await RuntimeSettings.GetAsync("XmppPasswordHashMethod", string.Empty);
+
+				if (string.IsNullOrEmpty(Host) ||
+					Port <= 0 || Port > ushort.MaxValue ||
+					string.IsNullOrEmpty(UserName) ||
+					string.IsNullOrEmpty(PasswordHash) ||
+					string.IsNullOrEmpty(PasswordHashMethod))
+				{
+					await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+						async () => await this.ShowConnectionDialog(Host, Port, UserName));
+				}
+				else
+				{
+					this.xmppClient = new XmppClient(Host, Port, UserName, PasswordHash, PasswordHashMethod, "en",
+						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
+					{
+						AllowCramMD5 = false,
+						AllowDigestMD5 = false,
+						AllowPlain = false,
+						AllowScramSHA1 = true
+					};
+					this.xmppClient.OnStateChanged += this.StateChanged;
+					this.xmppClient.OnConnectionError += this.ConnectionError;
+					this.AttachFeatures();
+
+					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
+					this.xmppClient.Connect();
+				}
 			}
 			catch (Exception ex)
 			{
@@ -207,6 +269,145 @@ namespace ActuatorXmpp
 				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
 				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
 					async () => await Dialog.ShowAsync());
+			}
+		}
+
+		private async Task ShowConnectionDialog(string Host, int Port, string UserName)
+		{
+			try
+			{
+				AccountDialog Dialog = new AccountDialog(Host, Port, UserName);
+
+				switch (await Dialog.ShowAsync())
+				{
+					case ContentDialogResult.Primary:
+						if (this.xmppClient != null)
+						{
+							this.xmppClient.Dispose();
+							this.xmppClient = null;
+						}
+
+						this.xmppClient = new XmppClient(Dialog.Host, Dialog.Port, Dialog.UserName, Dialog.Password, "en", typeof(App).GetTypeInfo().Assembly)
+						{
+							AllowCramMD5 = false,
+							AllowDigestMD5 = false,
+							AllowPlain = false
+						};
+
+						this.xmppClient.AllowRegistration();                // Allows registration on servers that do not require signatures.
+																			// this.xmppClient.AllowRegistration(Key, Secret);	// Allows registration on servers requiring a signature of the registration request.
+
+						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
+						this.xmppClient.OnConnectionError += this.ConnectionError;
+
+						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
+						this.xmppClient.Connect();
+						break;
+
+					case ContentDialogResult.Secondary:
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
+			}
+		}
+
+		private void StateChanged(object Sender, XmppState State)
+		{
+			Log.Informational("Changing state: " + State.ToString());
+
+			if (State == XmppState.Connected)
+				Log.Informational("Connected as " + this.xmppClient.FullJID);
+		}
+
+		private void ConnectionError(object Sender, Exception ex)
+		{
+			Log.Error(ex.Message);
+		}
+
+		private void AttachFeatures()
+		{
+			this.sensorServer = new SensorServer(this.xmppClient, true);
+			this.sensorServer.OnExecuteReadoutRequest += async (sender, e) =>
+			{
+				try
+				{
+					Log.Informational("Performing readout.", this.xmppClient.BareJID, e.Actor);
+
+					List<Field> Fields = new List<Field>();
+					DateTime Now = DateTime.Now;
+
+					if (e.IsIncluded(FieldType.Identity))
+						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+					if (this.output.HasValue)
+					{
+						Fields.Add(new BooleanField(ThingReference.Empty, Now, "Output", this.output.Value,
+							FieldType.Momentary, FieldQoS.AutomaticReadout));
+					}
+
+					e.ReportFields(true, Fields);
+				}
+				catch (Exception ex)
+				{
+					Log.Critical(ex);
+				}
+			};
+
+			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
+			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
+
+			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
+			{
+				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
+				e.Accept();
+			};
+
+			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
+			{
+				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
+				e.Accept();
+			};
+
+			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+
+			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
+			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.controlServer);
+		}
+
+		private async void TestConnectionStateChanged(object Sender, XmppState State)
+		{
+			try
+			{
+				this.StateChanged(Sender, State);
+
+				switch (State)
+				{
+					case XmppState.Connected:
+						await RuntimeSettings.SetAsync("XmppHost", this.xmppClient.Host);
+						await RuntimeSettings.SetAsync("XmppPort", this.xmppClient.Port);
+						await RuntimeSettings.SetAsync("XmppUserName", this.xmppClient.UserName);
+						await RuntimeSettings.SetAsync("XmppPasswordHash", this.xmppClient.PasswordHash);
+						await RuntimeSettings.SetAsync("XmppPasswordHashMethod", this.xmppClient.PasswordHashMethod);
+
+						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
+						this.xmppClient.OnStateChanged += this.StateChanged;
+						this.AttachFeatures();
+						break;
+
+					case XmppState.Error:
+					case XmppState.Offline:
+						await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+							async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
 			}
 		}
 
@@ -224,6 +425,7 @@ namespace ActuatorXmpp
 				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
 #endif
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
+				this.output = On;
 
 				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
