@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -315,7 +316,10 @@ namespace SensorXmpp
 			Log.Informational("Changing state: " + State.ToString());
 
 			if (State == XmppState.Connected)
+			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
+				Task T = this.SetVCard();
+			}
 		}
 
 		private void ConnectionError(object Sender, Exception ex)
@@ -498,6 +502,9 @@ namespace SensorXmpp
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
+
+			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
+			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
 		}
 
 		private void PublishMomentaryValues()
@@ -542,6 +549,7 @@ namespace SensorXmpp
 						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
 						this.xmppClient.OnStateChanged += this.StateChanged;
 						this.AttachFeatures();
+						await this.SetVCard();
 						break;
 
 					case XmppState.Error:
@@ -555,6 +563,61 @@ namespace SensorXmpp
 			{
 				Log.Critical(ex);
 			}
+		}
+
+		private async void QueryVCardHandler(object Sender, IqEventArgs e)
+		{
+			try
+			{
+				e.IqResult(await this.GetVCardXml());
+			}
+			catch (Exception ex)
+			{
+				e.IqError(ex);
+			}
+		}
+
+		private async Task SetVCard()
+		{
+			Log.Informational("Setting vCard");
+
+			// XEP-0054 - vcard-temp: http://xmpp.org/extensions/xep-0054.html
+
+			this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
+			{
+				if (e.Ok)
+					Log.Informational("vCard successfully set.");
+				else
+					Log.Error("Unable to set vCard.");
+			}, null);
+		}
+
+		private async Task<string> GetVCardXml()
+		{
+			StringBuilder Xml = new StringBuilder();
+
+			Xml.Append("<vCard xmlns='vcard-temp'>");
+			Xml.Append("<FN>MIoT Sensor</FN><N><FAMILY>Sensor</FAMILY><GIVEN>MIoT</GIVEN><MIDDLE/></N>");
+			Xml.Append("<URL>https://github.com/PeterWaher/MIoT</URL>");
+			Xml.Append("<JABBERID>");
+			Xml.Append(this.xmppClient.BareJID);
+			Xml.Append("</JABBERID>");
+			Xml.Append("<UID>");
+			Xml.Append(this.deviceId);
+			Xml.Append("</UID>");
+			Xml.Append("<DESC>XMPP Sensor Project (SensorXmpp) from the book Mastering Internet of Things, by Peter Waher.</DESC>");
+
+			// XEP-0153 - vCard-Based Avatars: http://xmpp.org/extensions/xep-0153.html
+
+			StorageFile File = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/LargeTile.scale-100.png"));
+			byte[] Icon = System.IO.File.ReadAllBytes(File.Path);
+
+			Xml.Append("<PHOTO><TYPE>image/png</TYPE><BINVAL>");
+			Xml.Append(Convert.ToBase64String(Icon));
+			Xml.Append("</BINVAL></PHOTO>");
+			Xml.Append("</vCard>");
+
+			return Xml.ToString();
 		}
 
 		private async void SampleValues(object State)
