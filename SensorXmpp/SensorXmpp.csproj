@@ -189,9 +189,6 @@
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
       <Version>1.0.4</Version>
     </PackageReference>
-    <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>1.0.2</Version>
-    </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
       <Version>1.0.1</Version>
     </PackageReference>
