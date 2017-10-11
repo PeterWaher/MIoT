@@ -330,7 +330,7 @@ namespace ActuatorXmpp
 		private void AttachFeatures()
 		{
 			this.sensorServer = new SensorServer(this.xmppClient, true);
-			this.sensorServer.OnExecuteReadoutRequest += async (sender, e) =>
+			this.sensorServer.OnExecuteReadoutRequest += (sender, e) =>
 			{
 				try
 				{
