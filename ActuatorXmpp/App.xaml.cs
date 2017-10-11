@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -33,6 +34,7 @@ using Waher.Networking.XMPP.Chat;
 using Waher.Networking.XMPP.Control;
 using Waher.Networking.XMPP.Sensor;
 using Waher.Things;
+using Waher.Things.ControlParameters;
 using Waher.Things.SensorData;
 using Waher.Persistence;
 using Waher.Persistence.Files;
@@ -63,6 +65,7 @@ namespace ActuatorXmpp
 		private SensorServer sensorServer = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
+		private Timer minuteTimer = null; 
 		private bool? output = null;
 
 		/// <summary>
@@ -261,6 +264,16 @@ namespace ActuatorXmpp
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
 				}
+
+				this.minuteTimer = new Timer((State) =>
+				{
+					if (this.xmppClient != null &&
+						(this.xmppClient.State == XmppState.Error || this.xmppClient.State == XmppState.Offline))
+					{
+						this.xmppClient.Reconnect();
+					}
+
+				}, null, 60000, 60000);
 			}
 			catch (Exception ex)
 			{
@@ -329,6 +342,11 @@ namespace ActuatorXmpp
 
 		private void AttachFeatures()
 		{
+			this.controlServer = new ControlServer(this.xmppClient,
+				new BooleanControlParameter("Output", "Actuator", "Output:", "Digital output.",
+					(Node) => this.output,
+					async (Node, Value) => await this.SetOutput(Value, "XMPP")));
+
 			this.sensorServer = new SensorServer(this.xmppClient, true);
 			this.sensorServer.OnExecuteReadoutRequest += (sender, e) =>
 			{
@@ -345,7 +363,7 @@ namespace ActuatorXmpp
 					if (this.output.HasValue)
 					{
 						Fields.Add(new BooleanField(ThingReference.Empty, Now, "Output", this.output.Value,
-							FieldType.Momentary, FieldQoS.AutomaticReadout));
+							FieldType.Momentary, FieldQoS.AutomaticReadout, true));
 					}
 
 					e.ReportFields(true, Fields);
@@ -427,6 +445,9 @@ namespace ActuatorXmpp
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
 				this.output = On;
 
+				this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, DateTime.Now, "Output", On,
+					FieldType.Momentary, FieldQoS.AutomaticReadout));
+
 				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
 					new KeyValuePair<string, object>("Output", On));
 
@@ -458,6 +479,36 @@ namespace ActuatorXmpp
 
 			if (instance == this)
 				instance = null;
+
+			if (this.chatServer != null)
+			{
+				this.chatServer.Dispose();
+				this.chatServer = null;
+			}
+
+			if (this.bobClient != null)
+			{
+				this.bobClient.Dispose();
+				this.bobClient = null;
+			}
+
+			if (this.sensorServer != null)
+			{
+				this.sensorServer.Dispose();
+				this.sensorServer = null;
+			}
+
+			if (this.xmppClient != null)
+			{
+				this.xmppClient.Dispose();
+				this.xmppClient = null;
+			}
+
+			if (this.minuteTimer != null)
+			{
+				this.minuteTimer.Dispose();
+				this.minuteTimer = null;
+			}
 
 #if GPIO
 			if (this.gpioPin != null)
