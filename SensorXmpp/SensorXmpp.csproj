@@ -98,7 +98,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChatServer.cs" />
     <Compile Include="History\Base.cs" />
     <Compile Include="History\LastDay.cs" />
     <Compile Include="History\LastHour.cs" />
@@ -176,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>5.4.0</Version>
+      <Version>6.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
       <Version>1.0.5</Version>
@@ -186,6 +185,9 @@
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.2</Version>
