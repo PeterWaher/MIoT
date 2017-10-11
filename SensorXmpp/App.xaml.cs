@@ -138,7 +138,7 @@ namespace SensorXmpp
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(XmppClient).GetTypeInfo().Assembly,
 					typeof(Waher.Content.Markdown.MarkdownDocument).GetTypeInfo().Assembly,
-					typeof(Waher.Content.Xml.XML).GetTypeInfo().Assembly,
+					typeof(XML).GetTypeInfo().Assembly,
 					typeof(Waher.Script.Expression).GetTypeInfo().Assembly,
 					typeof(Waher.Script.Graphs.Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
@@ -600,7 +600,7 @@ namespace SensorXmpp
 			Xml.Append("<FN>MIoT Sensor</FN><N><FAMILY>Sensor</FAMILY><GIVEN>MIoT</GIVEN><MIDDLE/></N>");
 			Xml.Append("<URL>https://github.com/PeterWaher/MIoT</URL>");
 			Xml.Append("<JABBERID>");
-			Xml.Append(this.xmppClient.BareJID);
+			Xml.Append(XML.Encode(this.xmppClient.BareJID));
 			Xml.Append("</JABBERID>");
 			Xml.Append("<UID>");
 			Xml.Append(this.deviceId);
