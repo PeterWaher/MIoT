@@ -191,13 +191,13 @@
       <Version>1.0.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>1.0.3</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
       <Version>1.0.9</Version>
@@ -215,7 +215,7 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Things">
-      <Version>1.0.3</Version>
+      <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
