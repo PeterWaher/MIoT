@@ -11,7 +11,8 @@ namespace ConcentratorXmpp.Topology
 	{
 		public const string ID = "MeteringTopology";
 
-		private static SensorNode sensorNode = new SensorNode();
+		public static ActuatorNode ActuatorNode = new ActuatorNode();
+		public static SensorNode SensorNode = new SensorNode();
 
 		public MeteringTopology()
 		{
@@ -22,7 +23,7 @@ namespace ConcentratorXmpp.Topology
 		public DateTime LastChanged => DateTime.MinValue;
 		public IEnumerable<IDataSource> ChildSources => null;
 
-		public IEnumerable<INode> RootNodes => new INode[] { sensorNode };
+		public IEnumerable<INode> RootNodes => new INode[] { ActuatorNode, SensorNode };
 
 		public Task<bool> CanViewAsync(RequestOrigin Caller)
 		{
@@ -36,8 +37,10 @@ namespace ConcentratorXmpp.Topology
 
 		public Task<INode> GetNodeAsync(IThingReference NodeRef)
 		{
-			if (NodeRef == sensorNode)
-				return Task.FromResult<INode>(sensorNode);
+			if (NodeRef == SensorNode)
+				return Task.FromResult<INode>(SensorNode);
+			else if (NodeRef == ActuatorNode)
+				return Task.FromResult<INode>(ActuatorNode);
 			else
 				return Task.FromResult<INode>(null);
 		}

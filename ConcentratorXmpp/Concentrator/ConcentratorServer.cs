@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using SkiaSharp;
 using Waher.Content;
 using Waher.Content.Xml;
+using Waher.Events;
 using Waher.Runtime.Language;
 using Waher.Runtime.Inventory;
 using Waher.Things;
+using Waher.Things.ControlParameters;
 using Waher.Things.DisplayableParameters;
 using Waher.Things.Queries;
+using Waher.Networking.XMPP.Control;
 using Waher.Networking.XMPP.DataForms;
+using Waher.Networking.XMPP.Sensor;
 
 namespace Waher.Networking.XMPP.Concentrator
 {
@@ -34,6 +38,8 @@ namespace Waher.Networking.XMPP.Concentrator
 		private Dictionary<string, IDataSource> dataSources = new Dictionary<string, IDataSource>();
 		private Dictionary<string, Query> queries = new Dictionary<string, Query>();
 		private object synchObject = new object();
+		private SensorServer sensorServer = null;
+		private ControlServer controlServer = null;
 
 		/// <summary>
 		/// Implements an XMPP concentrator server interface.
@@ -46,6 +52,12 @@ namespace Waher.Networking.XMPP.Concentrator
 		public ConcentratorServer(XmppClient Client, params IDataSource[] DataSources)
 		{
 			this.client = Client;
+
+			this.sensorServer = new SensorServer(this.client, true);
+			this.sensorServer.OnExecuteReadoutRequest += SensorServer_OnExecuteReadoutRequest;
+
+			this.controlServer = new ControlServer(this.client);
+			this.controlServer.OnGetControlParameters += ControlServer_OnGetControlParameters;
 
 			foreach (IDataSource DataSource in DataSources)
 				this.Register(DataSource);
@@ -172,6 +184,18 @@ namespace Waher.Networking.XMPP.Concentrator
 
 			foreach (Query Query in Queries)
 				Query.Abort();
+
+			if (this.sensorServer != null)
+			{
+				this.sensorServer.Dispose();
+				this.sensorServer = null;
+			}
+
+			if (this.controlServer != null)
+			{
+				this.controlServer.Dispose();
+				this.controlServer = null;
+			}
 		}
 
 		/// <summary>
@@ -181,6 +205,16 @@ namespace Waher.Networking.XMPP.Concentrator
 		{
 			get { return this.client; }
 		}
+
+		/// <summary>
+		/// Sensor server.
+		/// </summary>
+		public SensorServer SensorServer => this.sensorServer;
+
+		/// <summary>
+		/// Control server.
+		/// </summary>
+		public ControlServer ControlServer => this.controlServer;
 
 		#region Capabilities
 
@@ -735,7 +769,7 @@ namespace Waher.Networking.XMPP.Concentrator
 			}
 		}
 
-		private async Task ExportParametersAndMessages(StringBuilder Xml, INode Node, bool Parameters, bool Messages, 
+		private async Task ExportParametersAndMessages(StringBuilder Xml, INode Node, bool Parameters, bool Messages,
 			Language Language, RequestOrigin Caller)
 		{
 			if (Parameters)
@@ -3509,6 +3543,109 @@ namespace Waher.Networking.XMPP.Concentrator
 			catch (Exception ex)
 			{
 				e.IqError(ex);
+			}
+		}
+
+		#endregion
+
+		#region Sensor Data interface
+
+		private async void SensorServer_OnExecuteReadoutRequest(object Sender, SensorDataServerRequest Request)
+		{
+			DateTime Now = DateTime.Now;
+			ThingReference[] Nodes = Request.Nodes;
+			int i, c;
+
+			try
+			{
+				if (Nodes == null || (c = Nodes.Length) == 0)
+					Request.ReportErrors(true, new ThingError(ThingReference.Empty, Now, "Node specification required for concentrators."));
+				else
+				{
+					for (i = 0; i < c; i++)
+					{
+						ThingReference NodeRef = Nodes[i];
+
+						if (!this.TryGetDataSource(NodeRef.SourceId, out IDataSource DataSource))
+						{
+							Request.ReportErrors(i == c - 1, new ThingError(NodeRef, Now, "Data source not found."));
+							continue;
+						}
+
+						INode Node = await DataSource.GetNodeAsync(NodeRef);
+						if (Node == null)
+						{
+							Request.ReportErrors(i == c - 1, new ThingError(NodeRef, Now, "Node not found."));
+							continue;
+						}
+
+						ISensor Sensor = Node as ISensor;
+						if (Sensor == null || !Sensor.IsReadable)
+						{
+							Request.ReportErrors(i == c - 1, new ThingError(NodeRef, Now, "Node not readable."));
+							continue;
+						}
+
+						Sensor.StartReadout(Request);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Request.ReportErrors(true, new ThingError(ThingReference.Empty, Now, ex.Message));
+			}
+		}
+
+		/// <summary>
+		/// Reports newly measured values.
+		/// </summary>
+		/// <param name="Reference">Optional node reference</param>
+		/// <param name="Values">New momentary values.</param>
+		public void NewMomentaryValues(ThingReference Reference, params Things.SensorData.Field[] Values)
+		{
+			this.sensorServer.NewMomentaryValues(Reference, Values);
+		}
+
+		/// <summary>
+		/// Reports newly measured values.
+		/// </summary>
+		/// <param name="Reference">Optional node reference</param>
+		/// <param name="Values">New momentary values.</param>
+		public void NewMomentaryValues(ThingReference Reference, IEnumerable<Things.SensorData.Field> Values)
+		{
+			this.sensorServer.NewMomentaryValues(Reference, Values);
+		}
+
+		#endregion
+
+		#region Control interface
+
+		private async Task<ControlParameter[]> ControlServer_OnGetControlParameters(ThingReference Node)
+		{
+			DateTime Now = DateTime.Now;
+
+			try
+			{
+				if (!this.TryGetDataSource(Node.SourceId, out IDataSource DataSource))
+					return null;
+
+				INode Node2 = await DataSource.GetNodeAsync(Node);
+				if (Node == null)
+					return null;
+
+				IActuator Actuator = Node2 as IActuator;
+				if (Actuator == null)
+					return null;
+
+				if (!Actuator.IsControllable)
+					return new ControlParameter[0];
+
+				return Actuator.GetControlParameters();
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
+				return new ControlParameter[0];
 			}
 		}
 

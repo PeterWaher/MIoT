@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
@@ -298,6 +299,17 @@ namespace ConcentratorXmpp
 					w.Dispose();
 				}
 			}
+		}
+
+		private void Relay_Click(object sender, RoutedEventArgs e)
+		{
+			bool On = this.Relay.IsChecked.HasValue && this.Relay.IsChecked.Value;
+			Task.Run(() => App.Instance.SetOutput(On, null));
+		}
+
+		internal async Task OutputSet(bool On)
+		{
+			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.Relay.IsChecked = On);
 		}
 
 	}

@@ -72,11 +72,11 @@ namespace ConcentratorXmpp
 		private double? lastLight = null;
 		private bool? lastMotion = null;
 		private ConcentratorServer concentratorServer = null;
-		private SensorServer sensorServer = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
 		private DateTime lastPublished = DateTime.MinValue;
 		private double? lastPublishedLight = null;
+		private bool? output = null;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -89,8 +89,11 @@ namespace ConcentratorXmpp
 		}
 
 		public static App Instance => instance;
-		public double? Light => lastLight;
-		public bool? Motion => lastMotion;
+		public double? Light => this.lastLight;
+		public bool? Motion => this.lastMotion;
+		public bool? Output => this.output;
+		public XmppClient XmppClient => this.xmppClient;
+		public string DeviceId => this.deviceId;
 
 		/// <summary>
 		/// Invoked when the application is launched normally by the end user.  Other entry points
@@ -168,25 +171,39 @@ namespace ConcentratorXmpp
 							Log.Informational("USB connection established.");
 
 						this.arduino = new RemoteDevice(this.arduinoUsb);
-						this.arduino.DeviceReady += () =>
+						this.arduino.DeviceReady += async () =>
 						{
-							Log.Informational("Device ready.");
+							try
+							{
+								Log.Informational("Device ready.");
 
-							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-							this.arduino.digitalWrite(13, PinState.HIGH);
+								this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
+								this.arduino.digitalWrite(13, PinState.HIGH);
 
-							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-							PinState Pin0 = this.arduino.digitalRead(0);
-							this.lastMotion = Pin0 == PinState.HIGH;
-							MainPage.Instance.DigitalPinUpdated(0, Pin0);
+								this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
+								PinState Pin0 = this.arduino.digitalRead(0);
+								this.lastMotion = Pin0 == PinState.HIGH;
+								MainPage.Instance.DigitalPinUpdated(0, Pin0);
 
-							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(1, 0);             // Relay set to 0
+								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
 
-							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
 
-							this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
+								await MainPage.Instance.OutputSet(this.output.Value);
+
+								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
+									new KeyValuePair<string, object>("Output", this.output));
+
+								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+								MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+
+								this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
+							}
+							catch (Exception ex)
+							{
+								Log.Critical(ex);
+							}
 						};
 
 						this.arduino.AnalogPinUpdated += (pin, value) =>
@@ -206,8 +223,9 @@ namespace ConcentratorXmpp
 									this.lastMotion = Motion;
 									this.PublishMomentaryValues();
 
-									this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished, "Motion", Motion,
-										FieldType.Momentary, FieldQoS.AutomaticReadout));
+									this.concentratorServer?.NewMomentaryValues(MeteringTopology.SensorNode,
+										new BooleanField(MeteringTopology.SensorNode, this.lastPublished, "Motion", Motion,
+											FieldType.Momentary, FieldQoS.AutomaticReadout));
 								}
 							}
 						};
@@ -341,159 +359,6 @@ namespace ConcentratorXmpp
 		{
 			this.concentratorServer = new ConcentratorServer(this.xmppClient, new MeteringTopology());
 
-			this.sensorServer = new SensorServer(this.xmppClient, true);
-			this.sensorServer.OnExecuteReadoutRequest += async (sender, e) =>
-			{
-				try
-				{
-					Log.Informational("Performing readout.", this.xmppClient.BareJID, e.Actor);
-
-					List<Field> Fields = new List<Field>();
-					DateTime Now = DateTime.Now;
-
-					if (e.IsIncluded(FieldType.Identity))
-						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId, FieldType.Identity, FieldQoS.AutomaticReadout));
-
-					if (this.lastLight.HasValue)
-					{
-						Fields.Add(new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%",
-							FieldType.Momentary, FieldQoS.AutomaticReadout));
-					}
-
-					if (this.lastMotion.HasValue)
-					{
-						Fields.Add(new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value,
-							FieldType.Momentary, FieldQoS.AutomaticReadout));
-					}
-
-					if (e.IsIncluded(FieldType.Historical))
-					{
-						e.ReportFields(false, Fields);      // Allows for immediate response of momentary values.
-						Fields.Clear();
-
-						foreach (LastMinute Rec in await Database.Find<LastMinute>(new FilterAnd(
-							new FilterFieldGreaterOrEqualTo("Timestamp", e.From),
-							new FilterFieldLesserOrEqualTo("Timestamp", e.To)),
-							"Timestamp"))
-						{
-							if (Fields.Count > 50)
-							{
-								e.ReportFields(false, Fields);
-								Fields.Clear();
-							}
-
-							if (Rec.AvgLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Light, Minute, Average",
-									Rec.AvgLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.AvgMotion.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Minute, Average",
-									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MinLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MinLightAt, "Light, Minute, Minimum",
-									Rec.MinLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MaxLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MaxLightAt, "Light, Minute, Maximum",
-									Rec.MaxLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-						}
-
-						if (Fields.Count > 0)
-						{
-							e.ReportFields(false, Fields);
-							Fields.Clear();
-						}
-
-						foreach (LastHour Rec in await Database.Find<LastHour>(new FilterAnd(
-							new FilterFieldGreaterOrEqualTo("Timestamp", e.From),
-							new FilterFieldLesserOrEqualTo("Timestamp", e.To)),
-							"Timestamp"))
-						{
-							if (Fields.Count > 50)
-							{
-								e.ReportFields(false, Fields);
-								Fields.Clear();
-							}
-
-							if (Rec.AvgLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Light, Hour, Average",
-									Rec.AvgLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.AvgMotion.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Hour, Average",
-									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MinLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MinLightAt, "Light, Hour, Minimum",
-									Rec.MinLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MaxLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MaxLightAt, "Light, Hour, Maximum",
-									Rec.MaxLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-						}
-
-						foreach (LastDay Rec in await Database.Find<LastDay>(new FilterAnd(
-							new FilterFieldGreaterOrEqualTo("Timestamp", e.From),
-							new FilterFieldLesserOrEqualTo("Timestamp", e.To)),
-							"Timestamp"))
-						{
-							if (Fields.Count > 50)
-							{
-								e.ReportFields(false, Fields);
-								Fields.Clear();
-							}
-
-							if (Rec.AvgLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Light, Day, Average",
-									Rec.AvgLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.AvgMotion.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.Timestamp, "Motion, Day, Average",
-									Rec.AvgMotion.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MinLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MinLightAt, "Light, Day, Minimum",
-									Rec.MinLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-
-							if (Rec.MaxLight.HasValue)
-							{
-								Fields.Add(new QuantityField(ThingReference.Empty, Rec.MaxLightAt, "Light, Day, Maximum",
-									Rec.MaxLight.Value, 2, "%", FieldType.Computed | FieldType.Historical, FieldQoS.AutomaticReadout));
-							}
-						}
-					}
-
-					e.ReportFields(true, Fields);
-				}
-				catch (Exception ex)
-				{
-					Log.Critical(ex);
-				}
-			};
-
 			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
 			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
@@ -513,7 +378,7 @@ namespace ConcentratorXmpp
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
-			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
+			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.concentratorServer);
 
 			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
 			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
@@ -528,8 +393,8 @@ namespace ConcentratorXmpp
 
 			List<Field> Fields = new List<Field>()
 			{
-				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout),
-				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)
+				new QuantityField(MeteringTopology.SensorNode, Now, "Light", this.lastLight.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout),
+				new BooleanField(MeteringTopology.SensorNode, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)
 			};
 
 			StringBuilder Xml = new StringBuilder();
@@ -609,7 +474,7 @@ namespace ConcentratorXmpp
 			StringBuilder Xml = new StringBuilder();
 
 			Xml.Append("<vCard xmlns='vcard-temp'>");
-			Xml.Append("<FN>MIoT Sensor</FN><N><FAMILY>Sensor</FAMILY><GIVEN>MIoT</GIVEN><MIDDLE/></N>");
+			Xml.Append("<FN>MIoT Concentrator</FN><N><FAMILY>Concentrator</FAMILY><GIVEN>MIoT</GIVEN><MIDDLE/></N>");
 			Xml.Append("<URL>https://github.com/PeterWaher/MIoT</URL>");
 			Xml.Append("<JABBERID>");
 			Xml.Append(XML.Encode(this.xmppClient.BareJID));
@@ -617,7 +482,7 @@ namespace ConcentratorXmpp
 			Xml.Append("<UID>");
 			Xml.Append(this.deviceId);
 			Xml.Append("</UID>");
-			Xml.Append("<DESC>XMPP Sensor Project (ConcentratorXmpp) from the book Mastering Internet of Things, by Peter Waher.</DESC>");
+			Xml.Append("<DESC>XMPP Concentrator Project (ConcentratorXmpp) from the book Mastering Internet of Things, by Peter Waher.</DESC>");
 
 			// XEP-0153 - vCard-Based Avatars: http://xmpp.org/extensions/xep-0153.html
 
@@ -712,8 +577,9 @@ namespace ConcentratorXmpp
 					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
 
-					this.sensorServer?.NewMomentaryValues(new QuantityField(ThingReference.Empty, Timestamp, "Light", Light, 2, "%",
-						FieldType.Momentary, FieldQoS.AutomaticReadout));
+					this.concentratorServer?.NewMomentaryValues(MeteringTopology.SensorNode,
+						new QuantityField(MeteringTopology.SensorNode, Timestamp, "Light", Light, 2, "%",
+							FieldType.Momentary, FieldQoS.AutomaticReadout));
 
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
 					{
@@ -728,8 +594,8 @@ namespace ConcentratorXmpp
 					}
 
 					double SecondsSinceLast = (Timestamp - this.lastPublished).TotalSeconds;
-					if (!this.lastPublishedLight.HasValue || 
-						(SecondsSinceLast >= 5 && (Math.Abs(this.lastPublishedLight.Value - Light) >= 1)) || 
+					if (!this.lastPublishedLight.HasValue ||
+						(SecondsSinceLast >= 5 && (Math.Abs(this.lastPublishedLight.Value - Light) >= 1)) ||
 						SecondsSinceLast >= 60)
 					{
 						this.PublishMomentaryValues();
@@ -911,6 +777,27 @@ namespace ConcentratorXmpp
 			}
 		}
 
+		internal async Task SetOutput(bool On, string Actor)
+		{
+			if (this.arduino != null)
+			{
+				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
+
+				await RuntimeSettings.SetAsync("Actuator.Output", On);
+				this.output = On;
+
+				this.concentratorServer?.NewMomentaryValues(MeteringTopology.ActuatorNode, 
+					new BooleanField(MeteringTopology.ActuatorNode, DateTime.Now, "Output", On,
+						FieldType.Momentary, FieldQoS.AutomaticReadout));
+
+				Log.Informational("Setting Control Parameter.", string.Empty, Actor ?? "Windows user",
+					new KeyValuePair<string, object>("Output", On));
+
+				if (Actor != null)
+					await MainPage.Instance.OutputSet(On);
+			}
+		}
+
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
 		/// </summary>
@@ -946,10 +833,10 @@ namespace ConcentratorXmpp
 				this.bobClient = null;
 			}
 
-			if (this.sensorServer != null)
+			if (this.concentratorServer != null)
 			{
-				this.sensorServer.Dispose();
-				this.sensorServer = null;
+				this.concentratorServer.Dispose();
+				this.concentratorServer = null;
 			}
 
 			if (this.xmppClient != null)
