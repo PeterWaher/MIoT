@@ -37,9 +37,9 @@ namespace ConcentratorXmpp.Topology
 
 		public Task<INode> GetNodeAsync(IThingReference NodeRef)
 		{
-			if (NodeRef == SensorNode)
+			if (SensorNode.SameThing(NodeRef))
 				return Task.FromResult<INode>(SensorNode);
-			else if (NodeRef == ActuatorNode)
+			else if (ActuatorNode.SameThing(NodeRef))
 				return Task.FromResult<INode>(ActuatorNode);
 			else
 				return Task.FromResult<INode>(null);
