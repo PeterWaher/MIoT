@@ -18,6 +18,7 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>ConcentratorXmpp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -208,7 +209,7 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
       <Version>1.0.2</Version>
@@ -232,7 +233,7 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Things">
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>

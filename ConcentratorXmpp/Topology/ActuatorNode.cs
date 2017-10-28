@@ -114,7 +114,7 @@ namespace ConcentratorXmpp.Topology
 
 		public Task<string> GetTypeNameAsync(Language Language)
 		{
-			return Language.GetStringAsync(typeof(MeteringTopology), 4, "Sensor Node");
+			return Language.GetStringAsync(typeof(MeteringTopology), 5, "Actuator Node");
 		}
 
 		public Task<bool> MoveDownAsync(RequestOrigin Caller)
