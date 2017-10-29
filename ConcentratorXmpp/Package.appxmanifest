@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="0920b1ea-ad18-4238-8200-5b36797dd76e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ConcentratorXmpp</DisplayName>
-    <PublisherDisplayName>Peter</PublisherDisplayName>
+    <PublisherDisplayName>Peter Waher</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
