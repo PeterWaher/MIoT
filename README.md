@@ -16,7 +16,7 @@ by Peter Waher. The following projects are included:
 |       7 | Communicating more efficiently using CoAP         | [SensorCoap](SensorCoap)<br/>[ActuatorCoap](ActuatorCoap)     |
 |       8 | Interoperability                                  | [SensorLwm2m](SensorLwm2m)<br/>[ActuatorLwm2m](ActuatorLwm2m) |
 |       9 | Social interaction with your devices using XMPP   | [SensorXmpp](SensorXmpp)<br/>[ActuatorXmpp](ActuatorXmpp)     |
-|      10 | The Controller                                    |                                                               |
+|      10 | The controller                                    | [ControllerXmpp](ControllerXmpp)                              |
 |      11 | IoT Harmonization                                 | [ConcentratorXmpp](ConcentratorXmpp)                          |
 |      12 | Using an Internet of Things Service Platform      |                                                               |
 |      13 | Mobile application development using Xamarin      |                                                               |
