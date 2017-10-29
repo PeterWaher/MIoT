@@ -38,11 +38,11 @@ using Waher.Things.SensorData;
 
 namespace ControllerXmpp
 {
-    /// <summary>
-    /// Provides application-specific behavior to supplement the default Application class.
-    /// </summary>
-    sealed partial class App : Application
-    {
+	/// <summary>
+	/// Provides application-specific behavior to supplement the default Application class.
+	/// </summary>
+	sealed partial class App : Application
+	{
 		private Timer secondTimer = null;
 		private XmppClient xmppClient = null;
 		private BobClient bobClient = null;
@@ -57,49 +57,49 @@ namespace ControllerXmpp
 		/// executed, and as such is the logical equivalent of main() or WinMain().
 		/// </summary>
 		public App()
-        {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-        }
+		{
+			this.InitializeComponent();
+			this.Suspending += OnSuspending;
+		}
 
-        /// <summary>
-        /// Invoked when the application is launched normally by the end user.  Other entry points
-        /// will be used such as when the application is launched to open a specific file.
-        /// </summary>
-        /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
+		/// <summary>
+		/// Invoked when the application is launched normally by the end user.  Other entry points
+		/// will be used such as when the application is launched to open a specific file.
+		/// </summary>
+		/// <param name="e">Details about the launch request and process.</param>
+		protected override void OnLaunched(LaunchActivatedEventArgs e)
+		{
+			Frame rootFrame = Window.Current.Content as Frame;
 
-            // Do not repeat app initialization when the Window already has content,
-            // just ensure that the window is active
-            if (rootFrame == null)
-            {
-                // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
+			// Do not repeat app initialization when the Window already has content,
+			// just ensure that the window is active
+			if (rootFrame == null)
+			{
+				// Create a Frame to act as the navigation context and navigate to the first page
+				rootFrame = new Frame();
 
-                rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
+				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+				{
+					//TODO: Load state from previously suspended application
+				}
 
-                // Place the frame in the current Window
-                Window.Current.Content = rootFrame;
-            }
+				// Place the frame in the current Window
+				Window.Current.Content = rootFrame;
+			}
 
-            if (e.PrelaunchActivated == false)
-            {
-                if (rootFrame.Content == null)
-                {
-                    // When the navigation stack isn't restored navigate to the first page,
-                    // configuring the new page by passing required information as a navigation
-                    // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }
-                // Ensure the current window is active
-                Window.Current.Activate();
+			if (e.PrelaunchActivated == false)
+			{
+				if (rootFrame.Content == null)
+				{
+					// When the navigation stack isn't restored navigate to the first page,
+					// configuring the new page by passing required information as a navigation
+					// parameter
+					rootFrame.Navigate(typeof(MainPage), e.Arguments);
+				}
+				// Ensure the current window is active
+				Window.Current.Activate();
 				Task.Run((Action)this.Init);
 			}
 		}
@@ -160,6 +160,8 @@ namespace ControllerXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
+					this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
+					this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
 					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
@@ -203,6 +205,7 @@ namespace ControllerXmpp
 
 						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
 						this.xmppClient.OnConnectionError += this.ConnectionError;
+						this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 						this.xmppClient.Connect();
@@ -226,6 +229,7 @@ namespace ControllerXmpp
 			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
 				Task.Run(this.SetVCard);
+				Task.Run(this.CheckFriendships);
 			}
 		}
 
@@ -239,6 +243,22 @@ namespace ControllerXmpp
 			this.sensorServer = new SensorServer(this.xmppClient, true);
 			this.sensorServer.OnExecuteReadoutRequest += (sender, e) =>
 			{
+				try
+				{
+					Log.Informational("Performing readout.", this.xmppClient.BareJID, e.Actor);
+
+					List<Field> Fields = new List<Field>();
+					DateTime Now = DateTime.Now;
+
+					if (e.IsIncluded(FieldType.Identity))
+						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+					e.ReportFields(true, Fields);
+				}
+				catch (Exception ex)
+				{
+					Log.Critical(ex);
+				}
 			};
 
 			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
@@ -285,6 +305,7 @@ namespace ControllerXmpp
 						this.xmppClient.OnStateChanged += this.StateChanged;
 						this.AttachFeatures();
 						await this.SetVCard();
+						await this.CheckFriendships();
 						break;
 
 					case XmppState.Error:
@@ -355,26 +376,123 @@ namespace ControllerXmpp
 			return Xml.ToString();
 		}
 
+		private async Task CheckFriendships()
+		{
+			RosterItem Sensor = null;
+			RosterItem Actuator = null;
+
+			foreach (RosterItem Item in this.xmppClient.Roster)
+			{
+				if (Item.IsInGroup("Sensor"))
+					Sensor = Item;
+
+				if (Item.IsInGroup("Actuator"))
+					Actuator = Item;
+			}
+
+			if (Sensor == null)
+			{
+				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+					async () => await this.ShowAssociationDialog("Sensor"));
+			}
+			else if (Actuator == null)
+			{
+				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+					async () => await this.ShowAssociationDialog("Actuator"));
+			}
+		}
+
+		private AssociationRequest currentRequest = null;
+
+		private class AssociationRequest
+		{
+			public string Device = null;
+			public string Jid = null;
+			public string NodeId = null;
+			public string SourceId = null;
+			public string Partition = null;
+		}
+
+		private async Task ShowAssociationDialog(string Device)
+		{
+			try
+			{
+				AssociationDialog Dialog = new AssociationDialog(Device);
+
+				switch (await Dialog.ShowAsync())
+				{
+					case ContentDialogResult.Primary:
+						this.currentRequest = null;
+
+						this.xmppClient.RequestPresenceSubscription(Dialog.Jid);
+						Log.Informational("Subscribing to presence from " + Dialog.Jid);
+						break;
+
+					case ContentDialogResult.Secondary:
+						await this.CheckFriendships();
+						break;
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
+			}
+		}
+
+		private void XmppClient_OnRosterItemAdded(object Sender, RosterItem Item)
+		{
+			if (this.currentRequest != null && string.Compare(this.currentRequest.Jid, Item.BareJid, true) == 0)
+			{
+				AssociationRequest Request = this.currentRequest;
+				this.currentRequest = null;
+
+				if (Item.LastPresence != null && Item.LastPresence.Type == PresenceType.Available)
+				{
+					List<string> Groups = new List<string>();
+
+					foreach (string Group in Item.Groups)
+					{
+						if (!Group.StartsWith(Request.Device))
+							Groups.Add(Group);
+					}
+
+					Groups.Add(Request.Device);
+					Groups.Add(Request.Device + ".NodeID:" + Request.NodeId);
+					Groups.Add(Request.Device + ".SourceID:" + Request.SourceId);
+					Groups.Add(Request.Device + ".Partition:" + Request.Partition);
+
+					this.xmppClient.UpdateRosterItem(Item.BareJid, Item.Name, Groups.ToArray());
+				}
+				else
+					Task.Run(this.CheckFriendships);
+			}
+		}
+
+		private void XmppClient_OnRosterItemUpdated(object Sender, RosterItem Item)
+		{
+			Task.Run(this.CheckFriendships);
+		}
+
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
 		/// </summary>
 		/// <param name="sender">The Frame which failed navigation</param>
 		/// <param name="e">Details about the navigation failure</param>
 		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
+		{
+			throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+		}
 
-        /// <summary>
-        /// Invoked when application execution is being suspended.  Application state is saved
-        /// without knowing whether the application will be terminated or resumed with the contents
-        /// of memory still intact.
-        /// </summary>
-        /// <param name="sender">The source of the suspend request.</param>
-        /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
+		/// <summary>
+		/// Invoked when application execution is being suspended.  Application state is saved
+		/// without knowing whether the application will be terminated or resumed with the contents
+		/// of memory still intact.
+		/// </summary>
+		/// <param name="sender">The source of the suspend request.</param>
+		/// <param name="e">Details about the suspend request.</param>
+		private void OnSuspending(object sender, SuspendingEventArgs e)
+		{
+			var deferral = e.SuspendingOperation.GetDeferral();
 
 			if (this.chatServer != null)
 			{
@@ -421,6 +539,6 @@ namespace ControllerXmpp
 			Log.Terminate();
 
 			deferral.Complete();
-        }
-    }
+		}
+	}
 }
