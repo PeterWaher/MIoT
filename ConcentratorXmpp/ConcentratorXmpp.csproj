@@ -99,23 +99,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Attributes\AlphaChannelAttribute.cs" />
-    <Compile Include="Attributes\DateOnlyAttribute.cs" />
-    <Compile Include="Attributes\DefaultLanguageAttribute.cs" />
-    <Compile Include="Attributes\HeaderAttribute.cs" />
-    <Compile Include="Attributes\MaskedAttribute.cs" />
-    <Compile Include="Attributes\OpenAttribute.cs" />
-    <Compile Include="Attributes\OptionAttribute.cs" />
-    <Compile Include="Attributes\PageAttribute.cs" />
-    <Compile Include="Attributes\RangeAttribute.cs" />
-    <Compile Include="Attributes\ReadOnlyAttribute.cs" />
-    <Compile Include="Attributes\RegularExpressionAttribute.cs" />
-    <Compile Include="Attributes\RequiredAttribute.cs" />
-    <Compile Include="Attributes\SectionAttribute.cs" />
-    <Compile Include="Attributes\TextAttribute.cs" />
-    <Compile Include="Attributes\ToolTipAttribute.cs" />
-    <Compile Include="Concentrator\ChatServer.cs" />
-    <Compile Include="Concentrator\ConcentratorServer.cs" />
     <Compile Include="History\Base.cs" />
     <Compile Include="History\LastDay.cs" />
     <Compile Include="History\LastHour.cs" />
@@ -125,7 +108,6 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Topology\MeteringTopology.cs" />
-    <Compile Include="Concentrator\Parameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Topology\ActuatorNode.cs" />
     <Compile Include="Topology\SensorNode.cs" />
@@ -208,6 +190,12 @@
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
+      <Version>1.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Waher.Networking.XMPP.Concentrator.UWP">
+      <Version>0.1.5</Version>
+    </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.10</Version>
     </PackageReference>
@@ -215,7 +203,7 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.11</Version>
+      <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
       <Version>1.0.9</Version>
