@@ -43,7 +43,6 @@ namespace ControllerXmpp
     /// </summary>
     sealed partial class App : Application
     {
-		private static App instance = null;
 		private Timer secondTimer = null;
 		private XmppClient xmppClient = null;
 		private BobClient bobClient = null;
@@ -226,7 +225,7 @@ namespace ControllerXmpp
 			if (State == XmppState.Connected)
 			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
-				Task T = this.SetVCard();
+				Task.Run(this.SetVCard);
 			}
 		}
 
@@ -376,8 +375,6 @@ namespace ControllerXmpp
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
-			instance = null;
 
 			if (this.chatServer != null)
 			{

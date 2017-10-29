@@ -70,7 +70,6 @@ namespace ControllerXmpp
 		public async void AddLogMessage(string Message)
 		{
 			DateTime TP = DateTime.Now;
-			StreamWriter w;
 
 			await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 			{
