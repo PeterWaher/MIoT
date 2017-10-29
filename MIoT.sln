@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActuatorXmpp", "ActuatorXmp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcentratorXmpp", "ConcentratorXmpp\ConcentratorXmpp.csproj", "{755807F7-BED3-4700-9DBB-4D9627A9954C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControllerXmpp", "ControllerXmpp\ControllerXmpp.csproj", "{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -351,6 +353,26 @@ Global
 		{755807F7-BED3-4700-9DBB-4D9627A9954C}.Release|x86.ActiveCfg = Release|x86
 		{755807F7-BED3-4700-9DBB-4D9627A9954C}.Release|x86.Build.0 = Release|x86
 		{755807F7-BED3-4700-9DBB-4D9627A9954C}.Release|x86.Deploy.0 = Release|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|ARM.ActiveCfg = Debug|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|ARM.Build.0 = Debug|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|ARM.Deploy.0 = Debug|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x64.ActiveCfg = Debug|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x64.Build.0 = Debug|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x64.Deploy.0 = Debug|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x86.ActiveCfg = Debug|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x86.Build.0 = Debug|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Debug|x86.Deploy.0 = Debug|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|Any CPU.ActiveCfg = Release|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|ARM.ActiveCfg = Release|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|ARM.Build.0 = Release|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|ARM.Deploy.0 = Release|ARM
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x64.ActiveCfg = Release|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x64.Build.0 = Release|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x64.Deploy.0 = Release|x64
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x86.ActiveCfg = Release|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x86.Build.0 = Release|x86
+		{25C628EC-33B6-41AB-BFF3-34A81FD29CCE}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
