@@ -334,7 +334,10 @@ namespace ActuatorXmpp
 			Log.Informational("Changing state: " + State.ToString());
 
 			if (State == XmppState.Connected)
+			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
+				Task.Run(this.SetVCard);
+			}
 		}
 
 		private void ConnectionError(object Sender, Exception ex)

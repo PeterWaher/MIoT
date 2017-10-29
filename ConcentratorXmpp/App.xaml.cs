@@ -346,7 +346,7 @@ namespace ConcentratorXmpp
 			if (State == XmppState.Connected)
 			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
-				Task T = this.SetVCard();
+				Task.Run(this.SetVCard);
 			}
 		}
 
