@@ -652,11 +652,6 @@ namespace ControllerXmpp
 
 				Log.Informational("Searching for MIoT devices in my vicinity.");
 
-				Search = new List<SearchOperator>()
-				{
-					new StringTagEqualTo("COUNTRY", "Sweden")
-				};
-
 				this.registryClient.Search(0, 100, Search.ToArray(), (sender, e) =>
 				{
 					Log.Informational(e.Things.Length.ToString() + (e.More ? "+" : string.Empty) + " things found.");
