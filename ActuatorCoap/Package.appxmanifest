@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="fef2be67-1eb7-4d66-91d5-9dd255cdadf3" Publisher="CN=Peter" Version="1.0.0.0" />
+  <Identity Name="fef2be67-1eb7-4d66-91d5-9dd255cdadf3" Publisher="CN=Peter Waher" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="fef2be67-1eb7-4d66-91d5-9dd255cdadf3" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>ActuatorCoap</DisplayName>

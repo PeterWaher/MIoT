@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="d716ddbc-c9ff-43f0-866f-fc3ef724fa2d" Publisher="CN=Peter" Version="1.0.0.0" />
+  <Identity Name="d716ddbc-c9ff-43f0-866f-fc3ef724fa2d" Publisher="CN=Peter Waher" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="d716ddbc-c9ff-43f0-866f-fc3ef724fa2d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>SensorLwm2m</DisplayName>
