@@ -28,6 +28,7 @@ using Waher.Networking.XMPP.BitsOfBinary;
 using Waher.Networking.XMPP.Chat;
 using Waher.Networking.XMPP.Control;
 using Waher.Networking.XMPP.Provisioning;
+using Waher.Networking.XMPP.Provisioning.SearchOperators;
 using Waher.Networking.XMPP.Sensor;
 using Waher.Networking.XMPP.ServiceDiscovery;
 using Waher.Persistence;
@@ -435,6 +436,7 @@ namespace ControllerXmpp
 			List<MetaDataTag> MetaInfo = new List<MetaDataTag>()
 			{
 				new MetaDataStringTag("CLASS", "Controller"),
+				new MetaDataStringTag("TYPE", "MIoT Controller"),
 				new MetaDataStringTag("MAN", "waher.se"),
 				new MetaDataStringTag("MODEL", "MIoT ControllerXmpp"),
 				new MetaDataStringTag("PURL", "https://github.com/PeterWaher/MIoT"),
@@ -573,7 +575,7 @@ namespace ControllerXmpp
 						Log.Informational("Registration successful.");
 
 						await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
-						this.FindFriends();
+						this.FindFriends(MetaInfo);
 					}
 					else
 					{
@@ -602,37 +604,65 @@ namespace ControllerXmpp
 					this.RegisterDevice(MetaInfo);
 				}
 
-				this.FindFriends();
+				this.FindFriends(MetaInfo);
 			}, null);
 		}
 
-		private void FindFriends()
+		private void FindFriends(MetaDataTag[] MetaInfo)
 		{
-		}
+			RosterItem Sensor = null;
+			RosterItem Actuator = null;
 
-		/*RosterItem Sensor = null;
-		RosterItem Actuator = null;
+			foreach (RosterItem Item in this.xmppClient.Roster)
+			{
+				if (Item.IsInGroup("Sensor"))
+					Sensor = Item;
 
-		foreach (RosterItem Item in this.xmppClient.Roster)
-		{
-			if (Item.IsInGroup("Sensor"))
-				Sensor = Item;
+				if (Item.IsInGroup("Actuator"))
+					Actuator = Item;
+			}
 
-			if (Item.IsInGroup("Actuator"))
-				Actuator = Item;
-		}
+			if (Sensor == null || Actuator == null)
+			{
+				List<SearchOperator> Search = new List<SearchOperator>();
 
-		if (Sensor == null)
-		{
-			await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-				async () => await this.ShowAssociationDialog("Sensor"));
+				foreach (MetaDataTag Tag in MetaInfo)
+				{
+					if (Tag is MetaDataStringTag StringTag)
+					{
+						switch (StringTag.Name)
+						{
+							case "COUNTRY":
+							case "REGION":
+							case "CITY":
+							case "AREA":
+							case "STREET":
+							case "STREETNR":
+							case "BLD":
+							case "APT":
+							case "ROOM":
+							case "NAME":
+								Search.Add(new StringTagEqualTo(StringTag.Name, StringTag.StringValue));
+								break;
+						}
+					}
+				}
+
+				Search.Add(new StringTagGreaterThan("TYPE", "MIoT "));
+
+				Log.Informational("Searching for MIoT devices in my vicinity.");
+
+				Search = new List<SearchOperator>()
+				{
+					new StringTagEqualTo("COUNTRY", "Sweden")
+				};
+
+				this.registryClient.Search(0, 100, Search.ToArray(), (sender, e) =>
+				{
+					Log.Informational(e.Things.Length.ToString() + (e.More ? "+" : string.Empty) + " things found.");
+				}, null);
+			}
 		}
-		else if (Actuator == null)
-		{
-			await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-				async () => await this.ShowAssociationDialog("Actuator"));
-		}
-	}*/
 
 		/*private AssociationRequest currentRequest = null;
 
