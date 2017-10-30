@@ -15,8 +15,10 @@ namespace ConcentratorXmpp.Topology
 {
 	public class SensorNode : ThingReference, ISensor
 	{
+		public const string NodeID = "Sensor";
+
 		public SensorNode()
-			: base("Sensor", MeteringTopology.ID, string.Empty)
+			: base(NodeID, MeteringTopology.ID, string.Empty)
 		{
 		}
 

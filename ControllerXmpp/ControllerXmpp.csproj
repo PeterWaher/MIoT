@@ -19,6 +19,7 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <PackageCertificateKeyFile>ControllerXmpp_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <PackageCertificateThumbprint>10D49248ADA44EB73C65605CF9F136B0833FD908</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -93,8 +94,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssociationDialog.xaml.cs">
-      <DependentUpon>AssociationDialog.xaml</DependentUpon>
+    <Compile Include="RegistrationDialog.xaml.cs">
+      <DependentUpon>RegistrationDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="AccountDialog.xaml.cs">
       <DependentUpon>AccountDialog.xaml</DependentUpon>
@@ -164,7 +165,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AssociationDialog.xaml">
+    <Page Include="RegistrationDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

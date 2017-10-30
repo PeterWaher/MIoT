@@ -29,6 +29,8 @@ using Waher.Networking.XMPP;
 using Waher.Networking.XMPP.BitsOfBinary;
 using Waher.Networking.XMPP.Chat;
 using Waher.Networking.XMPP.Concentrator;
+using Waher.Networking.XMPP.Provisioning;
+using Waher.Networking.XMPP.ServiceDiscovery;
 using Waher.Networking.XMPP.Sensor;
 using Waher.Persistence;
 using Waher.Persistence.Files;
@@ -72,6 +74,7 @@ namespace ConcentratorXmpp
 		private double? lastLight = null;
 		private bool? lastMotion = null;
 		private ConcentratorServer concentratorServer = null;
+		private ThingRegistryClient registryClient = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
 		private DateTime lastPublished = DateTime.MinValue;
@@ -347,6 +350,7 @@ namespace ConcentratorXmpp
 			{
 				Log.Informational("Connected as " + this.xmppClient.FullJID);
 				Task.Run(this.SetVCard);
+				Task.Run(this.RegisterDevice);
 			}
 		}
 
@@ -427,6 +431,7 @@ namespace ConcentratorXmpp
 						this.xmppClient.OnStateChanged += this.StateChanged;
 						this.AttachFeatures();
 						await this.SetVCard();
+						await this.RegisterDevice();
 						break;
 
 					case XmppState.Error:
@@ -795,6 +800,267 @@ namespace ConcentratorXmpp
 
 				if (Actor != null)
 					await MainPage.Instance.OutputSet(On);
+			}
+		}
+
+		private async Task RegisterDevice()
+		{
+			string ThingRegistryJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+
+			if (!string.IsNullOrEmpty(ThingRegistryJid))
+				await this.RegisterDevice(ThingRegistryJid);
+			else
+			{
+				Log.Informational("Searching for Thing Registry.");
+
+				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
+				{
+					foreach (Item Item in e.Items)
+					{
+						this.xmppClient.SendServiceDiscoveryRequest(Item.JID, async (sender2, e2) =>
+						{
+							try
+							{
+								Item Item2 = (Item)e2.State;
+
+								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
+								{
+									Log.Informational("Thing registry found.", Item2.JID);
+
+									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
+									await this.RegisterDevice(Item2.JID);
+								}
+							}
+							catch (Exception ex)
+							{
+								Log.Critical(ex);
+							}
+						}, Item);
+					}
+				}, null);
+			}
+		}
+
+		private async Task RegisterDevice(string RegistryJid)
+		{
+			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
+			{
+				if (this.registryClient != null)
+				{
+					this.registryClient.Dispose();
+					this.registryClient = null;
+				}
+
+				this.registryClient = new ThingRegistryClient(this.xmppClient, RegistryJid);
+			}
+
+			string s;
+			List<MetaDataTag> MetaInfo = new List<MetaDataTag>()
+			{
+				new MetaDataStringTag("MAN", "waher.se"),
+				new MetaDataStringTag("MODEL", "MIoT ConcentratorXmpp"),
+				new MetaDataStringTag("PURL", "https://github.com/PeterWaher/MIoT"),
+				new MetaDataStringTag("SN", this.deviceId),
+				new MetaDataNumericTag("V", 1.0)
+			};
+
+			if (await RuntimeSettings.GetAsync("ThingRegistry.Location", false))
+			{
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Country", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("COUNTRY", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Region", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("REGION", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.City", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("CITY", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Area", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("AREA", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Street", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("STREET", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.StreetNr", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("STREETNR", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Building", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("BLD", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Apartment", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("APT", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Room", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("ROOM", s));
+
+				s = await RuntimeSettings.GetAsync("ThingRegistry.Name", string.Empty);
+				if (!string.IsNullOrEmpty(s))
+					MetaInfo.Add(new MetaDataStringTag("NAME", s));
+
+				this.UpdateRegistration(MetaInfo.ToArray());
+			}
+			else
+			{
+				try
+				{
+					await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+					{
+						try
+						{
+							RegistrationDialog Dialog = new RegistrationDialog();
+
+							switch (await Dialog.ShowAsync())
+							{
+								case ContentDialogResult.Primary:
+									await RuntimeSettings.SetAsync("ThingRegistry.Country", s = Dialog.Reg_Country);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("COUNTRY", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Region", s = Dialog.Reg_Region);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("REGION", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.City", s = Dialog.Reg_City);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("CITY", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Area", s = Dialog.Reg_Area);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("AREA", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Street", s = Dialog.Reg_Street);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("STREET", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.StreetNr", s = Dialog.Reg_StreetNr);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("STREETNR", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Building", s = Dialog.Reg_Building);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("BLD", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Apartment", s = Dialog.Reg_Apartment);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("APT", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Room", s = Dialog.Reg_Room);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("ROOM", s));
+
+									await RuntimeSettings.SetAsync("ThingRegistry.Name", s = Dialog.Name);
+									if (!string.IsNullOrEmpty(s))
+										MetaInfo.Add(new MetaDataStringTag("NAME", s));
+
+									this.RegisterDevice(MetaInfo.ToArray());
+									break;
+
+								case ContentDialogResult.Secondary:
+									await this.RegisterDevice();
+									break;
+							}
+						}
+						catch (Exception ex)
+						{
+							Log.Critical(ex);
+						}
+					});
+				}
+				catch (Exception ex)
+				{
+					Log.Critical(ex);
+				}
+			}
+		}
+
+		private void RegisterDevice(MetaDataTag[] MetaInfo)
+		{
+			Log.Informational("Registering device.");
+
+			MetaDataTag[] SensorTags = this.GetSensorMetaInfo(MetaInfo);
+			MetaDataTag[] ActuatorTags = this.GetActuatorMetaInfo(MetaInfo);
+
+			this.registryClient.RegisterThing(true, ActuatorNode.NodeID, ActuatorTags, this.RegistrationResponse, ActuatorNode.NodeID);
+			this.registryClient.RegisterThing(true, SensorNode.NodeID, SensorTags, this.RegistrationResponse, SensorNode.NodeID);
+		}
+
+		private MetaDataTag[] GetSensorMetaInfo(MetaDataTag[] MetaInfo)
+		{
+			List<MetaDataTag> SensorTags = new List<MetaDataTag>(MetaInfo)
+			{
+				new MetaDataStringTag("CLASS", "Sensor"),
+				new MetaDataStringTag("TYPE", "MIoT Sensor")
+			};
+
+			return SensorTags.ToArray();
+		}
+
+		private MetaDataTag[] GetActuatorMetaInfo(MetaDataTag[] MetaInfo)
+		{
+			List<MetaDataTag> ActuatorTags = new List<MetaDataTag>(MetaInfo)
+			{
+				new MetaDataStringTag("CLASS", "Actuator"),
+				new MetaDataStringTag("TYPE", "MIoT Actuator"),
+			};
+
+			return ActuatorTags.ToArray();
+		}
+
+		private async void RegistrationResponse(object Sender, RegistrationEventArgs e)
+		{
+			try
+			{
+				string NodeID = (string)e.State;
+
+				if (e.Ok)
+				{
+					Log.Informational("Registration successful.", NodeID);
+					await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
+				}
+				else
+				{
+					Log.Error("Registration failed.", NodeID);
+					await this.RegisterDevice();
+				}
+			}
+			catch (Exception ex)
+			{
+				Log.Critical(ex);
+			}
+		}
+
+		private void UpdateRegistration(MetaDataTag[] MetaInfo)
+		{
+			Log.Informational("Updating registration of device.");
+
+			MetaDataTag[] SensorTags = this.GetSensorMetaInfo(MetaInfo);
+			MetaDataTag[] ActuatorTags = this.GetActuatorMetaInfo(MetaInfo);
+
+			this.registryClient.UpdateThing(ActuatorNode.NodeID, ActuatorTags, this.RegistrationUpdateResponse, new object[] { ActuatorNode.NodeID, MetaInfo });
+			this.registryClient.UpdateThing(SensorNode.NodeID, SensorTags, this.RegistrationUpdateResponse, new object[] { SensorNode.NodeID, MetaInfo });
+		}
+
+		private void RegistrationUpdateResponse(object Sender, UpdateEventArgs e)
+		{
+			object[] P = (object[])e.State;
+			string NodeID = (string)P[0];
+			MetaDataTag[] MetaInfo = (MetaDataTag[])P[1];
+
+			if (e.Ok)
+				Log.Informational("Registration update successful.", NodeID);
+			else
+			{
+				Log.Error("Registration update failed.", NodeID);
+				this.RegisterDevice(MetaInfo);
 			}
 		}
 

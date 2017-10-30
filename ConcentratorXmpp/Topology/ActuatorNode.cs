@@ -16,8 +16,10 @@ namespace ConcentratorXmpp.Topology
 {
 	public class ActuatorNode : ThingReference, ISensor, IActuator
 	{
+		public const string NodeID = "Actuator";
+
 		public ActuatorNode()
-			: base("Actuator", MeteringTopology.ID, string.Empty)
+			: base(NodeID, MeteringTopology.ID, string.Empty)
 		{
 		}
 
