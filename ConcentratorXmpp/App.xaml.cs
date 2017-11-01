@@ -989,8 +989,8 @@ namespace ConcentratorXmpp
 			MetaDataTag[] SensorTags = this.GetSensorMetaInfo(MetaInfo);
 			MetaDataTag[] ActuatorTags = this.GetActuatorMetaInfo(MetaInfo);
 
-			this.registryClient.RegisterThing(true, ActuatorNode.NodeID, ActuatorTags, this.RegistrationResponse, ActuatorNode.NodeID);
-			this.registryClient.RegisterThing(true, SensorNode.NodeID, SensorTags, this.RegistrationResponse, SensorNode.NodeID);
+			this.registryClient.RegisterThing(true, ActuatorNode.NodeID, MeteringTopology.ID, ActuatorTags, this.RegistrationResponse, ActuatorNode.NodeID);
+			this.registryClient.RegisterThing(true, SensorNode.NodeID, MeteringTopology.ID, SensorTags, this.RegistrationResponse, SensorNode.NodeID);
 		}
 
 		private MetaDataTag[] GetSensorMetaInfo(MetaDataTag[] MetaInfo)
