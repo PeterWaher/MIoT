@@ -30,9 +30,9 @@ namespace ConcentratorXmpp.Topology
 			return Task.FromResult<bool>(true);
 		}
 
-		public async Task<string> GetNameAsync(Language Language)
+		public Task<string> GetNameAsync(Language Language)
 		{
-			return await Language.GetStringAsync(typeof(MeteringTopology), 1, "Metering Topology");
+			return Language.GetStringAsync(typeof(MeteringTopology), 1, "Metering Topology");
 		}
 
 		public Task<INode> GetNodeAsync(IThingReference NodeRef)

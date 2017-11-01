@@ -36,6 +36,7 @@ using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
+using Waher.Runtime.Language;
 using Waher.Runtime.Settings;
 using Waher.Things;
 using Waher.Things.SensorData;
@@ -151,6 +152,7 @@ namespace ConcentratorXmpp
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
+					typeof(Translator).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(XmppClient).GetTypeInfo().Assembly,
 					typeof(Waher.Content.Markdown.MarkdownDocument).GetTypeInfo().Assembly,

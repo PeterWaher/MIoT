@@ -938,7 +938,7 @@ namespace ControllerXmpp
 
 			if (RecalcOutput && this.motion.HasValue && this.light.HasValue)
 			{
-				bool Output = this.motion.Value && this.light.Value < 0.5;
+				bool Output = this.motion.Value && this.light.Value < 25;
 
 				if (!string.IsNullOrEmpty(this.actuatorJid) &&
 					(!this.output.HasValue || this.output.Value != Output))
