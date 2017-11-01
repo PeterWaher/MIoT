@@ -202,13 +202,13 @@
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Concentrator.UWP">
-      <Version>0.1.5</Version>
+      <Version>0.1.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
       <Version>1.0.12</Version>
@@ -217,7 +217,7 @@
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
