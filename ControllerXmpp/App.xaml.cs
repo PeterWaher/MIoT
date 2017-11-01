@@ -838,8 +838,8 @@ namespace ControllerXmpp
 
 			Log.Informational("Roster item updated.", Item.BareJid);
 
-			if ((IsSensor = (string.Compare(Item.BareJid, this.sensorJid, true) == 0) ||
-				string.Compare(Item.BareJid, this.actuatorJid, true) == 0) &&
+			if (((IsSensor = (this.sensorJid != null && string.Compare(Item.BareJid, this.sensorJid, true) == 0)) ||
+				(this.actuatorJid != null && string.Compare(Item.BareJid, this.actuatorJid, true) == 0)) &&
 				(Item.State == SubscriptionState.None || Item.State == SubscriptionState.From) &&
 				Item.PendingSubscription != PendingSubscription.Subscribe)
 			{
@@ -882,6 +882,12 @@ namespace ControllerXmpp
 					Nodes = null;
 				else
 					Nodes = new ThingReference[] { this.sensor };
+
+				if (this.subscription != null)
+				{
+					this.subscription.Unsubscribe();
+					this.subscription = null;
+				}
 
 				Log.Informational("Subscribing to events.", SensorItem.LastPresenceFullJid);
 
@@ -989,6 +995,12 @@ namespace ControllerXmpp
 		private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
+
+			if (this.subscription != null)
+			{
+				this.subscription.Unsubscribe();
+				this.subscription = null;
+			}
 
 			if (this.registryClient != null)
 			{
