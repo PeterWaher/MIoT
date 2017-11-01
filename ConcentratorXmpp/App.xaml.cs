@@ -793,7 +793,7 @@ namespace ConcentratorXmpp
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
 				this.output = On;
 
-				this.concentratorServer?.NewMomentaryValues(MeteringTopology.ActuatorNode, 
+				this.concentratorServer?.NewMomentaryValues(MeteringTopology.ActuatorNode,
 					new BooleanField(MeteringTopology.ActuatorNode, DateTime.Now, "Output", On,
 						FieldType.Momentary, FieldQoS.AutomaticReadout));
 
