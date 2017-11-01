@@ -54,6 +54,14 @@ namespace ControllerXmpp
 		private ControlClient controlClient = null;
 		private SensorServer sensorServer = null;
 		private ThingRegistryClient registryClient = null;
+		private string sensorJid = null;
+		private string actuatorJid = null;
+		private ThingReference sensor = null;
+		private ThingReference actuator = null;
+		private SensorDataSubscriptionRequest subscription = null;
+		private double? light = null;
+		private bool? motion = null;
+		private bool? output = null;
 		private string deviceId;
 
 		/// <summary>
@@ -164,8 +172,9 @@ namespace ControllerXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
-					//this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
-					//this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
+					this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
+					this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
+					this.xmppClient.OnRosterItemRemoved += XmppClient_OnRosterItemRemoved;
 					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
@@ -209,8 +218,9 @@ namespace ControllerXmpp
 
 						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
 						this.xmppClient.OnConnectionError += this.ConnectionError;
-						//this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
-						//this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
+						this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
+						this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
+						this.xmppClient.OnRosterItemRemoved += XmppClient_OnRosterItemRemoved;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 						this.xmppClient.Connect();
@@ -283,12 +293,16 @@ namespace ControllerXmpp
 
 			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+			this.xmppClient.OnPresence += XmppClient_OnPresence;
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
 
 			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
 			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+
+			this.sensorClient = new SensorClient(this.xmppClient);
+			this.controlClient = new ControlClient(this.xmppClient);
 		}
 
 		private async void TestConnectionStateChanged(object Sender, XmppState State)
@@ -610,19 +624,30 @@ namespace ControllerXmpp
 
 		private void FindFriends(MetaDataTag[] MetaInfo)
 		{
-			RosterItem Sensor = null;
-			RosterItem Actuator = null;
+			this.sensorJid = null;
+			this.sensor = null;
+			this.actuator = null;
+			this.actuatorJid = null;
 
 			foreach (RosterItem Item in this.xmppClient.Roster)
 			{
 				if (Item.IsInGroup("Sensor"))
-					Sensor = Item;
+				{
+					this.sensorJid = Item.BareJid;
+					this.sensor = this.GetReference(Item, "Sensor");
+				}
 
 				if (Item.IsInGroup("Actuator"))
-					Actuator = Item;
+				{
+					this.actuatorJid = Item.BareJid;
+					this.actuator = this.GetReference(Item, "Actuator");
+				}
 			}
 
-			if (Sensor == null || Actuator == null)
+			if (!string.IsNullOrEmpty(this.sensorJid))
+				this.SubscribeToSensorData();
+
+			if (string.IsNullOrEmpty(this.sensorJid) || string.IsNullOrEmpty(this.actuatorJid))
 			{
 				List<SearchOperator> Search = new List<SearchOperator>();
 
@@ -655,80 +680,294 @@ namespace ControllerXmpp
 				this.registryClient.Search(0, 100, Search.ToArray(), (sender, e) =>
 				{
 					Log.Informational(e.Things.Length.ToString() + (e.More ? "+" : string.Empty) + " things found.");
+
+					foreach (SearchResultThing Thing in e.Things)
+					{
+						foreach (MetaDataTag Tag in Thing.Tags)
+						{
+							if (Tag.Name == "TYPE" && Tag is MetaDataStringTag StringTag)
+							{
+								switch (Tag.StringValue)
+								{
+									case "MIoT Sensor":
+										if (string.IsNullOrEmpty(this.sensorJid))
+										{
+											this.sensorJid = Thing.Jid;
+											this.sensor = Thing.Node;
+
+											RosterItem Item = this.xmppClient[this.sensorJid];
+											if (Item != null)
+											{
+												this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name, this.AddReference(Item.Groups, "Sensor", Thing.Node));
+
+												if (Item.State != SubscriptionState.Both && Item.State != SubscriptionState.To)
+													this.xmppClient.RequestPresenceSubscription(this.sensorJid);
+											}
+											else
+											{
+												this.xmppClient.AddRosterItem(new RosterItem(this.sensorJid, string.Empty, this.AddReference(null, "Sensor", Thing.Node)));
+												this.xmppClient.RequestPresenceSubscription(this.sensorJid);
+											}
+										}
+										break;
+
+									case "MIoT Actuator":
+										if (string.IsNullOrEmpty(this.actuatorJid))
+										{
+											this.actuatorJid = Thing.Jid;
+											this.actuator = Thing.Node;
+
+											RosterItem Item = this.xmppClient[this.actuatorJid];
+											if (Item != null)
+											{
+												this.xmppClient.UpdateRosterItem(this.actuatorJid, Item.Name, this.AddReference(Item.Groups, "Actuator", Thing.Node));
+
+												if (Item.State != SubscriptionState.Both && Item.State != SubscriptionState.To)
+													this.xmppClient.RequestPresenceSubscription(this.sensorJid);
+											}
+											else
+												this.xmppClient.AddRosterItem(new RosterItem(this.actuatorJid, string.Empty, this.AddReference(null, "Actuator", Thing.Node)));
+										}
+										break;
+								}
+							}
+						}
+					}
+
 				}, null);
 			}
 		}
 
-		/*private AssociationRequest currentRequest = null;
-
-		private class AssociationRequest
+		private ThingReference GetReference(RosterItem Item, string Prefix)
 		{
-			public string Device = null;
-			public string Jid = null;
-			public string NodeId = null;
-			public string SourceId = null;
-			public string Partition = null;
-		}
+			string NodeId = string.Empty;
+			string SourceId = string.Empty;
+			string Partition = string.Empty;
 
-		private async Task ShowAssociationDialog(string Device)
-		{
-			try
+			Prefix += ".";
+
+			foreach (string Group in Item.Groups)
 			{
-				AssociationDialog Dialog = new AssociationDialog(Device);
-
-				switch (await Dialog.ShowAsync())
+				if (Group.StartsWith(Prefix))
 				{
-					case ContentDialogResult.Primary:
-						this.currentRequest = null;
+					string s = Group.Substring(Prefix.Length);
+					int i = s.IndexOf(':');
+					if (i < 0)
+						continue;
 
-						this.xmppClient.RequestPresenceSubscription(Dialog.Jid);
-						Log.Informational("Subscribing to presence from " + Dialog.Jid);
-						break;
-
-					case ContentDialogResult.Secondary:
-						await this.CheckFriendships();
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Critical(ex);
-			}
-		}
-
-		private void XmppClient_OnRosterItemAdded(object Sender, RosterItem Item)
-		{
-			if (this.currentRequest != null && string.Compare(this.currentRequest.Jid, Item.BareJid, true) == 0)
-			{
-				AssociationRequest Request = this.currentRequest;
-				this.currentRequest = null;
-
-				if (Item.LastPresence != null && Item.LastPresence.Type == PresenceType.Available)
-				{
-					List<string> Groups = new List<string>();
-
-					foreach (string Group in Item.Groups)
+					switch (s.Substring(0, i).ToLower())
 					{
-						if (!Group.StartsWith(Request.Device))
-							Groups.Add(Group);
+						case "nid":
+							NodeId = s.Substring(i + 1);
+							break;
+
+						case "sid":
+							SourceId = s.Substring(i + 1);
+							break;
+
+						case "prt":
+							Partition = s.Substring(i + 1);
+							break;
 					}
-
-					Groups.Add(Request.Device);
-					Groups.Add(Request.Device + ".NodeID:" + Request.NodeId);
-					Groups.Add(Request.Device + ".SourceID:" + Request.SourceId);
-					Groups.Add(Request.Device + ".Partition:" + Request.Partition);
-
-					this.xmppClient.UpdateRosterItem(Item.BareJid, Item.Name, Groups.ToArray());
 				}
-				else
-					Task.Run(this.CheckFriendships);
 			}
+
+			return new ThingReference(NodeId, SourceId, Partition);
+		}
+
+		private string[] AddReference(string[] Groups, string Prefix, IThingReference NodeReference)
+		{
+			List<string> Result = new List<string>()
+			{
+				Prefix
+			};
+
+			if (!string.IsNullOrEmpty(NodeReference.NodeId))
+				Result.Add(Prefix + ".nid:" + NodeReference.NodeId);
+
+			if (!string.IsNullOrEmpty(NodeReference.SourceId))
+				Result.Add(Prefix + ".sid:" + NodeReference.SourceId);
+
+			if (!string.IsNullOrEmpty(NodeReference.Partition))
+				Result.Add(Prefix + ".prt:" + NodeReference.Partition);
+
+			if (Groups != null)
+			{
+				foreach (string Group in Groups)
+				{
+					if (!Group.StartsWith(Prefix))
+						Result.Add(Group);
+				}
+			}
+
+			return Result.ToArray();
+		}
+
+		private void XmppClient_OnRosterItemRemoved(object Sender, RosterItem Item)
+		{
+			Log.Informational("Roster item removed.", Item.BareJid);
+
+			this.FriendshipLost(Item);
+		}
+
+		private void FriendshipLost(RosterItem Item)
+		{
+			bool UpdateRegistration = false;
+
+			if (string.Compare(Item.BareJid, this.sensorJid, true) == 0)
+			{
+				this.sensorJid = null;
+				this.sensor = null;
+				UpdateRegistration = true;
+			}
+
+			if (string.Compare(Item.BareJid, this.actuatorJid, true) == 0)
+			{
+				this.actuatorJid = null;
+				this.actuator = null;
+				UpdateRegistration = true;
+			}
+
+			if (UpdateRegistration)
+				Task.Run(this.RegisterDevice);
 		}
 
 		private void XmppClient_OnRosterItemUpdated(object Sender, RosterItem Item)
 		{
-			Task.Run(this.CheckFriendships);
-		}*/
+			bool IsSensor;
+
+			Log.Informational("Roster item updated.", Item.BareJid);
+
+			if ((IsSensor = (string.Compare(Item.BareJid, this.sensorJid, true) == 0) ||
+				string.Compare(Item.BareJid, this.actuatorJid, true) == 0) &&
+				(Item.State == SubscriptionState.None || Item.State == SubscriptionState.From) &&
+				Item.PendingSubscription != PendingSubscription.Subscribe)
+			{
+				this.FriendshipLost(Item);
+			}
+			else if (IsSensor)
+				this.SubscribeToSensorData();
+		}
+
+		private void XmppClient_OnRosterItemAdded(object Sender, RosterItem Item)
+		{
+			Log.Informational("Roster item added.", Item.BareJid);
+
+			if (Item.IsInGroup("Sensor") || Item.IsInGroup("Actuator"))
+			{
+				Log.Informational("Requesting presence subscription.", Item.BareJid);
+				this.xmppClient.RequestPresenceSubscription(Item.BareJid);
+			}
+		}
+
+		private void XmppClient_OnPresence(object Sender, PresenceEventArgs e)
+		{
+			Log.Informational("Presence received.", e.Availability.ToString(), e.From);
+
+			if (this.sensorJid != null && string.Compare(e.FromBareJID, this.sensorJid, true) == 0)
+				this.SubscribeToSensorData();
+		}
+
+		private void SubscribeToSensorData()
+		{
+			RosterItem SensorItem;
+
+			if (!string.IsNullOrEmpty(this.sensorJid) &&
+				(SensorItem = this.xmppClient[this.sensorJid]) != null &&
+				SensorItem.HasLastPresence && SensorItem.LastPresence.IsOnline)
+			{
+				ThingReference[] Nodes;
+
+				if (this.sensor.IsEmpty)
+					Nodes = null;
+				else
+					Nodes = new ThingReference[] { this.sensor };
+
+				Log.Informational("Subscribing to events.", SensorItem.LastPresenceFullJid);
+
+				this.subscription = this.sensorClient.Subscribe(SensorItem.LastPresenceFullJid,
+					Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
+					{
+						new FieldSubscriptionRule("Light", this.light, 1),
+						new FieldSubscriptionRule("Motion", this.motion.HasValue ? (double?)(this.motion.Value ? 1 : 0) : null, 1),
+					},
+					new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
+					new Waher.Content.Duration(false, 0, 0, 0, 0, 1, 0), true);
+
+				this.subscription.OnStateChanged += Subscription_OnStateChanged;
+				this.subscription.OnFieldsReceived += Subscription_OnFieldsReceived;
+				this.subscription.OnErrorsReceived += Subscription_OnErrorsReceived;
+			}
+		}
+
+		private void Subscription_OnStateChanged(object Sender, SensorDataReadoutState NewState)
+		{
+			Log.Informational("Sensor subscription state changed.", NewState.ToString());
+		}
+
+		private void Subscription_OnFieldsReceived(object Sender, IEnumerable<Field> NewFields)
+		{
+			bool RecalcOutput = false;
+
+			foreach (Field Field in NewFields)
+			{
+				switch (Field.Name)
+				{
+					case "Light":
+						if (Field is QuantityField Q)
+						{
+							MainPage.Instance.LightUpdated(Q.Value, Q.NrDecimals, Q.Unit);
+							if (Q.Unit == "%")
+							{
+								this.light = Q.Value;
+								RecalcOutput = true;
+							}
+						}
+						break;
+
+					case "Motion":
+						if (Field is BooleanField B)
+						{
+							MainPage.Instance.MotionUpdated(B.Value);
+							this.motion = B.Value;
+							RecalcOutput = true;
+						}
+						break;
+				}
+			}
+
+			if (RecalcOutput && this.motion.HasValue && this.light.HasValue)
+			{
+				bool Output = this.motion.Value && this.light.Value < 0.5;
+
+				if (!string.IsNullOrEmpty(this.actuatorJid) &&
+					(!this.output.HasValue || this.output.Value != Output))
+				{
+					RosterItem Actuator = this.xmppClient[this.actuatorJid];
+
+					if (Actuator != null && Actuator.HasLastPresence && Actuator.LastPresence.IsOnline)
+					{
+						ThingReference[] Nodes;
+
+						if (this.actuator.IsEmpty)
+							Nodes = null;
+						else
+							Nodes = new ThingReference[] { this.actuator };
+
+						this.controlClient.Set(Actuator.LastPresenceFullJid, "Output", Output, Nodes);
+						this.output = Output;
+
+						MainPage.Instance.RelayUpdated(Output);
+					}
+				}
+			}
+		}
+
+		private void Subscription_OnErrorsReceived(object Sender, IEnumerable<ThingError> NewErrors)
+		{
+			foreach (ThingError Error in NewErrors)
+				Log.Error(Error.ErrorMessage);
+		}
 
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
