@@ -62,6 +62,9 @@ namespace ControllerXmpp
 		private double? light = null;
 		private bool? motion = null;
 		private bool? output = null;
+		private DateTime lastEventFields = DateTime.Now;
+		private DateTime lastEventErrors = DateTime.Now;
+		private DateTime lastOutput = DateTime.Now;
 		private string deviceId;
 
 		/// <summary>
@@ -180,6 +183,8 @@ namespace ControllerXmpp
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
 				}
+
+				this.secondTimer = new Timer(SecondTimerCallback, null, 1000, 1000);
 			}
 			catch (Exception ex)
 			{
@@ -266,7 +271,86 @@ namespace ControllerXmpp
 					DateTime Now = DateTime.Now;
 
 					if (e.IsIncluded(FieldType.Identity))
+					{
 						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+						if (!string.IsNullOrEmpty(this.sensorJid))
+						{
+							Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, JID", this.sensorJid, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+							if (this.sensor != null)
+							{
+								if (!string.IsNullOrEmpty(this.sensor.NodeId))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Node ID", this.sensor.NodeId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+								if (!string.IsNullOrEmpty(this.sensor.SourceId))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Source ID", this.sensor.SourceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+								if (!string.IsNullOrEmpty(this.sensor.Partition))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Partition", this.sensor.Partition, FieldType.Identity, FieldQoS.AutomaticReadout));
+							}
+						}
+
+						if (!string.IsNullOrEmpty(this.actuatorJid))
+						{
+							Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, JID", this.actuatorJid, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+							if (this.actuator != null)
+							{
+								if (!string.IsNullOrEmpty(this.actuator.NodeId))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Node ID", this.actuator.NodeId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+								if (!string.IsNullOrEmpty(this.actuator.SourceId))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Source ID", this.actuator.SourceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+
+								if (!string.IsNullOrEmpty(this.actuator.Partition))
+									Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Partition", this.actuator.Partition, FieldType.Identity, FieldQoS.AutomaticReadout));
+							}
+						}
+					}
+
+					if (e.IsIncluded(FieldType.Status))
+					{
+						RosterItem Item;
+
+						if (string.IsNullOrEmpty(this.sensorJid))
+							Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
+						else
+						{
+							Item = this.xmppClient[this.sensorJid];
+							if (Item == null)
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
+							else if (!Item.HasLastPresence)
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", "Offline", FieldType.Status, FieldQoS.AutomaticReadout));
+							else
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", Item.LastPresence.Availability.ToString(), FieldType.Status, FieldQoS.AutomaticReadout));
+						}
+
+						if (string.IsNullOrEmpty(this.actuatorJid))
+							Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
+						else
+						{
+							Item = this.xmppClient[this.actuatorJid];
+							if (Item == null)
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
+							else if (!Item.HasLastPresence)
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", "Offline", FieldType.Status, FieldQoS.AutomaticReadout));
+							else
+								Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", Item.LastPresence.Availability.ToString(), FieldType.Status, FieldQoS.AutomaticReadout));
+						}
+					}
+
+					if (e.IsIncluded(FieldType.Momentary))
+					{
+						if (this.light.HasValue)
+							Fields.Add(new QuantityField(ThingReference.Empty, Now, "Light", this.light.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout));
+
+						if (this.motion.HasValue)
+							Fields.Add(new BooleanField(ThingReference.Empty, Now, "Motion", this.motion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout));
+
+						if (this.output.HasValue)
+							Fields.Add(new BooleanField(ThingReference.Empty, Now, "Output", this.output.Value, FieldType.Momentary, FieldQoS.AutomaticReadout));
+					}
 
 					e.ReportFields(true, Fields);
 				}
@@ -915,6 +999,8 @@ namespace ControllerXmpp
 		{
 			bool RecalcOutput = false;
 
+			this.lastEventFields = DateTime.Now;
+
 			foreach (Field Field in NewFields)
 			{
 				switch (Field.Name)
@@ -962,6 +1048,7 @@ namespace ControllerXmpp
 
 						this.controlClient.Set(Actuator.LastPresenceFullJid, "Output", Output, Nodes);
 						this.output = Output;
+						this.lastOutput = DateTime.Now;
 
 						MainPage.Instance.RelayUpdated(Output);
 					}
@@ -971,9 +1058,76 @@ namespace ControllerXmpp
 
 		private void Subscription_OnErrorsReceived(object Sender, IEnumerable<ThingError> NewErrors)
 		{
+			this.lastEventErrors = DateTime.Now;
+
 			foreach (ThingError Error in NewErrors)
 				Log.Error(Error.ErrorMessage);
 		}
+
+		private void SecondTimerCallback(object State)
+		{
+			DateTime Now = DateTime.Now;
+			double SecondsSinceLastEvent = Math.Min(
+				(Now - this.lastEventFields).TotalSeconds,
+				(Now - this.lastEventErrors).TotalSeconds);
+			double SecondsSinceLastOutput = (Now - this.lastOutput).TotalSeconds;
+			RosterItem Item;
+			bool Search = false;
+
+			if (this.subscription != null && SecondsSinceLastEvent > 70)
+				this.SubscribeToSensorData();
+			else if (SecondsSinceLastEvent > 60 * 60 * 24)
+			{
+				if (!string.IsNullOrEmpty(this.sensorJid))
+				{
+					Item = this.xmppClient[this.sensorJid];
+
+					this.sensor = null;
+					this.sensorJid = null;
+
+					if (Item != null)
+						this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name, this.RemoveReference(Item.Groups, "Sensor"));
+				}
+
+				Search = true;
+			}
+
+			if (SecondsSinceLastOutput > 60 * 60 * 24)
+			{
+				if (!string.IsNullOrEmpty(this.actuatorJid))
+				{
+					Item = this.xmppClient[this.actuatorJid];
+
+					this.actuator = null;
+					this.actuatorJid = null;
+
+					if (Item != null)
+						this.xmppClient.UpdateRosterItem(this.actuatorJid, Item.Name, this.RemoveReference(Item.Groups, "Actuator"));
+				}
+
+				Search = true;
+			}
+
+			if (Search)
+				Task.Run(this.RegisterDevice);
+		}
+
+		private string[] RemoveReference(string[] Groups, string Prefix)
+		{
+			List<string> Result = new List<string>();
+
+			if (Groups != null)
+			{
+				foreach (string Group in Groups)
+				{
+					if (!Group.StartsWith(Prefix))
+						Result.Add(Group);
+				}
+			}
+
+			return Result.ToArray();
+		}
+
 
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
