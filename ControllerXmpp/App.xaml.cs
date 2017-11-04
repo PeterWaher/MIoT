@@ -948,8 +948,12 @@ namespace ControllerXmpp
 		{
 			Log.Informational("Presence received.", e.Availability.ToString(), e.From);
 
-			if (this.sensorJid != null && string.Compare(e.FromBareJID, this.sensorJid, true) == 0)
+			if (this.sensorJid != null && 
+				string.Compare(e.FromBareJID, this.sensorJid, true) == 0 &&
+				e.IsOnline)
+			{
 				this.SubscribeToSensorData();
+			}
 		}
 
 		private void SubscribeToSensorData()
