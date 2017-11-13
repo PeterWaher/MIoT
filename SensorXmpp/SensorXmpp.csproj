@@ -196,16 +196,16 @@
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.13</Version>
+      <Version>1.0.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.0.10</Version>
