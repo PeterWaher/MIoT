@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -36,6 +37,7 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
+using Waher.Security;
 using Waher.Things;
 using Waher.Things.SensorData;
 
@@ -52,6 +54,7 @@ namespace SensorXmpp
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private XmppClient xmppClient = null;
+		private bool newXmppClient = true;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -72,6 +75,7 @@ namespace SensorXmpp
 		private bool? lastMotion = null;
 		private SensorServer sensorServer = null;
 		private ThingRegistryClient registryClient = null;
+		private ProvisioningClient provisioningClient = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
 		private DateTime lastPublished = DateTime.MinValue;
@@ -256,7 +260,6 @@ namespace SensorXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
-					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
@@ -333,7 +336,13 @@ namespace SensorXmpp
 
 		private void AttachFeatures()
 		{
-			this.sensorServer = new SensorServer(this.xmppClient, true);
+			if (this.sensorServer != null)
+			{
+				this.sensorServer.Dispose();
+				this.sensorServer = null;
+			}
+
+			this.sensorServer = new SensorServer(this.xmppClient, this.provisioningClient, true);
 			this.sensorServer.OnExecuteReadoutRequest += async (sender, e) =>
 			{
 				try
@@ -486,29 +495,25 @@ namespace SensorXmpp
 				}
 			};
 
-			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
-			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
-
-			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
+			if (this.newXmppClient)
 			{
-				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.newXmppClient = false;
 
-			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
-			{
-				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
+				this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
-			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
-			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
-			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
+				if (this.bobClient == null)
+					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
-			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
-			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+				if (this.chatServer == null)
+					this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
+
+				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
+				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+			}
 		}
 
 		private void PublishMomentaryValues()
@@ -552,7 +557,6 @@ namespace SensorXmpp
 
 						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
 						this.xmppClient.OnStateChanged += this.StateChanged;
-						this.AttachFeatures();
 						await this.SetVCard();
 						await this.RegisterDevice();
 						break;
@@ -721,8 +725,8 @@ namespace SensorXmpp
 					}
 
 					double SecondsSinceLast = (Timestamp - this.lastPublished).TotalSeconds;
-					if (!this.lastPublishedLight.HasValue || 
-						(SecondsSinceLast >= 5 && (Math.Abs(this.lastPublishedLight.Value - Light) >= 1)) || 
+					if (!this.lastPublishedLight.HasValue ||
+						(SecondsSinceLast >= 5 && (Math.Abs(this.lastPublishedLight.Value - Light) >= 1)) ||
 						SecondsSinceLast >= 60)
 					{
 						this.PublishMomentaryValues();
@@ -931,6 +935,21 @@ namespace SensorXmpp
 									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
 									await this.RegisterDevice(Item2.JID);
 								}
+
+								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioning))
+								{
+									if (this.provisioningClient == null || this.provisioningClient.ProvisioningServerAddress != Item2.JID)
+									{
+										if (this.provisioningClient != null)
+										{
+											this.provisioningClient.Dispose();
+											this.provisioningClient = null;
+										}
+
+										this.provisioningClient = new ProvisioningClient(this.xmppClient, Item2.JID);
+										this.AttachFeatures();
+									}
+								}
 							}
 							catch (Exception ex)
 							{
@@ -1009,7 +1028,7 @@ namespace SensorXmpp
 				if (!string.IsNullOrEmpty(s))
 					MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-				this.UpdateRegistration(MetaInfo.ToArray());
+				await this.UpdateRegistration(MetaInfo.ToArray());
 			}
 			else
 			{
@@ -1064,7 +1083,7 @@ namespace SensorXmpp
 									if (!string.IsNullOrEmpty(s))
 										MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-									this.RegisterDevice(MetaInfo.ToArray());
+									await this.RegisterDevice(MetaInfo.ToArray());
 									break;
 
 								case ContentDialogResult.Secondary:
@@ -1085,9 +1104,26 @@ namespace SensorXmpp
 			}
 		}
 
-		private void RegisterDevice(MetaDataTag[] MetaInfo)
+		private async Task RegisterDevice(MetaDataTag[] MetaInfo)
 		{
 			Log.Informational("Registering device.");
+
+			string Key = await RuntimeSettings.GetAsync("ThingRegistry.Key", string.Empty);
+			if (string.IsNullOrEmpty(Key))
+			{
+				byte[] Bin = new byte[32];
+				using (RandomNumberGenerator Rnd = RandomNumberGenerator.Create())
+				{
+					Rnd.GetBytes(Bin);
+				}
+
+				Key = Hashes.BinaryToString(Bin);
+				await RuntimeSettings.SetAsync("ThingRegistry.Key", Key);
+			}
+
+			int c = MetaInfo.Length;
+			Array.Resize<MetaDataTag>(ref MetaInfo, c + 1);
+			MetaInfo[c] = new MetaDataStringTag("KEY", Key);
 
 			this.registryClient.RegisterThing(false, MetaInfo, async (sender, e) =>
 			{
@@ -1095,15 +1131,18 @@ namespace SensorXmpp
 				{
 					if (e.Ok)
 					{
-						Log.Informational("Registration successful.");
-
 						await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
+						await RuntimeSettings.SetAsync("ThingRegistry.Owner", e.OwnerJid);
 
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
+							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							Log.Informational("Registration successful.", new KeyValuePair<string, object>("ClaimURL", ClaimUrl));
 						}
 						else
 						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Key", string.Empty);
+							Log.Informational("Registration updated. Device has an owner.", new KeyValuePair<string, object>("Owner", e.OwnerJid));
 						}
 					}
 					else
@@ -1119,20 +1158,34 @@ namespace SensorXmpp
 			}, null);
 		}
 
-		private void UpdateRegistration(MetaDataTag[] MetaInfo)
+		private async Task UpdateRegistration(MetaDataTag[] MetaInfo)
 		{
-			Log.Informational("Updating registration of device.");
+			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
 
-			this.registryClient.UpdateThing(MetaInfo, (sender, e) =>
+			if (string.IsNullOrEmpty(OwnerJid))
+				await this.RegisterDevice(MetaInfo);
+			else
 			{
-				if (e.Ok)
-					Log.Informational("Registration update successful.");
-				else
+				Log.Informational("Updating registration of device.");
+
+				this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
 				{
-					Log.Error("Registration update failed.");
-					this.RegisterDevice(MetaInfo);
-				}
-			}, null);
+					try
+					{
+						if (e.Ok)
+							Log.Informational("Registration update successful.");
+						else
+						{
+							Log.Error("Registration update failed.");
+							await this.RegisterDevice(MetaInfo);
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				}, null);
+			}
 		}
 
 		/// <summary>
