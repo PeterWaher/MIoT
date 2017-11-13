@@ -928,14 +928,6 @@ namespace SensorXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
-								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
-								{
-									Log.Informational("Thing registry found.", Item2.JID);
-
-									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
-									await this.RegisterDevice(Item2.JID);
-								}
-
 								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioning))
 								{
 									if (this.provisioningClient == null || this.provisioningClient.ProvisioningServerAddress != Item2.JID)
@@ -949,6 +941,14 @@ namespace SensorXmpp
 										this.provisioningClient = new ProvisioningClient(this.xmppClient, Item2.JID);
 										this.AttachFeatures();
 									}
+								}
+
+								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
+								{
+									Log.Informational("Thing registry found.", Item2.JID);
+
+									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
+									await this.RegisterDevice(Item2.JID);
 								}
 							}
 							catch (Exception ex)
@@ -1166,7 +1166,8 @@ namespace SensorXmpp
 				await this.RegisterDevice(MetaInfo);
 			else
 			{
-				Log.Informational("Updating registration of device.");
+				Log.Informational("Updating registration of device.",
+					new KeyValuePair<string, object>("Owner", OwnerJid));
 
 				this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
 				{
