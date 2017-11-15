@@ -911,12 +911,17 @@ namespace SensorXmpp
 		private async Task RegisterDevice()
 		{
 			string ThingRegistryJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+			string ProvisioningJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
 
-			if (!string.IsNullOrEmpty(ThingRegistryJid))
-				await this.RegisterDevice(ThingRegistryJid);
+			if (!string.IsNullOrEmpty(ThingRegistryJid) && !string.IsNullOrEmpty(ProvisioningJid))
+			{
+				this.UseProvisioningServer(ProvisioningJid, OwnerJid);
+				await this.RegisterDevice(ThingRegistryJid, OwnerJid);
+			}
 			else
 			{
-				Log.Informational("Searching for Thing Registry.");
+				Log.Informational("Searching for Thing Registry and Provisioning Server.");
 
 				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
@@ -930,17 +935,8 @@ namespace SensorXmpp
 
 								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioning))
 								{
-									if (this.provisioningClient == null || this.provisioningClient.ProvisioningServerAddress != Item2.JID)
-									{
-										if (this.provisioningClient != null)
-										{
-											this.provisioningClient.Dispose();
-											this.provisioningClient = null;
-										}
-
-										this.provisioningClient = new ProvisioningClient(this.xmppClient, Item2.JID);
-										this.AttachFeatures();
-									}
+									Log.Informational("Provisioning server found.", Item2.JID);
+									this.UseProvisioningServer(Item2.JID, OwnerJid);
 								}
 
 								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
@@ -948,7 +944,7 @@ namespace SensorXmpp
 									Log.Informational("Thing registry found.", Item2.JID);
 
 									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
-									await this.RegisterDevice(Item2.JID);
+									await this.RegisterDevice(Item2.JID, OwnerJid);
 								}
 							}
 							catch (Exception ex)
@@ -961,7 +957,24 @@ namespace SensorXmpp
 			}
 		}
 
-		private async Task RegisterDevice(string RegistryJid)
+		private void UseProvisioningServer(string JID, string OwnerJid)
+		{
+			if (this.provisioningClient == null || 
+				this.provisioningClient.ProvisioningServerAddress != JID || 
+				this.provisioningClient.OwnerJid != OwnerJid)
+			{
+				if (this.provisioningClient != null)
+				{
+					this.provisioningClient.Dispose();
+					this.provisioningClient = null;
+				}
+
+				this.provisioningClient = new ProvisioningClient(this.xmppClient, JID, OwnerJid);
+				this.AttachFeatures();
+			}
+		}
+
+		private async Task RegisterDevice(string RegistryJid, string OwnerJid)
 		{
 			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
@@ -1028,7 +1041,7 @@ namespace SensorXmpp
 				if (!string.IsNullOrEmpty(s))
 					MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-				await this.UpdateRegistration(MetaInfo.ToArray());
+				await this.UpdateRegistration(MetaInfo.ToArray(), OwnerJid);
 			}
 			else
 			{
@@ -1158,10 +1171,8 @@ namespace SensorXmpp
 			}, null);
 		}
 
-		private async Task UpdateRegistration(MetaDataTag[] MetaInfo)
+		private async Task UpdateRegistration(MetaDataTag[] MetaInfo, string OwnerJid)
 		{
-			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
-
 			if (string.IsNullOrEmpty(OwnerJid))
 				await this.RegisterDevice(MetaInfo);
 			else
