@@ -959,8 +959,8 @@ namespace SensorXmpp
 
 		private void UseProvisioningServer(string JID, string OwnerJid)
 		{
-			if (this.provisioningClient == null || 
-				this.provisioningClient.ProvisioningServerAddress != JID || 
+			if (this.provisioningClient == null ||
+				this.provisioningClient.ProvisioningServerAddress != JID ||
 				this.provisioningClient.OwnerJid != OwnerJid)
 			{
 				if (this.provisioningClient != null)
