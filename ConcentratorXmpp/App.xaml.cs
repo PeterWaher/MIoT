@@ -418,7 +418,7 @@ namespace ConcentratorXmpp
 		{
 			try
 			{
-				this.StateChanged(Sender, State);
+				Log.Informational("Changing state: " + State.ToString());
 
 				switch (State)
 				{
