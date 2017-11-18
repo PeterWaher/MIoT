@@ -201,7 +201,7 @@
       <Version>1.0.11</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.15</Version>
+      <Version>1.0.16</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
       <Version>1.0.10</Version>
