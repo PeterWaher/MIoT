@@ -933,7 +933,7 @@ namespace SensorXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
-								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioning))
+								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioningDevice))
 								{
 									Log.Informational("Provisioning server found.", Item2.JID);
 									this.UseProvisioningServer(Item2.JID, OwnerJid);
