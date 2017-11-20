@@ -2640,7 +2640,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5421,7 +5421,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8194,7 +8194,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10940,7 +10940,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13722,7 +13722,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16468,7 +16468,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19250,7 +19250,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.11": {
+      "Waher.Persistence.FilesLW/1.0.13": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -29463,13 +29463,13 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.11": {
-      "sha512": "FC5Uvs8CGEfus20PCK5bYTZZaR1xV2WP/FSM0tIqC/PtYQ9GwkDOfySeqHn6cH8PpJwAsn48sL717QudH63ICg==",
+    "Waher.Persistence.FilesLW/1.0.13": {
+      "sha512": "GF4pwGtMerIObh4IUx2CKIllMy+3vaDtov1DFyz2YOdV7m500fwBSymd89zw+WAf1YvjDnU7sTd+W44aMJ3hqQ==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.11",
+      "path": "waher.persistence.fileslw/1.0.13",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.11.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.13.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -29590,7 +29590,7 @@
       "Waher.Networking >= 1.0.2",
       "Waher.Networking.HTTP.UWP >= 1.0.5",
       "Waher.Persistence >= 1.0.2",
-      "Waher.Persistence.FilesLW >= 1.0.11",
+      "Waher.Persistence.FilesLW >= 1.0.13",
       "Waher.Runtime.Inventory >= 1.0.4",
       "Waher.Runtime.Settings >= 1.0.1",
       "Waher.Script >= 1.0.8",
@@ -29632,7 +29632,7 @@
       "Waher.Networking": "1.0.2",
       "Waher.Networking.HTTP.UWP": "1.0.5",
       "Waher.Persistence": "1.0.2",
-      "Waher.Persistence.FilesLW": "1.0.11",
+      "Waher.Persistence.FilesLW": "1.0.13",
       "Waher.Runtime.Inventory": "1.0.4",
       "Waher.Runtime.Settings": "1.0.1",
       "Waher.Script": "1.0.8",
