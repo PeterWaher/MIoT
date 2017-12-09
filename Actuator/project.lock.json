@@ -27890,17 +27890,11 @@
       }
     },
     "dependencies": {
+      "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.4",
       "Waher.Events": "1.0.5",
+      "Waher.Persistence.FilesLW": "1.0.22",
       "Waher.Runtime.Settings": "1.0.1",
-      "Windows-Remote-Arduino": "1.4.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[6.0.4, )"
-      },
-      "Waher.Persistence.FilesLW": {
-        "target": "Package",
-        "version": "[1.0.22, )"
-      }
+      "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
       "uap10.0.10586": {}
