@@ -509,7 +509,7 @@ namespace SensorXmpp
 					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
 				if (this.chatServer == null)
-					this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
+					this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.provisioningClient);
 
 				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
 				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
