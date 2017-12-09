@@ -1,8 +1,8 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.2",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.4",
     "Waher.Events": "1.0.5",
-    "Waher.Persistence.FilesLW": "1.0.16",
+    "Waher.Persistence.FilesLW": "1.0.22",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {
