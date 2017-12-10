@@ -508,8 +508,13 @@ namespace SensorXmpp
 				if (this.bobClient == null)
 					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
-				if (this.chatServer == null)
-					this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.provisioningClient);
+				if (this.chatServer != null)
+				{
+					this.chatServer.Dispose();
+					this.chatServer = null;
+				}
+
+				this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.provisioningClient);
 
 				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
 				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
@@ -911,7 +916,7 @@ namespace SensorXmpp
 		private async Task RegisterDevice()
 		{
 			string ThingRegistryJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
-			string ProvisioningJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+			string ProvisioningJid = await RuntimeSettings.GetAsync("ProvisioningServer.JID", ThingRegistryJid);
 			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
 
 			if (!string.IsNullOrEmpty(ThingRegistryJid) && !string.IsNullOrEmpty(ProvisioningJid))
@@ -937,6 +942,7 @@ namespace SensorXmpp
 								{
 									Log.Informational("Provisioning server found.", Item2.JID);
 									this.UseProvisioningServer(Item2.JID, OwnerJid);
+									await RuntimeSettings.SetAsync("ProvisioningServer.JID", Item2.JID);
 								}
 
 								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
@@ -1150,7 +1156,8 @@ namespace SensorXmpp
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
 							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
-							Log.Informational("Registration successful.", new KeyValuePair<string, object>("ClaimURL", ClaimUrl));
+							Log.Informational("Registration successful.");
+							Log.Informational(ClaimUrl);
 						}
 						else
 						{
