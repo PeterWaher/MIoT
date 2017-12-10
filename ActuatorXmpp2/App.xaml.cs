@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -37,6 +38,7 @@ using Waher.Networking.XMPP.Control;
 using Waher.Networking.XMPP.Provisioning;
 using Waher.Networking.XMPP.ServiceDiscovery;
 using Waher.Networking.XMPP.Sensor;
+using Waher.Security;
 using Waher.Things;
 using Waher.Things.ControlParameters;
 using Waher.Things.SensorData;
@@ -70,8 +72,10 @@ namespace ActuatorXmpp
 		private ThingRegistryClient registryClient = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
+		private ProvisioningClient provisioningClient = null;
 		private Timer minuteTimer = null;
 		private bool? output = null;
+		private bool newXmppClient = true;
 
 		/// <summary>
 		/// Initializes the singleton application object.  This is the first line of authored code
@@ -264,7 +268,6 @@ namespace ActuatorXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
-					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
@@ -351,7 +354,19 @@ namespace ActuatorXmpp
 
 		private void AttachFeatures()
 		{
-			this.controlServer = new ControlServer(this.xmppClient,
+			if (this.controlServer != null)
+			{
+				this.controlServer.Dispose();
+				this.controlServer = null;
+			}
+
+			if (this.sensorServer != null)
+			{
+				this.sensorServer.Dispose();
+				this.sensorServer = null;
+			}
+
+			this.controlServer = new ControlServer(this.xmppClient, this.provisioningClient,
 				new BooleanControlParameter("Output", "Actuator", "Output:", "Digital output.",
 					(Node) => this.output,
 					async (Node, Value) =>
@@ -366,7 +381,7 @@ namespace ActuatorXmpp
 						}
 					}));
 
-			this.sensorServer = new SensorServer(this.xmppClient, true);
+			this.sensorServer = new SensorServer(this.xmppClient, this.provisioningClient, true);
 			this.sensorServer.OnExecuteReadoutRequest += (sender, e) =>
 			{
 				try
@@ -393,29 +408,30 @@ namespace ActuatorXmpp
 				}
 			};
 
-			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
-			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
-
-			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
+			if (this.newXmppClient)
 			{
-				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.newXmppClient = false;
 
-			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
-			{
-				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
+				this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
-			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
-			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
-			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.controlServer);
+				if (this.bobClient == null)
+					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
-			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
-			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+				if (this.chatServer != null)
+				{
+					this.chatServer.Dispose();
+					this.chatServer = null;
+				}
+
+				this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.controlServer, this.provisioningClient);
+
+				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
+				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+			}
 		}
 
 		private async void TestConnectionStateChanged(object Sender, XmppState State)
@@ -435,7 +451,6 @@ namespace ActuatorXmpp
 
 						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
 						this.xmppClient.OnStateChanged += this.StateChanged;
-						this.AttachFeatures();
 						await this.SetVCard();
 						await this.RegisterDevice();
 						break;
@@ -538,12 +553,17 @@ namespace ActuatorXmpp
 		private async Task RegisterDevice()
 		{
 			string ThingRegistryJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+			string ProvisioningJid = await RuntimeSettings.GetAsync("ProvisioningServer.JID", ThingRegistryJid);
+			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
 
-			if (!string.IsNullOrEmpty(ThingRegistryJid))
-				await this.RegisterDevice(ThingRegistryJid);
+			if (!string.IsNullOrEmpty(ThingRegistryJid) && !string.IsNullOrEmpty(ProvisioningJid))
+			{
+				this.UseProvisioningServer(ProvisioningJid, OwnerJid);
+				await this.RegisterDevice(ThingRegistryJid, OwnerJid);
+			}
 			else
 			{
-				Log.Informational("Searching for Thing Registry.");
+				Log.Informational("Searching for Thing Registry and Provisioning Server.");
 
 				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
@@ -555,12 +575,19 @@ namespace ActuatorXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
+								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioningDevice))
+								{
+									Log.Informational("Provisioning server found.", Item2.JID);
+									this.UseProvisioningServer(Item2.JID, OwnerJid);
+									await RuntimeSettings.SetAsync("ProvisioningServer.JID", Item2.JID);
+								}
+
 								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
 								{
 									Log.Informational("Thing registry found.", Item2.JID);
 
 									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
-									await this.RegisterDevice(Item2.JID);
+									await this.RegisterDevice(Item2.JID, OwnerJid);
 								}
 							}
 							catch (Exception ex)
@@ -573,7 +600,24 @@ namespace ActuatorXmpp
 			}
 		}
 
-		private async Task RegisterDevice(string RegistryJid)
+		private void UseProvisioningServer(string JID, string OwnerJid)
+		{
+			if (this.provisioningClient == null ||
+				this.provisioningClient.ProvisioningServerAddress != JID ||
+				this.provisioningClient.OwnerJid != OwnerJid)
+			{
+				if (this.provisioningClient != null)
+				{
+					this.provisioningClient.Dispose();
+					this.provisioningClient = null;
+				}
+
+				this.provisioningClient = new ProvisioningClient(this.xmppClient, JID, OwnerJid);
+				this.AttachFeatures();
+			}
+		}
+
+		private async Task RegisterDevice(string RegistryJid, string OwnerJid)
 		{
 			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
@@ -640,7 +684,7 @@ namespace ActuatorXmpp
 				if (!string.IsNullOrEmpty(s))
 					MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-				this.UpdateRegistration(MetaInfo.ToArray());
+				await this.UpdateRegistration(MetaInfo.ToArray(), OwnerJid);
 			}
 			else
 			{
@@ -695,7 +739,7 @@ namespace ActuatorXmpp
 									if (!string.IsNullOrEmpty(s))
 										MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-									this.RegisterDevice(MetaInfo.ToArray());
+									await this.RegisterDevice(MetaInfo.ToArray());
 									break;
 
 								case ContentDialogResult.Secondary:
@@ -716,19 +760,45 @@ namespace ActuatorXmpp
 			}
 		}
 
-		private void RegisterDevice(MetaDataTag[] MetaInfo)
+		private async Task RegisterDevice(MetaDataTag[] MetaInfo)
 		{
-			Log.Informational("Registering device.");
+			string Key = await RuntimeSettings.GetAsync("ThingRegistry.Key", string.Empty);
+			if (string.IsNullOrEmpty(Key))
+			{
+				byte[] Bin = new byte[32];
+				using (RandomNumberGenerator Rnd = RandomNumberGenerator.Create())
+				{
+					Rnd.GetBytes(Bin);
+				}
 
-			this.registryClient.RegisterThing(true, MetaInfo, async (sender, e) =>
+				Key = Hashes.BinaryToString(Bin);
+				await RuntimeSettings.SetAsync("ThingRegistry.Key", Key);
+			}
+
+			int c = MetaInfo.Length;
+			Array.Resize<MetaDataTag>(ref MetaInfo, c + 1);
+			MetaInfo[c] = new MetaDataStringTag("KEY", Key);
+
+			this.registryClient.RegisterThing(false, MetaInfo, async (sender, e) =>
 			{
 				try
 				{
 					if (e.Ok)
 					{
-						Log.Informational("Registration successful.");
-
 						await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
+						await RuntimeSettings.SetAsync("ThingRegistry.Owner", e.OwnerJid);
+
+						if (string.IsNullOrEmpty(e.OwnerJid))
+						{
+							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							Log.Informational("Registration successful.");
+							Log.Informational(ClaimUrl);
+						}
+						else
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Key", string.Empty);
+							Log.Informational("Registration updated. Device has an owner.", new KeyValuePair<string, object>("Owner", e.OwnerJid));
+						}
 					}
 					else
 					{
@@ -743,20 +813,33 @@ namespace ActuatorXmpp
 			}, null);
 		}
 
-		private void UpdateRegistration(MetaDataTag[] MetaInfo)
+		private async Task UpdateRegistration(MetaDataTag[] MetaInfo, string OwnerJid)
 		{
-			Log.Informational("Updating registration of device.");
-
-			this.registryClient.UpdateThing(MetaInfo, (sender, e) =>
+			if (string.IsNullOrEmpty(OwnerJid))
+				await this.RegisterDevice(MetaInfo);
+			else
 			{
-				if (e.Ok)
-					Log.Informational("Registration update successful.");
-				else
+				Log.Informational("Updating registration of device.",
+					new KeyValuePair<string, object>("Owner", OwnerJid));
+
+				this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
 				{
-					Log.Error("Registration update failed.");
-					this.RegisterDevice(MetaInfo);
-				}
-			}, null);
+					try
+					{
+						if (e.Ok)
+							Log.Informational("Registration update successful.");
+						else
+						{
+							Log.Error("Registration update failed.");
+							await this.RegisterDevice(MetaInfo);
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				}, null);
+			}
 		}
 
 		/// <summary>
