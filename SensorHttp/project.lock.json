@@ -29626,6 +29626,7 @@
       "Waher.Content.Markdown": "1.0.11",
       "Waher.Content.Markdown.Web.UWP": "1.0.5",
       "Waher.Events": "1.0.5",
+      "Waher.Networking": "1.0.4",
       "Waher.Networking.HTTP.UWP": "1.0.5",
       "Waher.Persistence": "1.0.2",
       "Waher.Persistence.FilesLW": "1.0.22",
@@ -29635,11 +29636,7 @@
       "Waher.Script.Graphs": "1.0.6",
       "Waher.Security": "1.0.1",
       "Waher.Security.JWT.UWP": "1.0.1",
-      "Windows-Remote-Arduino": "1.4.0",
-      "Waher.Networking": {
-        "target": "Package",
-        "version": "[1.0.4, )"
-      }
+      "Windows-Remote-Arduino": "1.4.0"
     },
     "frameworks": {
       "uap10.0.10586": {}
