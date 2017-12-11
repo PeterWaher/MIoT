@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -38,6 +39,7 @@ using Waher.Persistence.Filters;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Language;
 using Waher.Runtime.Settings;
+using Waher.Security;
 using Waher.Things;
 using Waher.Things.SensorData;
 
@@ -56,6 +58,7 @@ namespace ConcentratorXmpp
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private XmppClient xmppClient = null;
+		private bool newXmppClient = true;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
@@ -76,6 +79,7 @@ namespace ConcentratorXmpp
 		private bool? lastMotion = null;
 		private ConcentratorServer concentratorServer = null;
 		private ThingRegistryClient registryClient = null;
+		private ProvisioningClient provisioningClient = null;
 		private BobClient bobClient = null;
 		private ChatServer chatServer = null;
 		private DateTime lastPublished = DateTime.MinValue;
@@ -286,7 +290,6 @@ namespace ConcentratorXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
-					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
@@ -363,31 +366,38 @@ namespace ConcentratorXmpp
 
 		private void AttachFeatures()
 		{
-			this.concentratorServer = new ConcentratorServer(this.xmppClient, new MeteringTopology());
-
-			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
-			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
-
-			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
+			if (this.concentratorServer != null)
 			{
-				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.concentratorServer.Dispose();
+				this.concentratorServer = null;
+			}
 
-			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
+			this.concentratorServer = new ConcentratorServer(this.xmppClient, this.provisioningClient, new MeteringTopology());
+
+			if (this.newXmppClient)
 			{
-				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-			};
+				this.newXmppClient = false;
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
-			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
+				this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
-			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
-			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.concentratorServer);
+				this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+				this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
-			// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
-			this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+				if (this.bobClient == null)
+					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
+
+				if (this.chatServer != null)
+				{
+					this.chatServer.Dispose();
+					this.chatServer = null;
+				}
+
+				this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.concentratorServer, this.provisioningClient);
+
+				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
+				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
+			}
 		}
 
 		private void PublishMomentaryValues()
@@ -431,7 +441,6 @@ namespace ConcentratorXmpp
 
 						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
 						this.xmppClient.OnStateChanged += this.StateChanged;
-						this.AttachFeatures();
 						await this.SetVCard();
 						await this.RegisterDevice();
 						break;
@@ -808,12 +817,17 @@ namespace ConcentratorXmpp
 		private async Task RegisterDevice()
 		{
 			string ThingRegistryJid = await RuntimeSettings.GetAsync("ThingRegistry.JID", string.Empty);
+			string ProvisioningJid = await RuntimeSettings.GetAsync("ProvisioningServer.JID", ThingRegistryJid);
+			string OwnerJid = await RuntimeSettings.GetAsync("ThingRegistry.Owner", string.Empty);
 
-			if (!string.IsNullOrEmpty(ThingRegistryJid))
-				await this.RegisterDevice(ThingRegistryJid);
+			if (!string.IsNullOrEmpty(ThingRegistryJid) && !string.IsNullOrEmpty(ProvisioningJid))
+			{
+				this.UseProvisioningServer(ProvisioningJid, OwnerJid);
+				await this.RegisterDevice(ThingRegistryJid, OwnerJid);
+			}
 			else
 			{
-				Log.Informational("Searching for Thing Registry.");
+				Log.Informational("Searching for Thing Registry and Provisioning Server.");
 
 				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
@@ -825,12 +839,19 @@ namespace ConcentratorXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
+								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioningDevice))
+								{
+									Log.Informational("Provisioning server found.", Item2.JID);
+									this.UseProvisioningServer(Item2.JID, OwnerJid);
+									await RuntimeSettings.SetAsync("ProvisioningServer.JID", Item2.JID);
+								}
+
 								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
 								{
 									Log.Informational("Thing registry found.", Item2.JID);
 
 									await RuntimeSettings.SetAsync("ThingRegistry.JID", Item2.JID);
-									await this.RegisterDevice(Item2.JID);
+									await this.RegisterDevice(Item2.JID, OwnerJid);
 								}
 							}
 							catch (Exception ex)
@@ -843,7 +864,24 @@ namespace ConcentratorXmpp
 			}
 		}
 
-		private async Task RegisterDevice(string RegistryJid)
+		private void UseProvisioningServer(string JID, string OwnerJid)
+		{
+			if (this.provisioningClient == null ||
+				this.provisioningClient.ProvisioningServerAddress != JID ||
+				this.provisioningClient.OwnerJid != OwnerJid)
+			{
+				if (this.provisioningClient != null)
+				{
+					this.provisioningClient.Dispose();
+					this.provisioningClient = null;
+				}
+
+				this.provisioningClient = new ProvisioningClient(this.xmppClient, JID, OwnerJid);
+				this.AttachFeatures();
+			}
+		}
+
+		private async Task RegisterDevice(string RegistryJid, string OwnerJid)
 		{
 			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
@@ -860,10 +898,10 @@ namespace ConcentratorXmpp
 			List<MetaDataTag> MetaInfo = new List<MetaDataTag>()
 			{
 				new MetaDataStringTag("MAN", "waher.se"),
-				new MetaDataStringTag("MODEL", "MIoT ConcentratorXmpp"),
+				new MetaDataStringTag("MODEL", "MIoT ConcentratorXmpp2"),
 				new MetaDataStringTag("PURL", "https://github.com/PeterWaher/MIoT"),
 				new MetaDataStringTag("SN", this.deviceId),
-				new MetaDataNumericTag("V", 1.0)
+				new MetaDataNumericTag("V", 2.0)
 			};
 
 			if (await RuntimeSettings.GetAsync("ThingRegistry.Location", false))
@@ -908,7 +946,7 @@ namespace ConcentratorXmpp
 				if (!string.IsNullOrEmpty(s))
 					MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-				this.UpdateRegistration(MetaInfo.ToArray());
+				await this.UpdateRegistration(MetaInfo.ToArray(), OwnerJid);
 			}
 			else
 			{
@@ -963,7 +1001,7 @@ namespace ConcentratorXmpp
 									if (!string.IsNullOrEmpty(s))
 										MetaInfo.Add(new MetaDataStringTag("NAME", s));
 
-									this.RegisterDevice(MetaInfo.ToArray());
+									await this.RegisterDevice(MetaInfo.ToArray());
 									break;
 
 								case ContentDialogResult.Secondary:
@@ -984,15 +1022,79 @@ namespace ConcentratorXmpp
 			}
 		}
 
-		private void RegisterDevice(MetaDataTag[] MetaInfo)
+		private async Task RegisterDevice(MetaDataTag[] MetaInfo)
 		{
-			Log.Informational("Registering device.");
+			await this.RegisterDevice(this.GetConcentratorMetaInfo(MetaInfo), string.Empty, string.Empty, string.Empty);
+			await this.RegisterDevice(this.GetSensorMetaInfo(MetaInfo), "Sensor.", SensorNode.NodeID, MeteringTopology.ID);
+			await this.RegisterDevice(this.GetActuatorMetaInfo(MetaInfo), "Actuator.", ActuatorNode.NodeID, MeteringTopology.ID);
+		}
 
-			MetaDataTag[] SensorTags = this.GetSensorMetaInfo(MetaInfo);
-			MetaDataTag[] ActuatorTags = this.GetActuatorMetaInfo(MetaInfo);
+		private async Task RegisterDevice(MetaDataTag[] MetaInfo, string Device, string NodeID, string SourceID)
+		{
+			string DeviceName = string.IsNullOrEmpty(Device) ? "Concentrator." : Device;
 
-			this.registryClient.RegisterThing(true, ActuatorNode.NodeID, MeteringTopology.ID, ActuatorTags, this.RegistrationResponse, ActuatorNode.NodeID);
-			this.registryClient.RegisterThing(true, SensorNode.NodeID, MeteringTopology.ID, SensorTags, this.RegistrationResponse, SensorNode.NodeID);
+			Log.Informational("Registering " + DeviceName);
+
+			string Key = await RuntimeSettings.GetAsync("ThingRegistry." + Device + "Key", string.Empty);
+			if (string.IsNullOrEmpty(Key))
+			{
+				byte[] Bin = new byte[32];
+				using (RandomNumberGenerator Rnd = RandomNumberGenerator.Create())
+				{
+					Rnd.GetBytes(Bin);
+				}
+
+				Key = Hashes.BinaryToString(Bin);
+				await RuntimeSettings.SetAsync("ThingRegistry." + Device + "Key", Key);
+			}
+
+			int c = MetaInfo.Length;
+			Array.Resize<MetaDataTag>(ref MetaInfo, c + 1);
+			MetaInfo[c] = new MetaDataStringTag("KEY", Key);
+
+			this.registryClient.RegisterThing(false, NodeID, SourceID, MetaInfo, async (sender, e) =>
+			{
+				try
+				{
+					if (e.Ok)
+					{
+						await RuntimeSettings.SetAsync("ThingRegistry." + Device + "Location", true);
+						await RuntimeSettings.SetAsync("ThingRegistry." + Device + "Owner", e.OwnerJid);
+
+						if (string.IsNullOrEmpty(e.OwnerJid))
+						{
+							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							Log.Informational("Successful registration of " + DeviceName);
+							Log.Informational(ClaimUrl);
+						}
+						else
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry." + Device + ".Key", string.Empty);
+							Log.Informational("Updated registration of " + Device + " Device has an owner.", new KeyValuePair<string, object>("Owner", e.OwnerJid));
+						}
+					}
+					else
+					{
+						Log.Error("Failed registration of " + Device, NodeID);
+						await this.RegisterDevice();
+					}
+				}
+				catch (Exception ex)
+				{
+					Log.Critical(ex);
+				}
+			}, null);
+		}
+
+		private MetaDataTag[] GetConcentratorMetaInfo(MetaDataTag[] MetaInfo)
+		{
+			List<MetaDataTag> SensorTags = new List<MetaDataTag>(MetaInfo)
+			{
+				new MetaDataStringTag("CLASS", "Concentrator"),
+				new MetaDataStringTag("TYPE", "MIoT Concentrator")
+			};
+
+			return SensorTags.ToArray();
 		}
 
 		private MetaDataTag[] GetSensorMetaInfo(MetaDataTag[] MetaInfo)
@@ -1017,53 +1119,45 @@ namespace ConcentratorXmpp
 			return ActuatorTags.ToArray();
 		}
 
-		private async void RegistrationResponse(object Sender, RegistrationEventArgs e)
+		private async Task UpdateRegistration(MetaDataTag[] MetaInfo, string OwnerJid)
 		{
-			try
-			{
-				string NodeID = (string)e.State;
-
-				if (e.Ok)
-				{
-					Log.Informational("Registration successful.", NodeID);
-					await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
-				}
-				else
-				{
-					Log.Error("Registration failed.", NodeID);
-					await this.RegisterDevice();
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Critical(ex);
-			}
-		}
-
-		private void UpdateRegistration(MetaDataTag[] MetaInfo)
-		{
-			Log.Informational("Updating registration of device.");
-
-			MetaDataTag[] SensorTags = this.GetSensorMetaInfo(MetaInfo);
-			MetaDataTag[] ActuatorTags = this.GetActuatorMetaInfo(MetaInfo);
-
-			this.registryClient.UpdateThing(ActuatorNode.NodeID, ActuatorTags, this.RegistrationUpdateResponse, new object[] { ActuatorNode.NodeID, MetaInfo });
-			this.registryClient.UpdateThing(SensorNode.NodeID, SensorTags, this.RegistrationUpdateResponse, new object[] { SensorNode.NodeID, MetaInfo });
-		}
-
-		private void RegistrationUpdateResponse(object Sender, UpdateEventArgs e)
-		{
-			object[] P = (object[])e.State;
-			string NodeID = (string)P[0];
-			MetaDataTag[] MetaInfo = (MetaDataTag[])P[1];
-
-			if (e.Ok)
-				Log.Informational("Registration update successful.", NodeID);
+			if (string.IsNullOrEmpty(OwnerJid))
+				await this.RegisterDevice(MetaInfo);
 			else
 			{
-				Log.Error("Registration update failed.", NodeID);
-				this.RegisterDevice(MetaInfo);
+
+				Log.Informational("Updating registration of device.",
+					new KeyValuePair<string, object>("Owner", OwnerJid));
+
+				this.UpdateRegistration(this.GetConcentratorMetaInfo(MetaInfo), string.Empty, string.Empty, string.Empty);
+				this.UpdateRegistration(this.GetSensorMetaInfo(MetaInfo), "Sensor.", SensorNode.NodeID, MeteringTopology.ID);
+				this.UpdateRegistration(this.GetActuatorMetaInfo(MetaInfo), "Actuator.", ActuatorNode.NodeID, MeteringTopology.ID);
 			}
+		}
+
+		private void UpdateRegistration(MetaDataTag[] MetaInfo, string Device, string NodeID, string SourceID)
+		{
+			string DeviceName = string.IsNullOrEmpty(Device) ? "Concentrator." : Device;
+
+			Log.Informational("Updating registration of " + DeviceName);
+
+			this.registryClient.UpdateThing(NodeID, SourceID, MetaInfo, async (sender, e) =>
+			{
+				try
+				{
+					if (e.Ok)
+						Log.Informational("Registration update successful.", NodeID);
+					else
+					{
+						Log.Error("Registration update failed.", NodeID);
+						await this.RegisterDevice(MetaInfo, Device, NodeID, SourceID);
+					}
+				}
+				catch (Exception ex)
+				{
+					Log.Critical(ex);
+				}
+			}, null);
 		}
 
 		/// <summary>
