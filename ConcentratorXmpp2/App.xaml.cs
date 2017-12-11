@@ -1074,12 +1074,12 @@ namespace ConcentratorXmpp
 						else
 						{
 							await RuntimeSettings.SetAsync("ThingRegistry." + Device + ".Key", string.Empty);
-							Log.Informational("Updated registration of " + Device + " Device has an owner.", new KeyValuePair<string, object>("Owner", e.OwnerJid));
+							Log.Informational("Updated registration of " + DeviceName + " Device has an owner.", new KeyValuePair<string, object>("Owner", e.OwnerJid));
 						}
 					}
 					else
 					{
-						Log.Error("Failed registration of " + Device, NodeID);
+						Log.Error("Failed registration of " + DeviceName, NodeID);
 						await this.RegisterDevice();
 					}
 				}
