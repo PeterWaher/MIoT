@@ -791,8 +791,12 @@ namespace ActuatorXmpp
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
 							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							string FilePath = ApplicationData.Current.LocalFolder.Path + Path.DirectorySeparatorChar + "Actuator.iotdisco";
+
 							Log.Informational("Registration successful.");
-							Log.Informational(ClaimUrl);
+							Log.Informational(ClaimUrl, new KeyValuePair<string, object>("Path", FilePath));
+
+							File.WriteAllText(FilePath, ClaimUrl);
 						}
 						else
 						{

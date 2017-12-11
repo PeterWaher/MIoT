@@ -1064,8 +1064,12 @@ namespace ConcentratorXmpp
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
 							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							string FilePath = ApplicationData.Current.LocalFolder.Path + Path.DirectorySeparatorChar + DeviceName + "iotdisco";
+
 							Log.Informational("Successful registration of " + DeviceName);
-							Log.Informational(ClaimUrl);
+							Log.Informational(ClaimUrl, new KeyValuePair<string, object>("Path", FilePath));
+
+							File.WriteAllText(FilePath, ClaimUrl);
 						}
 						else
 						{
