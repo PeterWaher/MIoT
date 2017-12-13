@@ -991,6 +991,32 @@ namespace SensorXmpp
 				}
 
 				this.registryClient = new ThingRegistryClient(this.xmppClient, RegistryJid);
+
+				this.registryClient.Claimed += async (sender, e) =>
+				{
+					try
+					{
+						await RuntimeSettings.SetAsync("ThingRegistry.Owner", e.JID);
+						await RuntimeSettings.SetAsync("ThingRegistry.Key", string.Empty);
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				this.registryClient.Disowned += async (sender, e) =>
+				{
+					try
+					{
+						await RuntimeSettings.SetAsync("ThingRegistry.Owner", string.Empty);
+						await this.RegisterDevice();
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
 			}
 
 			string s;
@@ -1195,7 +1221,12 @@ namespace SensorXmpp
 				{
 					try
 					{
-						if (e.Ok)
+						if (e.Disowned)
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Owner", string.Empty);
+							await this.RegisterDevice(MetaInfo);
+						}
+						else if (e.Ok)
 							Log.Informational("Registration update successful.");
 						else
 						{

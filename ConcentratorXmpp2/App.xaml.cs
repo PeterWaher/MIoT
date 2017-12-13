@@ -892,6 +892,51 @@ namespace ConcentratorXmpp
 				}
 
 				this.registryClient = new ThingRegistryClient(this.xmppClient, RegistryJid);
+
+				this.registryClient.Claimed += async (sender, e) =>
+				{
+					try
+					{
+						if (e.Node.IsEmpty)
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Owner", e.JID);
+							await RuntimeSettings.SetAsync("ThingRegistry.Key", string.Empty);
+						}
+						else if (e.Node.Equals(MeteringTopology.SensorNode))
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Sensor.Owner", e.JID);
+							await RuntimeSettings.SetAsync("ThingRegistry.Sensor.Key", string.Empty);
+						}
+						else if (e.Node.Equals(MeteringTopology.ActuatorNode))
+						{
+							await RuntimeSettings.SetAsync("ThingRegistry.Actuator.Owner", e.JID);
+							await RuntimeSettings.SetAsync("ThingRegistry.Actuator.Key", string.Empty);
+						}
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
+
+				this.registryClient.Disowned += async (sender, e) =>
+				{
+					try
+					{
+						if (e.Node.IsEmpty)
+							await RuntimeSettings.SetAsync("ThingRegistry.Owner", string.Empty);
+						else if (e.Node.Equals(MeteringTopology.SensorNode))
+							await RuntimeSettings.SetAsync("ThingRegistry.Sensor.Owner", string.Empty);
+						else if (e.Node.Equals(MeteringTopology.ActuatorNode))
+							await RuntimeSettings.SetAsync("ThingRegistry.Actuator.Owner", string.Empty);
+
+						await this.RegisterDevice();
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				};
 			}
 
 			string s;
@@ -1149,7 +1194,12 @@ namespace ConcentratorXmpp
 			{
 				try
 				{
-					if (e.Ok)
+					if (e.Disowned)
+					{
+						await RuntimeSettings.SetAsync("ThingRegistry." + Device + "Owner", string.Empty);
+						await this.RegisterDevice(MetaInfo);
+					}
+					else if (e.Ok)
 						Log.Informational("Registration update successful.", NodeID);
 					else
 					{
