@@ -1137,13 +1137,13 @@ namespace ConcentratorXmpp
 
 		private MetaDataTag[] GetConcentratorMetaInfo(MetaDataTag[] MetaInfo)
 		{
-			List<MetaDataTag> SensorTags = new List<MetaDataTag>(MetaInfo)
+			List<MetaDataTag> ConcentratorTags = new List<MetaDataTag>(MetaInfo)
 			{
 				new MetaDataStringTag("CLASS", "Concentrator"),
 				new MetaDataStringTag("TYPE", "MIoT Concentrator")
 			};
 
-			return SensorTags.ToArray();
+			return ConcentratorTags.ToArray();
 		}
 
 		private MetaDataTag[] GetSensorMetaInfo(MetaDataTag[] MetaInfo)
