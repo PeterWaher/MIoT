@@ -202,7 +202,7 @@
       <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Concentrator.UWP">
-      <Version>0.1.8</Version>
+      <Version>0.1.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.13</Version>
