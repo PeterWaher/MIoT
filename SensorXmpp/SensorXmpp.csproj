@@ -187,7 +187,7 @@
       <Version>6.0.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
       <Version>1.0.11</Version>
