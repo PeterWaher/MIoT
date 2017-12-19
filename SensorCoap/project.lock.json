@@ -28711,10 +28711,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[6.0.5, )"
-      },
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.5, )",
       "Waher.Networking.CoAP.UWP": "[1.0.5, )",
       "Waher.Persistence.FilesLW": "[1.0.22, )",
       "Waher.Runtime.Settings": "[1.0.1, )",

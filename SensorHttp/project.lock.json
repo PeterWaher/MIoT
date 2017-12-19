@@ -498,7 +498,7 @@
           }
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -3530,7 +3530,7 @@
           "runtimes/win8-arm/native/clrcompression.dll": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -6303,7 +6303,7 @@
           "runtimes/win8-arm-aot/native/_._": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -9049,7 +9049,7 @@
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -11831,7 +11831,7 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -14577,7 +14577,7 @@
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -17359,7 +17359,7 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/1.59.2": {
+      "SkiaSharp/1.59.3": {
         "type": "package",
         "compile": {
           "lib/uap10.0/SkiaSharp.dll": {}
@@ -24218,10 +24218,10 @@
         "runtimes/win8-arm/native/clrcompression.dll"
       ]
     },
-    "SkiaSharp/1.59.2": {
-      "sha512": "C0xCarWrHXc683SabhWEQW3D1Ky1k6DFu9oI5wKfvKrFJ0g5NL5DjMor1Qgdr5U7L9zUDI2YrPSApVwJQsF8UQ==",
+    "SkiaSharp/1.59.3": {
+      "sha512": "MNVXKHn3dDGnJPtO4dPMU6GtvFHO1aUHDWm1V5i7QbacVJFxT+a8x1chGGdgFNl7pB4+/yzEo39x9Q7ggRYt6A==",
       "type": "package",
-      "path": "skiasharp/1.59.2",
+      "path": "skiasharp/1.59.3",
       "files": [
         "build/net45/SkiaSharp.dll.config",
         "build/net45/SkiaSharp.targets",
@@ -24254,7 +24254,7 @@
         "runtimes/win10-x86/nativeassets/uap10.0/libSkiaSharp.dll",
         "runtimes/win7-x64/native/libSkiaSharp.dll",
         "runtimes/win7-x86/native/libSkiaSharp.dll",
-        "skiasharp.1.59.2.nupkg.sha512",
+        "skiasharp.1.59.3.nupkg.sha512",
         "skiasharp.nuspec",
         "xamarin.interactive/SkiaSharp.Workbooks.dll"
       ]
@@ -29576,7 +29576,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.5",
-      "SkiaSharp >= 1.59.2",
+      "SkiaSharp >= 1.59.3",
       "Waher.Content >= 1.0.6",
       "Waher.Content.Images >= 1.0.2",
       "Waher.Content.Markdown >= 1.0.11",
@@ -29624,11 +29624,8 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.5, )",
-      "SkiaSharp": "[1.59.2, )",
-      "Waher.Content": {
-        "target": "Package",
-        "version": "[1.0.6, )"
-      },
+      "SkiaSharp": "[1.59.3, )",
+      "Waher.Content": "[1.0.6, )",
       "Waher.Content.Images": "[1.0.2, )",
       "Waher.Content.Markdown": "[1.0.11, )",
       "Waher.Content.Markdown.Web.UWP": "[1.0.5, )",
