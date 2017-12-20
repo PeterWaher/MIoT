@@ -7,18 +7,19 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Unloaded="Page_Unloaded">
 
-  <Border Padding="10">
-    <StackPanel>
-      <CheckBox Name="Relay" Click="Relay_Click">Relay output.</CheckBox>
-      <TextBlock Text="D0:" Margin="0,20,0,0"/>
-      <TextBlock FontSize="40" FontWeight="Bold" Name="D0"/>
-      <TextBlock Text="A0:" Margin="0,20,0,0"/>
-      <TextBlock FontSize="40" FontWeight="Bold" Name="A0"/>
-      <TextBlock Text="Light:" Margin="0,20,0,0"/>
-      <TextBlock FontSize="40" FontWeight="Bold" Name="Light"/>
-      <CheckBox Name="OutputToFile" Click="OutputToFile_Click">Output values to file.</CheckBox>
-      <TextBlock Text="Events:" Margin="0,20,0,0"/>
-      <StackPanel Name="EventsPanel"/>
-    </StackPanel>
-  </Border>
+    <Border Padding="10">
+        <StackPanel>
+            <CheckBox Name="Relay" Click="Relay_Click">Relay output.</CheckBox>
+            <TextBlock Text="D0:" Margin="0,20,0,0"/>
+            <TextBlock FontSize="40" FontWeight="Bold" Name="D0"/>
+            <TextBlock Text="A0:" Margin="0,20,0,0"/>
+            <TextBlock FontSize="40" FontWeight="Bold" Name="A0"/>
+            <TextBlock Text="Light:" Margin="0,20,0,0"/>
+            <TextBlock FontSize="40" FontWeight="Bold" Name="Light"/>
+            <TextBlock Name="LocalFolder">Local folder:</TextBlock>
+            <CheckBox Name="OutputToFile" Click="OutputToFile_Click" Margin="0,10,0,10">Output log to file.</CheckBox>
+            <TextBlock Text="Events:"/>
+            <StackPanel Name="EventsPanel"/>
+        </StackPanel>
+    </Border>
 </Page>

@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -36,6 +38,40 @@ namespace ActuatorXmpp
 
 			if (instance == null)
 				instance = this;
+
+			Hyperlink Link = new Hyperlink();
+
+			Link.Inlines.Add(new Run()
+			{
+				Text = Windows.Storage.ApplicationData.Current.LocalFolder.Path
+			});
+
+			Link.Click += Link_Click;
+
+			ToolTip ToolTip = new ToolTip()
+			{
+				Content = "If provisioning is used, you will find the iotdisco URI in this folder. Use this URI to claim the device. " +
+					"Erase content of this folder when application is closed, and then restart, to reconfigure the application."
+			};
+
+			ToolTipService.SetToolTip(Link, ToolTip);
+
+			this.LocalFolder.Inlines.Add(new Run() { Text = " " });
+			this.LocalFolder.Inlines.Add(Link);
+		}
+
+		private async void Link_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+		{
+			try
+			{
+				await Windows.System.Launcher.LaunchFolderAsync(Windows.Storage.ApplicationData.Current.LocalFolder);
+			}
+			catch (Exception ex)
+			{
+				MessageDialog Dialog = new MessageDialog(ex.Message, "Error");
+				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+					async () => await Dialog.ShowAsync());
+			}
 		}
 
 		private void Page_Unloaded(object sender, RoutedEventArgs e)
