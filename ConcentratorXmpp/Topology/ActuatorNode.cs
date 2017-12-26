@@ -138,7 +138,7 @@ namespace ConcentratorXmpp.Topology
 		{
 			try
 			{
-				Log.Informational("Performing readout.", App.Instance.XmppClient.BareJID, Request.Actor);
+				Log.Informational("Performing readout.", this.LogId, Request.Actor);
 
 				List<Field> Fields = new List<Field>();
 				DateTime Now = DateTime.Now;
