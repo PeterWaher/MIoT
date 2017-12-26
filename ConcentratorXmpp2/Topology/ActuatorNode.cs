@@ -100,11 +100,8 @@ namespace ConcentratorXmpp.Topology
 		{
 			LinkedList<Parameter> Parameters = new LinkedList<Parameter>();
 
-			if (App.Instance.Light.HasValue)
-				Parameters.AddLast(new DoubleParameter("Light", await Language.GetStringAsync(typeof(MeteringTopology), 2, "Light (%)"), App.Instance.Light.Value));
-
-			if (App.Instance.Motion.HasValue)
-				Parameters.AddLast(new BooleanParameter("Motion", await Language.GetStringAsync(typeof(MeteringTopology), 3, "Motion"), App.Instance.Motion.Value));
+			if (App.Instance.Output.HasValue)
+				Parameters.AddLast(new BooleanParameter("Output", await Language.GetStringAsync(typeof(MeteringTopology), 6, "Output"), App.Instance.Output.Value));
 
 			return Parameters;
 		}
