@@ -59,8 +59,8 @@ namespace FirstApp
 
 		public async void DigitalPinUpdated(byte Pin, PinState Value)
 		{
-			if (Pin == 0)
-				await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.D0.Text = Value.ToString());
+			if (Pin == 8)
+				await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.D8.Text = Value.ToString());
 		}
 
 		public async void AddLogMessage(string Message)

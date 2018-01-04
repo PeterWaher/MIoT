@@ -9,8 +9,8 @@
 
   <Border Padding="10">
     <StackPanel>
-      <TextBlock Text="D0:" Margin="0,20,0,0"/>
-      <TextBlock FontSize="40" FontWeight="Bold" Name="D0"/>
+      <TextBlock Text="D8:" Margin="0,20,0,0"/>
+      <TextBlock FontSize="40" FontWeight="Bold" Name="D8"/>
       <TextBlock Text="A0:" Margin="0,20,0,0"/>
       <TextBlock FontSize="40" FontWeight="Bold" Name="A0"/>
       <TextBlock Text="Light:" Margin="0,20,0,0"/>

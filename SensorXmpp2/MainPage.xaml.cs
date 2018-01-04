@@ -27,14 +27,14 @@ namespace SensorXmpp
 	public sealed partial class MainPage : Page
 	{
 		private static MainPage instance = null;
-		private StreamWriter d0Output = null;
+		private StreamWriter d8Output = null;
 		private StreamWriter a0Output = null;
 		private StreamWriter lightOutput = null;
 		private StreamWriter eventOutput = null;
-		private DateTime prevD0TP = DateTime.MinValue;
+		private DateTime prevD8TP = DateTime.MinValue;
 		private DateTime prevA0TP = DateTime.MinValue;
 		private DateTime prevLightTP = DateTime.MinValue;
-		private bool d0First;
+		private bool d8First;
 		private bool a0First;
 		private bool lightFirst;
 		private bool eventFirst;
@@ -126,16 +126,16 @@ namespace SensorXmpp
 
 		public async void DigitalPinUpdated(byte Pin, PinState Value)
 		{
-			if (Pin == 0)
+			if (Pin == 8)
 			{
 				DateTime TP = DateTime.Now;
 				StreamWriter w;
 
-				if ((w = this.d0Output) != null)
+				if ((w = this.d8Output) != null)
 				{
 					lock (w)
 					{
-						if (!this.WriteNewRecord(w, TP, ref this.prevD0TP, ref this.d0First))
+						if (!this.WriteNewRecord(w, TP, ref this.prevD8TP, ref this.d8First))
 							return;
 
 						w.Write("\"");
@@ -144,7 +144,7 @@ namespace SensorXmpp
 					}
 				}
 
-				await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.D0.Text = Value.ToString());
+				await this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => this.D8.Text = Value.ToString());
 			}
 		}
 
@@ -293,9 +293,9 @@ namespace SensorXmpp
 
 			if (this.OutputToFile.IsChecked.HasValue && this.OutputToFile.IsChecked.Value)
 			{
-				this.d0First = true;
-				this.d0Output = File.CreateText(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "D0.script");
+				this.d8First = true;
+				this.d8Output = File.CreateText(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "D8.script");
 
 				this.a0First = true;
 				this.a0Output = File.CreateText(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
@@ -313,7 +313,7 @@ namespace SensorXmpp
 
 		private void CloseFiles()
 		{
-			this.CloseFile(ref this.d0Output);
+			this.CloseFile(ref this.d8Output);
 			this.CloseFile(ref this.a0Output);
 			this.CloseFile(ref this.lightOutput);
 			this.CloseFile(ref this.eventOutput);

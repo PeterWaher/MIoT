@@ -105,11 +105,11 @@ namespace FirstApp
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 							this.arduino.digitalWrite(13, PinState.HIGH);
 
-							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-							MainPage.Instance.DigitalPinUpdated(0, this.arduino.digitalRead(0));
+							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
+							MainPage.Instance.DigitalPinUpdated(8, this.arduino.digitalRead(8));
 
-							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(1, 0);             // Relay set to 0
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.digitalWrite(9, 0);             // Relay set to 0
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
@@ -175,7 +175,7 @@ namespace FirstApp
 			{
 				this.arduino.digitalWrite(13, PinState.LOW);
 				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+				this.arduino.pinMode(9, PinMode.INPUT);      // Relay.
 				
 				this.arduino.Dispose();
 				this.arduino = null;

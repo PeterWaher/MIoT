@@ -189,15 +189,15 @@ namespace ConcentratorXmpp
 								this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 								this.arduino.digitalWrite(13, PinState.HIGH);
 
-								this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-								PinState Pin0 = this.arduino.digitalRead(0);
-								this.lastMotion = Pin0 == PinState.HIGH;
-								MainPage.Instance.DigitalPinUpdated(0, Pin0);
+								this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
+								PinState Pin8 = this.arduino.digitalRead(8);
+								this.lastMotion = Pin8 == PinState.HIGH;
+								MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
-								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
+								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
 								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
-								this.arduino.digitalWrite(1, this.output.Value ? PinState.HIGH : PinState.LOW);
+								this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
 								await MainPage.Instance.OutputSet(this.output.Value);
 
@@ -519,7 +519,7 @@ namespace ConcentratorXmpp
 			{
 				DateTime Timestamp = DateTime.Now;
 				ushort A0 = this.arduino.analogRead("A0");
-				PinState D0 = this.arduino.digitalRead(0);
+				PinState D8 = this.arduino.digitalRead(8);
 
 				if (this.windowA0[0].HasValue)
 				{
@@ -590,7 +590,7 @@ namespace ConcentratorXmpp
 					MainPage.Instance.LightUpdated(Light, 2, "%");
 
 					this.sumLight += Light;
-					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
+					this.sumMotion += (D8 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
 
 					this.concentratorServer?.NewMomentaryValues(MeteringTopology.SensorNode,
@@ -627,7 +627,7 @@ namespace ConcentratorXmpp
 						{
 							Timestamp = Timestamp,
 							Light = Light,
-							Motion = D0,
+							Motion = D8,
 							MinLight = this.minLight,
 							MinLightAt = this.minLightAt,
 							MaxLight = this.maxLight,
@@ -660,7 +660,7 @@ namespace ConcentratorXmpp
 							{
 								Timestamp = Timestamp,
 								Light = Light,
-								Motion = D0,
+								Motion = D8,
 								MinLight = Rec.MinLight,
 								MinLightAt = Rec.MinLightAt,
 								MaxLight = Rec.MaxLight,
@@ -724,7 +724,7 @@ namespace ConcentratorXmpp
 								{
 									Timestamp = Timestamp,
 									Light = Light,
-									Motion = D0,
+									Motion = D8,
 									MinLight = HourRec.MinLight,
 									MinLightAt = HourRec.MinLightAt,
 									MaxLight = HourRec.MaxLight,
@@ -797,7 +797,7 @@ namespace ConcentratorXmpp
 		{
 			if (this.arduino != null)
 			{
-				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
+				this.arduino.digitalWrite(9, On ? PinState.HIGH : PinState.LOW);
 
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
 				this.output = On;
@@ -1271,7 +1271,7 @@ namespace ConcentratorXmpp
 			{
 				this.arduino.digitalWrite(13, PinState.LOW);
 				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+				this.arduino.pinMode(9, PinMode.INPUT);      // Relay.
 
 				this.arduino.Dispose();
 				this.arduino = null;

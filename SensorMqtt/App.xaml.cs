@@ -152,13 +152,13 @@ namespace SensorMqtt
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 							this.arduino.digitalWrite(13, PinState.HIGH);
 
-							this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
-							PinState Pin0 = this.arduino.digitalRead(0);
-							this.lastMotion = Pin0 == PinState.HIGH;
-							MainPage.Instance.DigitalPinUpdated(0, Pin0);
+							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
+							PinState Pin8 = this.arduino.digitalRead(8);
+							this.lastMotion = Pin8 == PinState.HIGH;
+							MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
-							this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(1, 0);             // Relay set to 0
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.digitalWrite(9, 0);             // Relay set to 0
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
@@ -223,7 +223,7 @@ namespace SensorMqtt
 			{
 				DateTime Timestamp = DateTime.Now;
 				ushort A0 = this.arduino.analogRead("A0");
-				PinState D0 = this.arduino.digitalRead(0);
+				PinState D8 = this.arduino.digitalRead(8);
 
 				if (this.windowA0[0].HasValue)
 				{
@@ -293,7 +293,7 @@ namespace SensorMqtt
 					this.PublishLight(Light);
 
 					this.sumLight += Light;
-					this.sumMotion += (D0 == PinState.HIGH ? 1 : 0);
+					this.sumMotion += (D8 == PinState.HIGH ? 1 : 0);
 					this.nrTerms++;
 
 					if (!this.minLight.HasValue || Light < this.minLight.Value)
@@ -318,7 +318,7 @@ namespace SensorMqtt
 						{
 							Timestamp = Timestamp,
 							Light = Light,
-							Motion = D0,
+							Motion = D8,
 							MinLight = this.minLight,
 							MinLightAt = this.minLightAt,
 							MaxLight = this.maxLight,
@@ -351,7 +351,7 @@ namespace SensorMqtt
 							{
 								Timestamp = Timestamp,
 								Light = Light,
-								Motion = D0,
+								Motion = D8,
 								MinLight = Rec.MinLight,
 								MinLightAt = Rec.MinLightAt,
 								MaxLight = Rec.MaxLight,
@@ -415,7 +415,7 @@ namespace SensorMqtt
 								{
 									Timestamp = Timestamp,
 									Light = Light,
-									Motion = D0,
+									Motion = D8,
 									MinLight = HourRec.MinLight,
 									MinLightAt = HourRec.MinLightAt,
 									MaxLight = HourRec.MaxLight,
@@ -599,7 +599,7 @@ namespace SensorMqtt
 			{
 				this.arduino.digitalWrite(13, PinState.LOW);
 				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+				this.arduino.pinMode(9, PinMode.INPUT);      // Relay.
 
 				this.arduino.Dispose();
 				this.arduino = null;

@@ -170,12 +170,12 @@ namespace ActuatorMqtt
 								this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 								this.arduino.digitalWrite(13, PinState.HIGH);
 
-								this.arduino.pinMode(0, PinMode.INPUT);      // PIR sensor (motion detection).
+								this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
-								this.arduino.pinMode(1, PinMode.OUTPUT);     // Relay.
+								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
 								bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
-								this.arduino.digitalWrite(1, LastOn ? PinState.HIGH : PinState.LOW);
+								this.arduino.digitalWrite(9, LastOn ? PinState.HIGH : PinState.LOW);
 
 								await MainPage.Instance.OutputSet(LastOn);
 
@@ -280,7 +280,7 @@ namespace ActuatorMqtt
 #else
 			if (this.arduino != null)
 			{
-				this.arduino.digitalWrite(1, On ? PinState.HIGH : PinState.LOW);
+				this.arduino.digitalWrite(9, On ? PinState.HIGH : PinState.LOW);
 #endif
 				await RuntimeSettings.SetAsync("Actuator.Output", On);
 
@@ -356,7 +356,7 @@ namespace ActuatorMqtt
 			{
 				this.arduino.digitalWrite(13, PinState.LOW);
 				this.arduino.pinMode(13, PinMode.INPUT);     // Onboard LED.
-				this.arduino.pinMode(1, PinMode.INPUT);      // Relay.
+				this.arduino.pinMode(9, PinMode.INPUT);      // Relay.
 
 				this.arduino.Dispose();
 				this.arduino = null;
