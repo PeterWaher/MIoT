@@ -194,7 +194,7 @@ namespace SensorLwm2m
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
-							if (pin == 0)
+							if (pin == 8)
 							{
 								bool Input = (value == PinState.HIGH);
 								this.lastMotion = Input;

@@ -193,7 +193,7 @@ namespace SensorHttp
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
-							if (pin == 0)
+							if (pin == 8)
 								this.lastMotion = (value == PinState.HIGH);
 						};
 

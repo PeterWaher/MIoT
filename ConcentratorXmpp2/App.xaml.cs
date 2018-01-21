@@ -224,7 +224,7 @@ namespace ConcentratorXmpp
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
-							if (pin == 0)
+							if (pin == 8)
 							{
 								bool Motion = (value == PinState.HIGH);
 								if (!this.lastMotion.HasValue || (this.lastMotion.Value != Motion))

@@ -175,7 +175,7 @@ namespace SensorMqtt
 						{
 							MainPage.Instance.DigitalPinUpdated(pin, value);
 
-							if (pin == 0)
+							if (pin == 8)
 								this.PublishMotion(value == PinState.HIGH);
 						};
 
