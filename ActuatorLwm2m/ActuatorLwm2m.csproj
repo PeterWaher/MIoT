@@ -172,6 +172,9 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Waher.Events">
+      <Version>1.0.5</Version>
+    </PackageReference>
     <PackageReference Include="Waher.Networking.LWM2M.UWP">
       <Version>1.0.1</Version>
     </PackageReference>

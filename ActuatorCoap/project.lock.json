@@ -2413,7 +2413,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -5092,7 +5092,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7763,7 +7763,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10407,7 +10407,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -13087,7 +13087,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15731,7 +15731,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -18411,7 +18411,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Events/1.0.4": {
+      "Waher.Events/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -28358,14 +28358,13 @@
         "waher.content.nuspec"
       ]
     },
-    "Waher.Events/1.0.4": {
-      "sha512": "itAyhauaGz9ie122SlujmUZqfEXHNBAiSXRD6OJ82qPGuoTGKXIsSGsvWYBu8KfGQnTdI9UJUc35bDa4fbkzBw==",
+    "Waher.Events/1.0.5": {
+      "sha512": "ssbkC/XUWXefp4Tj6AH7znijLUqsykq88ARmgn6H3h4APeN76eBCt59z08JaM+vIZosOoQdRUBj1yNlibfpZMA==",
       "type": "package",
-      "path": "waher.events/1.0.4",
+      "path": "waher.events/1.0.5",
       "files": [
-        "lib/netstandard1.3/.xml",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.0.4.nupkg.sha512",
+        "waher.events.1.0.5.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -28517,6 +28516,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.6",
+      "Waher.Events >= 1.0.5",
       "Waher.Networking.CoAP.UWP >= 1.0.5",
       "Waher.Persistence.FilesLW >= 1.0.24",
       "Waher.Runtime.Settings >= 1.0.1",
@@ -28551,9 +28551,10 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.6, )",
+      "Waher.Events": {
         "target": "Package",
-        "version": "[6.0.6, )"
+        "version": "[1.0.5, )"
       },
       "Waher.Networking.CoAP.UWP": "[1.0.5, )",
       "Waher.Persistence.FilesLW": "[1.0.24, )",
