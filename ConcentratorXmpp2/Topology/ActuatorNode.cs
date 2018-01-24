@@ -71,6 +71,11 @@ namespace ConcentratorXmpp.Topology
 			return Task.FromResult<bool>(true);
 		}
 
+		public Task UpdateAsync()
+		{
+			throw new NotSupportedException();
+		}
+
 		public Task DestroyAsync()
 		{
 			throw new NotSupportedException();
