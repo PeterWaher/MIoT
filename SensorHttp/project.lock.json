@@ -2458,7 +2458,7 @@
           }
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5261,7 +5261,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8034,7 +8034,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10780,7 +10780,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13562,7 +13562,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16308,7 +16308,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19090,7 +19090,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/1.0.6": {
+      "Waher.Content/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -29169,13 +29169,13 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Content/1.0.6": {
-      "sha512": "4LHBhv0VSY5fVovMvwLcOWEPeeCp5x5Hpdlq/WuGOrCSbzo+WhllS91KS6K/Z6MFEXyCRDKeU56AnPgJLXR2XQ==",
+    "Waher.Content/1.0.7": {
+      "sha512": "UjiqG1SQFB5P+I6Hah/lIwwRrb16PxlrP5tBiDDT9V2l0nU8K9xI77lhJKsLuFdXgjfoWg+G0vytf+3MugMVdg==",
       "type": "package",
-      "path": "waher.content/1.0.6",
+      "path": "waher.content/1.0.7",
       "files": [
         "lib/netstandard1.3/Waher.Content.dll",
-        "waher.content.1.0.6.nupkg.sha512",
+        "waher.content.1.0.7.nupkg.sha512",
         "waher.content.nuspec"
       ]
     },
@@ -29417,7 +29417,7 @@
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.6",
       "SkiaSharp >= 1.59.3",
-      "Waher.Content >= 1.0.6",
+      "Waher.Content >= 1.0.7",
       "Waher.Content.Images >= 1.0.2",
       "Waher.Content.Markdown >= 1.0.12",
       "Waher.Content.Markdown.Web.UWP >= 1.0.5",
@@ -29465,7 +29465,7 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.6, )",
       "SkiaSharp": "[1.59.3, )",
-      "Waher.Content": "[1.0.6, )",
+      "Waher.Content": "[1.0.7, )",
       "Waher.Content.Images": "[1.0.2, )",
       "Waher.Content.Markdown": "[1.0.12, )",
       "Waher.Content.Markdown.Web.UWP": "[1.0.5, )",

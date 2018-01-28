@@ -372,7 +372,7 @@ namespace ConcentratorXmpp
 				this.concentratorServer = null;
 			}
 
-			this.concentratorServer = new ConcentratorServer(this.xmppClient, this.provisioningClient, new MeteringTopology());
+			this.concentratorServer = new ConcentratorServer(this.xmppClient, this.registryClient, this.provisioningClient, new MeteringTopology());
 
 			if (this.newXmppClient)
 			{
@@ -1108,7 +1108,7 @@ namespace ConcentratorXmpp
 
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
-							string ClaimUrl = ThingRegistryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							string ClaimUrl = registryClient.EncodeAsIoTDiscoURI(MetaInfo);
 							string FilePath = ApplicationData.Current.LocalFolder.Path + Path.DirectorySeparatorChar + DeviceName + "iotdisco";
 
 							Log.Informational("Successful registration of " + DeviceName);
