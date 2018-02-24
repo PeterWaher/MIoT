@@ -27220,10 +27220,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[6.0.7, )"
-      },
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.7, )",
       "Waher.Events": "[1.0.5, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
