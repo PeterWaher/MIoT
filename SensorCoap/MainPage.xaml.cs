@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Microsoft.Maker.RemoteWiring;
 using Waher.Events;
 
@@ -170,7 +164,7 @@ namespace SensorCoap
 			{
 			}
 
-			public override void Queue(Event Event)
+			public override Task Queue(Event Event)
 			{
 				StringBuilder sb = new StringBuilder(Event.Message);
 
@@ -203,6 +197,8 @@ namespace SensorCoap
 				}
 
 				MainPage.Instance.AddLogMessage(sb.ToString());
+
+				return Task.CompletedTask;
 			}
 		}
 

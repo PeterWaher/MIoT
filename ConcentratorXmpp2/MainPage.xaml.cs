@@ -3,18 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using Microsoft.Maker.RemoteWiring;
 using Waher.Events;
 
@@ -207,7 +200,7 @@ namespace ConcentratorXmpp
 			{
 			}
 
-			public override void Queue(Event Event)
+			public override Task Queue(Event Event)
 			{
 				StringBuilder sb = new StringBuilder(Event.Message);
 
@@ -240,6 +233,8 @@ namespace ConcentratorXmpp
 				}
 
 				MainPage.Instance.AddLogMessage(sb.ToString());
+
+				return Task.CompletedTask;
 			}
 		}
 

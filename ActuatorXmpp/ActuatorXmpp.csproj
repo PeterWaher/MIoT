@@ -187,13 +187,13 @@
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>1.0.17</Version>
+      <Version>1.0.20</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.0.5</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
       <Version>1.0.12</Version>

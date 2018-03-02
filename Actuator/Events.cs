@@ -12,7 +12,7 @@ namespace Actuator
 		{
 		}
 
-		public override void Queue(Event Event)
+		public override Task Queue(Event Event)
 		{
 			StringBuilder sb = new StringBuilder(Event.Message);
 
@@ -45,6 +45,8 @@ namespace Actuator
 			}
 
 			MainPage.Instance.AddLogMessage(sb.ToString());
+
+			return Task.CompletedTask;
 		}
 	}
 }

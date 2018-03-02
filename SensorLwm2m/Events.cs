@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Waher.Events;
 
 namespace SensorLwm2m
@@ -10,7 +11,7 @@ namespace SensorLwm2m
 		{
 		}
 
-		public override void Queue(Event Event)
+		public override Task Queue(Event Event)
 		{
 			StringBuilder sb = new StringBuilder(Event.Message);
 
@@ -43,6 +44,8 @@ namespace SensorLwm2m
 			}
 
 			MainPage.Instance.AddLogMessage(sb.ToString());
+
+			return Task.CompletedTask;
 		}
 	}
 }
