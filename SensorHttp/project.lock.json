@@ -2600,11 +2600,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -5406,11 +5406,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -8193,11 +8193,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -10953,11 +10953,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -13749,11 +13749,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -16509,11 +16509,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -19305,11 +19305,11 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.5": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -29370,13 +29370,13 @@
         "waher.events.statistics.nuspec"
       ]
     },
-    "Waher.Networking/1.0.4": {
-      "sha512": "MskpCVMjO+JO/2mBGv+0p/jqYKlP3QoTep1Q4+IGwmGwUVv7ple5d2J5cebBEU2T+2DL4hvelqlsc0Gqts8+bQ==",
+    "Waher.Networking/1.0.5": {
+      "sha512": "OoT+CVUw+dbbBPklIY4S3OubCE84CerhL5YRn3UYIQhx6xN6K/2FtgY+ogqFrytUsbMsXXiSjLI7jyM3hskBVQ==",
       "type": "package",
-      "path": "waher.networking/1.0.4",
+      "path": "waher.networking/1.0.5",
       "files": [
         "lib/netstandard1.3/Waher.Networking.dll",
-        "waher.networking.1.0.4.nupkg.sha512",
+        "waher.networking.1.0.5.nupkg.sha512",
         "waher.networking.nuspec"
       ]
     },
@@ -29531,7 +29531,7 @@
       "Waher.Content.Markdown >= 1.0.21",
       "Waher.Content.Markdown.Web.UWP >= 1.0.5",
       "Waher.Events >= 1.0.6",
-      "Waher.Networking >= 1.0.4",
+      "Waher.Networking >= 1.0.5",
       "Waher.Networking.HTTP.UWP >= 1.0.5",
       "Waher.Persistence >= 1.0.2",
       "Waher.Persistence.FilesLW >= 1.0.25",
@@ -29579,7 +29579,7 @@
       "Waher.Content.Markdown": "[1.0.21, )",
       "Waher.Content.Markdown.Web.UWP": "[1.0.5, )",
       "Waher.Events": "[1.0.6, )",
-      "Waher.Networking": "[1.0.4, )",
+      "Waher.Networking": "[1.0.5, )",
       "Waher.Networking.HTTP.UWP": "[1.0.5, )",
       "Waher.Persistence": "[1.0.2, )",
       "Waher.Persistence.FilesLW": "[1.0.25, )",
