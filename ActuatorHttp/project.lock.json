@@ -2600,7 +2600,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5406,7 +5406,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8193,7 +8193,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10953,7 +10953,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13749,7 +13749,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16509,7 +16509,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19305,7 +19305,7 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking/1.0.5": {
+      "Waher.Networking/1.0.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -29368,13 +29368,13 @@
         "waher.events.statistics.nuspec"
       ]
     },
-    "Waher.Networking/1.0.5": {
-      "sha512": "OoT+CVUw+dbbBPklIY4S3OubCE84CerhL5YRn3UYIQhx6xN6K/2FtgY+ogqFrytUsbMsXXiSjLI7jyM3hskBVQ==",
+    "Waher.Networking/1.0.6": {
+      "sha512": "MvIv8smDOol2/AFVhuQYuZ91mG3GO9Bt+qRky5JxLojcwpq8cufl2VY5NjlSSjFqkY571QGBNPczVTw1eegIgg==",
       "type": "package",
-      "path": "waher.networking/1.0.5",
+      "path": "waher.networking/1.0.6",
       "files": [
         "lib/netstandard1.3/Waher.Networking.dll",
-        "waher.networking.1.0.5.nupkg.sha512",
+        "waher.networking.1.0.6.nupkg.sha512",
         "waher.networking.nuspec"
       ]
     },
@@ -29529,7 +29529,7 @@
       "Waher.Content.Markdown >= 1.0.21",
       "Waher.Content.Markdown.Web.UWP >= 1.0.5",
       "Waher.Events >= 1.0.6",
-      "Waher.Networking >= 1.0.5",
+      "Waher.Networking >= 1.0.6",
       "Waher.Networking.HTTP.UWP >= 1.0.5",
       "Waher.Persistence >= 1.0.2",
       "Waher.Persistence.FilesLW >= 1.0.25",
@@ -29547,6 +29547,7 @@
     "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
   },
   "project": {
+    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\My Projects\\MIoT\\ActuatorHttp\\ActuatorHttp.csproj",
       "projectName": "ActuatorHttp",
@@ -29576,7 +29577,10 @@
       "Waher.Content.Markdown": "[1.0.21, )",
       "Waher.Content.Markdown.Web.UWP": "[1.0.5, )",
       "Waher.Events": "[1.0.6, )",
-      "Waher.Networking": "[1.0.5, )",
+      "Waher.Networking": {
+        "target": "Package",
+        "version": "[1.0.6, )"
+      },
       "Waher.Networking.HTTP.UWP": "[1.0.5, )",
       "Waher.Persistence": "[1.0.2, )",
       "Waher.Persistence.FilesLW": "[1.0.25, )",
