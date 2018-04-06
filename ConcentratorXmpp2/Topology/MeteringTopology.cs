@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Waher.Runtime.Language;
 using Waher.Things;
+using Waher.Things.SourceEvents;
 
 namespace ConcentratorXmpp.Topology
 {
@@ -24,6 +25,8 @@ namespace ConcentratorXmpp.Topology
 		public IEnumerable<IDataSource> ChildSources => null;
 
 		public IEnumerable<INode> RootNodes => new INode[] { ActuatorNode, SensorNode };
+
+		public event SourceEventEventHandler OnEvent = null;
 
 		public Task<bool> CanViewAsync(RequestOrigin Caller)
 		{

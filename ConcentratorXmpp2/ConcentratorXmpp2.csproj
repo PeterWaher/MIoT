@@ -232,7 +232,7 @@
       <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Things">
-      <Version>1.0.19</Version>
+      <Version>1.0.20</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
