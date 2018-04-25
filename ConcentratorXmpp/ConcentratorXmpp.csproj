@@ -208,7 +208,7 @@
       <Version>0.1.25</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>1.0.16</Version>
+      <Version>1.0.17</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
       <Version>1.0.17</Version>
@@ -217,7 +217,7 @@
       <Version>1.0.21</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.23</Version>
+      <Version>1.0.24</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.0.25</Version>
