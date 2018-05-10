@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4",
     "Waher.Content": "1.0.8",
     "Waher.Content.Emoji": "1.0.1",
     "Waher.Content.Images": "1.0.2",
@@ -8,13 +8,13 @@
     "Waher.Content.Markdown.Web.UWP": "1.0.5",
     "Waher.Events": "1.0.6",
     "Waher.Networking": "1.0.6",
-    "Waher.Networking.HTTP.UWP": "1.0.5",
+    "Waher.Networking.HTTP.UWP": "1.0.8",
     "Waher.Persistence": "1.0.2",
-    "Waher.Persistence.FilesLW": "1.0.25",
+    "Waher.Persistence.FilesLW": "1.0.26",
     "Waher.Runtime.Inventory": "1.0.5",
     "Waher.Runtime.Settings": "1.0.1",
     "Waher.Script": "1.0.11",
-    "Waher.Security": "1.0.1",
+    "Waher.Security": "1.0.2",
     "Waher.Security.JWT.UWP": "1.0.1",
     "Windows-Remote-Arduino": "1.4.0"
   },

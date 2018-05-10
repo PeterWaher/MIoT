@@ -239,7 +239,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -2480,7 +2480,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2828,7 +2828,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -2868,7 +2868,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -3318,7 +3318,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5148,7 +5148,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5464,7 +5464,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -5504,7 +5504,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -5999,7 +5999,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7819,7 +7819,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8137,7 +8137,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -8177,7 +8177,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -8627,7 +8627,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -10463,7 +10463,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10782,7 +10782,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -10822,7 +10822,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -11317,7 +11317,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -13143,7 +13143,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13461,7 +13461,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -13501,7 +13501,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -13951,7 +13951,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -15787,7 +15787,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16106,7 +16106,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -16146,7 +16146,7 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8"
+          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.4"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -16641,7 +16641,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
+      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -18467,7 +18467,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.25": {
+      "Waher.Persistence.FilesLW/1.0.26": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -20891,14 +20891,14 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "zGyKY3y4bLAFJPIaUUl+JBysmo++bRHT7zB93dmUJNs8U1Gy1D95grF1fPydr5ipPveE3PblYpQio98LQZR9lg==",
+    "Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "fbmK93GBKC0hH+vwxQSt/6eW/M7RXESOkpnV4egGJhNJOukNhv5Ms+6D+rJ4jtVHoyBU44vKwL5a7iAXVrIAOA==",
       "type": "package",
-      "path": "microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "microsoft.netcore.universalwindowsplatform.nuspec",
         "ref/netcore50/_._",
         "ref/uap10.0.15138/Microsoft.CSharp.dll",
@@ -22183,15 +22183,15 @@
         "runtimes/win/lib/netstandard1.5/System.Runtime.Extensions.dll"
       ]
     },
-    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "mCcoolv8UTrTcmRktwjlPk4N+kjcoJDFEI6cH/kT72zv31Mf5HH7/H99q6lNwSF1dXZAeZbzBXJcDOKFMJoKTw==",
+    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "FUND5WcsdqM7L8IXHxhfbF29Av34NNeOsY7QDx2sqt6xouHQpo6utvqONYKqUcLHdNEncE/eMEy9BghJxUZL2w==",
       "type": "package",
-      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22372,15 +22372,15 @@
         "runtimes/win10-arm-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "tbmLG9GnSm0LWKkzvzq6Ppw85Lt4EE+aRDSGoYrbbiPTkzK9fzcPOv5YqzL86WKzxWi9E9pZvVytM1uvd3bYXg==",
+    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "eb+ZZLVddOKC2kY35i1XrpANpytShM7tpIy/TzpgZ6gebKRhumWGYaAnvAxoYwwxCxc6rg49wVbok68VZp4q3A==",
       "type": "package",
-      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22548,15 +22548,15 @@
         "runtimes/win10-arm/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "QhGAy+4NIyxehEg0t0Ps+TvLDj9EHZxwqK+St3q4ggMhGCKXsv7B1g1i9OjC3GGLWW1ShEaSGJMTXf05cDO8Cg==",
+    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "TyPOficOCSANrAlWIMZa7B6E6B+81ShF2pTe+l8dfngK2RBj4MyjDEJN2K90eDBVDEUYbQtm5auzg2t1umoQkQ==",
       "type": "package",
-      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22737,15 +22737,15 @@
         "runtimes/win10-x64-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "gDKOajerneiwUinQpoVy0dEzX4QRB/oWO37vmfwTac4bSkAsrfdhA5gEeMR4y2JN0OHABLP8zjm1bOiHp4XnFQ==",
+    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "m0qzvokDdqtPIdJJAmJU0Mq69kElwpKDxzlzic0mhC6SjNMcomZnyv7k5PvY1WQs5t3qpUFixwKokaJqrY97jg==",
       "type": "package",
-      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22913,15 +22913,15 @@
         "runtimes/win10-x64/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "qlJZm6eLTkgsb4TjIlkeCU2DkEAtJw1l0X/YzsMwTmx5yz63gSc1UBp45IrPu699kG0AY3TuUJ6fXeWk9x9iIg==",
+    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "LxUVPzWGAiuCmgTD5k8tOdJOF5tViswSv9GM1qbZmH0/sjCP+KKCTo6VDBpdiGUP5bRz81bzrMsLkiZqX4aXUg==",
       "type": "package",
-      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -23102,15 +23102,15 @@
         "runtimes/win10-x86-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.0.8": {
-      "sha512": "CHjI9Nsqvw/8nOqiCJOnXr8HT/Fpo44Ir2sUqANdH9jnxGs4u7RTcZSG1dIRyJrOvd0nHLklAVfbwu8SIkXPWg==",
+    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.4": {
+      "sha512": "a3BJYWE+bMtfrBn5ps/88z0Q9D/xCBk8Uf5I0dNo9nCXWuaJKeXTMVDt1Kk1/I/3VG3zwkEZOYSYHtEtZX9goA==",
       "type": "package",
-      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.0.8",
+      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.1.4",
       "files": [
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.0.8.nupkg.sha512",
+        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.1.4.nupkg.sha512",
         "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -28407,13 +28407,13 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.25": {
-      "sha512": "/zOrRTm4k5LLAVC0NaukoyxYw1Hta8mbnQxAsoCVoz6+iRhp5oAKAKsbc0RO73mjCdtiDvJ/g1F7JngQW3zjpw==",
+    "Waher.Persistence.FilesLW/1.0.26": {
+      "sha512": "XMyf7hPJq/njlSDF1+40T4bXyFgaFrXf4KyZQcGC6uzOk52kebNo+RwljVG44XF18AnRO0rnVCFrcf13GHaNSA==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.25",
+      "path": "waher.persistence.fileslw/1.0.26",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.25.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.26.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -28514,20 +28514,20 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.0.8",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.4",
       "Waher.Events >= 1.0.6",
       "Waher.Networking.CoAP.UWP >= 1.0.5",
-      "Waher.Persistence.FilesLW >= 1.0.25",
+      "Waher.Persistence.FilesLW >= 1.0.26",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
   },
   "packageFolders": {
-    "C:\\Users\\Peter\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "C:\\Users\\Peter\\.nuget\\packages\\": {}
   },
   "project": {
+    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\My Projects\\MIoT\\SensorCoap\\SensorCoap.csproj",
       "projectName": "SensorCoap",
@@ -28536,13 +28536,9 @@
       "packagesPath": "C:\\Users\\Peter\\.nuget\\packages\\",
       "outputPath": "C:\\My Projects\\MIoT\\SensorCoap\\obj\\",
       "projectStyle": "ProjectJson",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\Peter\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -28550,10 +28546,16 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.0.8, )",
+      "Microsoft.NETCore.UniversalWindowsPlatform": {
+        "target": "Package",
+        "version": "[6.1.4, )"
+      },
       "Waher.Events": "[1.0.6, )",
       "Waher.Networking.CoAP.UWP": "[1.0.5, )",
-      "Waher.Persistence.FilesLW": "[1.0.25, )",
+      "Waher.Persistence.FilesLW": {
+        "target": "Package",
+        "version": "[1.0.26, )"
+      },
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
