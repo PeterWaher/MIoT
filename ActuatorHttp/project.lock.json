@@ -2749,7 +2749,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2763,7 +2763,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -5560,7 +5560,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5574,7 +5574,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -8363,7 +8363,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8377,7 +8377,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -11139,7 +11139,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11153,7 +11153,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -13951,7 +13951,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13965,7 +13965,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -16727,7 +16727,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16741,7 +16741,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -19539,7 +19539,7 @@
           "lib/netstandard1.3/Waher.Security.dll": {}
         }
       },
-      "Waher.Security.JWS/1.0.2": {
+      "Waher.Security.JWS/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19553,7 +19553,7 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.0.4": {
+      "Waher.Security.JWT.UWP/1.0.5": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "1.0.10",
@@ -29596,20 +29596,20 @@
         "waher.security.nuspec"
       ]
     },
-    "Waher.Security.JWS/1.0.2": {
-      "sha512": "kPRMlw4Uy8H1ukANe517P8X4W8Xx00l+mZWwkkjiqBJQ56QpzFttxaiHjzqwbsA+1L33yOp9uBhSXYAnDv9F2A==",
+    "Waher.Security.JWS/1.0.3": {
+      "sha512": "oZyT2JCIHPkfpvzC4LdGLFWt/kzsA7VGX1wXYA4QxtL3v5uTn19A3MAaTnxb4j5r7fVjspl3Vz1/Lf2S3otIUg==",
       "type": "package",
-      "path": "waher.security.jws/1.0.2",
+      "path": "waher.security.jws/1.0.3",
       "files": [
         "lib/netstandard1.3/Waher.Security.JWS.dll",
-        "waher.security.jws.1.0.2.nupkg.sha512",
+        "waher.security.jws.1.0.3.nupkg.sha512",
         "waher.security.jws.nuspec"
       ]
     },
-    "Waher.Security.JWT.UWP/1.0.4": {
-      "sha512": "DdzqDFrDoyEV1xBgVXnrChPc7yyWIsMGvCiKdNbjrkFszWu15HC2WJJn3RmBC3BqQmq9e6Om5F0kdMbVVVpWvg==",
+    "Waher.Security.JWT.UWP/1.0.5": {
+      "sha512": "VWiPSXai0Id/PVbkBAiX4j/R+MyJdn3Bq15HNWjYJY7sXh/Wy567mahsp8zEhM8JNsPtKnNLu5uIJClcxOV0Uw==",
       "type": "package",
-      "path": "waher.security.jwt.uwp/1.0.4",
+      "path": "waher.security.jwt.uwp/1.0.5",
       "files": [
         "ref/uap10.0/Waher.Security.JWT.UWP.XML",
         "ref/uap10.0/Waher.Security.JWT.UWP.dll",
@@ -29621,7 +29621,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
-        "waher.security.jwt.uwp.1.0.4.nupkg.sha512",
+        "waher.security.jwt.uwp.1.0.5.nupkg.sha512",
         "waher.security.jwt.uwp.nuspec"
       ]
     },
@@ -29664,7 +29664,8 @@
       "Waher.Runtime.Settings >= 1.0.1",
       "Waher.Script >= 1.0.11",
       "Waher.Security >= 1.0.2",
-      "Waher.Security.JWT.UWP >= 1.0.4",
+      "Waher.Security.JWS >= 1.0.3",
+      "Waher.Security.JWT.UWP >= 1.0.5",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -29707,10 +29708,11 @@
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Waher.Script": "[1.0.11, )",
       "Waher.Security": "[1.0.2, )",
-      "Waher.Security.JWT.UWP": {
+      "Waher.Security.JWS": {
         "target": "Package",
-        "version": "[1.0.4, )"
+        "version": "[1.0.3, )"
       },
+      "Waher.Security.JWT.UWP": "[1.0.5, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
     "frameworks": {

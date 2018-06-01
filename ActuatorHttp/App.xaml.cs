@@ -39,6 +39,7 @@ using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 using Waher.Script;
 using Waher.Security;
+using Waher.Security.JWS;
 using Waher.Security.JWT;
 
 namespace ActuatorHttp
@@ -131,6 +132,7 @@ namespace ActuatorHttp
 					typeof(ImageCodec).GetTypeInfo().Assembly,
 					typeof(MarkdownDocument).GetTypeInfo().Assembly,
 					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
+					typeof(IJwsAlgorithm).GetTypeInfo().Assembly,
 					typeof(Expression).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 

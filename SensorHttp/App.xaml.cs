@@ -39,6 +39,7 @@ using Waher.Runtime.Settings;
 using Waher.Script;
 using Waher.Script.Graphs;
 using Waher.Security;
+using Waher.Security.JWS;
 using Waher.Security.JWT;
 
 using SensorHttp.History;
@@ -144,6 +145,7 @@ namespace SensorHttp
 					typeof(ImageCodec).GetTypeInfo().Assembly,
 					typeof(MarkdownDocument).GetTypeInfo().Assembly,
 					typeof(MarkdownToHtmlConverter).GetTypeInfo().Assembly,
+					typeof(JwsAlgorithm).GetTypeInfo().Assembly,
 					typeof(Expression).GetTypeInfo().Assembly,
 					typeof(Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
