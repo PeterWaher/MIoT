@@ -29,6 +29,7 @@ using Waher.Events;
 using Waher.Networking.XMPP;
 using Waher.Networking.XMPP.BitsOfBinary;
 using Waher.Networking.XMPP.Chat;
+using Waher.Networking.XMPP.PEP;
 using Waher.Networking.XMPP.Provisioning;
 using Waher.Networking.XMPP.ServiceDiscovery;
 using Waher.Networking.XMPP.Sensor;
@@ -54,6 +55,7 @@ namespace SensorXmpp
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private XmppClient xmppClient = null;
+		private PepClient pepClient = null;
 		private bool newXmppClient = true;
 
 		private const int windowSize = 10;
@@ -508,6 +510,12 @@ namespace SensorXmpp
 				if (this.bobClient == null)
 					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
+				if (this.pepClient != null)
+				{
+					this.pepClient.Dispose();
+					this.pepClient = null;
+				}
+
 				if (this.chatServer != null)
 				{
 					this.chatServer.Dispose();
@@ -515,6 +523,7 @@ namespace SensorXmpp
 				}
 
 				this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer, this.provisioningClient);
+				this.pepClient = new PepClient(this.xmppClient);
 
 				// XEP-0054: vcard-temp: http://xmpp.org/extensions/xep-0054.html
 				this.xmppClient.RegisterIqGetHandler("vCard", "vcard-temp", this.QueryVCardHandler, true);
@@ -526,20 +535,42 @@ namespace SensorXmpp
 			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected || !this.lastLight.HasValue || !this.lastMotion.HasValue)
 				return;
 
+			/* Three methods to publish data using the Publish/Subscribe pattern exists:
+			 * 
+			 * 1) Using the presence stanza. In this chase, simply include the sensor data XML when you set your online presence:
+			 * 
+			 *       this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
+			 *       
+			 * 2) Using the Publish/Subscribe extension XEP-0060. In this case, you need to use an XMPP broker that supports XEP-0060, and
+			 *    publish the sensor data XML to a node on the broke pubsub service. A subcriber receives the sensor data after successfully
+			 *    subscribing to the node. You can use Waher.Networking.XMPP.PubSub to publish data using XEP-0060.
+			 *    
+			 * 3) Using the Personal Eventing Protocol (PEP) extension XEP-0163. It's a simplified Publish/Subscribe extension where each
+			 *    account becomes its own Publish/Subsribe service. A contact with a presence subscription to the sensor, and showing an interest
+			 *    in sensor data in its entity capabilities, will receive the data automatically. There's no need to manually subscibe to the data.
+			 *    This approach is used in this example. You can use Waher.Networking.XMPP.PEP to publish data using XEP-0163.
+			 *    
+			 *    To receive personal events, register a personal event handler on the controller. This adds the required namespace to the
+			 *    entity capability features list, and the broker will forward the events to you. Example:
+			 *    
+			 *       this.pepClient.RegisterHandler(typeof(SensorData), PepClient_SensorData);
+			 *    
+			 *    Then you process the incoming event as follows:
+			 *    
+			 *       private void PepClient_SensorData(object Sender, PersonalEventNotificationEventArgs e)
+			 *       {
+			 *          if (e.PersonalEvent is SensorData SensorData)
+			 *          {
+			 *             ...
+			 *          }
+			 *       }
+			 */
+
 			DateTime Now = DateTime.Now;
 
-			List<Field> Fields = new List<Field>()
-			{
+			this.pepClient?.Publish(new SensorData(
 				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout),
-				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)
-			};
-
-			StringBuilder Xml = new StringBuilder();
-			XmlWriter w = XmlWriter.Create(Xml, XML.WriterSettings(false, true));
-			SensorDataServerRequest.OutputFields(w, Fields);
-			w.Flush();
-
-			//this.xmppClient.SetPresence(Availability.Chat, Xml.ToString());
+				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)), null, null);
 
 			this.lastPublished = Now;
 			this.lastPublishedLight = this.lastLight.Value;
@@ -1262,6 +1293,12 @@ namespace SensorXmpp
 		private void OnSuspending(object sender, SuspendingEventArgs e)
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
+
+			if (this.pepClient != null)
+			{
+				this.pepClient.Dispose();
+				this.pepClient = null;
+			}
 
 			if (this.chatServer != null)
 			{
