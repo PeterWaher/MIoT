@@ -2411,11 +2411,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -2424,11 +2424,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -2460,7 +2460,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5013,11 +5013,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -5026,11 +5026,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -5051,7 +5051,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -7607,11 +7607,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -7620,11 +7620,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -7645,7 +7645,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -10174,11 +10174,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -10187,11 +10187,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -10212,7 +10212,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -12777,11 +12777,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -12790,11 +12790,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -12815,7 +12815,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15344,11 +15344,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -15357,11 +15357,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -15382,7 +15382,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -17947,11 +17947,11 @@
           "lib/netstandard1.3/Waher.Events.dll": {}
         }
       },
-      "Waher.Networking/1.0.4": {
+      "Waher.Networking/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.5"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Networking.dll": {}
@@ -17960,11 +17960,11 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.MQTT.UWP/1.0.9": {
+      "Waher.Networking.MQTT.UWP/1.0.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Events": "1.0.4",
-          "Waher.Networking": "1.0.4"
+          "Waher.Events": "1.0.7",
+          "Waher.Networking": "1.0.8"
         },
         "compile": {
           "ref/uap10.0/Waher.Networking.MQTT.UWP.dll": {}
@@ -17985,7 +17985,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.27": {
+      "Waher.Persistence.FilesLW/1.0.28": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -27825,20 +27825,20 @@
         "waher.events.nuspec"
       ]
     },
-    "Waher.Networking/1.0.4": {
-      "sha512": "MskpCVMjO+JO/2mBGv+0p/jqYKlP3QoTep1Q4+IGwmGwUVv7ple5d2J5cebBEU2T+2DL4hvelqlsc0Gqts8+bQ==",
+    "Waher.Networking/1.0.8": {
+      "sha512": "QnD74w00pFws8eZpjnefo4hZzJkUBy3UAe8j5Wt7iWP+G777ydBNawlje1Dhysk4+Xnyx8vanGU4e+J5ic6Cyw==",
       "type": "package",
-      "path": "waher.networking/1.0.4",
+      "path": "waher.networking/1.0.8",
       "files": [
         "lib/netstandard1.3/Waher.Networking.dll",
-        "waher.networking.1.0.4.nupkg.sha512",
+        "waher.networking.1.0.8.nupkg.sha512",
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.MQTT.UWP/1.0.9": {
-      "sha512": "+h+GFrMq5In9CxPx8zcGnXPuaiSYSvsOnj2uRy6X/rR2UcCxragWmzinpM8FsB6I106wiB06D4QI1NsRgJpUfA==",
+    "Waher.Networking.MQTT.UWP/1.0.10": {
+      "sha512": "VacahsnfINmC+d4mIcT3GmPFyXq8bKKMvl/QA7xh62jp4NqZsLDJOwFjGCmbv3cXUfQ4gmO4zj91uBxLurxXmA==",
       "type": "package",
-      "path": "waher.networking.mqtt.uwp/1.0.9",
+      "path": "waher.networking.mqtt.uwp/1.0.10",
       "files": [
         "ref/uap10.0/Waher.Networking.MQTT.UWP.XML",
         "ref/uap10.0/Waher.Networking.MQTT.UWP.dll",
@@ -27850,7 +27850,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.MQTT.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.MQTT.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.MQTT.UWP.pdb",
-        "waher.networking.mqtt.uwp.1.0.9.nupkg.sha512",
+        "waher.networking.mqtt.uwp.1.0.10.nupkg.sha512",
         "waher.networking.mqtt.uwp.nuspec"
       ]
     },
@@ -27864,13 +27864,13 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.27": {
-      "sha512": "P3/LBuWf+JrAVQ6whjszsXh4/Y6/S4+MXL0ZIAwmN1mgXfxlkRiEcc37WKDTs+Xygef8jCWNWR94lm64pe8oag==",
+    "Waher.Persistence.FilesLW/1.0.28": {
+      "sha512": "tuKuZD/h2r0nLn4FUTermrxxL+GAspTcsxhOPnh3ZqiQUznKXSLXoTc2RdwO5RG4C7BF2iGgv8wjqm/yblopuA==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.27",
+      "path": "waher.persistence.fileslw/1.0.28",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.27.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.28.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -27930,8 +27930,8 @@
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.5",
       "Waher.Events >= 1.0.7",
-      "Waher.Networking.MQTT.UWP >= 1.0.9",
-      "Waher.Persistence.FilesLW >= 1.0.27",
+      "Waher.Networking.MQTT.UWP >= 1.0.10",
+      "Waher.Persistence.FilesLW >= 1.0.28",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -27962,10 +27962,13 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.1.5, )",
       "Waher.Events": "[1.0.7, )",
-      "Waher.Networking.MQTT.UWP": "[1.0.9, )",
+      "Waher.Networking.MQTT.UWP": {
+        "target": "Package",
+        "version": "[1.0.10, )"
+      },
       "Waher.Persistence.FilesLW": {
         "target": "Package",
-        "version": "[1.0.27, )"
+        "version": "[1.0.28, )"
       },
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
