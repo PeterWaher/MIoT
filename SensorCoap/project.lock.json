@@ -2468,7 +2468,7 @@
           }
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2480,12 +2480,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -2495,11 +2495,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -5136,7 +5136,7 @@
           "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -5148,12 +5148,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -5163,11 +5163,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -7807,7 +7807,7 @@
           "runtimes/win10-arm/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7819,12 +7819,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -7834,11 +7834,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -10451,7 +10451,7 @@
           "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10463,12 +10463,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -10478,11 +10478,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -13131,7 +13131,7 @@
           "runtimes/win10-x64/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -13143,12 +13143,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -13158,11 +13158,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -15775,7 +15775,7 @@
           "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15787,12 +15787,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -15802,11 +15802,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -18455,7 +18455,7 @@
           "runtimes/win10-x86/lib/uap10.0/Waher.Networking.CoAP.UWP.dll": {}
         }
       },
-      "Waher.Persistence/1.0.2": {
+      "Waher.Persistence/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -18467,12 +18467,12 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.28": {
+      "Waher.Persistence.FilesLW/1.0.29": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Persistence": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Persistence": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6"
         },
         "compile": {
@@ -18482,11 +18482,11 @@
           "lib/netstandard1.3/Waher.Persistence.FilesLW.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.1": {
+      "Waher.Runtime.Cache/1.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.2"
+          "Waher.Events": "1.0.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -28404,33 +28404,33 @@
         "waher.networking.coap.uwp.nuspec"
       ]
     },
-    "Waher.Persistence/1.0.2": {
-      "sha512": "w+XFb9d1SPhAjkTHrDUV8YSoz3AqlPjVdhY+ad/IVYvd/ajtMPMilp24WDkwWR33HGBxCTwUlRcx86xoEc5m5Q==",
+    "Waher.Persistence/1.0.3": {
+      "sha512": "M6f1faQxqK4xquskVTg+05zq4y4CKdEyV3Tok36PbuJFFrPeivd1QSVctsZJwOlFZdpUEkgU33jqPhjoibHCRg==",
       "type": "package",
-      "path": "waher.persistence/1.0.2",
+      "path": "waher.persistence/1.0.3",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.dll",
-        "waher.persistence.1.0.2.nupkg.sha512",
+        "waher.persistence.1.0.3.nupkg.sha512",
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.28": {
-      "sha512": "tuKuZD/h2r0nLn4FUTermrxxL+GAspTcsxhOPnh3ZqiQUznKXSLXoTc2RdwO5RG4C7BF2iGgv8wjqm/yblopuA==",
+    "Waher.Persistence.FilesLW/1.0.29": {
+      "sha512": "VPtJt5S7/8bQbAZaPy3tELd4BhhUWprxFYUaHS7PlADxlrr9FA0a7DM0moNVlzsetboaREHAQglC2nee5144gg==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.28",
+      "path": "waher.persistence.fileslw/1.0.29",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.28.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.29.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
-    "Waher.Runtime.Cache/1.0.1": {
-      "sha512": "SSzE3bRwcf7spHdP0MPOA3h5d9WwkIdQG3XxUiyGQchR/W7xXkWFiGMgXdlW/0WhOCFRAHt82GtjYNbI2ZqyWg==",
+    "Waher.Runtime.Cache/1.0.2": {
+      "sha512": "7gYzdAWUSe8eHkwUAWRi6MziRo/Ug4daWZ+b8J6guioHmcDNQhuGGd3WqJ139LIlFMU4cyKgtwIK1mLz5PSKAw==",
       "type": "package",
-      "path": "waher.runtime.cache/1.0.1",
+      "path": "waher.runtime.cache/1.0.2",
       "files": [
         "lib/netstandard1.3/Waher.Runtime.Cache.dll",
-        "waher.runtime.cache.1.0.1.nupkg.sha512",
+        "waher.runtime.cache.1.0.2.nupkg.sha512",
         "waher.runtime.cache.nuspec"
       ]
     },
@@ -28524,7 +28524,7 @@
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.5",
       "Waher.Events >= 1.0.7",
       "Waher.Networking.CoAP.UWP >= 1.0.5",
-      "Waher.Persistence.FilesLW >= 1.0.28",
+      "Waher.Persistence.FilesLW >= 1.0.29",
       "Waher.Runtime.Settings >= 1.0.1",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -28558,7 +28558,7 @@
       "Waher.Networking.CoAP.UWP": "[1.0.5, )",
       "Waher.Persistence.FilesLW": {
         "target": "Package",
-        "version": "[1.0.28, )"
+        "version": "[1.0.29, )"
       },
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
