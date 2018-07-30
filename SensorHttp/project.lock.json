@@ -239,7 +239,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -270,11 +270,11 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
@@ -1456,7 +1456,7 @@
           }
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -2086,12 +2086,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -2101,15 +2101,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -2119,14 +2119,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -2135,7 +2135,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -2144,7 +2144,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -2162,13 +2162,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -2519,17 +2519,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -2567,14 +2567,14 @@
           }
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -2621,16 +2621,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -2663,7 +2663,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2717,7 +2717,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -3035,7 +3035,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -3066,16 +3066,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -3525,7 +3525,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -4381,7 +4381,7 @@
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -4941,12 +4941,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -4956,15 +4956,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -4974,14 +4974,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -4990,7 +4990,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -4999,7 +4999,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -5017,13 +5017,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -5352,17 +5352,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -5389,14 +5389,14 @@
           "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -5443,16 +5443,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -5474,7 +5474,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5528,7 +5528,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5803,7 +5803,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -5834,16 +5834,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -6338,7 +6338,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7184,7 +7184,7 @@
           "runtimes/aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -7744,12 +7744,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -7759,15 +7759,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -7777,14 +7777,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -7793,7 +7793,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -7802,7 +7802,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -7820,13 +7820,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -8155,17 +8155,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -8192,14 +8192,14 @@
           "runtimes/win10-arm/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -8246,16 +8246,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -8277,7 +8277,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8331,7 +8331,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8608,7 +8608,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -8639,16 +8639,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -9098,7 +9098,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -9960,7 +9960,7 @@
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -10520,12 +10520,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -10535,15 +10535,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -10553,14 +10553,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -10569,7 +10569,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -10578,7 +10578,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -10596,13 +10596,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -10931,17 +10931,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -10968,14 +10968,14 @@
           "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -11022,16 +11022,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -11053,7 +11053,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11107,7 +11107,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11385,7 +11385,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -11416,16 +11416,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -11920,7 +11920,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -12772,7 +12772,7 @@
           "runtimes/aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -13332,12 +13332,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -13347,15 +13347,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -13365,14 +13365,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -13381,7 +13381,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -13390,7 +13390,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -13408,13 +13408,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -13743,17 +13743,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -13780,14 +13780,14 @@
           "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -13834,16 +13834,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -13865,7 +13865,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13919,7 +13919,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -14196,7 +14196,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -14227,16 +14227,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -14686,7 +14686,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -15548,7 +15548,7 @@
           "lib/netstandard1.3/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -16108,12 +16108,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -16123,15 +16123,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -16141,14 +16141,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -16157,7 +16157,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -16166,7 +16166,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -16184,13 +16184,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -16519,17 +16519,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -16556,14 +16556,14 @@
           "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -16610,16 +16610,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -16641,7 +16641,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16695,7 +16695,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16973,7 +16973,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -17004,16 +17004,16 @@
           "System.Runtime.Serialization.Xml": "4.1.2",
           "System.Runtime.WindowsRuntime": "4.0.11",
           "System.Runtime.WindowsRuntime.UI.Xaml": "4.0.1",
-          "System.ServiceModel.Duplex": "4.0.2",
-          "System.ServiceModel.Http": "4.1.1",
-          "System.ServiceModel.NetTcp": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
-          "System.ServiceModel.Security": "4.0.2",
+          "System.ServiceModel.Duplex": "4.0.4",
+          "System.ServiceModel.Http": "4.1.3",
+          "System.ServiceModel.NetTcp": "4.1.3",
+          "System.ServiceModel.Primitives": "4.1.3",
+          "System.ServiceModel.Security": "4.0.4",
           "System.Text.Encoding.CodePages": "4.0.1",
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5"
+          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.7"
         },
         "compile": {
           "ref/netcore50/_._": {}
@@ -17508,7 +17508,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
+      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -18360,7 +18360,7 @@
           "runtimes/aot/lib/netcore50/System.Private.DataContractSerialization.dll": {}
         }
       },
-      "System.Private.ServiceModel/4.1.1": {
+      "System.Private.ServiceModel/4.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.0.1",
@@ -18920,12 +18920,12 @@
           "lib/netcore50/System.Security.Principal.dll": {}
         }
       },
-      "System.ServiceModel.Duplex/4.0.2": {
+      "System.ServiceModel.Duplex/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Threading": "4.0.11"
         },
         "compile": {
@@ -18935,15 +18935,15 @@
           "lib/netcore50/System.ServiceModel.Duplex.dll": {}
         }
       },
-      "System.ServiceModel.Http/4.1.1": {
+      "System.ServiceModel.Http/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
           "System.Net.WebHeaderCollection": "4.0.1",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1",
+          "System.ServiceModel.Primitives": "4.1.3",
           "System.Text.Encoding": "4.0.11"
         },
         "compile": {
@@ -18953,14 +18953,14 @@
           "lib/netcore50/System.ServiceModel.Http.dll": {}
         }
       },
-      "System.ServiceModel.NetTcp/4.1.1": {
+      "System.ServiceModel.NetTcp/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Net.Primitives": "4.0.11",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.NetTcp.dll": {}
@@ -18969,7 +18969,7 @@
           "lib/netcore50/System.ServiceModel.NetTcp.dll": {}
         }
       },
-      "System.ServiceModel.Primitives/4.1.1": {
+      "System.ServiceModel.Primitives/4.1.3": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -18978,7 +18978,7 @@
           "System.IO": "4.1.0",
           "System.Net.Primitives": "4.0.11",
           "System.ObjectModel": "4.0.12",
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Reflection": "4.1.0",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Primitives": "4.1.1",
@@ -18996,13 +18996,13 @@
           "lib/netcore50/System.ServiceModel.Primitives.dll": {}
         }
       },
-      "System.ServiceModel.Security/4.0.2": {
+      "System.ServiceModel.Security/4.0.4": {
         "type": "package",
         "dependencies": {
-          "System.Private.ServiceModel": "4.1.1",
+          "System.Private.ServiceModel": "4.1.3",
           "System.Runtime": "4.1.0",
           "System.Runtime.Serialization.Xml": "4.1.1",
-          "System.ServiceModel.Primitives": "4.1.1"
+          "System.ServiceModel.Primitives": "4.1.3"
         },
         "compile": {
           "ref/netcore50/System.ServiceModel.Security.dll": {}
@@ -19331,17 +19331,17 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/1.0.22": {
+      "Waher.Content.Markdown/1.0.23": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
           "Waher.Content.Emoji": "1.0.1",
           "Waher.Content.Html": "1.0.3",
-          "Waher.Content.Xml": "1.0.2",
-          "Waher.Runtime.Cache": "1.0.1",
-          "Waher.Script": "1.0.13",
-          "Waher.Script.Graphs": "1.0.7"
+          "Waher.Content.Xml": "1.0.3",
+          "Waher.Runtime.Cache": "1.0.2",
+          "Waher.Script": "1.0.15",
+          "Waher.Script.Graphs": "1.0.9"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -19368,14 +19368,14 @@
           "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll": {}
         }
       },
-      "Waher.Content.Xml/1.0.2": {
+      "Waher.Content.Xml/1.0.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.2",
-          "Waher.Script": "1.0.3"
+          "Waher.Content": "1.0.11",
+          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Script": "1.0.14"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -19422,16 +19422,16 @@
           "lib/netstandard1.3/Waher.Networking.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/1.0.16": {
+      "Waher.Networking.HTTP.UWP/1.0.19": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "1.0.10",
+          "Waher.Content": "1.0.11",
           "Waher.Events": "1.0.7",
           "Waher.Events.Statistics": "1.0.3",
-          "Waher.Networking": "1.0.6",
-          "Waher.Runtime.Cache": "1.0.1",
+          "Waher.Networking": "1.0.10",
+          "Waher.Runtime.Cache": "1.0.2",
           "Waher.Runtime.Inventory": "1.0.6",
-          "Waher.Script": "1.0.13",
+          "Waher.Script": "1.0.15",
           "Waher.Security": "1.0.2"
         },
         "compile": {
@@ -19453,7 +19453,7 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.29": {
+      "Waher.Persistence.FilesLW/1.0.32": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19507,7 +19507,7 @@
           "lib/netstandard1.3/Waher.Runtime.Settings.dll": {}
         }
       },
-      "Waher.Script/1.0.14": {
+      "Waher.Script/1.0.15": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -21890,15 +21890,15 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "+mkQ5wUTJSioGTIZ/q+0DTamp4MjTJjeuW1Jl5bZlVQdwR+IgCqGgU6et2JdeUoiwnDorEjJP7cH05SuiQ4edQ==",
+    "Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "QoL3lJwDRFvUAWXSuIN43s56MD/SPplHdV821aM10hX7yTRQOgrHoy4PaP/SYNmZD8MdevUh2I3tKDC2kk5Xig==",
       "type": "package",
-      "path": "microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "microsoft.netcore.universalwindowsplatform.nuspec",
         "ref/netcore50/_._",
         "ref/uap10.0.15138/Microsoft.CSharp.dll",
@@ -23183,16 +23183,16 @@
         "runtimes/win/lib/netstandard1.5/System.Runtime.Extensions.dll"
       ]
     },
-    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "8dcKF8afW7ntMOrlx7mYIa9eEn1vX7mu8DyDRjFspieN9QRhSme88dLYW1ox4MRQXF/s67Vomnk4L6MQ2M389w==",
+    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "sKS9GWR1elC5HMxDyYrONWJkBdcfOkRsRCVsnn3Ed1j9SAglZy2xJ0KjW0xz0UZuCkga0s0nUwas1A8Aomo5RA==",
       "type": "package",
-      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -23373,16 +23373,16 @@
         "runtimes/win10-arm-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "hks9C32BJcxM94NO9J4ssE0AilhuJVPRQdA02UgP/mAL0y4dKApIzzJxzpRJ4yUk0JAWCIljToqy1Bn+G4O7tA==",
+    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "/IpVWKTfetFmRJrtm9hqw1u6lm/i6P3+DxKu5JEmpG7FhLHPKU+MCrJE1ZjeRJwVwCmpGQVIOdbXiNZEbIx1FA==",
       "type": "package",
-      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -23550,16 +23550,16 @@
         "runtimes/win10-arm/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "W3RUaxJ/u8eUTr7Wwa0BnVBBGqFP0pALhmj5yjZogM2ChQkapZyTxO4+/FDDZYuI27OG5MhtMwoSCaVNG5Oobw==",
+    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "iWfRwTyWtFfy0SEdSHV90Qz3hyhV/psELSKp7BocjDkTbM0nCvF4LDq6vf8D3hZXlA2ng4KM7LRIJN0Gw7aOcg==",
       "type": "package",
-      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -23740,16 +23740,16 @@
         "runtimes/win10-x64-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "VWmLqgEnbpiwEnHjjlrNy9VLAdQy41K7htSXtKBqDqKNJbc0j0gaWGCrZjozAN9vA3m0q4BOpqqz7W+RHFXp0g==",
+    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "25p/SlG1nfkQIyAp8n7bI5U6DXBt5rUfydeqnIgnRMhbFJBaetbg8VJiJ4bTU82yFTsAcGX8IpkOGFbE/xEZ/g==",
       "type": "package",
-      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -23917,16 +23917,16 @@
         "runtimes/win10-x64/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "9cnu98KUQiJWWkY/5+/+5xlR/OfeSNWo88v/rqy6ks0Nat02F1KaD4JzHatwlwtLI32Oi+2hUrdEPvUhUB6uOg==",
+    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "siNB9D+pYO5AsgSW/FvHhN91H5OkpIW37G3jq+Ra1ZZvs9YFRkaiwlfkeQSiQrMOWJfm8OCZhKATaRnMboaZHw==",
       "type": "package",
-      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -24107,16 +24107,16 @@
         "runtimes/win10-x86-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.5": {
-      "sha512": "C3NiwXqzKJ4pams1sAW0EAZlDphBms1Ib1CUrg5NzDkpGpAp/NYYWzv8izwFRdhvvesb0KsFo6FW66l7coPgWg==",
+    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.7": {
+      "sha512": "ub7zmqQTMhlaYf4o27/8LLMmhoHq3f5x5CMFur5eDvILRqcd53r3rTQMkp1KU6wmk0VAHW9P0490UBgo9d3r4A==",
       "type": "package",
-      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.1.5",
+      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.1.7",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.1.5.nupkg.sha512",
+        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.1.7.nupkg.sha512",
         "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -26896,18 +26896,19 @@
         "system.private.datacontractserialization.nuspec"
       ]
     },
-    "System.Private.ServiceModel/4.1.1": {
-      "sha512": "xJyHuGt++ArcsoQkkOUuBxWdPvQa9P/YZ/L1W14gL7xh4XrcDu39Ejp7159qes6JlVvrOFZVoiCRj721hj1hnw==",
+    "System.Private.ServiceModel/4.1.3": {
+      "sha512": "PS9pmdXqvLxxt02jF7Lrbq0kBi+IQGhVOP38V6Wv5IlUW2vFVBbtPb2euhl7bJsh80paIeUEjjA3QtvgMVE7Vw==",
       "type": "package",
-      "path": "system.private.servicemodel/4.1.1",
+      "path": "system.private.servicemodel/4.1.3",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "ref/netstandard/_._",
         "runtimes/unix/lib/netstandard1.3/System.Private.ServiceModel.dll",
         "runtimes/win7/lib/netcore50/System.Private.ServiceModel.dll",
         "runtimes/win7/lib/netstandard1.3/System.Private.ServiceModel.dll",
-        "system.private.servicemodel.4.1.1.nupkg.sha512",
+        "system.private.servicemodel.4.1.3.nupkg.sha512",
         "system.private.servicemodel.nuspec"
       ]
     },
@@ -28429,11 +28430,12 @@
         "system.security.principal.nuspec"
       ]
     },
-    "System.ServiceModel.Duplex/4.0.2": {
-      "sha512": "AABh0/uzAPK2zsdt7BG1Ay+h3zlEVfxO7T4Ht+Zo8LMOBirEDglT0dyvaMo2Jd6lCVqTjQIyGODdtk3g61UXDg==",
+    "System.ServiceModel.Duplex/4.0.4": {
+      "sha512": "yBFdrm04/c3ApEM8TmHnN+d5nEXBX7ZDQ5kgL06TuXHWR6M8OogaUVFqfb9hkBH/PrA1aFLgaTTj4PqhvRSTBQ==",
       "type": "package",
-      "path": "system.servicemodel.duplex/4.0.2",
+      "path": "system.servicemodel.duplex/4.0.4",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net45/_._",
@@ -28446,15 +28448,16 @@
         "ref/netstandard1.1/System.ServiceModel.Duplex.dll",
         "ref/portable-net45+win8/_._",
         "ref/win8/_._",
-        "system.servicemodel.duplex.4.0.2.nupkg.sha512",
+        "system.servicemodel.duplex.4.0.4.nupkg.sha512",
         "system.servicemodel.duplex.nuspec"
       ]
     },
-    "System.ServiceModel.Http/4.1.1": {
-      "sha512": "Af8YqW1+/Plr+ufkvg6B9yw6kv7mOk/wO1aUWMMFJEErigoLCy7Q+mJ5dTjQFPeiLb6VaQsGlCkKD43bBQ7rvw==",
+    "System.ServiceModel.Http/4.1.3": {
+      "sha512": "8hpHlzYjJI6zxDq0jOLd7oioVokGJ9mVb+O9ME7Me5c+JLl0lny3snkKtCIXi0NJ98SjLUsF0uFg/lyBVos9QQ==",
       "type": "package",
-      "path": "system.servicemodel.http/4.1.1",
+      "path": "system.servicemodel.http/4.1.3",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -28485,15 +28488,16 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.http.4.1.1.nupkg.sha512",
+        "system.servicemodel.http.4.1.3.nupkg.sha512",
         "system.servicemodel.http.nuspec"
       ]
     },
-    "System.ServiceModel.NetTcp/4.1.1": {
-      "sha512": "ozGfn/rBUgEuulq5CCEBen3bdLFePCPzg/Rdg+QrsPflr1eYAvFKR4JGSlFO+UVs6BumLsGstO8S1LuoMMr1Dg==",
+    "System.ServiceModel.NetTcp/4.1.3": {
+      "sha512": "qiAn9GyWS5zFNWBjgnFMThN1iO2ryyJCTAZgYehTQyLvBr3E3XHlW9rM1bTTbbxU0neTKuJPLjEn7QVQ96H9gA==",
       "type": "package",
-      "path": "system.servicemodel.nettcp/4.1.1",
+      "path": "system.servicemodel.nettcp/4.1.3",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net45/_._",
@@ -28509,15 +28513,16 @@
         "ref/netstandard1.3/System.ServiceModel.NetTcp.dll",
         "ref/portable-net45+win8/_._",
         "ref/win8/_._",
-        "system.servicemodel.nettcp.4.1.1.nupkg.sha512",
+        "system.servicemodel.nettcp.4.1.3.nupkg.sha512",
         "system.servicemodel.nettcp.nuspec"
       ]
     },
-    "System.ServiceModel.Primitives/4.1.1": {
-      "sha512": "T7KBgQiQaxeTH9mIfKptvJhLKtYFm/riraVWY4OCesjgzgRjDPpFAlHXLv6dO4lNjkQLlgeAVwKKNGBgSrDkog==",
+    "System.ServiceModel.Primitives/4.1.3": {
+      "sha512": "ooQ7+rc+4NOU3fzVDBpH9DGubH2U09rSpKOK5LoI/RQg00zWCtGuPN1Ve09LxkjTkD+nEssoHxVaWDW8lWmevQ==",
       "type": "package",
-      "path": "system.servicemodel.primitives/4.1.1",
+      "path": "system.servicemodel.primitives/4.1.3",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -28548,15 +28553,16 @@
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.servicemodel.primitives.4.1.1.nupkg.sha512",
+        "system.servicemodel.primitives.4.1.3.nupkg.sha512",
         "system.servicemodel.primitives.nuspec"
       ]
     },
-    "System.ServiceModel.Security/4.0.2": {
-      "sha512": "4oqvU/Upjl4q8bfj9oqI1dHv74nzpltvTcJAmDIxi+8KGlMnMOnzklh/BqonQHb6lAIVxYVmvAQlPo3lXv+P6w==",
+    "System.ServiceModel.Security/4.0.4": {
+      "sha512": "TYSUCu8ejtp+8CLznJR57GS/LTR+wIGV6RlehUYwZImOhqnMvCRH35G0SXqbGrUd7wThlD+DowRHU3LivG89Mg==",
       "type": "package",
-      "path": "system.servicemodel.security/4.0.2",
+      "path": "system.servicemodel.security/4.0.4",
       "files": [
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net45/_._",
@@ -28572,7 +28578,7 @@
         "ref/portable-net45+win8+wp8/_._",
         "ref/win8/_._",
         "ref/wp8/_._",
-        "system.servicemodel.security.4.0.2.nupkg.sha512",
+        "system.servicemodel.security.4.0.4.nupkg.sha512",
         "system.servicemodel.security.nuspec"
       ]
     },
@@ -29441,13 +29447,13 @@
         "waher.content.images.nuspec"
       ]
     },
-    "Waher.Content.Markdown/1.0.22": {
-      "sha512": "5o72imaUaMQ9I82CLYc/lYPBOAzAWyu6CwtrAWysBqg751tCrFCBJKFXH24+V9z/oTU6zAAu6yx+9npknI3dLA==",
+    "Waher.Content.Markdown/1.0.23": {
+      "sha512": "ZnhrjmXn+AqXZ+K2ikDQPxJNTSXGiYWXOeU6VQ3IDP2LrMTIqwT0eEjp7yDQIsvFYWLSUCs3SmAgSNcMRR4UuA==",
       "type": "package",
-      "path": "waher.content.markdown/1.0.22",
+      "path": "waher.content.markdown/1.0.23",
       "files": [
         "lib/netstandard1.3/Waher.Content.Markdown.dll",
-        "waher.content.markdown.1.0.22.nupkg.sha512",
+        "waher.content.markdown.1.0.23.nupkg.sha512",
         "waher.content.markdown.nuspec"
       ]
     },
@@ -29470,13 +29476,13 @@
         "waher.content.markdown.web.uwp.nuspec"
       ]
     },
-    "Waher.Content.Xml/1.0.2": {
-      "sha512": "hGQr/zFdLfRMi1UfMJTx0uJUnMX+lEclffR4PFytPvKGV8HyHjLNwTaynIoTynL3Y6ys8ol8KCAQvyBYQ3iYFQ==",
+    "Waher.Content.Xml/1.0.3": {
+      "sha512": "g37U9Aoxuz0b1y2HhTsujnxEQyVch7G5eSTm/GzNl88y1c07LSXhNAE6FPFGCH+AnGr/PYmLG+3Qn3XR+Z8i1A==",
       "type": "package",
-      "path": "waher.content.xml/1.0.2",
+      "path": "waher.content.xml/1.0.3",
       "files": [
         "lib/netstandard1.3/Waher.Content.Xml.dll",
-        "waher.content.xml.1.0.2.nupkg.sha512",
+        "waher.content.xml.1.0.3.nupkg.sha512",
         "waher.content.xml.nuspec"
       ]
     },
@@ -29510,10 +29516,10 @@
         "waher.networking.nuspec"
       ]
     },
-    "Waher.Networking.HTTP.UWP/1.0.16": {
-      "sha512": "O+D/S8ZlPPoCgVjTW93+jWCz3TSmxrkp+kP1sKoRYnTLctyl/1IWPclIY5NhhIQ5ckfiAZYRhc+6LGfHBx4Tcg==",
+    "Waher.Networking.HTTP.UWP/1.0.19": {
+      "sha512": "kqA/EsyukpSBDWfitarOnzpev1lwKRfHU74atpRXjyBoy/XvICTuQqfeVfjpSXtr5Dt1UllZLs/vGxbmJZ2QUw==",
       "type": "package",
-      "path": "waher.networking.http.uwp/1.0.16",
+      "path": "waher.networking.http.uwp/1.0.19",
       "files": [
         "ref/uap10.0/Waher.Networking.HTTP.UWP.XML",
         "ref/uap10.0/Waher.Networking.HTTP.UWP.dll",
@@ -29525,7 +29531,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
-        "waher.networking.http.uwp.1.0.16.nupkg.sha512",
+        "waher.networking.http.uwp.1.0.19.nupkg.sha512",
         "waher.networking.http.uwp.nuspec"
       ]
     },
@@ -29539,13 +29545,13 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.29": {
-      "sha512": "VPtJt5S7/8bQbAZaPy3tELd4BhhUWprxFYUaHS7PlADxlrr9FA0a7DM0moNVlzsetboaREHAQglC2nee5144gg==",
+    "Waher.Persistence.FilesLW/1.0.32": {
+      "sha512": "ah3XDTyoz3x1zb7ehe5dWyeyVCmbBxEvMaQsSG8I2kf9qPCxvt67WqYDC4VZj3jOeS8olbOfBBbyiycRrDV6ww==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.29",
+      "path": "waher.persistence.fileslw/1.0.32",
       "files": [
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
-        "waher.persistence.fileslw.1.0.29.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.32.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -29579,13 +29585,13 @@
         "waher.runtime.settings.nuspec"
       ]
     },
-    "Waher.Script/1.0.14": {
-      "sha512": "F3xfUzltIOvylre1t3qfGvU3NFATbRclGztjlq049r+96UrtECNh6Fg6St5SeZ9hQpugl1dezmzDUH4VSAPmCg==",
+    "Waher.Script/1.0.15": {
+      "sha512": "eMOtHuC4jC/x0t/P4oxmr0jqjIVs9XJ7cFaZ4CG+nkCaQH0I7AweMhdRYoSWn+n7VBLD1W0C6ZppGzgQBGX/9A==",
       "type": "package",
-      "path": "waher.script/1.0.14",
+      "path": "waher.script/1.0.15",
       "files": [
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.14.nupkg.sha512",
+        "waher.script.1.0.15.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
@@ -29662,20 +29668,20 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.5",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.7",
       "SkiaSharp >= 1.60.2",
       "Waher.Content >= 1.0.11",
       "Waher.Content.Images >= 1.0.2",
-      "Waher.Content.Markdown >= 1.0.22",
+      "Waher.Content.Markdown >= 1.0.23",
       "Waher.Content.Markdown.Web.UWP >= 1.0.5",
       "Waher.Events >= 1.0.7",
       "Waher.Networking >= 1.0.10",
-      "Waher.Networking.HTTP.UWP >= 1.0.16",
+      "Waher.Networking.HTTP.UWP >= 1.0.19",
       "Waher.Persistence >= 1.0.3",
-      "Waher.Persistence.FilesLW >= 1.0.29",
+      "Waher.Persistence.FilesLW >= 1.0.32",
       "Waher.Runtime.Inventory >= 1.0.6",
       "Waher.Runtime.Settings >= 1.0.1",
-      "Waher.Script >= 1.0.14",
+      "Waher.Script >= 1.0.15",
       "Waher.Script.Graphs >= 1.0.9",
       "Waher.Security >= 1.0.2",
       "Waher.Security.JWS >= 1.0.3",
@@ -29707,26 +29713,35 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.1.5, )",
+      "Microsoft.NETCore.UniversalWindowsPlatform": {
+        "target": "Package",
+        "version": "[6.1.7, )"
+      },
       "SkiaSharp": "[1.60.2, )",
       "Waher.Content": "[1.0.11, )",
       "Waher.Content.Images": "[1.0.2, )",
-      "Waher.Content.Markdown": "[1.0.22, )",
+      "Waher.Content.Markdown": {
+        "target": "Package",
+        "version": "[1.0.23, )"
+      },
       "Waher.Content.Markdown.Web.UWP": "[1.0.5, )",
       "Waher.Events": "[1.0.7, )",
-      "Waher.Networking": {
+      "Waher.Networking": "[1.0.10, )",
+      "Waher.Networking.HTTP.UWP": {
         "target": "Package",
-        "version": "[1.0.10, )"
+        "version": "[1.0.19, )"
       },
-      "Waher.Networking.HTTP.UWP": "[1.0.16, )",
       "Waher.Persistence": "[1.0.3, )",
       "Waher.Persistence.FilesLW": {
         "target": "Package",
-        "version": "[1.0.29, )"
+        "version": "[1.0.32, )"
       },
       "Waher.Runtime.Inventory": "[1.0.6, )",
       "Waher.Runtime.Settings": "[1.0.1, )",
-      "Waher.Script": "[1.0.14, )",
+      "Waher.Script": {
+        "target": "Package",
+        "version": "[1.0.15, )"
+      },
       "Waher.Script.Graphs": "[1.0.9, )",
       "Waher.Security": "[1.0.2, )",
       "Waher.Security.JWS": "[1.0.3, )",
