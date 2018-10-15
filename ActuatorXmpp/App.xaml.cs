@@ -90,11 +90,9 @@ namespace ActuatorXmpp
 		/// <param name="e">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			Frame rootFrame = Window.Current.Content as Frame;
-
 			// Do not repeat app initialization when the Window already has content,
 			// just ensure that the window is active
-			if (rootFrame == null)
+			if (!(Window.Current.Content is Frame rootFrame))
 			{
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
@@ -173,59 +171,58 @@ namespace ActuatorXmpp
 				}
 #else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
-				foreach (DeviceInformation DeviceInfo in Devices)
+				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
+				if (DeviceInfo == null)
+					Log.Error("Unable to find Arduino device.");
+				else
 				{
-					if (DeviceInfo.IsEnabled && DeviceInfo.Name.StartsWith("Arduino"))
+					Log.Informational("Connecting to " + DeviceInfo.Name);
+
+					this.arduinoUsb = new UsbSerial(DeviceInfo);
+					this.arduinoUsb.ConnectionEstablished += () =>
+						Log.Informational("USB connection established.");
+
+					this.arduino = new RemoteDevice(this.arduinoUsb);
+					this.arduino.DeviceReady += async () =>
 					{
-						Log.Informational("Connecting to " + DeviceInfo.Name);
-
-						this.arduinoUsb = new UsbSerial(DeviceInfo);
-						this.arduinoUsb.ConnectionEstablished += () =>
-							Log.Informational("USB connection established.");
-
-						this.arduino = new RemoteDevice(this.arduinoUsb);
-						this.arduino.DeviceReady += async () =>
+						try
 						{
-							try
-							{
-								Log.Informational("Device ready.");
+							Log.Informational("Device ready.");
 
-								this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
+							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 								this.arduino.digitalWrite(13, PinState.HIGH);
 
-								this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
+							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
 								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
 								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
-								this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
+							this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
-								await MainPage.Instance.OutputSet(this.output.Value);
+							await MainPage.Instance.OutputSet(this.output.Value);
 
-								Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
-									new KeyValuePair<string, object>("Output", this.output));
+							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
+								new KeyValuePair<string, object>("Output", this.output));
 
-								this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							}
-							catch (Exception ex)
-							{
-								Log.Critical(ex);
-							}
-						};
-
-						this.arduinoUsb.ConnectionFailed += message =>
+						catch (Exception ex)
 						{
-							Log.Error("USB connection failed: " + message);
-						};
+							Log.Critical(ex);
+						}
+					};
 
-						this.arduinoUsb.ConnectionLost += message =>
-						{
-							Log.Error("USB connection lost: " + message);
-						};
+					this.arduinoUsb.ConnectionFailed += message =>
+					{
+						Log.Error("USB connection failed: " + message);
+					};
 
-						this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
-						break;
-					}
+					this.arduinoUsb.ConnectionLost += message =>
+					{
+						Log.Error("USB connection lost: " + message);
+					};
+
+					this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
 				}
 #endif
 				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
@@ -288,6 +285,20 @@ namespace ActuatorXmpp
 				await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
 					async () => await Dialog.ShowAsync());
 			}
+		}
+
+		private DeviceInformation FindDevice(DeviceInformationCollection Devices, params string[] DeviceNames)
+		{
+			foreach (string DeviceName in DeviceNames)
+			{
+				foreach (DeviceInformation DeviceInfo in Devices)
+				{
+					if (DeviceInfo.IsEnabled && DeviceInfo.Name.StartsWith(DeviceName))
+						return DeviceInfo;
+				}
+			}
+
+			return null;
 		}
 
 		private async Task ShowConnectionDialog(string Host, int Port, string UserName)

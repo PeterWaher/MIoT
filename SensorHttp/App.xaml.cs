@@ -96,11 +96,9 @@ namespace SensorHttp
 		/// <param name="e">Details about the launch request and process.</param>
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
-			Frame rootFrame = Window.Current.Content as Frame;
-
 			// Do not repeat app initialization when the Window already has content,
 			// just ensure that the window is active
-			if (rootFrame == null)
+			if (!(Window.Current.Content is Frame rootFrame))
 			{
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
@@ -154,64 +152,63 @@ namespace SensorHttp
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
-				foreach (DeviceInformation DeviceInfo in Devices)
+				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
+				if (DeviceInfo == null)
+					Log.Error("Unable to find Arduino device.");
+				else
 				{
-					if (DeviceInfo.IsEnabled && DeviceInfo.Name.StartsWith("Arduino"))
+					Log.Informational("Connecting to " + DeviceInfo.Name);
+
+					this.arduinoUsb = new UsbSerial(DeviceInfo);
+					this.arduinoUsb.ConnectionEstablished += () =>
+						Log.Informational("USB connection established.");
+
+					this.arduino = new RemoteDevice(this.arduinoUsb);
+					this.arduino.DeviceReady += () =>
 					{
-						Log.Informational("Connecting to " + DeviceInfo.Name);
+						Log.Informational("Device ready.");
 
-						this.arduinoUsb = new UsbSerial(DeviceInfo);
-						this.arduinoUsb.ConnectionEstablished += () =>
-							Log.Informational("USB connection established.");
-
-						this.arduino = new RemoteDevice(this.arduinoUsb);
-						this.arduino.DeviceReady += () =>
-						{
-							Log.Informational("Device ready.");
-
-							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
+						this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
 							this.arduino.digitalWrite(13, PinState.HIGH);
 
-							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
+						this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 							PinState Pin8 = this.arduino.digitalRead(8);
-							this.lastMotion = Pin8 == PinState.HIGH;
-							MainPage.Instance.DigitalPinUpdated(8, Pin8);
+						this.lastMotion = Pin8 == PinState.HIGH;
+						MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
-							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+						this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 							this.arduino.digitalWrite(9, 0);             // Relay set to 0
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
 							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
 
-							this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
-						};
+						this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
+					};
 
-						this.arduino.AnalogPinUpdated += (pin, value) =>
-						{
-							MainPage.Instance.AnalogPinUpdated(pin, value);
-						};
+					this.arduino.AnalogPinUpdated += (pin, value) =>
+					{
+						MainPage.Instance.AnalogPinUpdated(pin, value);
+					};
 
-						this.arduino.DigitalPinUpdated += (pin, value) =>
-						{
-							MainPage.Instance.DigitalPinUpdated(pin, value);
+					this.arduino.DigitalPinUpdated += (pin, value) =>
+					{
+						MainPage.Instance.DigitalPinUpdated(pin, value);
 
-							if (pin == 8)
-								this.lastMotion = (value == PinState.HIGH);
-						};
+						if (pin == 8)
+							this.lastMotion = (value == PinState.HIGH);
+					};
 
-						this.arduinoUsb.ConnectionFailed += message =>
-						{
-							Log.Error("USB connection failed: " + message);
-						};
+					this.arduinoUsb.ConnectionFailed += message =>
+					{
+						Log.Error("USB connection failed: " + message);
+					};
 
-						this.arduinoUsb.ConnectionLost += message =>
-						{
-							Log.Error("USB connection lost: " + message);
-						};
+					this.arduinoUsb.ConnectionLost += message =>
+					{
+						Log.Error("USB connection lost: " + message);
+					};
 
-						this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
-						break;
-					}
+					this.arduinoUsb.begin(57600, SerialConfig.SERIAL_8N1);
 				}
 
 				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
@@ -295,9 +292,8 @@ namespace SensorHttp
 						throw new BadRequestException();
 
 					object Obj = req.DecodeData();
-					Dictionary<string, string> Form = Obj as Dictionary<string, string>;
 
-					if (Form == null ||
+					if (!(Obj is Dictionary<string, string> Form) ||
 						!Form.TryGetValue("UserName", out string UserName) ||
 						!Form.TryGetValue("Password", out string Password))
 					{
@@ -359,6 +355,19 @@ namespace SensorHttp
 			}
 		}
 
+		private DeviceInformation FindDevice(DeviceInformationCollection Devices, params string[] DeviceNames)
+		{
+			foreach (string DeviceName in DeviceNames)
+			{
+				foreach (DeviceInformation DeviceInfo in Devices)
+				{
+					if (DeviceInfo.IsEnabled && DeviceInfo.Name.StartsWith(DeviceName))
+						return DeviceInfo;
+				}
+			}
+
+			return null;
+		}
 
 		public class Users : IUserSource
 		{
