@@ -190,13 +190,13 @@ namespace ActuatorXmpp
 							Log.Informational("Device ready.");
 
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-								this.arduino.digitalWrite(13, PinState.HIGH);
+							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
-								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
-								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
 							await MainPage.Instance.OutputSet(this.output.Value);
@@ -205,7 +205,7 @@ namespace ActuatorXmpp
 								new KeyValuePair<string, object>("Output", this.output));
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							}
+						}
 						catch (Exception ex)
 						{
 							Log.Critical(ex);
