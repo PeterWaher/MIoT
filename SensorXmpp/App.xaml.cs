@@ -200,8 +200,8 @@ namespace SensorXmpp
 								this.lastMotion = Motion;
 								this.PublishMomentaryValues();
 
-								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished, "Motion", Motion,
-									FieldType.Momentary, FieldQoS.AutomaticReadout));
+								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished, 
+									"Motion", Motion, FieldType.Momentary, FieldQoS.AutomaticReadout));
 							}
 						}
 					};
@@ -246,7 +246,8 @@ namespace SensorXmpp
 				else
 				{
 					this.xmppClient = new XmppClient(Host, Port, UserName, PasswordHash, PasswordHashMethod, "en",
-						typeof(App).GetTypeInfo().Assembly)     // Add "new LogSniffer()" to the end, to output communication to the log.
+						typeof(App).GetTypeInfo().Assembly)     
+						// Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
@@ -357,7 +358,10 @@ namespace SensorXmpp
 					DateTime Now = DateTime.Now;
 
 					if (e.IsIncluded(FieldType.Identity))
-						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId, FieldType.Identity, FieldQoS.AutomaticReadout));
+					{
+						Fields.Add(new StringField(ThingReference.Empty, Now, "Device ID", this.deviceId,
+							FieldType.Identity, FieldQoS.AutomaticReadout));
+					}
 
 					if (this.lastLight.HasValue)
 					{
@@ -527,8 +531,11 @@ namespace SensorXmpp
 
 		private void PublishMomentaryValues()
 		{
-			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected || !this.lastLight.HasValue || !this.lastMotion.HasValue)
+			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected ||
+				!this.lastLight.HasValue || !this.lastMotion.HasValue)
+			{
 				return;
+			}
 
 			/* Three methods to publish data using the Publish/Subscribe pattern exists:
 			 * 
@@ -564,8 +571,10 @@ namespace SensorXmpp
 			DateTime Now = DateTime.Now;
 
 			this.pepClient?.Publish(new SensorData(
-				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", FieldType.Momentary, FieldQoS.AutomaticReadout),
-				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, FieldType.Momentary, FieldQoS.AutomaticReadout)), null, null);
+				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", 
+					FieldType.Momentary, FieldQoS.AutomaticReadout),
+				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, 
+					FieldType.Momentary, FieldQoS.AutomaticReadout)), null, null);
 
 			this.lastPublished = Now;
 			this.lastPublishedLight = this.lastLight.Value;
