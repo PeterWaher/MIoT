@@ -813,14 +813,17 @@ namespace ControllerXmpp
 											RosterItem Item = this.xmppClient[this.sensorJid];
 											if (Item != null)
 											{
-												this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name, this.AddReference(Item.Groups, "Sensor", Thing.Node));
+												this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name,
+													this.AddReference(Item.Groups, "Sensor", Thing.Node));
 
 												if (Item.State != SubscriptionState.Both && Item.State != SubscriptionState.To)
 													this.xmppClient.RequestPresenceSubscription(this.sensorJid);
 											}
 											else
 											{
-												this.xmppClient.AddRosterItem(new RosterItem(this.sensorJid, string.Empty, this.AddReference(null, "Sensor", Thing.Node)));
+												this.xmppClient.AddRosterItem(new RosterItem(this.sensorJid, string.Empty, 
+													this.AddReference(null, "Sensor", Thing.Node)));
+
 												this.xmppClient.RequestPresenceSubscription(this.sensorJid);
 											}
 										}
@@ -1015,7 +1018,8 @@ namespace ControllerXmpp
 						Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
 						{
 							new FieldSubscriptionRule("Light", this.light, 1),
-							new FieldSubscriptionRule("Motion", this.motion.HasValue ? (double?)(this.motion.Value ? 1 : 0) : null, 1),
+							new FieldSubscriptionRule("Motion", this.motion.HasValue ? 
+								(double?)(this.motion.Value ? 1 : 0) : null, 1),
 						},
 						new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
 						new Waher.Content.Duration(false, 0, 0, 0, 0, 1, 0), true);
