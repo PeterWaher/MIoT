@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -65,6 +64,8 @@ namespace ControllerXmpp
 		private DateTime lastEventFields = DateTime.Now;
 		private DateTime lastEventErrors = DateTime.Now;
 		private DateTime lastOutput = DateTime.Now;
+		private DateTime lastRequestActuator = DateTime.MinValue;
+		private DateTime lastFindFriends = DateTime.MinValue;
 		private string deviceId;
 
 		/// <summary>
@@ -373,7 +374,14 @@ namespace ControllerXmpp
 				e.Accept();
 			};
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+			this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
+			{
+				Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+
+				if (string.Compare(e.FromBareJID, this.sensorJid, true) == 0)
+					this.SubscribeToSensorData();
+			};
+
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 			this.xmppClient.OnPresence += XmppClient_OnPresence;
 
@@ -706,6 +714,31 @@ namespace ControllerXmpp
 
 		private void FindFriends(MetaDataTag[] MetaInfo)
 		{
+			double ms = (DateTime.Now - lastFindFriends).TotalMilliseconds;
+			if (ms < 60000)		// Call at most once a minute
+			{
+				int msi = (int)Math.Ceiling(60000 - ms);
+				Timer Timer = null;
+
+				Log.Informational("Delaying search " + msi.ToString() + " ms.");
+
+				Timer = new Timer((P) =>
+				{
+					try
+					{
+						Timer?.Dispose();
+						this.FindFriends(MetaInfo);
+					}
+					catch (Exception ex)
+					{
+						Log.Critical(ex);
+					}
+				}, null, msi, Timeout.Infinite);
+				
+				return;
+			}
+
+			this.lastFindFriends = DateTime.Now;
 			this.sensorJid = null;
 			this.sensor = null;
 			this.actuator = null;
@@ -959,36 +992,43 @@ namespace ControllerXmpp
 			RosterItem SensorItem;
 
 			if (!string.IsNullOrEmpty(this.sensorJid) &&
-				(SensorItem = this.xmppClient[this.sensorJid]) != null &&
-				SensorItem.HasLastPresence && SensorItem.LastPresence.IsOnline)
+				(SensorItem = this.xmppClient[this.sensorJid]) != null)
 			{
-				ThingReference[] Nodes;
-
-				if (this.sensor.IsEmpty)
-					Nodes = null;
-				else
-					Nodes = new ThingReference[] { this.sensor };
-
-				if (this.subscription != null)
+				if (SensorItem.HasLastPresence && SensorItem.LastPresence.IsOnline)
 				{
-					this.subscription.Unsubscribe();
-					this.subscription = null;
-				}
+					ThingReference[] Nodes;
 
-				Log.Informational("Subscribing to events.", SensorItem.LastPresenceFullJid);
+					if (this.sensor.IsEmpty)
+						Nodes = null;
+					else
+						Nodes = new ThingReference[] { this.sensor };
 
-				this.subscription = this.sensorClient.Subscribe(SensorItem.LastPresenceFullJid,
-					Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
+					if (this.subscription != null)
 					{
-						new FieldSubscriptionRule("Light", this.light, 1),
-						new FieldSubscriptionRule("Motion", this.motion.HasValue ? (double?)(this.motion.Value ? 1 : 0) : null, 1),
-					},
-					new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
-					new Waher.Content.Duration(false, 0, 0, 0, 0, 1, 0), true);
+						this.subscription.Unsubscribe();
+						this.subscription = null;
+					}
 
-				this.subscription.OnStateChanged += Subscription_OnStateChanged;
-				this.subscription.OnFieldsReceived += Subscription_OnFieldsReceived;
-				this.subscription.OnErrorsReceived += Subscription_OnErrorsReceived;
+					Log.Informational("Subscribing to events.", SensorItem.LastPresenceFullJid);
+
+					this.subscription = this.sensorClient.Subscribe(SensorItem.LastPresenceFullJid,
+						Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
+						{
+							new FieldSubscriptionRule("Light", this.light, 1),
+							new FieldSubscriptionRule("Motion", this.motion.HasValue ? (double?)(this.motion.Value ? 1 : 0) : null, 1),
+						},
+						new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
+						new Waher.Content.Duration(false, 0, 0, 0, 0, 1, 0), true);
+
+					this.subscription.OnStateChanged += Subscription_OnStateChanged;
+					this.subscription.OnFieldsReceived += Subscription_OnFieldsReceived;
+					this.subscription.OnErrorsReceived += Subscription_OnErrorsReceived;
+				}
+				else if (SensorItem.State == SubscriptionState.From || SensorItem.State == SubscriptionState.None)
+				{
+					Log.Informational("Requesting presence subscription.", this.sensorJid);
+					this.xmppClient.RequestPresenceSubscription(this.sensorJid);
+				}
 			}
 		}
 
@@ -1039,20 +1079,29 @@ namespace ControllerXmpp
 				{
 					RosterItem Actuator = this.xmppClient[this.actuatorJid];
 
-					if (Actuator != null && Actuator.HasLastPresence && Actuator.LastPresence.IsOnline)
+					if (Actuator != null)
 					{
-						ThingReference[] Nodes;
+						if (Actuator.HasLastPresence && Actuator.LastPresence.IsOnline)
+						{
+							ThingReference[] Nodes;
 
-						if (this.actuator.IsEmpty)
-							Nodes = null;
-						else
-							Nodes = new ThingReference[] { this.actuator };
+							if (this.actuator.IsEmpty)
+								Nodes = null;
+							else
+								Nodes = new ThingReference[] { this.actuator };
 
-						this.controlClient.Set(Actuator.LastPresenceFullJid, "Output", Output, Nodes);
-						this.output = Output;
-						this.lastOutput = DateTime.Now;
+							this.controlClient.Set(Actuator.LastPresenceFullJid, "Output", Output, Nodes);
+							this.output = Output;
+							this.lastOutput = DateTime.Now;
 
-						MainPage.Instance.RelayUpdated(Output);
+							MainPage.Instance.RelayUpdated(Output);
+						}
+						else if ((Actuator.State == SubscriptionState.From || Actuator.State == SubscriptionState.None) &&
+							(DateTime.Now - lastRequestActuator).TotalHours >= 1.0)
+						{
+							this.xmppClient.RequestPresenceSubscription(this.actuatorJid);
+							this.lastRequestActuator = DateTime.Now;
+						}
 					}
 				}
 			}
