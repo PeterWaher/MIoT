@@ -239,7 +239,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -282,6 +282,9 @@
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -2714,7 +2717,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -2754,10 +2757,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -3204,7 +3210,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -5247,7 +5253,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -5287,10 +5293,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -5782,7 +5791,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -7817,7 +7826,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -7857,10 +7866,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -8307,7 +8319,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -10359,7 +10371,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -10399,10 +10411,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -10894,7 +10909,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -12935,7 +12950,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -12975,10 +12990,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -13425,7 +13443,7 @@
           "runtimes/win/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -15477,7 +15495,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore": "5.0.2",
@@ -15517,10 +15535,13 @@
           "System.Threading.Overlapped": "4.0.1",
           "System.Xml.XmlDocument": "4.0.1",
           "System.Xml.XmlSerializer": "4.0.11",
-          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.1.9"
+          "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform": "6.2.2"
         },
         "compile": {
           "ref/netcore50/_._": {}
+        },
+        "build": {
+          "build/Microsoft.NetCore.UniversalWindowsPlatform.targets": {}
         }
       },
       "Microsoft.NETCore.Windows.ApiSets/1.0.1": {
@@ -16012,7 +16033,7 @@
           "runtimes/aot/lib/netcore50/System.Runtime.Extensions.dll": {}
         }
       },
-      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
+      "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
         "type": "package",
         "compile": {
           "ref/netstandard/_._": {}
@@ -20159,15 +20180,16 @@
         "runtime.json"
       ]
     },
-    "Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "RAzxTZE00dceqkP+8Meyh10BFzF7EyiN7NCQhLZnFG79Uk5rC+NbXrXJg3PBGSkLUiOvwmVlLZmUWG+Ml4Uhyg==",
+    "Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "1hk1OTqEaTCG8o9GTVj7Ub/abq3j8BmyfQUvIi9J6sIIZ79L5ZRduVNbBT7YUDMwJ1txCDC/8vcXEJzXuc34Zw==",
       "type": "package",
-      "path": "microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "build/Microsoft.NetCore.UniversalWindowsPlatform.targets",
+        "microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "microsoft.netcore.universalwindowsplatform.nuspec",
         "ref/netcore50/_._",
         "ref/uap10.0.15138/Microsoft.CSharp.dll",
@@ -20177,7 +20199,6 @@
         "ref/uap10.0.15138/Microsoft.Win32.Primitives.dll",
         "ref/uap10.0.15138/Microsoft.Win32.Primitives.xml",
         "ref/uap10.0.15138/System.AppContext.dll",
-        "ref/uap10.0.15138/System.AppContext.xml",
         "ref/uap10.0.15138/System.Buffers.dll",
         "ref/uap10.0.15138/System.Buffers.xml",
         "ref/uap10.0.15138/System.Collections.Concurrent.dll",
@@ -20192,7 +20213,6 @@
         "ref/uap10.0.15138/System.Collections.xml",
         "ref/uap10.0.15138/System.ComponentModel.Annotations.dll",
         "ref/uap10.0.15138/System.ComponentModel.Annotations.xml",
-        "ref/uap10.0.15138/System.ComponentModel.Composition.dll",
         "ref/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "ref/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "ref/uap10.0.15138/System.ComponentModel.EventBasedAsync.xml",
@@ -20233,13 +20253,9 @@
         "ref/uap10.0.15138/System.Drawing.Primitives.xml",
         "ref/uap10.0.15138/System.Drawing.dll",
         "ref/uap10.0.15138/System.Dynamic.Runtime.dll",
-        "ref/uap10.0.15138/System.Dynamic.Runtime.xml",
         "ref/uap10.0.15138/System.Globalization.Calendars.dll",
-        "ref/uap10.0.15138/System.Globalization.Calendars.xml",
         "ref/uap10.0.15138/System.Globalization.Extensions.dll",
-        "ref/uap10.0.15138/System.Globalization.Extensions.xml",
         "ref/uap10.0.15138/System.Globalization.dll",
-        "ref/uap10.0.15138/System.Globalization.xml",
         "ref/uap10.0.15138/System.IO.Compression.FileSystem.dll",
         "ref/uap10.0.15138/System.IO.Compression.ZipFile.dll",
         "ref/uap10.0.15138/System.IO.Compression.ZipFile.xml",
@@ -20248,7 +20264,6 @@
         "ref/uap10.0.15138/System.IO.FileSystem.DriveInfo.dll",
         "ref/uap10.0.15138/System.IO.FileSystem.DriveInfo.xml",
         "ref/uap10.0.15138/System.IO.FileSystem.Primitives.dll",
-        "ref/uap10.0.15138/System.IO.FileSystem.Primitives.xml",
         "ref/uap10.0.15138/System.IO.FileSystem.Watcher.dll",
         "ref/uap10.0.15138/System.IO.FileSystem.Watcher.xml",
         "ref/uap10.0.15138/System.IO.FileSystem.dll",
@@ -20257,14 +20272,14 @@
         "ref/uap10.0.15138/System.IO.IsolatedStorage.xml",
         "ref/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
         "ref/uap10.0.15138/System.IO.MemoryMappedFiles.xml",
+        "ref/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
+        "ref/uap10.0.15138/System.IO.Pipes.AccessControl.xml",
         "ref/uap10.0.15138/System.IO.Pipes.dll",
         "ref/uap10.0.15138/System.IO.Pipes.xml",
         "ref/uap10.0.15138/System.IO.Ports.dll",
         "ref/uap10.0.15138/System.IO.Ports.xml",
         "ref/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
-        "ref/uap10.0.15138/System.IO.UnmanagedMemoryStream.xml",
         "ref/uap10.0.15138/System.IO.dll",
-        "ref/uap10.0.15138/System.IO.xml",
         "ref/uap10.0.15138/System.Linq.Expressions.dll",
         "ref/uap10.0.15138/System.Linq.Expressions.xml",
         "ref/uap10.0.15138/System.Linq.Parallel.dll",
@@ -20273,6 +20288,8 @@
         "ref/uap10.0.15138/System.Linq.Queryable.xml",
         "ref/uap10.0.15138/System.Linq.dll",
         "ref/uap10.0.15138/System.Linq.xml",
+        "ref/uap10.0.15138/System.Memory.dll",
+        "ref/uap10.0.15138/System.Memory.xml",
         "ref/uap10.0.15138/System.Net.Http.Rtc.dll",
         "ref/uap10.0.15138/System.Net.Http.Rtc.xml",
         "ref/uap10.0.15138/System.Net.Http.dll",
@@ -20319,7 +20336,6 @@
         "ref/uap10.0.15138/System.Reflection.DispatchProxy.dll",
         "ref/uap10.0.15138/System.Reflection.DispatchProxy.xml",
         "ref/uap10.0.15138/System.Reflection.Extensions.dll",
-        "ref/uap10.0.15138/System.Reflection.Extensions.xml",
         "ref/uap10.0.15138/System.Reflection.Metadata.dll",
         "ref/uap10.0.15138/System.Reflection.Metadata.xml",
         "ref/uap10.0.15138/System.Reflection.Primitives.dll",
@@ -20327,19 +20343,18 @@
         "ref/uap10.0.15138/System.Reflection.TypeExtensions.dll",
         "ref/uap10.0.15138/System.Reflection.TypeExtensions.xml",
         "ref/uap10.0.15138/System.Reflection.dll",
-        "ref/uap10.0.15138/System.Reflection.xml",
         "ref/uap10.0.15138/System.Resources.Reader.dll",
-        "ref/uap10.0.15138/System.Resources.Reader.xml",
         "ref/uap10.0.15138/System.Resources.ResourceManager.dll",
         "ref/uap10.0.15138/System.Resources.ResourceManager.xml",
         "ref/uap10.0.15138/System.Resources.Writer.dll",
         "ref/uap10.0.15138/System.Resources.Writer.xml",
+        "ref/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "ref/uap10.0.15138/System.Runtime.CompilerServices.VisualC.xml",
         "ref/uap10.0.15138/System.Runtime.Extensions.dll",
         "ref/uap10.0.15138/System.Runtime.Extensions.xml",
         "ref/uap10.0.15138/System.Runtime.Handles.dll",
-        "ref/uap10.0.15138/System.Runtime.Handles.xml",
         "ref/uap10.0.15138/System.Runtime.InteropServices.RuntimeInformation.dll",
         "ref/uap10.0.15138/System.Runtime.InteropServices.RuntimeInformation.xml",
         "ref/uap10.0.15138/System.Runtime.InteropServices.WindowsRuntime.dll",
@@ -20382,7 +20397,6 @@
         "ref/uap10.0.15138/System.Security.Principal.dll",
         "ref/uap10.0.15138/System.Security.Principal.xml",
         "ref/uap10.0.15138/System.Security.SecureString.dll",
-        "ref/uap10.0.15138/System.Security.SecureString.xml",
         "ref/uap10.0.15138/System.Security.dll",
         "ref/uap10.0.15138/System.ServiceModel.Duplex.dll",
         "ref/uap10.0.15138/System.ServiceModel.Http.dll",
@@ -20397,13 +20411,14 @@
         "ref/uap10.0.15138/System.Text.Encoding.Extensions.dll",
         "ref/uap10.0.15138/System.Text.Encoding.Extensions.xml",
         "ref/uap10.0.15138/System.Text.Encoding.dll",
-        "ref/uap10.0.15138/System.Text.Encoding.xml",
         "ref/uap10.0.15138/System.Text.RegularExpressions.dll",
         "ref/uap10.0.15138/System.Text.RegularExpressions.xml",
         "ref/uap10.0.15138/System.Threading.Overlapped.dll",
         "ref/uap10.0.15138/System.Threading.Overlapped.xml",
         "ref/uap10.0.15138/System.Threading.Tasks.Dataflow.dll",
         "ref/uap10.0.15138/System.Threading.Tasks.Dataflow.xml",
+        "ref/uap10.0.15138/System.Threading.Tasks.Extensions.dll",
+        "ref/uap10.0.15138/System.Threading.Tasks.Extensions.xml",
         "ref/uap10.0.15138/System.Threading.Tasks.Parallel.dll",
         "ref/uap10.0.15138/System.Threading.Tasks.Parallel.xml",
         "ref/uap10.0.15138/System.Threading.Tasks.dll",
@@ -20420,7 +20435,6 @@
         "ref/uap10.0.15138/System.Transactions.Local.xml",
         "ref/uap10.0.15138/System.Transactions.dll",
         "ref/uap10.0.15138/System.ValueTuple.dll",
-        "ref/uap10.0.15138/System.ValueTuple.xml",
         "ref/uap10.0.15138/System.Web.HttpUtility.dll",
         "ref/uap10.0.15138/System.Web.HttpUtility.xml",
         "ref/uap10.0.15138/System.Web.dll",
@@ -20436,7 +20450,6 @@
         "ref/uap10.0.15138/System.Xml.XPath.dll",
         "ref/uap10.0.15138/System.Xml.XPath.xml",
         "ref/uap10.0.15138/System.Xml.XmlDocument.dll",
-        "ref/uap10.0.15138/System.Xml.XmlDocument.xml",
         "ref/uap10.0.15138/System.Xml.XmlSerializer.dll",
         "ref/uap10.0.15138/System.Xml.XmlSerializer.xml",
         "ref/uap10.0.15138/System.Xml.dll",
@@ -21452,16 +21465,16 @@
         "runtimes/win/lib/netstandard1.5/System.Runtime.Extensions.dll"
       ]
     },
-    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "wzz0Fi2o7E/wXrRAidq651WEymO87REqjZXIk5Lv3WOTsGxe6JtPiKvvmJ5zSj1646S11hZg3XNJLXSTx+S9Sg==",
+    "runtime.win10-arm-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "xhmrV0h1Fz9sRELjsUSBRPXIo/cis7+ip/2tpTPfbjcgVZpe6MA8Vah2cu8QtSUSyw45mzfzcZtqI83GC4DAsA==",
       "type": "package",
-      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-arm-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -21474,7 +21487,6 @@
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-arm-aot/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -21511,6 +21523,7 @@
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -21519,6 +21532,7 @@
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -21560,6 +21574,7 @@
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-arm-aot/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -21642,16 +21657,16 @@
         "runtimes/win10-arm-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "BCnU4QLE6v+oqyR2B5HSjaRLKDy7AqwM5/II6KPNSHrE4uF1gFtVcGRwTKcJk4oaw6aNTFUREEVVPErgtsc9PQ==",
+    "runtime.win10-arm.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "Fz/VeNgPRH0juJhybOrm5HgTcgcMY4ezpI9nA88i+bxcOdM+rOG2JstuOjUpl9EVUcx9NBKX7wXNbVqFjctZvw==",
       "type": "package",
-      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-arm.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-arm.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -21664,7 +21679,6 @@
         "runtimes/win10-arm/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-arm/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -21701,6 +21715,7 @@
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-arm/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -21709,6 +21724,7 @@
         "runtimes/win10-arm/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-arm/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -21749,6 +21765,7 @@
         "runtimes/win10-arm/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-arm/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-arm/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -21819,16 +21836,16 @@
         "runtimes/win10-arm/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "7GOZk2xQBds8gVbuNbluB2RjYX6MLWJGlAsptklOMAsRjEbQXpHxcD6iqwwWxFQuv33DcxlneT4ERRE20GcECQ==",
+    "runtime.win10-x64-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "7bo8huff2cLqz364hAw7kxozpiGWedqe/EJDB0pwkVwFQ+wWp1BAEzMfdUZkl9RnJlERMZMGjRwxFD0g1t3tvQ==",
       "type": "package",
-      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-x64-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -21841,7 +21858,6 @@
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-x64-aot/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -21878,6 +21894,7 @@
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -21886,6 +21903,7 @@
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -21927,6 +21945,7 @@
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-x64-aot/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -22009,16 +22028,16 @@
         "runtimes/win10-x64-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "M0qBsF/YY80PusIkPHNH0lIx8haDrCRzkeA7bc4XKmrPKCVEXKZl6kc+2P08xyjhV6AtrCjREqNxEhLGUtOT4A==",
+    "runtime.win10-x64.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "MxpqT65+ZZBMJdOnmLqaQL9pkHL3D8AZA8RAktzqFfnb5Hh2pJObnEuO96YqgJsaYGyxc1r27h271FpM6zNC3g==",
       "type": "package",
-      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-x64.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-x64.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22031,7 +22050,6 @@
         "runtimes/win10-x64/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-x64/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -22068,6 +22086,7 @@
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-x64/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -22076,6 +22095,7 @@
         "runtimes/win10-x64/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-x64/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -22116,6 +22136,7 @@
         "runtimes/win10-x64/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-x64/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-x64/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -22186,16 +22207,16 @@
         "runtimes/win10-x64/nativeassets/uap10.0.15138/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "ABvTR8C4Ja9alxJadmEgL5pHQQLJfuawYbcyu7RvoxQvMIN1FKhnbHeTkVS4R9a9vZvleUDpTMRW1EH//luPlg==",
+    "runtime.win10-x86-aot.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "f0j8ku13I/bNxuqNvE+f0qmZ/ou51wMwcOSp1I9X53ofpvDPXRD2vwmsYC4MIhqIBhNdMIPV5L7Usa6lZcZIMQ==",
       "type": "package",
-      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-x86-aot.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22208,7 +22229,6 @@
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-x86-aot/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -22245,6 +22265,7 @@
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -22253,6 +22274,7 @@
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -22294,6 +22316,7 @@
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-x86-aot/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -22376,16 +22399,16 @@
         "runtimes/win10-x86-aot/lib/netcore50/clrcompression.dll"
       ]
     },
-    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.1.9": {
-      "sha512": "V9uo+GF8xDCxdK8viskfOMYZM8u4uqHADn77eJHzi4FYhh2UxmC4OpK5khc9EaFRQcbe/TrnlbPHpaKrXqzoaw==",
+    "runtime.win10-x86.Microsoft.NETCore.UniversalWindowsPlatform/6.2.2": {
+      "sha512": "dbfriHK2h8zdngoMX5vxsJCr8RJ6jlMVM3T5FtNCIyZfM5gRSxBKSnurbSiWu76yphsqP9ZhfQNKmVWtpsmkUQ==",
       "type": "package",
-      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.1.9",
+      "path": "runtime.win10-x86.microsoft.netcore.universalwindowsplatform/6.2.2",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "ref/netstandard/_._",
-        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.1.9.nupkg.sha512",
+        "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.6.2.2.nupkg.sha512",
         "runtime.win10-x86.microsoft.netcore.universalwindowsplatform.nuspec",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.CSharp.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/Microsoft.VisualBasic.dll",
@@ -22398,7 +22421,6 @@
         "runtimes/win10-x86/lib/uap10.0.15138/System.Collections.Specialized.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Collections.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.ComponentModel.Annotations.dll",
-        "runtimes/win10-x86/lib/uap10.0.15138/System.ComponentModel.Composition.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.ComponentModel.DataAnnotations.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.ComponentModel.EventBasedAsync.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.ComponentModel.Primitives.dll",
@@ -22435,6 +22457,7 @@
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.FileSystem.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.IsolatedStorage.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.MemoryMappedFiles.dll",
+        "runtimes/win10-x86/lib/uap10.0.15138/System.IO.Pipes.AccessControl.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.Pipes.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.Ports.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.IO.UnmanagedMemoryStream.dll",
@@ -22443,6 +22466,7 @@
         "runtimes/win10-x86/lib/uap10.0.15138/System.Linq.Parallel.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Linq.Queryable.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Linq.dll",
+        "runtimes/win10-x86/lib/uap10.0.15138/System.Memory.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Net.Http.Rtc.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Net.Http.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Net.HttpListener.dll",
@@ -22483,6 +22507,7 @@
         "runtimes/win10-x86/lib/uap10.0.15138/System.Resources.Reader.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Resources.ResourceManager.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Resources.Writer.dll",
+        "runtimes/win10-x86/lib/uap10.0.15138/System.Runtime.CompilerServices.Unsafe.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Runtime.CompilerServices.VisualC.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Runtime.Extensions.dll",
         "runtimes/win10-x86/lib/uap10.0.15138/System.Runtime.Handles.dll",
@@ -27717,7 +27742,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.1.9",
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.2",
       "Waher.Events >= 1.0.7",
       "Waher.Persistence.FilesLW >= 1.0.40",
       "Windows-Remote-Arduino >= 1.4.0"
@@ -27747,12 +27772,12 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.1.9, )",
-      "Waher.Events": "[1.0.7, )",
-      "Waher.Persistence.FilesLW": {
+      "Microsoft.NETCore.UniversalWindowsPlatform": {
         "target": "Package",
-        "version": "[1.0.40, )"
+        "version": "[6.2.2, )"
       },
+      "Waher.Events": "[1.0.7, )",
+      "Waher.Persistence.FilesLW": "[1.0.40, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
     "frameworks": {

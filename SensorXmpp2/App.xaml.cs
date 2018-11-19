@@ -148,6 +148,7 @@ namespace SensorXmpp
 					typeof(XML).GetTypeInfo().Assembly,
 					typeof(Waher.Script.Expression).GetTypeInfo().Assembly,
 					typeof(Waher.Script.Graphs.Graph).GetTypeInfo().Assembly,
+					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
 				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +

@@ -180,13 +180,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.1.9</Version>
+      <Version>6.2.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
       <Version>1.0.13</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>1.0.29</Version>
+      <Version>1.0.30</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.5</Version>
@@ -195,7 +195,7 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.13</Version>
+      <Version>1.0.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>1.0.17</Version>
@@ -217,6 +217,9 @@
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.9</Version>
+    </PackageReference>
+    <PackageReference Include="Waher.Script.Persistence">
+      <Version>1.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
