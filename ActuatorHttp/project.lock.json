@@ -2733,7 +2733,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5560,7 +5560,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8379,7 +8379,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11171,7 +11171,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13999,7 +13999,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16791,7 +16791,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19619,7 +19619,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.19": {
+      "Waher.Script/1.0.20": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -29724,14 +29724,14 @@
         "waher.runtime.threading.nuspec"
       ]
     },
-    "Waher.Script/1.0.19": {
-      "sha512": "SvIa8ukfZvIlgePwXgpqYM1C7MzqpjdDgEfWsrdTDSI8hsjw1YkLVxqdF/lZ2Gi08A5nbBLGXILbbHHyT+AHrg==",
+    "Waher.Script/1.0.20": {
+      "sha512": "jzNMfM2MhdIBU/J3DV+YbObCGN2ljvMX/bp78hEnZxoFZASRWmAujerC9jX7xbK/W59U/ri8yL42MwbGLAS2Mg==",
       "type": "package",
-      "path": "waher.script/1.0.19",
+      "path": "waher.script/1.0.20",
       "files": [
         ".signature.p7s",
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.19.nupkg.sha512",
+        "waher.script.1.0.20.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
@@ -29821,7 +29821,7 @@
       "Waher.Persistence.FilesLW >= 1.0.40",
       "Waher.Runtime.Inventory >= 1.0.7",
       "Waher.Runtime.Settings >= 1.0.1",
-      "Waher.Script >= 1.0.19",
+      "Waher.Script >= 1.0.20",
       "Waher.Security >= 1.0.2",
       "Waher.Security.JWS >= 1.0.3",
       "Waher.Security.JWT.UWP >= 1.0.5",
@@ -29852,34 +29852,22 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[6.2.2, )"
-      },
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.2, )",
       "Waher.Content": "[1.0.13, )",
       "Waher.Content.Emoji": "[1.0.1, )",
       "Waher.Content.Images": "[1.0.2, )",
-      "Waher.Content.Markdown": {
-        "target": "Package",
-        "version": "[1.0.30, )"
-      },
+      "Waher.Content.Markdown": "[1.0.30, )",
       "Waher.Content.Markdown.Web.UWP": "[1.0.7, )",
       "Waher.Events": "[1.0.7, )",
       "Waher.Networking": "[1.0.11, )",
-      "Waher.Networking.HTTP.UWP": {
-        "target": "Package",
-        "version": "[1.0.26, )"
-      },
+      "Waher.Networking.HTTP.UWP": "[1.0.26, )",
       "Waher.Persistence": "[1.0.7, )",
       "Waher.Persistence.FilesLW": "[1.0.40, )",
-      "Waher.Runtime.Inventory": {
-        "target": "Package",
-        "version": "[1.0.7, )"
-      },
+      "Waher.Runtime.Inventory": "[1.0.7, )",
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Waher.Script": {
         "target": "Package",
-        "version": "[1.0.19, )"
+        "version": "[1.0.20, )"
       },
       "Waher.Security": "[1.0.2, )",
       "Waher.Security.JWS": "[1.0.3, )",

@@ -223,13 +223,13 @@
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.19</Version>
+      <Version>1.0.20</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>1.0.3</Version>
+      <Version>1.0.5</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
