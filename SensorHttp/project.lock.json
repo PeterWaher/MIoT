@@ -2666,13 +2666,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -2733,7 +2733,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2747,12 +2747,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -5493,13 +5493,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -5560,7 +5560,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5574,12 +5574,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -8312,13 +8312,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -8379,7 +8379,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8393,12 +8393,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -11104,13 +11104,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -11171,7 +11171,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11185,12 +11185,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -13932,13 +13932,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -13999,7 +13999,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -14013,12 +14013,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -16724,13 +16724,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -16791,7 +16791,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16805,12 +16805,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -19552,13 +19552,13 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.0.40": {
+      "Waher.Persistence.FilesLW/1.0.41": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Persistence": "1.0.7",
           "Waher.Runtime.Cache": "1.0.2",
-          "Waher.Runtime.Inventory": "1.0.6",
+          "Waher.Runtime.Inventory": "1.0.7",
           "Waher.Runtime.Threading": "1.0.0"
         },
         "compile": {
@@ -19619,7 +19619,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.21": {
+      "Waher.Script/1.0.22": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19633,12 +19633,12 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/1.0.9": {
+      "Waher.Script.Graphs/1.0.10": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "1.60.1",
-          "Waher.Script": "1.0.13"
+          "Waher.Script": "1.0.22"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -29669,15 +29669,15 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.0.40": {
-      "sha512": "5iIG1uwnr6+hEKlmHCO+q4d0byKa1pi5O1nriot8d2jILA2N0yRodCLZKDmoFblou62hBuKPzAoDVAkHNhrvTA==",
+    "Waher.Persistence.FilesLW/1.0.41": {
+      "sha512": "42/dbSpmtBpvER6qMhlmBBlkxdqb8hLQVZgzO1dyjGYC5cxspd69m67i8le/TNybnmcjJJSDOeZlkyOAV8FmYw==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.0.40",
+      "path": "waher.persistence.fileslw/1.0.41",
       "files": [
         ".signature.p7s",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.xml",
-        "waher.persistence.fileslw.1.0.40.nupkg.sha512",
+        "waher.persistence.fileslw.1.0.41.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -29724,24 +29724,25 @@
         "waher.runtime.threading.nuspec"
       ]
     },
-    "Waher.Script/1.0.21": {
-      "sha512": "Mj9RCHsTJO37bEQkgk0pc4sXxwKXKm967n+owMp2zd9pHgGgKtWq64TT56mafkyHQ22eCK0QYco7FCAvwFfiOA==",
+    "Waher.Script/1.0.22": {
+      "sha512": "z2rHuLncURF1Rv9RWuuTVLwo5ahfUVoV8jiNtk0rc/MrcrMQiTVxB8yXVPpQ2oUSaC6svUS+dayVjbrExX8nog==",
       "type": "package",
-      "path": "waher.script/1.0.21",
+      "path": "waher.script/1.0.22",
       "files": [
         ".signature.p7s",
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.21.nupkg.sha512",
+        "waher.script.1.0.22.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
-    "Waher.Script.Graphs/1.0.9": {
-      "sha512": "/fT4cgVZw/0iEMErSo+alXCGcCaAQc9T294FA0sINOeIFC5jwuHfduCfjFBPG31pBUk6MCvo3u26cMmkx94SZA==",
+    "Waher.Script.Graphs/1.0.10": {
+      "sha512": "XoLxneiP+pmS1CGT8v8MGNEYCWT9c/Z45UNxuCYcy6MoWD3DeMMT//JKhAycMZnAWDGvwItFUWEo9X8JWYsj+Q==",
       "type": "package",
-      "path": "waher.script.graphs/1.0.9",
+      "path": "waher.script.graphs/1.0.10",
       "files": [
+        ".signature.p7s",
         "lib/netstandard1.3/Waher.Script.Graphs.dll",
-        "waher.script.graphs.1.0.9.nupkg.sha512",
+        "waher.script.graphs.1.0.10.nupkg.sha512",
         "waher.script.graphs.nuspec"
       ]
     },
@@ -29818,11 +29819,11 @@
       "Waher.Networking >= 1.0.11",
       "Waher.Networking.HTTP.UWP >= 1.0.26",
       "Waher.Persistence >= 1.0.7",
-      "Waher.Persistence.FilesLW >= 1.0.40",
+      "Waher.Persistence.FilesLW >= 1.0.41",
       "Waher.Runtime.Inventory >= 1.0.7",
       "Waher.Runtime.Settings >= 1.0.1",
-      "Waher.Script >= 1.0.21",
-      "Waher.Script.Graphs >= 1.0.9",
+      "Waher.Script >= 1.0.22",
+      "Waher.Script.Graphs >= 1.0.10",
       "Waher.Security >= 1.0.2",
       "Waher.Security.JWS >= 1.0.3",
       "Waher.Security.JWT.UWP >= 1.0.5",
@@ -29863,14 +29864,20 @@
       "Waher.Networking": "[1.0.11, )",
       "Waher.Networking.HTTP.UWP": "[1.0.26, )",
       "Waher.Persistence": "[1.0.7, )",
-      "Waher.Persistence.FilesLW": "[1.0.40, )",
+      "Waher.Persistence.FilesLW": {
+        "target": "Package",
+        "version": "[1.0.41, )"
+      },
       "Waher.Runtime.Inventory": "[1.0.7, )",
       "Waher.Runtime.Settings": "[1.0.1, )",
       "Waher.Script": {
         "target": "Package",
-        "version": "[1.0.21, )"
+        "version": "[1.0.22, )"
       },
-      "Waher.Script.Graphs": "[1.0.9, )",
+      "Waher.Script.Graphs": {
+        "target": "Package",
+        "version": "[1.0.10, )"
+      },
       "Waher.Security": "[1.0.2, )",
       "Waher.Security.JWS": "[1.0.3, )",
       "Waher.Security.JWT.UWP": "[1.0.5, )",
