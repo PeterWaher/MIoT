@@ -34,7 +34,7 @@ namespace ActuatorCoap
 			this.events = new Events();
 			Log.Register(this.events);
 
-			if (instance == null)
+			if (instance is null)
 				instance = this;
 		}
 

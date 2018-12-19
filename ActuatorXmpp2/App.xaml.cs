@@ -114,7 +114,7 @@ namespace ActuatorXmpp
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -177,7 +177,7 @@ namespace ActuatorXmpp
 #else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
-				if (DeviceInfo == null)
+				if (DeviceInfo is null)
 					Log.Error("Unable to find Arduino device.");
 				else
 				{
@@ -430,7 +430,7 @@ namespace ActuatorXmpp
 				this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
 				this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
 
-				if (this.bobClient == null)
+				if (this.bobClient is null)
 					this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 
 				if (this.chatServer != null)
@@ -614,7 +614,7 @@ namespace ActuatorXmpp
 
 		private void UseProvisioningServer(string JID, string OwnerJid)
 		{
-			if (this.provisioningClient == null ||
+			if (this.provisioningClient is null ||
 				this.provisioningClient.ProvisioningServerAddress != JID ||
 				this.provisioningClient.OwnerJid != OwnerJid)
 			{
@@ -631,7 +631,7 @@ namespace ActuatorXmpp
 
 		private async Task RegisterDevice(string RegistryJid, string OwnerJid)
 		{
-			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
+			if (this.registryClient is null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
 				if (this.registryClient != null)
 				{

@@ -103,7 +103,7 @@ namespace ActuatorHttp
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -165,7 +165,7 @@ namespace ActuatorHttp
 #else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
-				if (DeviceInfo == null)
+				if (DeviceInfo is null)
 					Log.Error("Unable to find Arduino device.");
 				else
 				{
@@ -312,7 +312,7 @@ namespace ActuatorHttp
 
 				this.httpServer.Register("/Login", null, (req, resp) =>
 				{
-					if (!req.HasData || req.Session == null)
+					if (!req.HasData || req.Session is null)
 						throw new BadRequestException();
 
 					object Obj = req.DecodeData();
@@ -357,7 +357,7 @@ namespace ActuatorHttp
 					IUser User;
 
 					if (!req.Session.TryGetVariable("User", out Variable v) ||
-						(User = v.ValueObject as IUser) == null)
+						(User = v.ValueObject as IUser) is null)
 					{
 						throw new ForbiddenException();
 					}

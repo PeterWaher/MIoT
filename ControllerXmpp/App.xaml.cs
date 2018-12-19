@@ -105,7 +105,7 @@ namespace ControllerXmpp
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -318,7 +318,7 @@ namespace ControllerXmpp
 						else
 						{
 							Item = this.xmppClient[this.sensorJid];
-							if (Item == null)
+							if (Item is null)
 								Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
 							else if (!Item.HasLastPresence)
 								Fields.Add(new StringField(ThingReference.Empty, Now, "Sensor, Availability", "Offline", FieldType.Status, FieldQoS.AutomaticReadout));
@@ -331,7 +331,7 @@ namespace ControllerXmpp
 						else
 						{
 							Item = this.xmppClient[this.actuatorJid];
-							if (Item == null)
+							if (Item is null)
 								Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", "Not Found", FieldType.Status, FieldQoS.AutomaticReadout));
 							else if (!Item.HasLastPresence)
 								Fields.Add(new StringField(ThingReference.Empty, Now, "Actuator, Availability", "Offline", FieldType.Status, FieldQoS.AutomaticReadout));
@@ -526,7 +526,7 @@ namespace ControllerXmpp
 
 		private async Task RegisterDevice(string RegistryJid)
 		{
-			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
+			if (this.registryClient is null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
 				if (this.registryClient != null)
 				{

@@ -87,7 +87,7 @@ namespace Actuator
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -143,7 +143,7 @@ namespace Actuator
 #else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
-				if (DeviceInfo == null)
+				if (DeviceInfo is null)
 					Log.Error("Unable to find Arduino device.");
 				else
 				{

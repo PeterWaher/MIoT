@@ -105,7 +105,7 @@ namespace ActuatorLwm2m
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -167,7 +167,7 @@ namespace ActuatorLwm2m
 #else
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
-				if (DeviceInfo == null)
+				if (DeviceInfo is null)
 					Log.Error("Unable to find Arduino device.");
 				else
 				{
@@ -276,10 +276,10 @@ namespace ActuatorLwm2m
 					try
 					{
 						string s = req.Decode() as string;
-						if (s == null && req.Payload != null)
+						if (s is null && req.Payload != null)
 							s = Encoding.UTF8.GetString(req.Payload);
 
-						if (s == null || !CommonTypes.TryParse(s, out bool Output))
+						if (s is null || !CommonTypes.TryParse(s, out bool Output))
 							resp.RST(CoapCode.BadRequest);
 						else
 						{

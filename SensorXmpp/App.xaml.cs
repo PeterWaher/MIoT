@@ -116,7 +116,7 @@ namespace SensorXmpp
 
 			if (e.PrelaunchActivated == false)
 			{
-				if (rootFrame.Content == null)
+				if (rootFrame.Content is null)
 				{
 					// When the navigation stack isn't restored navigate to the first page,
 					// configuring the new page by passing required information as a navigation
@@ -152,7 +152,7 @@ namespace SensorXmpp
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
-				if (DeviceInfo == null)
+				if (DeviceInfo is null)
 					Log.Error("Unable to find Arduino device.");
 				else
 				{
@@ -532,7 +532,7 @@ namespace SensorXmpp
 
 		private void PublishMomentaryValues()
 		{
-			if (this.xmppClient == null || this.xmppClient.State != XmppState.Connected ||
+			if (this.xmppClient is null || this.xmppClient.State != XmppState.Connected ||
 				!this.lastLight.HasValue || !this.lastMotion.HasValue)
 			{
 				return;
@@ -990,7 +990,7 @@ namespace SensorXmpp
 
 		private async Task RegisterDevice(string RegistryJid)
 		{
-			if (this.registryClient == null || this.registryClient.ThingRegistryAddress != RegistryJid)
+			if (this.registryClient is null || this.registryClient.ThingRegistryAddress != RegistryJid)
 			{
 				if (this.registryClient != null)
 				{
