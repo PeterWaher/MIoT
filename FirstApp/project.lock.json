@@ -27235,7 +27235,6 @@
     "C:\\Users\\Peter\\.nuget\\packages\\": {}
   },
   "project": {
-    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\My Projects\\MIoT\\FirstApp\\FirstApp.csproj",
       "projectName": "FirstApp",
@@ -27254,10 +27253,7 @@
       }
     },
     "dependencies": {
-      "Microsoft.NETCore.UniversalWindowsPlatform": {
-        "target": "Package",
-        "version": "[6.2.2, )"
-      },
+      "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.2, )",
       "Waher.Events": "[1.0.7, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
