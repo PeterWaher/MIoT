@@ -199,7 +199,7 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.19</Version>
+      <Version>1.0.20</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PEP.UWP">
       <Version>1.0.8</Version>
