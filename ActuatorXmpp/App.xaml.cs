@@ -54,6 +54,7 @@ namespace ActuatorXmpp
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 
 #if GPIO
 		private const int gpioOutputPin = 5;
@@ -142,8 +143,11 @@ namespace ActuatorXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 #if GPIO
 				gpio = GpioController.GetDefault();
@@ -795,42 +799,24 @@ namespace ActuatorXmpp
 			if (instance == this)
 				instance = null;
 
-			if (this.chatServer != null)
-			{
-				this.chatServer.Dispose();
-				this.chatServer = null;
-			}
+			this.chatServer?.Dispose();
+			this.chatServer = null;
 
-			if (this.bobClient != null)
-			{
-				this.bobClient.Dispose();
-				this.bobClient = null;
-			}
+			this.bobClient?.Dispose();
+			this.bobClient = null;
 
-			if (this.sensorServer != null)
-			{
-				this.sensorServer.Dispose();
-				this.sensorServer = null;
-			}
+			this.sensorServer?.Dispose();
+			this.sensorServer = null;
 
-			if (this.xmppClient != null)
-			{
-				this.xmppClient.Dispose();
-				this.xmppClient = null;
-			}
+			this.xmppClient?.Dispose();
+			this.xmppClient = null;
 
-			if (this.minuteTimer != null)
-			{
-				this.minuteTimer.Dispose();
-				this.minuteTimer = null;
-			}
+			this.minuteTimer?.Dispose();
+			this.minuteTimer = null;
 
 #if GPIO
-			if (this.gpioPin != null)
-			{
-				this.gpioPin.Dispose();
-				this.gpioPin = null;
-			}
+			this.gpioPin.Dispose();
+			this.gpioPin = null;
 #else
 			if (this.arduino != null)
 			{
@@ -849,6 +835,9 @@ namespace ActuatorXmpp
 				this.arduinoUsb = null;
 			}
 #endif
+			db?.Stop().Wait();
+			db?.Flush().Wait();
+
 			Log.Terminate();
 
 			deferral.Complete();

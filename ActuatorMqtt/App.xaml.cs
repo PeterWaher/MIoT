@@ -43,6 +43,7 @@ namespace ActuatorMqtt
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 		private string deviceId;
 		private MqttClient mqttClient = null;
 		private Timer reconnectionTimer = null;
@@ -118,8 +119,11 @@ namespace ActuatorMqtt
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 #if GPIO
 				gpio = GpioController.GetDefault();
@@ -167,13 +171,13 @@ namespace ActuatorMqtt
 							Log.Informational("Device ready.");
 
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-								this.arduino.digitalWrite(13, PinState.HIGH);
+							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
-								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
-								bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							bool LastOn = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.arduino.digitalWrite(9, LastOn ? PinState.HIGH : PinState.LOW);
 
 							await MainPage.Instance.OutputSet(LastOn);
@@ -182,7 +186,7 @@ namespace ActuatorMqtt
 								new KeyValuePair<string, object>("Output", LastOn));
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							}
+						}
 						catch (Exception ex)
 						{
 							Log.Critical(ex);
@@ -344,24 +348,15 @@ namespace ActuatorMqtt
 			if (instance == this)
 				instance = null;
 
-			if (this.mqttClient != null)
-			{
-				this.mqttClient.Dispose();
-				this.mqttClient = null;
-			}
+			this.mqttClient?.Dispose();
+			this.mqttClient = null;
 
-			if (this.reconnectionTimer != null)
-			{
-				this.reconnectionTimer.Dispose();
-				this.reconnectionTimer = null;
-			}
+			this.reconnectionTimer?.Dispose();
+			this.reconnectionTimer = null;
 
 #if GPIO
-			if (this.gpioPin != null)
-			{
-				this.gpioPin.Dispose();
-				this.gpioPin = null;
-			}
+			this.gpioPin?.Dispose();
+			this.gpioPin = null;
 #else
 			if (this.arduino != null)
 			{
@@ -380,6 +375,9 @@ namespace ActuatorMqtt
 				this.arduinoUsb = null;
 			}
 #endif
+			db?.Stop().Wait();
+			db?.Flush().Wait();
+
 			Log.Terminate();
 
 			deferral.Complete();

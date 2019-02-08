@@ -53,6 +53,7 @@ namespace ConcentratorXmpp
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
@@ -162,8 +163,11 @@ namespace ConcentratorXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -185,16 +189,16 @@ namespace ConcentratorXmpp
 							Log.Informational("Device ready.");
 
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-								this.arduino.digitalWrite(13, PinState.HIGH);
+							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
-								PinState Pin8 = this.arduino.digitalRead(8);
+							PinState Pin8 = this.arduino.digitalRead(8);
 							this.lastMotion = Pin8 == PinState.HIGH;
 							MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
 							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
-								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
 							await MainPage.Instance.OutputSet(this.output.Value);
@@ -203,7 +207,7 @@ namespace ConcentratorXmpp
 								new KeyValuePair<string, object>("Output", this.output));
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-								MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
 
 							this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
 						}
@@ -1126,41 +1130,23 @@ namespace ConcentratorXmpp
 
 			instance = null;
 
-			if (this.pepClient != null)
-			{
-				this.pepClient.Dispose();
-				this.pepClient = null;
-			}
+			this.pepClient?.Dispose();
+			this.pepClient = null;
 
-			if (this.chatServer != null)
-			{
-				this.chatServer.Dispose();
-				this.chatServer = null;
-			}
+			this.chatServer?.Dispose();
+			this.chatServer = null;
 
-			if (this.bobClient != null)
-			{
-				this.bobClient.Dispose();
-				this.bobClient = null;
-			}
+			this.bobClient?.Dispose();
+			this.bobClient = null;
 
-			if (this.concentratorServer != null)
-			{
-				this.concentratorServer.Dispose();
-				this.concentratorServer = null;
-			}
+			this.concentratorServer?.Dispose();
+			this.concentratorServer = null;
 
-			if (this.xmppClient != null)
-			{
-				this.xmppClient.Dispose();
-				this.xmppClient = null;
-			}
+			this.xmppClient?.Dispose();
+			this.xmppClient = null;
 
-			if (this.sampleTimer != null)
-			{
-				this.sampleTimer.Dispose();
-				this.sampleTimer = null;
-			}
+			this.sampleTimer?.Dispose();
+			this.sampleTimer = null;
 
 			if (this.arduino != null)
 			{
@@ -1178,6 +1164,9 @@ namespace ConcentratorXmpp
 				this.arduinoUsb.Dispose();
 				this.arduinoUsb = null;
 			}
+
+			db?.Stop().Wait();
+			db?.Flush().Wait();
 
 			Log.Terminate();
 

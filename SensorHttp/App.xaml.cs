@@ -53,6 +53,7 @@ namespace SensorHttp
 	{
 		private static App instance = null;
 
+		private FilesProvider db = null;
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
@@ -148,8 +149,11 @@ namespace SensorHttp
 					typeof(Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -169,18 +173,18 @@ namespace SensorHttp
 						Log.Informational("Device ready.");
 
 						this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-							this.arduino.digitalWrite(13, PinState.HIGH);
+						this.arduino.digitalWrite(13, PinState.HIGH);
 
 						this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
-							PinState Pin8 = this.arduino.digitalRead(8);
+						PinState Pin8 = this.arduino.digitalRead(8);
 						this.lastMotion = Pin8 == PinState.HIGH;
 						MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
 						this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(9, 0);             // Relay set to 0
+						this.arduino.digitalWrite(9, 0);             // Relay set to 0
 
-							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+						this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+						MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
 
 						this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
 					};
@@ -241,7 +245,7 @@ namespace SensorHttp
 
 					if (req.Header.Accept != null)
 					{
-						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json", "image/png", "image/jpeg", "image/webp"))
+						switch (req.Header.Accept.GetBestAlternative("text/xml", "application/xml", "application/json", "image/png", "image/jpeg", "image/webp"))
 						{
 							case "text/xml":
 							case "application/xml":
@@ -787,7 +791,7 @@ namespace SensorHttp
 			else if (Width <= 0)
 				throw new BadRequestException();
 
-			using (SKSurface Surface = SKSurface.Create(Width, Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul))
+			using (SKSurface Surface = SKSurface.Create(new SKImageInfo(Width, Height, SKImageInfo.PlatformColorType, SKAlphaType.Premul)))
 			{
 				SKCanvas Canvas = Surface.Canvas;
 				Canvas.Clear(SKColors.White);
@@ -922,17 +926,11 @@ namespace SensorHttp
 			if (instance == this)
 				instance = null;
 
-			if (this.httpServer != null)
-			{
-				this.httpServer.Dispose();
-				this.httpServer = null;
-			}
+			this.httpServer?.Dispose();
+			this.httpServer = null;
 
-			if (this.sampleTimer != null)
-			{
-				this.sampleTimer.Dispose();
-				this.sampleTimer = null;
-			}
+			this.sampleTimer?.Dispose();
+			this.sampleTimer = null;
 
 			if (this.arduino != null)
 			{
@@ -950,6 +948,9 @@ namespace SensorHttp
 				this.arduinoUsb.Dispose();
 				this.arduinoUsb = null;
 			}
+
+			db?.Stop().Wait();
+			db?.Flush().Wait();
 
 			Log.Terminate();
 

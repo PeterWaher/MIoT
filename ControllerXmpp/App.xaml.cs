@@ -45,6 +45,7 @@ namespace ControllerXmpp
 	/// </summary>
 	sealed partial class App : Application
 	{
+		private FilesProvider db = null;
 		private Timer secondTimer = null;
 		private XmppClient xmppClient = null;
 		private BobClient bobClient = null;
@@ -136,8 +137,11 @@ namespace ControllerXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
 				if (string.IsNullOrEmpty(this.deviceId))
@@ -716,7 +720,7 @@ namespace ControllerXmpp
 		private void FindFriends(MetaDataTag[] MetaInfo)
 		{
 			double ms = (DateTime.Now - lastFindFriends).TotalMilliseconds;
-			if (ms < 60000)		// Call at most once a minute
+			if (ms < 60000)     // Call at most once a minute
 			{
 				int msi = (int)Math.Ceiling(60000 - ms);
 				Timer Timer = null;
@@ -735,7 +739,7 @@ namespace ControllerXmpp
 						Log.Critical(ex);
 					}
 				}, null, msi, Timeout.Infinite);
-				
+
 				return;
 			}
 
@@ -822,7 +826,7 @@ namespace ControllerXmpp
 											}
 											else
 											{
-												this.xmppClient.AddRosterItem(new RosterItem(this.sensorJid, string.Empty, 
+												this.xmppClient.AddRosterItem(new RosterItem(this.sensorJid, string.Empty,
 													this.AddReference(null, "Sensor", Thing.Node)));
 
 												this.xmppClient.RequestPresenceSubscription(this.sensorJid);
@@ -983,7 +987,7 @@ namespace ControllerXmpp
 		{
 			Log.Informational("Presence received.", e.Availability.ToString(), e.From);
 
-			if (this.sensorJid != null && 
+			if (this.sensorJid != null &&
 				string.Compare(e.FromBareJID, this.sensorJid, true) == 0 &&
 				e.IsOnline)
 			{
@@ -1019,7 +1023,7 @@ namespace ControllerXmpp
 						Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
 						{
 							new FieldSubscriptionRule("Light", this.light, 1),
-							new FieldSubscriptionRule("Motion", this.motion.HasValue ? 
+							new FieldSubscriptionRule("Motion", this.motion.HasValue ?
 								(double?)(this.motion.Value ? 1 : 0) : null, 1),
 						},
 						new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
@@ -1206,59 +1210,32 @@ namespace ControllerXmpp
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
-			if (this.subscription != null)
-			{
-				this.subscription.Unsubscribe();
-				this.subscription = null;
-			}
+			this.subscription?.Unsubscribe();
+			this.subscription = null;
 
-			if (this.registryClient != null)
-			{
-				this.registryClient.Dispose();
-				this.registryClient = null;
-			}
+			this.registryClient?.Dispose();
+			this.registryClient = null;
 
-			if (this.chatServer != null)
-			{
-				this.chatServer.Dispose();
-				this.chatServer = null;
-			}
+			this.chatServer?.Dispose();
+			this.chatServer = null;
 
-			if (this.bobClient != null)
-			{
-				this.bobClient.Dispose();
-				this.bobClient = null;
-			}
+			this.bobClient?.Dispose();
+			this.bobClient = null;
 
-			if (this.sensorServer != null)
-			{
-				this.sensorServer.Dispose();
-				this.sensorServer = null;
-			}
+			this.sensorServer?.Dispose();
+			this.sensorServer = null;
 
-			if (this.sensorClient != null)
-			{
-				this.sensorClient.Dispose();
-				this.sensorClient = null;
-			}
+			this.sensorClient?.Dispose();
+			this.sensorClient = null;
 
-			if (this.controlClient != null)
-			{
-				this.controlClient.Dispose();
-				this.controlClient = null;
-			}
+			this.controlClient?.Dispose();
+			this.controlClient = null;
 
-			if (this.xmppClient != null)
-			{
-				this.xmppClient.Dispose();
-				this.xmppClient = null;
-			}
+			this.xmppClient?.Dispose();
+			this.xmppClient = null;
 
-			if (this.secondTimer != null)
-			{
-				this.secondTimer.Dispose();
-				this.secondTimer = null;
-			}
+			this.secondTimer?.Dispose();
+			this.secondTimer = null;
 
 			Log.Terminate();
 

@@ -49,6 +49,7 @@ namespace SensorXmpp
 	/// </summary>
 	sealed partial class App : Application
 	{
+		private FilesProvider db = null;
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
@@ -147,8 +148,11 @@ namespace SensorXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -168,18 +172,18 @@ namespace SensorXmpp
 						Log.Informational("Device ready.");
 
 						this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-							this.arduino.digitalWrite(13, PinState.HIGH);
+						this.arduino.digitalWrite(13, PinState.HIGH);
 
 						this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
-							PinState Pin8 = this.arduino.digitalRead(8);
+						PinState Pin8 = this.arduino.digitalRead(8);
 						this.lastMotion = Pin8 == PinState.HIGH;
 						MainPage.Instance.DigitalPinUpdated(8, Pin8);
 
 						this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
-							this.arduino.digitalWrite(9, 0);             // Relay set to 0
+						this.arduino.digitalWrite(9, 0);             // Relay set to 0
 
-							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
+						this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
+						MainPage.Instance.AnalogPinUpdated("A0", this.arduino.analogRead("A0"));
 
 						this.sampleTimer = new Timer(this.SampleValues, null, 1000 - DateTime.Now.Millisecond, 1000);
 					};
@@ -201,7 +205,7 @@ namespace SensorXmpp
 								this.lastMotion = Motion;
 								this.PublishMomentaryValues();
 
-								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished, 
+								this.sensorServer?.NewMomentaryValues(new BooleanField(ThingReference.Empty, this.lastPublished,
 									"Motion", Motion, FieldType.Momentary, FieldQoS.AutomaticReadout));
 							}
 						}
@@ -247,8 +251,8 @@ namespace SensorXmpp
 				else
 				{
 					this.xmppClient = new XmppClient(Host, Port, UserName, PasswordHash, PasswordHashMethod, "en",
-						typeof(App).GetTypeInfo().Assembly)     
-						// Add "new LogSniffer()" to the end, to output communication to the log.
+						typeof(App).GetTypeInfo().Assembly)
+					// Add "new LogSniffer()" to the end, to output communication to the log.
 					{
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
@@ -572,9 +576,9 @@ namespace SensorXmpp
 			DateTime Now = DateTime.Now;
 
 			this.pepClient?.Publish(new SensorData(
-				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%", 
+				new QuantityField(ThingReference.Empty, Now, "Light", this.lastLight.Value, 2, "%",
 					FieldType.Momentary, FieldQoS.AutomaticReadout),
-				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value, 
+				new BooleanField(ThingReference.Empty, Now, "Motion", this.lastMotion.Value,
 					FieldType.Momentary, FieldQoS.AutomaticReadout)), null, null);
 
 			this.lastPublished = Now;
@@ -1195,41 +1199,23 @@ namespace SensorXmpp
 		{
 			var deferral = e.SuspendingOperation.GetDeferral();
 
-			if (this.pepClient != null)
-			{
-				this.pepClient.Dispose();
-				this.pepClient = null;
-			}
+			this.pepClient?.Dispose();
+			this.pepClient = null;
 
-			if (this.chatServer != null)
-			{
-				this.chatServer.Dispose();
-				this.chatServer = null;
-			}
+			this.chatServer?.Dispose();
+			this.chatServer = null;
 
-			if (this.bobClient != null)
-			{
-				this.bobClient.Dispose();
-				this.bobClient = null;
-			}
+			this.bobClient?.Dispose();
+			this.bobClient = null;
 
-			if (this.sensorServer != null)
-			{
-				this.sensorServer.Dispose();
-				this.sensorServer = null;
-			}
+			this.sensorServer?.Dispose();
+			this.sensorServer = null;
 
-			if (this.xmppClient != null)
-			{
-				this.xmppClient.Dispose();
-				this.xmppClient = null;
-			}
+			this.xmppClient?.Dispose();
+			this.xmppClient = null;
 
-			if (this.sampleTimer != null)
-			{
-				this.sampleTimer.Dispose();
-				this.sampleTimer = null;
-			}
+			this.sampleTimer?.Dispose();
+			this.sampleTimer = null;
 
 			if (this.arduino != null)
 			{
@@ -1247,6 +1233,9 @@ namespace SensorXmpp
 				this.arduinoUsb.Dispose();
 				this.arduinoUsb = null;
 			}
+
+			db?.Stop().Wait();
+			db?.Flush().Wait();
 
 			Log.Terminate();
 

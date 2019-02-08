@@ -44,6 +44,7 @@ namespace SensorCoap
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 		private UsbSerial arduinoUsb = null;
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
@@ -136,8 +137,11 @@ namespace SensorCoap
 					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -713,11 +717,8 @@ namespace SensorCoap
 			if (instance == this)
 				instance = null;
 
-			if (this.sampleTimer != null)
-			{
-				this.sampleTimer.Dispose();
-				this.sampleTimer = null;
-			}
+			this.sampleTimer?.Dispose();
+			this.sampleTimer = null;
 
 			if (this.arduino != null)
 			{
@@ -735,6 +736,9 @@ namespace SensorCoap
 				this.arduinoUsb.Dispose();
 				this.arduinoUsb = null;
 			}
+
+			db?.Stop().Wait();
+			db?.Flush().Wait();
 
 			Log.Terminate();
 

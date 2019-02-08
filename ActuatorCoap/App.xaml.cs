@@ -46,6 +46,7 @@ namespace ActuatorCoap
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 
 #if GPIO
 		private const int gpioOutputPin = 5;
@@ -126,8 +127,11 @@ namespace ActuatorCoap
 					typeof(IDtlsCredentials).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 #if GPIO
 				gpio = GpioController.GetDefault();
@@ -389,11 +393,8 @@ namespace ActuatorCoap
 				instance = null;
 
 #if GPIO
-			if (this.gpioPin != null)
-			{
-				this.gpioPin.Dispose();
-				this.gpioPin = null;
-			}
+			this.gpioPin?.Dispose();
+			this.gpioPin = null;
 #else
 			if (this.arduino != null)
 			{
@@ -412,6 +413,9 @@ namespace ActuatorCoap
 				this.arduinoUsb = null;
 			}
 #endif
+			db?.Stop().Wait();
+			db?.Flush().Wait();
+
 			Log.Terminate();
 
 			deferral.Complete();

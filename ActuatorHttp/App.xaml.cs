@@ -50,6 +50,7 @@ namespace ActuatorHttp
 	sealed partial class App : Application
 	{
 		private static App instance = null;
+		private FilesProvider db = null;
 
 #if GPIO
 		private const int gpioOutputPin = 5;
@@ -134,8 +135,11 @@ namespace ActuatorHttp
 					typeof(Expression).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				Database.Register(new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
-					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000));
+				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
+				Database.Register(db);
+				await db.RepairIfInproperShutdown(null);
+				await db.Start();
 
 #if GPIO
 				gpio = GpioController.GetDefault();
@@ -183,13 +187,13 @@ namespace ActuatorHttp
 							Log.Informational("Device ready.");
 
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-								this.arduino.digitalWrite(13, PinState.HIGH);
+							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
-								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
-								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
 							await MainPage.Instance.OutputSet(this.output.Value);
@@ -198,7 +202,7 @@ namespace ActuatorHttp
 								new KeyValuePair<string, object>("Output", this.output.Value));
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							}
+						}
 						catch (Exception ex)
 						{
 							Log.Critical(ex);
@@ -248,7 +252,7 @@ namespace ActuatorHttp
 
 					if (req.Header.Accept != null)
 					{
-						switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json"))
+						switch (req.Header.Accept.GetBestAlternative("text/xml", "application/xml", "application/json"))
 						{
 							case "text/xml":
 							case "application/xml":
@@ -279,7 +283,7 @@ namespace ActuatorHttp
 
 						if (req.Header.Accept != null)
 						{
-							switch (req.Header.Accept.GetBestContentType("text/xml", "application/xml", "application/json"))
+							switch (req.Header.Accept.GetBestAlternative("text/xml", "application/xml", "application/json"))
 							{
 								case "text/xml":
 								case "application/xml":
@@ -541,18 +545,12 @@ namespace ActuatorHttp
 			if (instance == this)
 				instance = null;
 
-			if (this.httpServer != null)
-			{
-				this.httpServer.Dispose();
-				this.httpServer = null;
-			}
+			this.httpServer?.Dispose();
+			this.httpServer = null;
 
 #if GPIO
-			if (this.gpioPin != null)
-			{
-				this.gpioPin.Dispose();
-				this.gpioPin = null;
-			}
+			this.gpioPin?.Dispose();
+			this.gpioPin = null;
 #else
 			if (this.arduino != null)
 			{
@@ -571,6 +569,9 @@ namespace ActuatorHttp
 				this.arduinoUsb = null;
 			}
 #endif
+			db?.Stop().Wait();
+			db?.Flush().Wait();
+
 			Log.Terminate();
 
 			deferral.Complete();
