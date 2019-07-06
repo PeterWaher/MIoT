@@ -226,13 +226,13 @@
       <Version>1.0.42</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.55</Version>
+      <Version>1.0.57</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.29</Version>
+      <Version>1.0.30</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.12</Version>
