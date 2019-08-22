@@ -204,37 +204,37 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.21</Version>
+      <Version>1.0.23</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PEP.UWP">
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>1.0.20</Version>
+      <Version>1.0.22</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PubSub.UWP">
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.26</Version>
+      <Version>1.0.27</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
       <Version>1.0.42</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.57</Version>
+      <Version>1.0.61</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.30</Version>
+      <Version>1.0.31</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>1.0.10</Version>
+      <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>

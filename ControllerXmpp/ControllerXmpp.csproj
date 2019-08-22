@@ -195,13 +195,13 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.21</Version>
+      <Version>1.0.23</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>1.0.18</Version>
+      <Version>1.0.19</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.26</Version>
+      <Version>1.0.27</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
       <Version>1.0.42</Version>
@@ -210,7 +210,7 @@
       <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.57</Version>
+      <Version>1.0.61</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
@@ -219,7 +219,7 @@
       <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>1.0.10</Version>
+      <Version>1.0.12</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
