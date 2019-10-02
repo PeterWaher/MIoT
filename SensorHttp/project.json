@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.8",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
     "SkiaSharp": "1.68.0",
     "Waher.Content": "1.0.22",
     "Waher.Content.Images": "1.0.3",
@@ -10,7 +10,7 @@
     "Waher.Networking": "1.0.13",
     "Waher.Networking.HTTP.UWP": "1.0.35",
     "Waher.Persistence": "1.0.12",
-    "Waher.Persistence.FilesLW": "1.0.61",
+    "Waher.Persistence.FilesLW": "1.0.63",
     "Waher.Runtime.Inventory": "1.0.9",
     "Waher.Runtime.Settings": "1.0.1",
     "Waher.Script": "1.0.31",
