@@ -193,7 +193,7 @@
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.0.8</Version>
+      <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
       <Version>1.0.23</Version>
@@ -208,16 +208,16 @@
       <Version>1.0.27</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.42</Version>
+      <Version>1.0.43</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.64</Version>
+      <Version>1.0.65</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.32</Version>
+      <Version>1.0.33</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.12</Version>
