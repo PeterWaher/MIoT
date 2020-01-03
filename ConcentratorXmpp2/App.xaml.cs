@@ -496,8 +496,11 @@ namespace ConcentratorXmpp
 
 					case XmppState.Error:
 					case XmppState.Offline:
-						await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-							async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
+						if (!(this.xmppClient is null))
+						{
+							await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+								async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
+						}
 						break;
 				}
 			}
