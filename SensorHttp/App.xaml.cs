@@ -28,12 +28,11 @@ using Waher.Content.Images;
 using Waher.Content.Markdown;
 using Waher.Content.Markdown.Web;
 using Waher.Events;
-using Waher.Networking;
 using Waher.Networking.HTTP;
-using Waher.Networking.Sniffers;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Script;
@@ -139,6 +138,7 @@ namespace SensorHttp
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ImageCodec).GetTypeInfo().Assembly,

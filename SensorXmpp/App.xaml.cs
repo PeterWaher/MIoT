@@ -35,6 +35,7 @@ using Waher.Networking.XMPP.Sensor;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Things;
@@ -138,6 +139,7 @@ namespace SensorXmpp
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(XmppClient).GetTypeInfo().Assembly,

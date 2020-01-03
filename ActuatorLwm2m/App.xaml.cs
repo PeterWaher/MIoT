@@ -29,12 +29,10 @@ using Waher.Content;
 using Waher.Events;
 using Waher.Networking.CoAP;
 using Waher.Networking.CoAP.ContentFormats;
-using Waher.Networking.CoAP.Options;
 using Waher.Networking.LWM2M;
-using Waher.Networking.LWM2M.Events;
 using Waher.Persistence;
 using Waher.Persistence.Files;
-using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 using Waher.Security;
@@ -128,6 +126,7 @@ namespace ActuatorLwm2m
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(ICoapContentFormat).GetTypeInfo().Assembly,

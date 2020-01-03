@@ -28,6 +28,7 @@ using Waher.Networking.Sniffers;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 
@@ -126,6 +127,7 @@ namespace SensorMqtt
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 

@@ -24,6 +24,7 @@ using Waher.Events;
 using Waher.Persistence;
 using Waher.Persistence.Files;
 using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Inventory;
 
 using Sensor.History;
@@ -110,7 +111,10 @@ namespace Sensor
 			try
 			{
 				Log.Informational("Starting application.");
-				Types.Initialize(typeof(FilesProvider).GetTypeInfo().Assembly, typeof(App).GetTypeInfo().Assembly);
+				Types.Initialize(
+					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
+					typeof(App).GetTypeInfo().Assembly);
 
 				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);

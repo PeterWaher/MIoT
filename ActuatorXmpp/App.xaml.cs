@@ -42,7 +42,7 @@ using Waher.Things.ControlParameters;
 using Waher.Things.SensorData;
 using Waher.Persistence;
 using Waher.Persistence.Files;
-using Waher.Persistence.Filters;
+using Waher.Persistence.Serialization;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
 
@@ -133,6 +133,7 @@ namespace ActuatorXmpp
 
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
+					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(IContentEncoder).GetTypeInfo().Assembly,
 					typeof(XmppClient).GetTypeInfo().Assembly,
