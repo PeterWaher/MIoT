@@ -1,10 +1,10 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.9",
-    "Waher.Events": "1.0.9",
+    "Waher.Events": "1.0.10",
     "Waher.Networking.MQTT.UWP": "1.0.11",
-    "Waher.Persistence.FilesLW": "1.0.65",
-    "Waher.Runtime.Settings": "1.0.1",
+    "Waher.Persistence.FilesLW": "1.0.66",
+    "Waher.Runtime.Settings": "1.0.2",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {
