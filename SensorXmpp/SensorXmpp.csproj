@@ -185,49 +185,49 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.9</Version>
+      <Version>6.2.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>1.0.23</Version>
+      <Version>1.0.24</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>1.0.38</Version>
+      <Version>1.0.39</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.0.10</Version>
+      <Version>1.0.11</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
-      <Version>1.0.23</Version>
+      <Version>1.0.25</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PEP.UWP">
-      <Version>1.0.9</Version>
+      <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>1.0.23</Version>
+      <Version>1.0.24</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PubSub.UWP">
-      <Version>1.0.7</Version>
+      <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>1.0.27</Version>
+      <Version>1.0.28</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.0.44</Version>
+      <Version>1.0.45</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.66</Version>
+      <Version>1.0.67</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.34</Version>
+      <Version>1.0.35</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
-      <Version>1.0.12</Version>
+      <Version>1.0.13</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
       <Version>1.0.14</Version>
