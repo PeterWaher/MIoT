@@ -1241,6 +1241,9 @@ namespace ControllerXmpp
 			this.secondTimer?.Dispose();
 			this.secondTimer = null;
 
+			db?.Stop().Wait();
+			db?.Flush().Wait();
+
 			Log.Terminate();
 
 			deferral.Complete();
