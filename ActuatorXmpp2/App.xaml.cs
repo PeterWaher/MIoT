@@ -957,8 +957,8 @@ namespace ActuatorXmpp
 				this.arduinoUsb = null;
 			}
 #endif
-			db?.Stop().Wait();
-			db?.Flush().Wait();
+			db?.Stop()?.Wait();
+			db?.Flush()?.Wait();
 
 			Log.Terminate();
 

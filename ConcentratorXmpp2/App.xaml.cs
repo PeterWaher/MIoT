@@ -1324,8 +1324,8 @@ namespace ConcentratorXmpp
 				this.arduinoUsb = null;
 			}
 
-			db?.Stop().Wait();
-			db?.Flush().Wait();
+			db?.Stop()?.Wait();
+			db?.Flush()?.Wait();
 
 			Log.Terminate();
 
