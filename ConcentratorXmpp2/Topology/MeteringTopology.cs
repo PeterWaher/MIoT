@@ -26,7 +26,7 @@ namespace ConcentratorXmpp.Topology
 
 		public IEnumerable<INode> RootNodes => new INode[] { ActuatorNode, SensorNode };
 
-		public event SourceEventEventHandler OnEvent = null;
+		public event SourceEventEventHandler OnEvent;
 
 		public Task<bool> CanViewAsync(RequestOrigin Caller)
 		{

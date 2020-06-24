@@ -3,8 +3,8 @@
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.10",
     "Waher.Events": "1.0.11",
     "Waher.Networking.CoAP.UWP": "1.0.7",
-    "Waher.Persistence.FilesLW": "1.0.67",
-    "Waher.Runtime.Settings": "1.0.2",
+    "Waher.Persistence.FilesLW": "1.0.68",
+    "Waher.Runtime.Settings": "1.0.3",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {

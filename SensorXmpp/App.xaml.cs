@@ -59,7 +59,7 @@ namespace SensorXmpp
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
-		private int?[] windowA0 = new int?[windowSize];
+		private readonly int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
 
@@ -335,7 +335,7 @@ namespace SensorXmpp
 			}
 		}
 
-		private void StateChanged(object Sender, XmppState State)
+		private Task StateChanged(object _, XmppState State)
 		{
 			Log.Informational("Changing state: " + State.ToString());
 
@@ -345,11 +345,14 @@ namespace SensorXmpp
 				Task.Run(this.SetVCard);
 				Task.Run(this.RegisterDevice);
 			}
+
+			return Task.CompletedTask;
 		}
 
-		private void ConnectionError(object Sender, Exception ex)
+		private Task ConnectionError(object _, Exception ex)
 		{
 			Log.Error(ex.Message);
+			return Task.CompletedTask;
 		}
 
 		private void AttachFeatures()
@@ -510,23 +513,39 @@ namespace SensorXmpp
 				}
 			};
 
-			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
+			this.xmppClient.OnError += (Sender, ex) =>
+			{
+				Log.Error(ex);
+				return Task.CompletedTask;
+			};
+
 			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
 
 			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
 			{
 				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
 				e.Accept();
+				return Task.CompletedTask;
 			};
 
 			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
 			{
 				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
 				e.Accept();
+				return Task.CompletedTask;
 			};
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) => Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
-			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+			this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
+			{
+				Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
+				return Task.CompletedTask;
+			};
+
+			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) =>
+			{
+				Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+				return Task.CompletedTask;
+			};
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
@@ -587,54 +606,40 @@ namespace SensorXmpp
 			this.lastPublishedLight = this.lastLight.Value;
 		}
 
-		private async void TestConnectionStateChanged(object Sender, XmppState State)
+		private async Task TestConnectionStateChanged(object Sender, XmppState State)
 		{
-			try
+			Log.Informational("Changing state: " + State.ToString());
+
+			switch (State)
 			{
-				Log.Informational("Changing state: " + State.ToString());
+				case XmppState.Connected:
+					await RuntimeSettings.SetAsync("XmppHost", this.xmppClient.Host);
+					await RuntimeSettings.SetAsync("XmppPort", this.xmppClient.Port);
+					await RuntimeSettings.SetAsync("XmppUserName", this.xmppClient.UserName);
+					await RuntimeSettings.SetAsync("XmppPasswordHash", this.xmppClient.PasswordHash);
+					await RuntimeSettings.SetAsync("XmppPasswordHashMethod", this.xmppClient.PasswordHashMethod);
 
-				switch (State)
-				{
-					case XmppState.Connected:
-						await RuntimeSettings.SetAsync("XmppHost", this.xmppClient.Host);
-						await RuntimeSettings.SetAsync("XmppPort", this.xmppClient.Port);
-						await RuntimeSettings.SetAsync("XmppUserName", this.xmppClient.UserName);
-						await RuntimeSettings.SetAsync("XmppPasswordHash", this.xmppClient.PasswordHash);
-						await RuntimeSettings.SetAsync("XmppPasswordHashMethod", this.xmppClient.PasswordHashMethod);
+					this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
+					this.xmppClient.OnStateChanged += this.StateChanged;
+					this.AttachFeatures();
+					await this.SetVCard();
+					await this.RegisterDevice();
+					break;
 
-						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
-						this.xmppClient.OnStateChanged += this.StateChanged;
-						this.AttachFeatures();
-						await this.SetVCard();
-						await this.RegisterDevice();
-						break;
-
-					case XmppState.Error:
-					case XmppState.Offline:
-						if (!(this.xmppClient is null))
-						{
-							await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-								async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
-						}
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Critical(ex);
+				case XmppState.Error:
+				case XmppState.Offline:
+					if (!(this.xmppClient is null))
+					{
+						await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+							async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
+					}
+					break;
 			}
 		}
 
-		private async void QueryVCardHandler(object Sender, IqEventArgs e)
+		private async Task QueryVCardHandler(object Sender, IqEventArgs e)
 		{
-			try
-			{
-				e.IqResult(await this.GetVCardXml());
-			}
-			catch (Exception ex)
-			{
-				e.IqError(ex);
-			}
+			e.IqResult(await this.GetVCardXml());
 		}
 
 		private async Task SetVCard()
@@ -649,6 +654,9 @@ namespace SensorXmpp
 					Log.Informational("vCard successfully set.");
 				else
 					Log.Error("Unable to set vCard.");
+
+				return Task.CompletedTask;
+
 			}, null);
 		}
 
@@ -993,6 +1001,9 @@ namespace SensorXmpp
 							}
 						}, Item);
 					}
+
+					return Task.CompletedTask;
+
 				}, null);
 			}
 		}
@@ -1180,6 +1191,9 @@ namespace SensorXmpp
 					Log.Error("Registration update failed.");
 					this.RegisterDevice(MetaInfo);
 				}
+
+				return Task.CompletedTask;
+
 			}, null);
 		}
 

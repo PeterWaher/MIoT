@@ -246,7 +246,7 @@ namespace ControllerXmpp
 			}
 		}
 
-		private void StateChanged(object Sender, XmppState State)
+		private Task StateChanged(object _, XmppState State)
 		{
 			Log.Informational("Changing state: " + State.ToString());
 
@@ -256,11 +256,14 @@ namespace ControllerXmpp
 				Task.Run(this.SetVCard);
 				Task.Run(this.RegisterDevice);
 			}
+
+			return Task.CompletedTask;
 		}
 
-		private void ConnectionError(object Sender, Exception ex)
+		private Task ConnectionError(object _, Exception ex)
 		{
 			Log.Error(ex.Message);
+			return Task.CompletedTask;
 		}
 
 		private void AttachFeatures()
@@ -361,23 +364,35 @@ namespace ControllerXmpp
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					e.ReportErrors(true, new ThingError(ThingReference.Empty, ex.Message));
 				}
+
+				return Task.CompletedTask;
 			};
 
-			this.xmppClient.OnError += (Sender, ex) => Log.Error(ex);
-			this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
+			this.xmppClient.OnError += (Sender, ex) =>
+			{
+				Log.Error(ex);
+				return Task.CompletedTask;
+			};
+
+			this.xmppClient.OnPasswordChanged += (Sender, e) =>
+			{
+				Log.Informational("Password changed.", this.xmppClient.BareJID);
+			};
 
 			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
 			{
 				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
 				e.Accept();
+				return Task.CompletedTask;
 			};
 
 			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
 			{
 				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
 				e.Accept();
+				return Task.CompletedTask;
 			};
 
 			this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
@@ -386,9 +401,16 @@ namespace ControllerXmpp
 
 				if (string.Compare(e.FromBareJID, this.sensorJid, true) == 0)
 					this.SubscribeToSensorData();
+
+				return Task.CompletedTask;
 			};
 
-			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) => Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) =>
+			{
+				Log.Informational("Friendship removal accepted.", this.xmppClient.BareJID, e.From);
+				return Task.CompletedTask;
+			};
+
 			this.xmppClient.OnPresence += XmppClient_OnPresence;
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
@@ -401,54 +423,40 @@ namespace ControllerXmpp
 			this.controlClient = new ControlClient(this.xmppClient);
 		}
 
-		private async void TestConnectionStateChanged(object Sender, XmppState State)
+		private async Task TestConnectionStateChanged(object Sender, XmppState State)
 		{
-			try
+			Log.Informational("Changing state: " + State.ToString());
+
+			switch (State)
 			{
-				Log.Informational("Changing state: " + State.ToString());
+				case XmppState.Connected:
+					await RuntimeSettings.SetAsync("XmppHost", this.xmppClient.Host);
+					await RuntimeSettings.SetAsync("XmppPort", this.xmppClient.Port);
+					await RuntimeSettings.SetAsync("XmppUserName", this.xmppClient.UserName);
+					await RuntimeSettings.SetAsync("XmppPasswordHash", this.xmppClient.PasswordHash);
+					await RuntimeSettings.SetAsync("XmppPasswordHashMethod", this.xmppClient.PasswordHashMethod);
 
-				switch (State)
-				{
-					case XmppState.Connected:
-						await RuntimeSettings.SetAsync("XmppHost", this.xmppClient.Host);
-						await RuntimeSettings.SetAsync("XmppPort", this.xmppClient.Port);
-						await RuntimeSettings.SetAsync("XmppUserName", this.xmppClient.UserName);
-						await RuntimeSettings.SetAsync("XmppPasswordHash", this.xmppClient.PasswordHash);
-						await RuntimeSettings.SetAsync("XmppPasswordHashMethod", this.xmppClient.PasswordHashMethod);
+					this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
+					this.xmppClient.OnStateChanged += this.StateChanged;
+					this.AttachFeatures();
+					await this.SetVCard();
+					await this.RegisterDevice();
+					break;
 
-						this.xmppClient.OnStateChanged -= this.TestConnectionStateChanged;
-						this.xmppClient.OnStateChanged += this.StateChanged;
-						this.AttachFeatures();
-						await this.SetVCard();
-						await this.RegisterDevice();
-						break;
-
-					case XmppState.Error:
-					case XmppState.Offline:
-						if (!(this.xmppClient is null))
-						{
-							await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-								async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
-						}
-						break;
-				}
-			}
-			catch (Exception ex)
-			{
-				Log.Critical(ex);
+				case XmppState.Error:
+				case XmppState.Offline:
+					if (!(this.xmppClient is null))
+					{
+						await MainPage.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
+							async () => await this.ShowConnectionDialog(this.xmppClient.Host, this.xmppClient.Port, this.xmppClient.UserName));
+					}
+					break;
 			}
 		}
 
-		private async void QueryVCardHandler(object Sender, IqEventArgs e)
+		private async Task QueryVCardHandler(object Sender, IqEventArgs e)
 		{
-			try
-			{
-				e.IqResult(await this.GetVCardXml());
-			}
-			catch (Exception ex)
-			{
-				e.IqError(ex);
-			}
+			e.IqResult(await this.GetVCardXml());
 		}
 
 		private async Task SetVCard()
@@ -463,6 +471,9 @@ namespace ControllerXmpp
 					Log.Informational("vCard successfully set.");
 				else
 					Log.Error("Unable to set vCard.");
+
+				return Task.CompletedTask;
+
 			}, null);
 		}
 
@@ -528,6 +539,9 @@ namespace ControllerXmpp
 							}
 						}, Item);
 					}
+
+					return Task.CompletedTask;
+
 				}, null);
 			}
 		}
@@ -718,6 +732,9 @@ namespace ControllerXmpp
 				}
 
 				this.FindFriends(MetaInfo);
+
+				return Task.CompletedTask;
+
 			}, null);
 		}
 
@@ -861,6 +878,8 @@ namespace ControllerXmpp
 						}
 					}
 
+					return Task.CompletedTask;
+
 				}, null);
 			}
 		}
@@ -930,11 +949,13 @@ namespace ControllerXmpp
 			return Result.ToArray();
 		}
 
-		private void XmppClient_OnRosterItemRemoved(object Sender, RosterItem Item)
+		private Task XmppClient_OnRosterItemRemoved(object _, RosterItem Item)
 		{
 			Log.Informational("Roster item removed.", Item.BareJid);
 
 			this.FriendshipLost(Item);
+
+			return Task.CompletedTask;
 		}
 
 		private void FriendshipLost(RosterItem Item)
@@ -959,7 +980,7 @@ namespace ControllerXmpp
 				Task.Run(this.RegisterDevice);
 		}
 
-		private void XmppClient_OnRosterItemUpdated(object Sender, RosterItem Item)
+		private Task XmppClient_OnRosterItemUpdated(object _, RosterItem Item)
 		{
 			bool IsSensor;
 
@@ -974,9 +995,11 @@ namespace ControllerXmpp
 			}
 			else if (IsSensor)
 				this.SubscribeToSensorData();
+
+			return Task.CompletedTask;
 		}
 
-		private void XmppClient_OnRosterItemAdded(object Sender, RosterItem Item)
+		private Task XmppClient_OnRosterItemAdded(object _, RosterItem Item)
 		{
 			Log.Informational("Roster item added.", Item.BareJid);
 
@@ -985,9 +1008,11 @@ namespace ControllerXmpp
 				Log.Informational("Requesting presence subscription.", Item.BareJid);
 				this.xmppClient.RequestPresenceSubscription(Item.BareJid);
 			}
+
+			return Task.CompletedTask;
 		}
 
-		private void XmppClient_OnPresence(object Sender, PresenceEventArgs e)
+		private Task XmppClient_OnPresence(object Sender, PresenceEventArgs e)
 		{
 			Log.Informational("Presence received.", e.Availability.ToString(), e.From);
 
@@ -997,6 +1022,8 @@ namespace ControllerXmpp
 			{
 				this.SubscribeToSensorData();
 			}
+
+			return Task.CompletedTask;
 		}
 
 		private void SubscribeToSensorData()
@@ -1045,12 +1072,13 @@ namespace ControllerXmpp
 			}
 		}
 
-		private void Subscription_OnStateChanged(object Sender, SensorDataReadoutState NewState)
+		private Task Subscription_OnStateChanged(object _, SensorDataReadoutState NewState)
 		{
 			Log.Informational("Sensor subscription state changed.", NewState.ToString());
+			return Task.CompletedTask;
 		}
 
-		private void Subscription_OnFieldsReceived(object Sender, IEnumerable<Field> NewFields)
+		private Task Subscription_OnFieldsReceived(object _, IEnumerable<Field> NewFields)
 		{
 			bool RecalcOutput = false;
 
@@ -1118,14 +1146,18 @@ namespace ControllerXmpp
 					}
 				}
 			}
+
+			return Task.CompletedTask;
 		}
 
-		private void Subscription_OnErrorsReceived(object Sender, IEnumerable<ThingError> NewErrors)
+		private Task Subscription_OnErrorsReceived(object _, IEnumerable<ThingError> NewErrors)
 		{
 			this.lastEventErrors = DateTime.Now;
 
 			foreach (ThingError Error in NewErrors)
 				Log.Error(Error.ErrorMessage);
+
+			return Task.CompletedTask;
 		}
 
 		private void SecondTimerCallback(object State)

@@ -81,12 +81,12 @@ namespace ConcentratorXmpp.Topology
 			throw new NotSupportedException();
 		}
 
-		public ControlParameter[] GetControlParameters()
+		public Task<ControlParameter[]> GetControlParameters()
 		{
-			return new ControlParameter[]
+			return Task.FromResult<ControlParameter[]>(new ControlParameter[]
 			{
 				new BooleanControlParameter("Output", "Actuator", "Output:", "Digital output.",
-					(Node) => App.Instance.Output,
+					(Node) => Task.FromResult<bool?>(App.Instance.Output),
 					async (Node, Value) =>
 					{
 						try
@@ -98,7 +98,7 @@ namespace ConcentratorXmpp.Topology
 							Log.Critical(ex);
 						}
 					})
-			};
+			});
 		}
 
 		public async Task<IEnumerable<Parameter>> GetDisplayableParametersAsync(Language Language, RequestOrigin Caller)
@@ -136,7 +136,7 @@ namespace ConcentratorXmpp.Topology
 			return Task.FromResult<bool>(false);
 		}
 
-		public void StartReadout(ISensorReadout Request)
+		public Task StartReadout(ISensorReadout Request)
 		{
 			try
 			{
@@ -160,6 +160,8 @@ namespace ConcentratorXmpp.Topology
 			{
 				Log.Critical(ex);
 			}
+
+			return Task.CompletedTask;
 		}
 	}
 }

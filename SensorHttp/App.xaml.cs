@@ -57,13 +57,13 @@ namespace SensorHttp
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private HttpServer httpServer = null;
-		private IUserSource users = new Users();
-		private JwtFactory tokenFactory = new JwtFactory();
+		private readonly IUserSource users = new Users();
+		private readonly JwtFactory tokenFactory = new JwtFactory();
 		private JwtAuthentication tokenAuthentication;
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
-		private int?[] windowA0 = new int?[windowSize];
+		private readonly int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
 
@@ -274,20 +274,24 @@ namespace SensorHttp
 					}
 					else
 						this.ReturnMomentaryAsXml(req, resp);
+
+					return Task.CompletedTask;
+
 				}, this.tokenAuthentication);
 
 				this.httpServer.Register("/MomentaryPng", (req, resp) =>
 				{
-					IUser User;
-
 					if (!req.Session.TryGetVariable("User", out Variable v) ||
-						(User = v.ValueObject as IUser) is null)
+						!(v.ValueObject is IUser User))
 					{
 						throw new ForbiddenException();
 					}
 
 					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
 					this.ReturnMomentaryAsPng(req, resp);
+
+					return Task.CompletedTask;
+
 				}, true, false, true);
 
 				this.httpServer.Register("/Login", null, (req, resp) =>
@@ -334,10 +338,8 @@ namespace SensorHttp
 
 				this.httpServer.Register("/GetSessionToken", null, (req, resp) =>
 				{
-					IUser User;
-
 					if (!req.Session.TryGetVariable("User", out Variable v) ||
-						(User = v.ValueObject as IUser) is null)
+						!(v.ValueObject is IUser User))
 					{
 						throw new ForbiddenException();
 					}
@@ -346,6 +348,9 @@ namespace SensorHttp
 
 					resp.ContentType = JwtCodec.ContentType;
 					resp.Write(Token);
+
+					return Task.CompletedTask;
+
 				}, true, false, true);
 
 			}
@@ -730,7 +735,7 @@ namespace SensorHttp
 			Response.Write("</Motion>");
 		}
 
-		private void ReturnMomentaryAsJson(HttpRequest Request, HttpResponse Response)
+		private void ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
 		{
 			Response.ContentType = "application/json";
 

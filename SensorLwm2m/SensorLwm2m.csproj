@@ -192,10 +192,10 @@
       <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.0.67</Version>
+      <Version>1.0.68</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>

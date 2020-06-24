@@ -49,7 +49,7 @@ namespace SensorMqtt
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
-		private int?[] windowA0 = new int?[windowSize];
+		private readonly int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
 
@@ -208,7 +208,11 @@ namespace SensorMqtt
 
 				this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty);
 				//this.mqttClient = new MqttClient("iot.eclipse.org", 8883, true, this.deviceId, string.Empty, new LogSniffer());
-				this.mqttClient.OnStateChanged += (sender, state) => Log.Informational("MQTT client state changed: " + state.ToString());
+				this.mqttClient.OnStateChanged += (sender, state) =>
+				{
+					Log.Informational("MQTT client state changed: " + state.ToString());
+					return Task.CompletedTask;
+				};
 			}
 			catch (Exception ex)
 			{
@@ -492,7 +496,7 @@ namespace SensorMqtt
 				if (Timestamp.Second == 0 && this.mqttClient != null &&
 					(this.mqttClient.State == MqttState.Error || this.mqttClient.State == MqttState.Offline))
 				{
-					this.mqttClient.Reconnect();
+					await this.mqttClient.Reconnect();
 				}
 			}
 			catch (Exception ex)

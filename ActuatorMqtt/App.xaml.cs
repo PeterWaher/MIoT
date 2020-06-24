@@ -223,6 +223,8 @@ namespace ActuatorMqtt
 
 					if (state == MqttState.Connected)
 						this.mqttClient.SUBSCRIBE("Waher/MIOT/" + this.deviceId + "/Set/+", MqttQualityOfService.AtLeastOnce);
+
+					return Task.CompletedTask;
 				};
 
 				this.mqttClient.OnContentReceived += async (sender, e) =>
@@ -307,7 +309,7 @@ namespace ActuatorMqtt
 
 				if (this.mqttClient != null && this.mqttClient.State == MqttState.Connected)
 				{
-					this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/On", MqttQualityOfService.AtLeastOnce, true,
+					await this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/On", MqttQualityOfService.AtLeastOnce, true,
 						Encoding.UTF8.GetBytes(On.ToString()));
 
 					StringBuilder Json = new StringBuilder();
@@ -319,7 +321,7 @@ namespace ActuatorMqtt
 					Json.Append('}');
 
 					byte[] Data = Encoding.UTF8.GetBytes(Json.ToString());
-					this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtLeastOnce, true, Data);
+					await this.mqttClient.PUBLISH("Waher/MIOT/" + this.deviceId + "/JSON", MqttQualityOfService.AtLeastOnce, true, Data);
 				}
 			}
 		}

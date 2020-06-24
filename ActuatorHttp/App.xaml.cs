@@ -62,8 +62,8 @@ namespace ActuatorHttp
 #endif
 		private string deviceId;
 		private HttpServer httpServer = null;
-		private IUserSource users = new Users();
-		private JwtFactory tokenFactory = new JwtFactory();
+		private readonly IUserSource users = new Users();
+		private readonly JwtFactory tokenFactory = new JwtFactory();
 		private JwtAuthentication tokenAuthentication;
 		private bool? output = null;
 
@@ -270,6 +270,9 @@ namespace ActuatorHttp
 					}
 					else
 						this.ReturnMomentaryAsXml(req, resp);
+
+					return Task.CompletedTask;
+
 				}, this.tokenAuthentication);
 
 				this.httpServer.Register("/Set", null, async (req, resp) =>
@@ -307,11 +310,11 @@ namespace ActuatorHttp
 							this.ReturnMomentaryAsXml(req, resp);
 						}
 
-						resp.SendResponse();
+						await resp.SendResponse();
 					}
 					catch (Exception ex)
 					{
-						resp.SendResponse(ex);
+						await resp.SendResponse(ex);
 					}
 				}, false, this.tokenAuthentication);
 
@@ -359,10 +362,8 @@ namespace ActuatorHttp
 
 				this.httpServer.Register("/GetSessionToken", null, (req, resp) =>
 				{
-					IUser User;
-
 					if (!req.Session.TryGetVariable("User", out Variable v) ||
-						(User = v.ValueObject as IUser) is null)
+						!(v.ValueObject is IUser User))
 					{
 						throw new ForbiddenException();
 					}
@@ -371,6 +372,9 @@ namespace ActuatorHttp
 
 					resp.ContentType = JwtCodec.ContentType;
 					resp.Write(Token);
+
+					return Task.CompletedTask;
+
 				}, true, false, true);
 
 			}
@@ -481,7 +485,7 @@ namespace ActuatorHttp
 			Response.Write("</Momentary>");
 		}
 
-		private void ReturnMomentaryAsJson(HttpRequest Request, HttpResponse Response)
+		private void ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
 		{
 			Response.ContentType = "application/json";
 

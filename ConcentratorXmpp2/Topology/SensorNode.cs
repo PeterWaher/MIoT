@@ -118,7 +118,7 @@ namespace ConcentratorXmpp.Topology
 			return Task.FromResult<bool>(false);
 		}
 
-		public async void StartReadout(ISensorReadout Request)
+		public async Task StartReadout(ISensorReadout Request)
 		{
 			try
 			{
@@ -266,7 +266,7 @@ namespace ConcentratorXmpp.Topology
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Request.ReportErrors(true, new ThingError(this, ex.Message));
 			}
 		}
 	}
