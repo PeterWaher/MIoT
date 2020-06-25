@@ -259,7 +259,8 @@ namespace SensorXmpp
 						AllowCramMD5 = false,
 						AllowDigestMD5 = false,
 						AllowPlain = false,
-						AllowScramSHA1 = true
+						AllowScramSHA1 = true,
+						AllowScramSHA256 = true
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
@@ -312,7 +313,9 @@ namespace SensorXmpp
 						{
 							AllowCramMD5 = false,
 							AllowDigestMD5 = false,
-							AllowPlain = false
+							AllowPlain = false,
+							AllowScramSHA1 = true,
+							AllowScramSHA256 = true
 						};
 
 						this.xmppClient.AllowRegistration();                // Allows registration on servers that do not require signatures.
