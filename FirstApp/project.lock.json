@@ -2420,7 +2420,7 @@
           }
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -4924,7 +4924,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7431,7 +7431,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -9911,7 +9911,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12427,7 +12427,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -14907,7 +14907,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17423,7 +17423,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.0.11": {
+      "Waher.Events/1.0.12": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -27288,17 +27288,17 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.0.11": {
-      "sha512": "+3sElFuypT5uG1l7d9GYCLZCPj9tH1Lscr6XJfs2gy3BoX9SZMWXUJHzVeXPNTbQ4nYphanNmgw0R+8ckLWkQg==",
+    "Waher.Events/1.0.12": {
+      "sha512": "qN2x5VSAZDa/vrh+LN3kZea/WfF50ivo4NpCEXSqEQRZbZIern02GB8CcIvjw3dDCjHrGCadgPArrRnPudoUjg==",
       "type": "package",
-      "path": "waher.events/1.0.11",
+      "path": "waher.events/1.0.12",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.0.11.nupkg.sha512",
+        "waher.events.1.0.12.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -27327,7 +27327,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.10",
-      "Waher.Events >= 1.0.11",
+      "Waher.Events >= 1.0.12",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -27337,7 +27337,6 @@
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
-    "version": "1.0.0",
     "restore": {
       "projectUniqueName": "C:\\My Projects\\MIoT\\FirstApp\\FirstApp.csproj",
       "projectName": "FirstApp",
@@ -27361,7 +27360,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.10, )",
-      "Waher.Events": "[1.0.11, )",
+      "Waher.Events": "[1.0.12, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
     "frameworks": {
