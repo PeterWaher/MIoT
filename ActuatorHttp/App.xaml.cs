@@ -318,7 +318,7 @@ namespace ActuatorHttp
 					}
 				}, false, this.tokenAuthentication);
 
-				this.httpServer.Register("/Login", null, (req, resp) =>
+				this.httpServer.Register("/Login", null, async (req, resp) =>
 				{
 					if (!req.HasData || req.Session is null)
 						throw new BadRequestException();
@@ -340,7 +340,7 @@ namespace ActuatorHttp
 					if (string.IsNullOrEmpty(From))
 						From = "/Index.md";
 
-					IUser User = this.Login(UserName, Password);
+					IUser User = await this.Login(UserName, Password);
 					if (User != null)
 					{
 						Log.Informational("User logged in.", UserName, req.RemoteEndPoint, "LoginSuccessful", EventLevel.Minor);
@@ -404,14 +404,12 @@ namespace ActuatorHttp
 
 		public class Users : IUserSource
 		{
-			public bool TryGetUser(string UserName, out IUser User)
+			public Task<IUser> TryGetUser(string UserName)
 			{
 				if (UserName == "MIoT")
-					User = new User();
+					return Task.FromResult<IUser>(new User());
 				else
-					User = null;
-
-				return User != null;
+					return Task.FromResult<IUser>(null);
 			}
 		}
 
@@ -432,9 +430,11 @@ namespace ActuatorHttp
 			return Waher.Security.Hashes.ComputeSHA256HashString(Encoding.UTF8.GetBytes(Password + ":" + this.deviceId));
 		}
 
-		private IUser Login(string UserName, string Password)
+		private async Task<IUser> Login(string UserName, string Password)
 		{
-			if (this.users.TryGetUser(UserName, out IUser User))
+			IUser User = await this.users.TryGetUser(UserName);
+
+			if (!(User is null))
 			{
 				switch (User.PasswordHashType)
 				{
