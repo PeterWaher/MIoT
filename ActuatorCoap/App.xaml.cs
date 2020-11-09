@@ -57,7 +57,7 @@ namespace ActuatorCoap
 #endif
 		private string deviceId;
 		private CoapEndpoint coapEndpoint = null;
-		private IUserSource users = new Users();
+		private readonly IUserSource users = new Users();
 		private bool? output = null;
 		private CoapResource outputResource = null;
 
@@ -314,14 +314,12 @@ namespace ActuatorCoap
 
 		public class Users : IUserSource
 		{
-			public bool TryGetUser(string UserName, out IUser User)
+			public Task<IUser> TryGetUser(string UserName)
 			{
 				if (UserName == "MIoT")
-					User = new User();
+					return Task.FromResult<IUser>(new User());
 				else
-					User = null;
-
-				return User != null;
+					return Task.FromResult<IUser>(null);
 			}
 		}
 

@@ -50,11 +50,11 @@ namespace SensorCoap
 		private RemoteDevice arduino = null;
 		private Timer sampleTimer = null;
 		private CoapEndpoint coapEndpoint = null;
-		private IUserSource users = new Users();
+		private readonly IUserSource users = new Users();
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
-		private int?[] windowA0 = new int?[windowSize];
+		private readonly int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
 
@@ -323,14 +323,12 @@ namespace SensorCoap
 
 		public class Users : IUserSource
 		{
-			public bool TryGetUser(string UserName, out IUser User)
+			public Task<IUser> TryGetUser(string UserName)
 			{
 				if (UserName == "MIoT")
-					User = new User();
+					return Task.FromResult<IUser>(new User());
 				else
-					User = null;
-
-				return User != null;
+					return Task.FromResult<IUser>(null);
 			}
 		}
 
