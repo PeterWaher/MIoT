@@ -136,7 +136,7 @@ namespace ActuatorHttp
 					typeof(Expression).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
 				Database.Register(db);
 				await db.RepairIfInproperShutdown(null);

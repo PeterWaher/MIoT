@@ -43,7 +43,7 @@ namespace Sensor
 
 		private const int windowSize = 10;
 		private const int spikePos = windowSize / 2;
-		private int?[] windowA0 = new int?[windowSize];
+		private readonly int?[] windowA0 = new int?[windowSize];
 		private int nrA0 = 0;
 		private int sumA0 = 0;
 
@@ -116,7 +116,7 @@ namespace Sensor
 					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = new FilesProvider(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
 				Database.Register(db);
 				await db.RepairIfInproperShutdown(null);
