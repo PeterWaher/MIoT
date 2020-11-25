@@ -218,7 +218,7 @@
       <Version>1.0.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.0.44</Version>
+      <Version>1.0.45</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.0.18</Version>

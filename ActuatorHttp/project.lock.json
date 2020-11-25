@@ -2870,7 +2870,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -5818,7 +5818,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -8747,7 +8747,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -11649,7 +11649,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -14587,7 +14587,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -17489,7 +17489,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -20427,7 +20427,7 @@
           "lib/netstandard1.3/Waher.Runtime.Threading.dll": {}
         }
       },
-      "Waher.Script/1.0.44": {
+      "Waher.Script/1.0.45": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -30838,17 +30838,17 @@
         "waher.runtime.threading.nuspec"
       ]
     },
-    "Waher.Script/1.0.44": {
-      "sha512": "s5A3CJifxQDnPcjCDyr2TJl+3GGsEWIplDeCidsJQ3+Ran1t1aLJe7SpuBUOKF2d4Xs22X0q1nbFQtxgW3KAyw==",
+    "Waher.Script/1.0.45": {
+      "sha512": "u+yG7IvqeM6mIJoTOCjvvAOSEQmbFm6JtUVWTEvWdkux8Yywy8ltYOSoVHcuhm/T6LZiSKsx7SNPAungGAvBWA==",
       "type": "package",
-      "path": "waher.script/1.0.44",
+      "path": "waher.script/1.0.45",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.1.0.44.nupkg.sha512",
+        "waher.script.1.0.45.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
@@ -30977,7 +30977,7 @@
       "Waher.Persistence.FilesLW >= 1.2.1",
       "Waher.Runtime.Inventory >= 1.0.14",
       "Waher.Runtime.Settings >= 1.0.4",
-      "Waher.Script >= 1.0.44",
+      "Waher.Script >= 1.0.45",
       "Waher.Security >= 1.0.7",
       "Waher.Security.JWS >= 1.0.5",
       "Waher.Security.JWT.UWP >= 1.1.2",
@@ -31025,7 +31025,7 @@
       "Waher.Persistence.FilesLW": "[1.2.1, )",
       "Waher.Runtime.Inventory": "[1.0.14, )",
       "Waher.Runtime.Settings": "[1.0.4, )",
-      "Waher.Script": "[1.0.44, )",
+      "Waher.Script": "[1.0.45, )",
       "Waher.Security": "[1.0.7, )",
       "Waher.Security.JWS": "[1.0.5, )",
       "Waher.Security.JWT.UWP": "[1.1.2, )",
