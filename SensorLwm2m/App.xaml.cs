@@ -437,14 +437,16 @@ namespace SensorLwm2m
 
 		public class Users : IUserSource
 		{
-			public bool TryGetUser(string UserName, out IUser User)
+			public Task<IUser> TryGetUser(string UserName)
 			{
+				IUser User;
+
 				if (UserName == "MIoT")
 					User = new User();
 				else
 					User = null;
 
-				return User != null;
+				return Task.FromResult<IUser>(User);
 			}
 		}
 
