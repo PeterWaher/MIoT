@@ -1040,6 +1040,12 @@ namespace SensorXmpp
 				}
 
 				this.provisioningClient = new ProvisioningClient(this.xmppClient, JID, OwnerJid);
+
+				this.provisioningClient.CacheCleared += (sender, e) =>
+				{
+					Log.Informational("Rule cache cleared.");
+				};
+				
 				this.AttachFeatures();
 			}
 		}
