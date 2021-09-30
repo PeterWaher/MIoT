@@ -191,7 +191,7 @@
       <Version>1.1.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>1.2.4</Version>
+      <Version>1.2.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>1.1.1</Version>
@@ -215,22 +215,22 @@
       <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>1.1.18</Version>
+      <Version>1.1.19</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.7.0</Version>
+      <Version>1.7.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.1.4</Version>
+      <Version>1.1.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
-      <Version>1.2.3</Version>
+      <Version>1.2.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>1.1.4</Version>
+      <Version>1.1.5</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
