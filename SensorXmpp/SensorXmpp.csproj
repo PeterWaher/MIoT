@@ -185,16 +185,16 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.2.12</Version>
+      <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>1.1.4</Version>
+      <Version>1.1.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
       <Version>1.2.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
-      <Version>1.1.1</Version>
+      <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
       <Version>1.0.15</Version>
@@ -206,7 +206,7 @@
       <Version>1.1.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>1.1.10</Version>
+      <Version>1.1.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PubSub.UWP">
       <Version>1.1.2</Version>
@@ -224,13 +224,13 @@
       <Version>1.0.9</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>1.1.5</Version>
+      <Version>1.1.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>1.2.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>1.1.5</Version>
+      <Version>1.1.6</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
