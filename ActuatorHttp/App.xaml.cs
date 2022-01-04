@@ -247,7 +247,7 @@ namespace ActuatorHttp
 					throw new TemporaryRedirectException("/Index.md");
 				});
 
-				this.httpServer.Register("/Momentary", (req, resp) =>
+				this.httpServer.Register("/Momentary", async (req, resp) =>
 				{
 					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
 
@@ -257,11 +257,11 @@ namespace ActuatorHttp
 						{
 							case "text/xml":
 							case "application/xml":
-								this.ReturnMomentaryAsXml(req, resp);
+								await this.ReturnMomentaryAsXml(req, resp);
 								break;
 
 							case "application/json":
-								this.ReturnMomentaryAsJson(req, resp);
+								await this.ReturnMomentaryAsJson(req, resp);
 								break;
 
 							default:
@@ -269,9 +269,7 @@ namespace ActuatorHttp
 						}
 					}
 					else
-						this.ReturnMomentaryAsXml(req, resp);
-
-					return Task.CompletedTask;
+						await this.ReturnMomentaryAsXml(req, resp);
 
 				}, this.tokenAuthentication);
 
@@ -282,7 +280,7 @@ namespace ActuatorHttp
 						if (!req.HasData)
 							throw new BadRequestException();
 
-						if (!(req.DecodeData() is string s) || !CommonTypes.TryParse(s, out bool OutputValue))
+						if (!(await req.DecodeDataAsync() is string s) || !CommonTypes.TryParse(s, out bool OutputValue))
 							throw new BadRequestException();
 
 						if (req.Header.Accept != null)
@@ -292,12 +290,12 @@ namespace ActuatorHttp
 								case "text/xml":
 								case "application/xml":
 									await this.SetOutput(OutputValue, req.RemoteEndPoint);
-									this.ReturnMomentaryAsXml(req, resp);
+									await this.ReturnMomentaryAsXml(req, resp);
 									break;
 
 								case "application/json":
 									await this.SetOutput(OutputValue, req.RemoteEndPoint);
-									this.ReturnMomentaryAsJson(req, resp);
+									await this.ReturnMomentaryAsJson(req, resp);
 									break;
 
 								default:
@@ -307,7 +305,7 @@ namespace ActuatorHttp
 						else
 						{
 							await this.SetOutput(OutputValue, req.RemoteEndPoint);
-							this.ReturnMomentaryAsXml(req, resp);
+							await this.ReturnMomentaryAsXml(req, resp);
 						}
 
 						await resp.SendResponse();
@@ -323,7 +321,7 @@ namespace ActuatorHttp
 					if (!req.HasData || req.Session is null)
 						throw new BadRequestException();
 
-					object Obj = req.DecodeData();
+					object Obj = await req.DecodeDataAsync();
 
 					if (!(Obj is Dictionary<string, string> Form) ||
 						!Form.TryGetValue("UserName", out string UserName) ||
@@ -457,49 +455,49 @@ namespace ActuatorHttp
 			return null;
 		}
 
-		private void ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
+		private async Task ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
 		{
 			Response.ContentType = "application/xml";
 
-			Response.Write("<?xml version='1.0' encoding='");
-			Response.Write(Response.Encoding.WebName);
-			Response.Write("'?>");
+			await Response.Write("<?xml version='1.0' encoding='");
+			await Response.Write(Response.Encoding.WebName);
+			await Response.Write("'?>");
 
 			string SchemaUrl = Request.Header.GetURL();
 			int i = SchemaUrl.IndexOf("/Momentary");
 			SchemaUrl = SchemaUrl.Substring(0, i) + "/schema.xsd";
 
-			Response.Write("<Momentary timestamp='");
-			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-			Response.Write("' xmlns='");
-			Response.Write(SchemaUrl);
-			Response.Write("'>");
+			await Response.Write("<Momentary timestamp='");
+			await Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			await Response.Write("' xmlns='");
+			await Response.Write(SchemaUrl);
+			await Response.Write("'>");
 
 			if (this.output.HasValue)
 			{
-				Response.Write("<Output value='");
-				Response.Write(this.output.Value ? "true" : "false");
-				Response.Write("'/>");
+				await Response.Write("<Output value='");
+				await Response.Write(this.output.Value ? "true" : "false");
+				await Response.Write("'/>");
 			}
 
-			Response.Write("</Momentary>");
+			await Response.Write("</Momentary>");
 		}
 
-		private void ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
+		private async Task ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
 		{
 			Response.ContentType = "application/json";
 
-			Response.Write("{\"ts\":\"");
-			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-			Response.Write('"');
+			await Response.Write("{\"ts\":\"");
+			await Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			await Response.Write('"');
 
 			if (this.output.HasValue)
 			{
-				Response.Write(",\"output\":");
-				Response.Write(this.output.Value ? "true" : "false");
+				await Response.Write(",\"output\":");
+				await Response.Write(this.output.Value ? "true" : "false");
 			}
 
-			Response.Write('}');
+			await Response.Write('}');
 		}
 
 		internal static App Instance => instance;

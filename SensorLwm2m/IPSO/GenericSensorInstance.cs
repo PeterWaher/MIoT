@@ -1,19 +1,20 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Waher.Networking.LWM2M;
 
 namespace SensorLwm2m.IPSO
 {
 	public class GenericSensorInstance : Lwm2mObjectInstance
 	{
-		private Lwm2mResourceDouble current;
-		private Lwm2mResourceString unit;
-		private Lwm2mResourceDouble min;
-		private Lwm2mResourceDouble max;
-		private Lwm2mResourceDouble minRange;
-		private Lwm2mResourceDouble maxRange;
-		private Lwm2mResourceCommand resetMinMax;
-		private Lwm2mResourceString applicationType;
-		private Lwm2mResourceString sensorType;
+		private readonly Lwm2mResourceDouble current;
+		private readonly Lwm2mResourceString unit;
+		private readonly Lwm2mResourceDouble min;
+		private readonly Lwm2mResourceDouble max;
+		private readonly Lwm2mResourceDouble minRange;
+		private readonly Lwm2mResourceDouble maxRange;
+		private readonly Lwm2mResourceCommand resetMinMax;
+		private readonly Lwm2mResourceString applicationType;
+		private readonly Lwm2mResourceString sensorType;
 
 		public GenericSensorInstance(ushort InstanceId, double? CurrentValue, string Unit, double MinRange, double MaxRange, string ApplicationType, string SensorType)
 			: this(3300, InstanceId, CurrentValue, Unit, MinRange, MaxRange, ApplicationType, SensorType)
@@ -46,6 +47,8 @@ namespace SensorLwm2m.IPSO
 				this.max.TriggerAll();
 
 				this.TriggerAll();
+			
+				return Task.CompletedTask;
 			};
 
 			this.Add(this.current);

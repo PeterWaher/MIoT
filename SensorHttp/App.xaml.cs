@@ -239,7 +239,7 @@ namespace SensorHttp
 					throw new TemporaryRedirectException("/Index.md");
 				});
 
-				this.httpServer.Register("/Momentary", (req, resp) =>
+				this.httpServer.Register("/Momentary", async (req, resp) =>
 				{
 					resp.SetHeader("Cache-Control", "max-age=0, no-cache, no-store");
 
@@ -249,23 +249,23 @@ namespace SensorHttp
 						{
 							case "text/xml":
 							case "application/xml":
-								this.ReturnMomentaryAsXml(req, resp);
+								await this.ReturnMomentaryAsXml(req, resp);
 								break;
 
 							case "application/json":
-								this.ReturnMomentaryAsJson(req, resp);
+								await this.ReturnMomentaryAsJson(req, resp);
 								break;
 
 							case "image/png":
-								this.ReturnMomentaryAsPng(req, resp);
+								await this.ReturnMomentaryAsPng(req, resp);
 								break;
 
 							case "image/jpg":
-								this.ReturnMomentaryAsJpg(req, resp);
+								await this.ReturnMomentaryAsJpg(req, resp);
 								break;
 
 							case "image/webp":
-								this.ReturnMomentaryAsWebp(req, resp);
+								await this.ReturnMomentaryAsWebp(req, resp);
 								break;
 
 							default:
@@ -273,9 +273,7 @@ namespace SensorHttp
 						}
 					}
 					else
-						this.ReturnMomentaryAsXml(req, resp);
-
-					return Task.CompletedTask;
+						await this.ReturnMomentaryAsXml(req, resp);
 
 				}, this.tokenAuthentication);
 
@@ -299,7 +297,7 @@ namespace SensorHttp
 					if (!req.HasData || req.Session is null)
 						throw new BadRequestException();
 
-					object Obj = req.DecodeData();
+					object Obj = await req.DecodeDataAsync();
 
 					if (!(Obj is Dictionary<string, string> Form) ||
 						!Form.TryGetValue("UserName", out string UserName) ||
@@ -700,88 +698,88 @@ namespace SensorHttp
 			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
 		}
 
-		private void ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
+		private async Task ReturnMomentaryAsXml(HttpRequest Request, HttpResponse Response)
 		{
 			Response.ContentType = "application/xml";
 
-			Response.Write("<?xml version='1.0' encoding='");
-			Response.Write(Response.Encoding.WebName);
-			Response.Write("'?>");
+			await Response.Write("<?xml version='1.0' encoding='");
+			await Response.Write(Response.Encoding.WebName);
+			await Response.Write("'?>");
 
 			string SchemaUrl = Request.Header.GetURL();
 			int i = SchemaUrl.IndexOf("/Momentary");
 			SchemaUrl = SchemaUrl.Substring(0, i) + "/schema.xsd";
 
-			Response.Write("<Momentary timestamp='");
-			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-			Response.Write("' xmlns='");
-			Response.Write(SchemaUrl);
-			Response.Write("'>");
+			await Response.Write("<Momentary timestamp='");
+			await Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			await Response.Write("' xmlns='");
+			await Response.Write(SchemaUrl);
+			await Response.Write("'>");
 
 			if (this.lastLight.HasValue)
 			{
-				Response.Write("<Light value='");
-				Response.Write(ToString(this.lastLight.Value, 2));
-				Response.Write("' unit='%'/>");
+				await Response.Write("<Light value='");
+				await Response.Write(ToString(this.lastLight.Value, 2));
+				await Response.Write("' unit='%'/>");
 			}
 
 			if (this.lastMotion.HasValue)
 			{
-				Response.Write("<Motion value='");
-				Response.Write(this.lastMotion.Value ? "true" : "false");
-				Response.Write("'/>");
+				await Response.Write("<Motion value='");
+				await Response.Write(this.lastMotion.Value ? "true" : "false");
+				await Response.Write("'/>");
 			}
 
-			Response.Write("</Motion>");
+			await Response.Write("</Motion>");
 		}
 
-		private void ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
+		private async Task ReturnMomentaryAsJson(HttpRequest _, HttpResponse Response)
 		{
 			Response.ContentType = "application/json";
 
-			Response.Write("{\"ts\":\"");
-			Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
-			Response.Write('"');
+			await Response.Write("{\"ts\":\"");
+			await Response.Write(DateTime.Now.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
+			await Response.Write('"');
 
 			if (this.lastLight.HasValue)
 			{
-				Response.Write(",\"light\":{\"value\":");
-				Response.Write(ToString(this.lastLight.Value, 2));
-				Response.Write(",\"unit\":\"%\"}");
+				await Response.Write(",\"light\":{\"value\":");
+				await Response.Write(ToString(this.lastLight.Value, 2));
+				await Response.Write(",\"unit\":\"%\"}");
 			}
 
 			if (this.lastMotion.HasValue)
 			{
-				Response.Write(",\"motion\":");
-				Response.Write(this.lastMotion.Value ? "true" : "false");
+				await Response.Write(",\"motion\":");
+				await Response.Write(this.lastMotion.Value ? "true" : "false");
 			}
 
-			Response.Write('}');
+			await Response.Write('}');
 		}
 
-		private void ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
+		private Task ReturnMomentaryAsPng(HttpRequest Request, HttpResponse Response)
 		{
-			Response.Return(this.GenerateGauge(Request.Header));
+			return Response.Return(this.GenerateGauge(Request.Header));
 		}
 
-		private void ReturnMomentaryAsJpg(HttpRequest Request, HttpResponse Response)
+		private async Task ReturnMomentaryAsJpg(HttpRequest Request, HttpResponse Response)
 		{
 			SKImage Gauge = this.GenerateGauge(Request.Header);
 			SKData Data = Gauge.Encode(SKEncodedImageFormat.Jpeg, 90);
 			byte[] Binary = Data.ToArray();
 
 			Response.ContentType = "image/jpeg";
-			Response.Write(Binary);
+			await Response.Write(Binary);
 		}
 
-		private void ReturnMomentaryAsWebp(HttpRequest Request, HttpResponse Response)
+		private async Task ReturnMomentaryAsWebp(HttpRequest Request, HttpResponse Response)
 		{
 			SKImage Gauge = this.GenerateGauge(Request.Header);
 			SKData Data = Gauge.Encode(SKEncodedImageFormat.Webp, 90);
 			byte[] Binary = Data.ToArray();
 
 			Response.ContentType = "image/webp";
-			Response.Write(Binary);
+			await Response.Write(Binary);
 		}
 
 		private SKImage GenerateGauge(HttpRequestHeader Header)

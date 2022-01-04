@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Waher.Networking.LWM2M;
 
 namespace SensorLwm2m.IPSO
 {
 	public class DigitalInputInstance : Lwm2mObjectInstance
 	{
-		private Lwm2mResourceBoolean state;
-		private Lwm2mResourceInteger counter;
-		private Lwm2mResourceCommand counterReset;
-		private Lwm2mResourceString applicationType;
-		private Lwm2mResourceString sensorType;
+		private readonly Lwm2mResourceBoolean state;
+		private readonly Lwm2mResourceInteger counter;
+		private readonly Lwm2mResourceCommand counterReset;
+		private readonly Lwm2mResourceString applicationType;
+		private readonly Lwm2mResourceString sensorType;
 
 		public DigitalInputInstance(ushort InstanceId, bool? CurrentState, string ApplicationType, string SensorType)
 			: this(3200, InstanceId, CurrentState, ApplicationType, SensorType)
@@ -34,6 +35,8 @@ namespace SensorLwm2m.IPSO
 				this.counter.IntegerValue = 0;
 				this.counter.TriggerAll();
 				this.TriggerAll();
+			
+				return Task.CompletedTask;
 			};
 
 			this.Add(this.state);

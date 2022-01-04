@@ -252,7 +252,7 @@ namespace ActuatorCoap
 				this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
 					new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
 
-				this.outputResource = this.coapEndpoint.Register("/Output", (req, resp) =>
+				this.outputResource = this.coapEndpoint.Register("/Output", async (req, resp) =>
 				{
 					string s;
 
@@ -261,13 +261,13 @@ namespace ActuatorCoap
 					else
 						s = "-";
 
-					resp.Respond(CoapCode.Content, s, 64);
+					await resp.RespondAsync(CoapCode.Content, s, 64);
 
 				}, async (req, resp) =>
 				{
 					try
 					{
-						string s = req.Decode() as string;
+						string s = await req.DecodeAsync() as string;
 						if (s is null && req.Payload != null)
 							s = Encoding.UTF8.GetString(req.Payload);
 

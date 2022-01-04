@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Waher.Events;
 using Waher.Networking.LWM2M;
 using Waher.Networking.LWM2M.Events;
@@ -7,8 +8,8 @@ namespace ActuatorLwm2m.IPSO
 {
 	public class DigitalOutputInstance : Lwm2mObjectInstance
 	{
-		private Lwm2mResourceBoolean state;
-		private Lwm2mResourceString applicationType;
+		private readonly Lwm2mResourceBoolean state;
+		private readonly Lwm2mResourceString applicationType;
 
 		public DigitalOutputInstance(ushort InstanceId, bool? CurrentState, string ApplicationType)
 			: this(3201, InstanceId, CurrentState, ApplicationType)
@@ -36,6 +37,8 @@ namespace ActuatorLwm2m.IPSO
 				{
 					Log.Critical(ex);
 				}
+			
+				return Task.CompletedTask;
 			};
 
 			this.Add(this.state);

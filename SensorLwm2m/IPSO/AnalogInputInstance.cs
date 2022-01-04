@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Waher.Networking.LWM2M;
 
 namespace SensorLwm2m.IPSO
 {
 	public class AnalogInputInstance : Lwm2mObjectInstance
 	{
-		private Lwm2mResourceDouble current;
-		private Lwm2mResourceDouble min;
-		private Lwm2mResourceDouble max;
-		private Lwm2mResourceDouble minRange;
-		private Lwm2mResourceDouble maxRange;
-		private Lwm2mResourceCommand resetMinMax;
-		private Lwm2mResourceString applicationType;
-		private Lwm2mResourceString sensorType;
+		private readonly Lwm2mResourceDouble current;
+		private readonly Lwm2mResourceDouble min;
+		private readonly Lwm2mResourceDouble max;
+		private readonly Lwm2mResourceDouble minRange;
+		private readonly Lwm2mResourceDouble maxRange;
+		private readonly Lwm2mResourceCommand resetMinMax;
+		private readonly Lwm2mResourceString applicationType;
+		private readonly Lwm2mResourceString sensorType;
 
 		public AnalogInputInstance(ushort InstanceId, double? CurrentValue, double MinRange, double MaxRange, string ApplicationType, string SensorType)
 			: base(3202, InstanceId)
@@ -35,6 +36,8 @@ namespace SensorLwm2m.IPSO
 				this.max.TriggerAll();
 
 				this.TriggerAll();
+			
+				return Task.CompletedTask;
 			};
 
 			this.Add(this.current);

@@ -265,7 +265,7 @@ namespace SensorLwm2m
 				this.coapEndpoint = new CoapEndpoint(new int[] { 5783 }, new int[] { 5784 }, null, null,
 					false, false);
 
-				this.lightResource = this.coapEndpoint.Register("/Light", (req, resp) =>
+				this.lightResource = this.coapEndpoint.Register("/Light", async (req, resp) =>
 				{
 					string s;
 
@@ -274,14 +274,14 @@ namespace SensorLwm2m
 					else
 						s = "-";
 
-					resp.Respond(CoapCode.Content, s, 64);
+					await resp.RespondAsync(CoapCode.Content, s, 64);
 
 				}, Notifications.Unacknowledged, "Light, in %.", null, null,
 					new int[] { PlainText.ContentFormatCode });
 
 				this.lightResource?.TriggerAll(new TimeSpan(0, 0, 5));
 
-				this.motionResource = this.coapEndpoint.Register("/Motion", (req, resp) =>
+				this.motionResource = this.coapEndpoint.Register("/Motion", async (req, resp) =>
 				{
 					string s;
 
@@ -290,25 +290,25 @@ namespace SensorLwm2m
 					else
 						s = "-";
 
-					resp.Respond(CoapCode.Content, s, 64);
+					await resp.RespondAsync(CoapCode.Content, s, 64);
 
 				}, Notifications.Acknowledged, "Motion detector.", null, null,
 					new int[] { PlainText.ContentFormatCode });
 
 				this.motionResource?.TriggerAll(new TimeSpan(0, 1, 0));
 
-				this.momentaryResource = this.coapEndpoint.Register("/Momentary", (req, resp) =>
+				this.momentaryResource = this.coapEndpoint.Register("/Momentary", async (req, resp) =>
 				{
 					if (req.IsAcceptable(Xml.ContentFormatCode))
-						this.ReturnMomentaryAsXml(req, resp);
+						await this .ReturnMomentaryAsXml(req, resp);
 					else if (req.IsAcceptable(Json.ContentFormatCode))
-						this.ReturnMomentaryAsJson(req, resp);
+						await this.ReturnMomentaryAsJson(req, resp);
 					else if (req.IsAcceptable(PlainText.ContentFormatCode))
-						this.ReturnMomentaryAsPlainText(req, resp);
+						await this.ReturnMomentaryAsPlainText(req, resp);
 					else if (req.Accept.HasValue)
 						throw new CoapException(CoapCode.NotAcceptable);
 					else
-						this.ReturnMomentaryAsPlainText(req, resp);
+						await this.ReturnMomentaryAsPlainText(req, resp);
 
 				}, Notifications.Acknowledged, "Momentary values.", null, null,
 					new int[] { Xml.ContentFormatCode, Json.ContentFormatCode, PlainText.ContentFormatCode });
@@ -360,21 +360,25 @@ namespace SensorLwm2m
 				this.lwm2mClient.OnRegistrationSuccessful += (sender, e) =>
 				{
 					Log.Informational("Server registration completed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnRegistrationFailed += (sender, e) =>
 				{
 					Log.Error("Server registration failed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnDeregistrationSuccessful += (sender, e) =>
 				{
 					Log.Informational("Server deregistration completed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnDeregistrationFailed += (sender, e) =>
 				{
 					Log.Error("Server deregistration failed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnRebootRequest += async (sender, e) =>
@@ -472,7 +476,7 @@ namespace SensorLwm2m
 			return Value.ToString("F" + NrDec.ToString()).Replace(NumberFormatInfo.CurrentInfo.NumberDecimalSeparator, ".");
 		}
 
-		private void ReturnMomentaryAsXml(CoapMessage Request, CoapResponse Response)
+		private Task ReturnMomentaryAsXml(CoapMessage _, CoapResponse Response)
 		{
 			StringBuilder s = new StringBuilder();
 
@@ -496,10 +500,10 @@ namespace SensorLwm2m
 
 			s.Append("</m>");
 
-			Response.Respond(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Xml.ContentFormatCode));
+			return Response.RespondAsync(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Xml.ContentFormatCode));
 		}
 
-		private void ReturnMomentaryAsJson(CoapMessage Request, CoapResponse Response)
+		private Task ReturnMomentaryAsJson(CoapMessage _, CoapResponse Response)
 		{
 			StringBuilder s = new StringBuilder();
 
@@ -522,10 +526,10 @@ namespace SensorLwm2m
 
 			s.Append('}');
 
-			Response.Respond(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Json.ContentFormatCode));
+			return Response.RespondAsync(CoapCode.Content, s.ToString(), 64, new CoapOptionContentFormat(Json.ContentFormatCode));
 		}
 
-		private void ReturnMomentaryAsPlainText(CoapMessage Request, CoapResponse Response)
+		private Task ReturnMomentaryAsPlainText(CoapMessage _, CoapResponse Response)
 		{
 			StringBuilder s = new StringBuilder();
 
@@ -545,7 +549,7 @@ namespace SensorLwm2m
 				s.AppendLine(this.lastMotion.Value ? "true" : "false");
 			}
 
-			Response.Respond(CoapCode.Content, s.ToString(), 64);
+			return Response.RespondAsync(CoapCode.Content, s.ToString(), 64);
 		}
 
 		private async void SampleValues(object State)

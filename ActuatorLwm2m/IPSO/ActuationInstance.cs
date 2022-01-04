@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Waher.Events;
 using Waher.Networking.LWM2M;
 using Waher.Networking.LWM2M.Events;
@@ -7,9 +8,9 @@ namespace ActuatorLwm2m.IPSO
 {
 	public class ActuationInstance : Lwm2mObjectInstance
 	{
-		private Lwm2mResourceBoolean onOff;
-		private Lwm2mResourceString applicationType;
-		private Lwm2mResourceInteger onTime;
+		private readonly Lwm2mResourceBoolean onOff;
+		private readonly Lwm2mResourceString applicationType;
+		private readonly Lwm2mResourceInteger onTime;
 		private DateTime lastSet = DateTime.Now;
 
 		public ActuationInstance(ushort InstanceId, bool? CurrentState, string ApplicationType)
@@ -39,6 +40,8 @@ namespace ActuatorLwm2m.IPSO
 				{
 					Log.Critical(ex);
 				}
+			
+				return Task.CompletedTask;
 			};
 
 			this.onTime.OnBeforeGet += (sender, e) =>
@@ -47,6 +50,8 @@ namespace ActuatorLwm2m.IPSO
 					this.onTime.IntegerValue = (long)((DateTime.Now - this.lastSet).TotalSeconds + 0.5);
 				else
 					this.onTime.IntegerValue = 0;
+		
+				return Task.CompletedTask;
 			};
 
 			this.onTime.OnRemoteUpdate += (sender, e) =>
@@ -55,6 +60,8 @@ namespace ActuatorLwm2m.IPSO
 					this.lastSet = DateTime.Now.AddSeconds(-this.onTime.IntegerValue.Value);
 				else
 					this.lastSet = DateTime.Now;
+			
+				return Task.CompletedTask;
 			};
 
 			this.Add(this.onOff);

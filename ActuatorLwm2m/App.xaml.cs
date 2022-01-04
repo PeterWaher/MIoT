@@ -263,7 +263,7 @@ namespace ActuatorLwm2m
 				this.coapEndpoint = new CoapEndpoint(new int[] { CoapEndpoint.DefaultCoapPort },
 					new int[] { CoapEndpoint.DefaultCoapsPort }, this.users, string.Empty, false, false);
 
-				this.outputResource = this.coapEndpoint.Register("/Output", (req, resp) =>
+				this.outputResource = this.coapEndpoint.Register("/Output", async (req, resp) =>
 				{
 					string s;
 
@@ -272,13 +272,13 @@ namespace ActuatorLwm2m
 					else
 						s = "-";
 
-					resp.Respond(CoapCode.Content, s, 64);
+					await resp.RespondAsync(CoapCode.Content, s, 64);
 
 				}, async (req, resp) =>
 				{
 					try
 					{
-						string s = req.Decode() as string;
+						string s = await req.DecodeAsync() as string;
 						if (s is null && req.Payload != null)
 							s = Encoding.UTF8.GetString(req.Payload);
 
@@ -363,21 +363,25 @@ namespace ActuatorLwm2m
 				this.lwm2mClient.OnRegistrationSuccessful += (sender, e) =>
 				{
 					Log.Informational("Server registration completed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnRegistrationFailed += (sender, e) =>
 				{
 					Log.Error("Server registration failed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnDeregistrationSuccessful += (sender, e) =>
 				{
 					Log.Informational("Server deregistration completed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnDeregistrationFailed += (sender, e) =>
 				{
 					Log.Error("Server deregistration failed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnRebootRequest += async (sender, e) =>
