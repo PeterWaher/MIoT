@@ -982,14 +982,9 @@ namespace SensorHttp
 			}
 		}
 
-		public static LastMinute[] GetLastMinutes()
-		{
-			Task<LastMinute[]> T = GetLastMinutesAsync();
-			T.Wait();
-			return T.Result;
-		}
+		// Note: Script (from v2.0.1) automatically awaits the result to be completed before displaying the results on the web page.
 
-		public static async Task<LastMinute[]> GetLastMinutesAsync()
+		public static async Task<LastMinute[]> GetLastMinutes()
 		{
 			List<LastMinute> Result = new List<LastMinute>();
 
@@ -999,14 +994,7 @@ namespace SensorHttp
 			return Result.ToArray();
 		}
 
-		public static LastHour[] GetLastHours()
-		{
-			Task<LastHour[]> T = GetLastHoursAsync();
-			T.Wait();
-			return T.Result;
-		}
-
-		public static async Task<LastHour[]> GetLastHoursAsync()
+		public static async Task<LastHour[]> GetLastHours()
 		{
 			List<LastHour> Result = new List<LastHour>();
 
@@ -1016,14 +1004,7 @@ namespace SensorHttp
 			return Result.ToArray();
 		}
 
-		public static LastDay[] GetLastDays()
-		{
-			Task<LastDay[]> T = GetLastDaysAsync();
-			T.Wait();
-			return T.Result;
-		}
-
-		public static async Task<LastDay[]> GetLastDaysAsync()
+		public static async Task<LastDay[]> GetLastDays()
 		{
 			List<LastDay> Result = new List<LastDay>();
 
