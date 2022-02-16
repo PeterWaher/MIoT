@@ -2641,7 +2641,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2939,11 +2939,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -5637,7 +5637,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -5902,11 +5902,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -8581,7 +8581,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -8846,11 +8846,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -11498,7 +11498,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -11763,11 +11763,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -14451,7 +14451,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -14716,11 +14716,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -17368,7 +17368,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -17633,11 +17633,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -20321,7 +20321,7 @@
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
         }
       },
-      "Waher.Events/1.1.0": {
+      "Waher.Events/1.1.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -20586,11 +20586,11 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.1": {
+      "Waher.Security.JWT.UWP/1.3.2": {
         "type": "package",
         "dependencies": {
           "Waher.Content": "2.0.0",
-          "Waher.Events": "1.1.0",
+          "Waher.Events": "1.1.1",
           "Waher.Networking.HTTP.UWP": "2.0.2",
           "Waher.Runtime.Inventory": "1.0.27",
           "Waher.Security": "1.0.8",
@@ -30723,17 +30723,17 @@
         "waher.content.xml.nuspec"
       ]
     },
-    "Waher.Events/1.1.0": {
-      "sha512": "IPesGj8VxutusJnmlPG9unsPaoqrcR/y9oQ4cm3cMW04RKO/IAbp2zMnUt5zsT8j58aJm8YTIFTqEyZSMsEtlg==",
+    "Waher.Events/1.1.1": {
+      "sha512": "cPk4mHunubUoz2LiKy1vgKslTLM3Ac9djRc2UToY/Tl7N6N8zcXnUQrTo3erA2kHazLaD7PQP9ebnyp6ougK2Q==",
       "type": "package",
-      "path": "waher.events/1.1.0",
+      "path": "waher.events/1.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.1.0.nupkg.sha512",
+        "waher.events.1.1.1.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -31018,10 +31018,10 @@
         "waher.security.jws.nuspec"
       ]
     },
-    "Waher.Security.JWT.UWP/1.3.1": {
-      "sha512": "2dZ2Z7DqOw8pHSxAahCtOpUrTHW23B+1EB9K2qfZ+ITc6LHQVo6rBoOB8lGHGa6PViTkaPz1nB1tezLzzlCryg==",
+    "Waher.Security.JWT.UWP/1.3.2": {
+      "sha512": "ySNzayf1b9QugOHHQG6dttvlMluomgaRKsYPN22PzHVWJtpvqfGITu8f410fQQf/ZSMEaq0LsHYXGU1Bohis1g==",
       "type": "package",
-      "path": "waher.security.jwt.uwp/1.3.1",
+      "path": "waher.security.jwt.uwp/1.3.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -31037,7 +31037,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
-        "waher.security.jwt.uwp.1.3.1.nupkg.sha512",
+        "waher.security.jwt.uwp.1.3.2.nupkg.sha512",
         "waher.security.jwt.uwp.nuspec"
       ]
     },
@@ -31094,7 +31094,7 @@
       "Waher.Content.Images >= 2.0.1",
       "Waher.Content.Markdown >= 2.1.2",
       "Waher.Content.Markdown.Web.UWP >= 2.0.2",
-      "Waher.Events >= 1.1.0",
+      "Waher.Events >= 1.1.1",
       "Waher.Networking.HTTP.UWP >= 2.0.2",
       "Waher.Networking.UWP >= 2.0.3",
       "Waher.Persistence >= 1.6.1",
@@ -31105,7 +31105,7 @@
       "Waher.Script.Graphs >= 2.0.3",
       "Waher.Security >= 1.0.8",
       "Waher.Security.JWS >= 1.0.6",
-      "Waher.Security.JWT.UWP >= 1.3.1",
+      "Waher.Security.JWT.UWP >= 1.3.2",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -31146,7 +31146,7 @@
       "Waher.Content.Images": "[2.0.1, )",
       "Waher.Content.Markdown": "[2.1.2, )",
       "Waher.Content.Markdown.Web.UWP": "[2.0.2, )",
-      "Waher.Events": "[1.1.0, )",
+      "Waher.Events": "[1.1.1, )",
       "Waher.Networking.HTTP.UWP": "[2.0.2, )",
       "Waher.Networking.UWP": "[2.0.3, )",
       "Waher.Persistence": "[1.6.1, )",
@@ -31157,7 +31157,7 @@
       "Waher.Script.Graphs": "[2.0.3, )",
       "Waher.Security": "[1.0.8, )",
       "Waher.Security.JWS": "[1.0.6, )",
-      "Waher.Security.JWT.UWP": "[1.3.1, )",
+      "Waher.Security.JWT.UWP": "[1.3.2, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
     "frameworks": {

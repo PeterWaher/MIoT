@@ -186,7 +186,7 @@
       <Version>6.2.13</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.1.0</Version>
+      <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.LWM2M.UWP">
       <Version>2.0.1</Version>
