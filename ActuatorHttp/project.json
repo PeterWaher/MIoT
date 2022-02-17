@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.13",
-    "Waher.Content": "2.0.0",
+    "Waher.Content": "2.1.0",
     "Waher.Content.Emoji": "2.0.0",
     "Waher.Content.Images": "2.0.1",
     "Waher.Content.Markdown": "2.1.2",
