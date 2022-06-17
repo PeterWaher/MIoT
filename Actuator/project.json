@@ -1,6 +1,6 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.13",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.14",
     "Waher.Events": "1.1.1",
     "Waher.Persistence.FilesLW": "1.8.4",
     "Waher.Runtime.Settings": "1.0.10",
