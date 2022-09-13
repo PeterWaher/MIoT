@@ -1,7 +1,4 @@
-﻿using System;
-using Waher.Networking.LWM2M;
-
-namespace SensorLwm2m.IPSO
+﻿namespace SensorLwm2m.IPSO
 {
 	public class IlluminanceSensorInstance : GenericSensorInstance
 	{

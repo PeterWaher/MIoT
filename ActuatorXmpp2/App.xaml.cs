@@ -11,23 +11,21 @@ using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+#if GPIO
 using Windows.Devices.Gpio;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+#endif
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 using Windows.Devices.Enumeration;
+#if !GPIO
 using Microsoft.Maker.RemoteWiring;
 using Microsoft.Maker.Serial;
+#endif
 using Waher.Content;
 using Waher.Content.Xml;
 using Waher.Events;
@@ -47,7 +45,6 @@ using Waher.Persistence.Files;
 using Waher.Persistence.Serialization;
 using Waher.Runtime.Settings;
 using Waher.Runtime.Inventory;
-using Windows.Devices.Midi;
 
 namespace ActuatorXmpp
 {
@@ -167,9 +164,9 @@ namespace ActuatorXmpp
 							this.gpioPin.SetDriveMode(GpioPinDriveMode.Output);
 
 							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
-							this.gpioPin.Write(this.output ? GpioPinValue.High : GpioPinValue.Low);
+							this.gpioPin.Write(this.output.Value ? GpioPinValue.High : GpioPinValue.Low);
 
-							await MainPage.Instance.OutputSet(this.output);
+							await MainPage.Instance.OutputSet(this.output.Value);
 
 							Log.Informational("Setting Control Parameter.", string.Empty, "Startup",
 								new KeyValuePair<string, object>("Output", this.output));

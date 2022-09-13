@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Waher.Runtime.Language;
 using Waher.Events;
-using Waher.Persistence;
-using Waher.Persistence.Filters;
 using Waher.Things;
 using Waher.Things.DisplayableParameters;
 using Waher.Things.SensorData;
-using ConcentratorXmpp.History;
 using Waher.Things.ControlParameters;
 
 namespace ConcentratorXmpp.Topology
