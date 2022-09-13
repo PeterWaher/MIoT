@@ -184,10 +184,10 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>2.4.1</Version>
+      <Version>2.4.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>2.2.0</Version>
+      <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>2.0.3</Version>
