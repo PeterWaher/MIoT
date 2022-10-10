@@ -2421,7 +2421,7 @@
           }
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -5103,7 +5103,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -7766,7 +7766,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -10402,7 +10402,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -13074,7 +13074,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15710,7 +15710,7 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -18382,7 +18382,7 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.1": {
+      "Waher.Events/1.1.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -28402,17 +28402,17 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.1.1": {
-      "sha512": "cPk4mHunubUoz2LiKy1vgKslTLM3Ac9djRc2UToY/Tl7N6N8zcXnUQrTo3erA2kHazLaD7PQP9ebnyp6ougK2Q==",
+    "Waher.Events/1.1.2": {
+      "sha512": "G3vczwexXfBo4DYW2S9JP/Lo9EAitrCyPv9g0cPjP8C+O54cxX3WSnmud5espIf0Dksps+LYsRIOUDFpCIICig==",
       "type": "package",
-      "path": "waher.events/1.1.1",
+      "path": "waher.events/1.1.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.1.1.nupkg.sha512",
+        "waher.events.1.1.2.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -28615,7 +28615,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.14",
-      "Waher.Events >= 1.1.1",
+      "Waher.Events >= 1.1.2",
       "Waher.Networking.MQTT.UWP >= 2.0.2",
       "Waher.Persistence.FilesLW >= 1.9.4",
       "Waher.Runtime.Settings >= 1.0.10",
@@ -28654,7 +28654,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.14, )",
-      "Waher.Events": "[1.1.1, )",
+      "Waher.Events": "[1.1.2, )",
       "Waher.Networking.MQTT.UWP": "[2.0.2, )",
       "Waher.Persistence.FilesLW": "[1.9.4, )",
       "Waher.Runtime.Settings": "[1.0.10, )",

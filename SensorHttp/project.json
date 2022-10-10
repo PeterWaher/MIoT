@@ -1,14 +1,14 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.14",
-    "SkiaSharp": "2.88.2",
-    "Waher.Content": "2.4.5",
+    "SkiaSharp": "2.88.3",
+    "Waher.Content": "2.4.6",
     "Waher.Content.Images": "2.1.2",
     "Waher.Content.Markdown": "2.2.3",
     "Waher.Content.Markdown.Web.UWP": "2.0.5",
-    "Waher.Events": "1.1.1",
+    "Waher.Events": "1.1.2",
     "Waher.Networking.HTTP.UWP": "2.1.4",
-    "Waher.Networking.UWP": "2.0.5",
+    "Waher.Networking.UWP": "2.0.6",
     "Waher.Persistence": "1.8.2",
     "Waher.Persistence.FilesLW": "1.9.4",
     "Waher.Runtime.Inventory": "1.1.2",

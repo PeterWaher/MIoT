@@ -188,7 +188,7 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>2.4.5</Version>
+      <Version>2.4.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
       <Version>2.2.3</Version>
@@ -197,7 +197,7 @@
       <Version>2.0.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.1.1</Version>
+      <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
       <Version>2.0.6</Version>
