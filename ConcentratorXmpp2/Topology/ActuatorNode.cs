@@ -26,7 +26,7 @@ namespace ConcentratorXmpp.Topology
 		public bool IsReadable => true;
 		public bool IsControllable => true;
 		public bool HasCommands => false;
-		public IThingReference Parent => null;
+		public INode Parent => null;
 		public DateTime LastChanged => DateTime.MinValue;
 		public NodeState State => NodeState.None;   // TODO
 		public Task<IEnumerable<INode>> ChildNodes => null;

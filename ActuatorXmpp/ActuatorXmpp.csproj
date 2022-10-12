@@ -209,7 +209,7 @@
       <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>2.0.6</Version>
+      <Version>2.0.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.9.4</Version>
@@ -227,7 +227,7 @@
       <Version>2.3.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Things">
-      <Version>1.3.0</Version>
+      <Version>1.3.1</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>
