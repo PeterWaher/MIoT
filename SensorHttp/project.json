@@ -2,13 +2,13 @@
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.2.14",
     "SkiaSharp": "2.88.3",
-    "Waher.Content": "2.4.6",
+    "Waher.Content": "2.4.8",
     "Waher.Content.Images": "2.1.2",
-    "Waher.Content.Markdown": "2.2.3",
-    "Waher.Content.Markdown.Web.UWP": "2.0.5",
+    "Waher.Content.Markdown": "2.2.5",
+    "Waher.Content.Markdown.Web.UWP": "2.0.6",
     "Waher.Events": "1.1.2",
-    "Waher.Networking.HTTP.UWP": "2.1.5",
-    "Waher.Networking.UWP": "2.0.6",
+    "Waher.Networking.HTTP.UWP": "2.2.0",
+    "Waher.Networking.UWP": "2.1.0",
     "Waher.Persistence": "1.8.2",
     "Waher.Persistence.FilesLW": "1.9.4",
     "Waher.Runtime.Inventory": "1.1.2",
@@ -17,7 +17,7 @@
     "Waher.Script.Graphs": "2.0.8",
     "Waher.Security": "1.0.8",
     "Waher.Security.JWS": "1.0.8",
-    "Waher.Security.JWT.UWP": "1.3.5",
+    "Waher.Security.JWT.UWP": "1.3.6",
     "Windows-Remote-Arduino": "1.4.0"
   },
   "frameworks": {

@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Waher Data AB")]
 [assembly: AssemblyProduct("FirstApp")]
-[assembly: AssemblyCopyright("Copyright © Waher Data AB 2017")]
+[assembly: AssemblyCopyright("Copyright © Waher Data AB 2017-2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
