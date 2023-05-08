@@ -191,13 +191,13 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>2.5.0</Version>
+      <Version>2.6.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>2.3.0</Version>
+      <Version>2.3.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
-      <Version>2.1.0</Version>
+      <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
       <Version>1.1.2</Version>
@@ -206,7 +206,7 @@
       <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Concentrator.UWP">
-      <Version>2.1.0</Version>
+      <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
       <Version>2.0.3</Version>
@@ -218,22 +218,22 @@
       <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PubSub.UWP">
-      <Version>2.0.4</Version>
+      <Version>2.0.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
       <Version>2.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>2.1.1</Version>
+      <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.10.0</Version>
+      <Version>1.10.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>2.4.11</Version>
+      <Version>2.4.13</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
       <Version>2.0.8</Version>
