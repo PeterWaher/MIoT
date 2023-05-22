@@ -2790,7 +2790,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -6049,7 +6049,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -9257,7 +9257,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -12438,7 +12438,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15655,7 +15655,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -18836,7 +18836,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -22053,7 +22053,7 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/2.4.0": {
+      "Waher.Content.Markdown/2.5.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -32530,17 +32530,17 @@
         "waher.content.images.nuspec"
       ]
     },
-    "Waher.Content.Markdown/2.4.0": {
-      "sha512": "aK0AUqf2drc4z18Pgk9gx25/0Qtvs9EVUby3kU9hWge/QGKJcTxB6fc1jKPWV/PrKoHr4SsT30febEhaHHcoxg==",
+    "Waher.Content.Markdown/2.5.0": {
+      "sha512": "pX8kERnjJ9rxDDKhTiLSbRPdnqeC6KuOUVZIYUqld/bmnCUVGok2k363HTKb8uq8+qb0eCM2BYIBCFhhQgv0sA==",
       "type": "package",
-      "path": "waher.content.markdown/2.4.0",
+      "path": "waher.content.markdown/2.5.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.Markdown.dll",
-        "waher.content.markdown.2.4.0.nupkg.sha512",
+        "waher.content.markdown.2.5.0.nupkg.sha512",
         "waher.content.markdown.nuspec"
       ]
     },
@@ -32964,7 +32964,7 @@
       "SkiaSharp >= 2.88.3",
       "Waher.Content >= 2.6.1",
       "Waher.Content.Images >= 2.1.4",
-      "Waher.Content.Markdown >= 2.4.0",
+      "Waher.Content.Markdown >= 2.5.0",
       "Waher.Content.Markdown.Web.UWP >= 2.1.1",
       "Waher.Events >= 1.1.2",
       "Waher.Networking.HTTP.UWP >= 2.2.3",
@@ -33016,7 +33016,7 @@
       "SkiaSharp": "[2.88.3, )",
       "Waher.Content": "[2.6.1, )",
       "Waher.Content.Images": "[2.1.4, )",
-      "Waher.Content.Markdown": "[2.4.0, )",
+      "Waher.Content.Markdown": "[2.5.0, )",
       "Waher.Content.Markdown.Web.UWP": "[2.1.1, )",
       "Waher.Events": "[1.1.2, )",
       "Waher.Networking.HTTP.UWP": "[2.2.3, )",
