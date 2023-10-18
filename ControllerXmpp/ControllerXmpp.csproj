@@ -187,7 +187,7 @@
       <Version>2.6.5</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>2.9.0</Version>
+      <Version>2.9.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
       <Version>2.2.3</Version>
@@ -208,7 +208,7 @@
       <Version>2.1.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence">
-      <Version>1.10.0</Version>
+      <Version>1.10.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
       <Version>1.11.3</Version>
