@@ -192,7 +192,7 @@
       <Version>2.0.3</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.11.3</Version>
+      <Version>1.11.4</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.0.10</Version>
