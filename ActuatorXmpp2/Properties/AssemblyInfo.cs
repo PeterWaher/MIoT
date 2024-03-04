@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("ActuatorXmpp2")]
-[assembly: AssemblyCopyright("Copyright ©  2017-2023")]
+[assembly: AssemblyCopyright("Copyright © Waher Data AB 2017-2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
