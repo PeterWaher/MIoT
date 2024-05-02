@@ -526,10 +526,10 @@
           }
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -543,7 +543,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -2735,13 +2735,13 @@
           }
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -2750,7 +2750,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -2762,12 +2762,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -2790,20 +2790,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -2812,7 +2812,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -2820,39 +2820,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -2875,55 +2898,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -2957,18 +2992,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -2993,7 +3028,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -3058,16 +3093,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -3098,11 +3133,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -3124,7 +3159,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -3193,7 +3228,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -3207,13 +3242,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -3248,12 +3283,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -4103,10 +4138,10 @@
           "runtimes/win8-arm/native/clrcompression.dll": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -4120,7 +4155,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -6068,13 +6103,13 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -6083,7 +6118,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -6095,12 +6130,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -6123,20 +6158,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -6145,7 +6180,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -6153,39 +6188,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -6199,55 +6257,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -6281,18 +6351,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -6308,7 +6378,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -6355,16 +6425,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -6395,11 +6465,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -6421,7 +6491,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -6490,7 +6560,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -6504,13 +6574,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -6545,12 +6615,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -7385,10 +7455,10 @@
           "runtimes/win8-arm-aot/native/_._": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -7402,7 +7472,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -9350,13 +9420,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -9365,7 +9435,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -9377,12 +9447,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -9405,20 +9475,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -9427,7 +9497,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -9435,39 +9505,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -9481,55 +9574,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -9563,18 +9668,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -9590,7 +9695,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -9637,16 +9742,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -9677,11 +9782,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -9703,7 +9808,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -9772,7 +9877,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -9786,13 +9891,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -9827,12 +9932,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -10640,10 +10745,10 @@
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -10657,7 +10762,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -12605,13 +12710,13 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -12620,7 +12725,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -12632,12 +12737,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -12660,20 +12765,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -12682,7 +12787,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -12690,39 +12795,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -12736,55 +12864,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -12818,18 +12958,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -12845,7 +12985,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -12892,16 +13032,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -12932,11 +13072,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -12958,7 +13098,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -13027,7 +13167,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -13041,13 +13181,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -13082,12 +13222,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -13931,10 +14071,10 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -13948,7 +14088,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -15896,13 +16036,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -15911,7 +16051,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -15923,12 +16063,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -15951,20 +16091,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -15973,7 +16113,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -15981,39 +16121,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -16027,55 +16190,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -16109,18 +16284,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -16136,7 +16311,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -16183,16 +16358,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -16223,11 +16398,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -16249,7 +16424,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -16318,7 +16493,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -16332,13 +16507,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -16373,12 +16548,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -17186,10 +17361,10 @@
           "runtimes/win/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -17203,7 +17378,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -19151,13 +19326,13 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -19166,7 +19341,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -19178,12 +19353,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -19206,20 +19381,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -19228,7 +19403,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19236,39 +19411,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -19282,55 +19480,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -19364,18 +19574,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -19391,7 +19601,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -19438,16 +19648,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -19478,11 +19688,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -19504,7 +19714,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -19573,7 +19783,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -19587,13 +19797,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -19628,12 +19838,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -20477,10 +20687,10 @@
           "runtimes/aot/lib/netcore50/System.Private.Uri.dll": {}
         }
       },
-      "SkiaSharp/2.88.7": {
+      "SkiaSharp/2.88.8": {
         "type": "package",
         "dependencies": {
-          "SkiaSharp.NativeAssets.UWP": "2.88.7",
+          "SkiaSharp.NativeAssets.UWP": "2.88.8",
           "System.Memory": "4.5.5"
         },
         "compile": {
@@ -20494,7 +20704,7 @@
           }
         }
       },
-      "SkiaSharp.NativeAssets.UWP/2.88.7": {
+      "SkiaSharp.NativeAssets.UWP/2.88.8": {
         "type": "package",
         "compile": {
           "lib/uap10.0.10240/_._": {}
@@ -22442,13 +22652,13 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Content/2.6.8": {
+      "Waher.Content/2.6.9": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.dll": {}
@@ -22457,7 +22667,7 @@
           "lib/netstandard1.3/Waher.Content.dll": {}
         }
       },
-      "Waher.Content.Emoji/2.0.0": {
+      "Waher.Content.Emoji/2.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -22469,12 +22679,12 @@
           "lib/netstandard1.3/Waher.Content.Emoji.dll": {}
         }
       },
-      "Waher.Content.Html/2.2.2": {
+      "Waher.Content.Html/2.3.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content": "2.6.5",
-          "Waher.Content.Xml": "2.2.2"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Html.dll": {}
@@ -22497,20 +22707,20 @@
           "lib/netstandard1.3/Waher.Content.Images.dll": {}
         }
       },
-      "Waher.Content.Markdown/3.0.0": {
+      "Waher.Content.Markdown/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Html": "2.2.2",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Html": "2.3.0",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Text": "1.1.2",
           "Waher.Runtime.Threading": "1.2.1",
-          "Waher.Script": "2.6.6",
-          "Waher.Script.Graphs": "2.1.5"
+          "Waher.Script": "2.6.7",
+          "Waher.Script.Graphs": "2.1.6"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
@@ -22519,7 +22729,7 @@
           "lib/netstandard1.3/Waher.Content.Markdown.dll": {}
         }
       },
-      "Waher.Content.Markdown.Contracts/3.0.0": {
+      "Waher.Content.Markdown.Contracts/3.0.2": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -22527,39 +22737,62 @@
           "Waher.Content.Xml": "2.2.5"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Latex/3.0.0": {
+      "Waher.Content.Markdown.JavaScript/3.0.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll": {}
         }
       },
-      "Waher.Content.Markdown.Web.UWP/3.0.0": {
+      "Waher.Content.Markdown.Latex/3.0.1": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.8",
-          "Waher.Content.Emoji": "2.0.0",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Markdown.Contracts": "3.0.0",
-          "Waher.Content.Markdown.Latex": "3.0.0",
-          "Waher.Content.Markdown.Wpf": "3.0.0",
-          "Waher.Content.Markdown.Xamarin": "3.0.0",
-          "Waher.Content.Markdown.Xml": "3.0.0",
-          "Waher.Networking.HTTP.UWP": "2.6.1",
+          "NETStandard.Library": "1.6.1",
+          "Waher.Content.Markdown": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Waher.Content.Markdown.Web.UWP/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Waher.Content": "2.6.9",
+          "Waher.Content.Emoji": "2.0.1",
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Markdown.Contracts": "3.0.2",
+          "Waher.Content.Markdown.JavaScript": "3.0.0",
+          "Waher.Content.Markdown.Latex": "3.0.1",
+          "Waher.Content.Markdown.Wpf": "3.0.1",
+          "Waher.Content.Markdown.Xamarin": "3.0.1",
+          "Waher.Content.Markdown.Xml": "3.0.1",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.6",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8"
         },
         "compile": {
@@ -22573,55 +22806,67 @@
           }
         }
       },
-      "Waher.Content.Markdown.Wpf/3.0.0": {
+      "Waher.Content.Markdown.Wpf/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xamarin/3.0.0": {
+      "Waher.Content.Markdown.Xamarin/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0",
-          "Waher.Content.Xml": "2.2.5"
+          "Waher.Content.Markdown": "3.0.1",
+          "Waher.Content.Xml": "2.2.6"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Markdown.Xml/3.0.0": {
+      "Waher.Content.Markdown.Xml/3.0.1": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Content.Markdown": "3.0.0"
+          "Waher.Content.Markdown": "3.0.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {}
+          "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll": {
+            "related": ".xml"
+          }
         }
       },
-      "Waher.Content.Xml/2.2.5": {
+      "Waher.Content.Xml/2.2.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Content": "2.6.8",
+          "Waher.Content": "2.6.9",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Script": "2.6.5"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Content.Xml.dll": {}
@@ -22655,18 +22900,18 @@
           "lib/netstandard1.3/Waher.Events.Statistics.dll": {}
         }
       },
-      "Waher.Networking.HTTP.UWP/2.6.1": {
+      "Waher.Networking.HTTP.UWP/2.7.0": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.6",
+          "Waher.Content": "2.6.9",
           "Waher.Events": "1.1.3",
           "Waher.Events.Statistics": "1.1.0",
-          "Waher.Networking.UWP": "2.2.4",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Networking.UWP": "2.2.5",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Runtime.Temporary": "1.0.0",
-          "Waher.Runtime.Text": "1.1.0",
-          "Waher.Script": "2.6.3",
+          "Waher.Runtime.Text": "1.1.2",
+          "Waher.Script": "2.6.7",
           "Waher.Security": "1.0.8",
           "Waher.Security.LoginMonitor.UWP": "1.0.9",
           "Waher.Security.SHA3": "1.0.3"
@@ -22682,7 +22927,7 @@
           }
         }
       },
-      "Waher.Networking.UWP/2.2.4": {
+      "Waher.Networking.UWP/2.2.5": {
         "type": "package",
         "dependencies": {
           "Waher.Events": "1.1.3",
@@ -22729,16 +22974,16 @@
           "lib/netstandard1.3/Waher.Persistence.dll": {}
         }
       },
-      "Waher.Persistence.FilesLW/1.11.5": {
+      "Waher.Persistence.FilesLW/1.11.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "Waher.Events": "1.1.3",
           "Waher.Persistence": "1.10.1",
           "Waher.Persistence.Serialization": "1.7.8",
-          "Waher.Runtime.Cache": "1.0.6",
+          "Waher.Runtime.Cache": "1.0.7",
           "Waher.Runtime.Inventory": "1.1.5",
-          "Waher.Runtime.Profiling": "1.0.7",
+          "Waher.Runtime.Profiling": "1.0.8",
           "Waher.Runtime.Threading": "1.2.1"
         },
         "compile": {
@@ -22769,11 +23014,11 @@
           "lib/netstandard1.3/Waher.Persistence.Serialization.dll": {}
         }
       },
-      "Waher.Runtime.Cache/1.0.6": {
+      "Waher.Runtime.Cache/1.0.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Waher.Events": "1.0.14"
+          "Waher.Events": "1.1.3"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Runtime.Cache.dll": {}
@@ -22795,7 +23040,7 @@
           "lib/netstandard1.3/Waher.Runtime.Inventory.dll": {}
         }
       },
-      "Waher.Runtime.Profiling/1.0.7": {
+      "Waher.Runtime.Profiling/1.0.8": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -22864,7 +23109,7 @@
           }
         }
       },
-      "Waher.Script/2.6.6": {
+      "Waher.Script/2.6.7": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -22878,13 +23123,13 @@
           "lib/netstandard1.3/Waher.Script.dll": {}
         }
       },
-      "Waher.Script.Graphs/2.1.5": {
+      "Waher.Script.Graphs/2.1.6": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
           "SkiaSharp": "2.88.7",
           "System.Xml.XmlDocument": "4.3.0",
-          "Waher.Script": "2.6.6"
+          "Waher.Script": "2.6.7"
         },
         "compile": {
           "lib/netstandard1.3/Waher.Script.Graphs.dll": {}
@@ -22919,12 +23164,12 @@
           "lib/netstandard1.3/Waher.Security.JWS.dll": {}
         }
       },
-      "Waher.Security.JWT.UWP/1.3.9": {
+      "Waher.Security.JWT.UWP/1.3.10": {
         "type": "package",
         "dependencies": {
-          "Waher.Content": "2.6.4",
-          "Waher.Events": "1.1.2",
-          "Waher.Networking.HTTP.UWP": "2.3.3",
+          "Waher.Content": "2.6.9",
+          "Waher.Events": "1.1.3",
+          "Waher.Networking.HTTP.UWP": "2.7.0",
           "Waher.Runtime.Inventory": "1.1.5",
           "Waher.Security": "1.0.8",
           "Waher.Security.JWS": "1.0.8",
@@ -27905,10 +28150,10 @@
         "runtimes/win8-arm/native/clrcompression.dll"
       ]
     },
-    "SkiaSharp/2.88.7": {
-      "sha512": "LJHAMrbWO00J7jXWLWehyjqFo29T4VzABimfJb4nICqpEe3c/KvQGWL4ItON8ymzhxYOeFgyxeRzuNzO4GHSug==",
+    "SkiaSharp/2.88.8": {
+      "sha512": "bRkp3uKp5ZI8gXYQT57uKwil1uobb2p8c69n7v5evlB/2JNcMAXVcw9DZAP5Ig3WSvgzGm2YSn27UVeOi05NlA==",
       "type": "package",
-      "path": "skiasharp/2.88.7",
+      "path": "skiasharp/2.88.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -27975,14 +28220,14 @@
         "lib/xamarinwatchos1.0/SkiaSharp.dll",
         "lib/xamarinwatchos1.0/SkiaSharp.pdb",
         "lib/xamarinwatchos1.0/SkiaSharp.xml",
-        "skiasharp.2.88.7.nupkg.sha512",
+        "skiasharp.2.88.8.nupkg.sha512",
         "skiasharp.nuspec"
       ]
     },
-    "SkiaSharp.NativeAssets.UWP/2.88.7": {
-      "sha512": "cfaXYuM8+2cuStVJwz/tfPHLDPPhhd2XReDxFVFL1L/93KwKzs1Cirrh9eyraqzmVLjrRv6As/OG0jj4JWbiRA==",
+    "SkiaSharp.NativeAssets.UWP/2.88.8": {
+      "sha512": "zQ4xs9MpavWGy8L2QlRoKlDnUrR1HttwEOcvE8yYX/OY60Ync0OFt60yL9973KHA1nVD/BJLfuvBaAb1QLMxqA==",
       "type": "package",
-      "path": "skiasharp.nativeassets.uwp/2.88.7",
+      "path": "skiasharp.nativeassets.uwp/2.88.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -28005,7 +28250,7 @@
         "runtimes/win10-x86/nativeassets/uap10.0/libGLESv2.dll",
         "runtimes/win10-x86/nativeassets/uap10.0/libSkiaSharp.dll",
         "runtimes/win10-x86/nativeassets/uap10.0/zlib1.dll",
-        "skiasharp.nativeassets.uwp.2.88.7.nupkg.sha512",
+        "skiasharp.nativeassets.uwp.2.88.8.nupkg.sha512",
         "skiasharp.nativeassets.uwp.nuspec"
       ]
     },
@@ -33001,45 +33246,45 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Content/2.6.8": {
-      "sha512": "ebpEuz5nn21P3nJXCxK/zNAEDwTcazvpvtaYA91GSkH0IdmcFI/WIexm4Y+wk+d9wNe8sJJLYGQRvQSj+xdLOg==",
+    "Waher.Content/2.6.9": {
+      "sha512": "uFen132bJ0sqp4PIhp3A5INoZQswauRmww7ZPkdseHas4spT92lib7h1r4iBCH54xz5AC0sHm28BYPABW/bblg==",
       "type": "package",
-      "path": "waher.content/2.6.8",
+      "path": "waher.content/2.6.9",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.dll",
-        "waher.content.2.6.8.nupkg.sha512",
+        "waher.content.2.6.9.nupkg.sha512",
         "waher.content.nuspec"
       ]
     },
-    "Waher.Content.Emoji/2.0.0": {
-      "sha512": "l82VoG8YDamh85LnEdMqfHnBcn46QM3tJqTjP8Pyj1/KQTAsq179d6q/mmNZ0289w4tvunaaGVXXnoK5J6yASA==",
+    "Waher.Content.Emoji/2.0.1": {
+      "sha512": "UOJfEEegaXoqXXvbsYv8Expbj4RYX7TFo2E2j86jqR4TnA805+yYtV2WTv1gRNxPdQtDEN44foa+2qIQCv2adg==",
       "type": "package",
-      "path": "waher.content.emoji/2.0.0",
+      "path": "waher.content.emoji/2.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.Emoji.dll",
-        "waher.content.emoji.2.0.0.nupkg.sha512",
+        "waher.content.emoji.2.0.1.nupkg.sha512",
         "waher.content.emoji.nuspec"
       ]
     },
-    "Waher.Content.Html/2.2.2": {
-      "sha512": "v/gAkVmadfiNo3i6Ccj4c6puSDoGSMT3eATDu7IBLQzpKIK3YZVPsiuAsQsZPRZ/cbY55XyZV3c4yFYiCPdhHw==",
+    "Waher.Content.Html/2.3.0": {
+      "sha512": "COfpl/ngLNj3/RdCQKZsyILqLsvw4EKVhwzv5ZKP+tMCbqYpA8qWBptP79IJ6sJXhlfVdft+b+SxJbbTaH8pAQ==",
       "type": "package",
-      "path": "waher.content.html/2.2.2",
+      "path": "waher.content.html/2.3.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.Html.dll",
-        "waher.content.html.2.2.2.nupkg.sha512",
+        "waher.content.html.2.3.0.nupkg.sha512",
         "waher.content.html.nuspec"
       ]
     },
@@ -33057,50 +33302,65 @@
         "waher.content.images.nuspec"
       ]
     },
-    "Waher.Content.Markdown/3.0.0": {
-      "sha512": "byAzjQp+oHnYoVr3HW2rSJiMonjZ2jdNuicVkKz7LSBy8ulxS9wyB43putPfEf58JG3aua71fzun1DfK+iDH9Q==",
+    "Waher.Content.Markdown/3.0.1": {
+      "sha512": "WIkQswZQihqVPrrQOb7/3N4S7lggBeal4bI727H4Y/Oev5bcp7PL7vMneTs1IJ6aDD/sCGGjBotB8zOYIbKU9A==",
       "type": "package",
-      "path": "waher.content.markdown/3.0.0",
+      "path": "waher.content.markdown/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.Markdown.dll",
-        "waher.content.markdown.3.0.0.nupkg.sha512",
+        "waher.content.markdown.3.0.1.nupkg.sha512",
         "waher.content.markdown.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Contracts/3.0.0": {
-      "sha512": "+RRbLKB8o3ONMKHcYyTPXLmN6IjfWuRaEwxppr1cyODN3RWtt4WHjy3Xrp39uM+D4R4kBcLhyO6ItWyjU4mxZQ==",
+    "Waher.Content.Markdown.Contracts/3.0.2": {
+      "sha512": "GaTFoUqRUqxqZln5LSVUsxSCZEgFrnqeNW8GDHVMonreyGuQSqkMFZcWBdZCUzPATg8R7zELIE2rEKrhalNksQ==",
       "type": "package",
-      "path": "waher.content.markdown.contracts/3.0.0",
+      "path": "waher.content.markdown.contracts/3.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "lib/netstandard1.3/Waher.Content.Markdown.Contracts.dll",
-        "waher.content.markdown.contracts.3.0.0.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Content.Markdown.Contracts.xml",
+        "waher.content.markdown.contracts.3.0.2.nupkg.sha512",
         "waher.content.markdown.contracts.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Latex/3.0.0": {
-      "sha512": "Rf0RBKFKex3EchxvdkjxvM/jbQDl5Q2WD3DWDwPRRpbtzwH3ZiJhpsqd3G5x0wn28nhtMWw2PEGe5pNOLOqvyA==",
+    "Waher.Content.Markdown.JavaScript/3.0.0": {
+      "sha512": "g328loWiYdLXRhIZ2GhgoyxLbFfV7fHczhun7oaw6uPBQ2D+0a9PKp79jzNsZD/OehVy044bWZGJWmvYSL2QxQ==",
       "type": "package",
-      "path": "waher.content.markdown.latex/3.0.0",
+      "path": "waher.content.markdown.javascript/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon_64x64.png",
+        "lib/netstandard1.3/Waher.Content.Markdown.JavaScript.dll",
+        "waher.content.markdown.javascript.3.0.0.nupkg.sha512",
+        "waher.content.markdown.javascript.nuspec"
+      ]
+    },
+    "Waher.Content.Markdown.Latex/3.0.1": {
+      "sha512": "h5shO53v2J78RkVcRcTBdrkgwSsYd8KLcobxSDkCZhfMhWA03cMyIT0TAINKP+xhQ0B5akiEUBHoN4/2wFC4eA==",
+      "type": "package",
+      "path": "waher.content.markdown.latex/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "lib/netstandard1.3/Waher.Content.Markdown.Latex.dll",
-        "waher.content.markdown.latex.3.0.0.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Content.Markdown.Latex.xml",
+        "waher.content.markdown.latex.3.0.1.nupkg.sha512",
         "waher.content.markdown.latex.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Web.UWP/3.0.0": {
-      "sha512": "Q+LC9/tXkc/bKKWjASWysc6isdbBCn1vmonboPnLpyonjN4hwuv3UMPe7i/CRHUf68uiC4T2tc4GIDvzu2f1yQ==",
+    "Waher.Content.Markdown.Web.UWP/3.0.1": {
+      "sha512": "bxoJNWIQj0kRyJW7Ru4mMVxyiYTHA73xUBbBV8eanV5MzqkpS7ZU9WIbQTMvdIQo7bg2t4/Jnp9wCBaG0HdG6w==",
       "type": "package",
-      "path": "waher.content.markdown.web.uwp/3.0.0",
+      "path": "waher.content.markdown.web.uwp/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -33116,60 +33376,63 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Content.Markdown.Web.UWP.pdb",
-        "waher.content.markdown.web.uwp.3.0.0.nupkg.sha512",
+        "waher.content.markdown.web.uwp.3.0.1.nupkg.sha512",
         "waher.content.markdown.web.uwp.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Wpf/3.0.0": {
-      "sha512": "AV4om+4DXMOT18M+rn8KD8Y1Yzmj/JqkBmm0q6BY93K92vtlZOTGzU+/j0WrR1rbrBaU0NC7NPX/lZqgRSs8nQ==",
+    "Waher.Content.Markdown.Wpf/3.0.1": {
+      "sha512": "LzVwmHjL3pWAqDI9cBSD3wkENrE3BCzo4QA7ZrQElp9Dn45Jj4JqbHWFMMFQBFo2ANZi0Ss4MRI5IiT/dsh6eA==",
       "type": "package",
-      "path": "waher.content.markdown.wpf/3.0.0",
+      "path": "waher.content.markdown.wpf/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "lib/netstandard1.3/Waher.Content.Markdown.Wpf.dll",
-        "waher.content.markdown.wpf.3.0.0.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Content.Markdown.Wpf.xml",
+        "waher.content.markdown.wpf.3.0.1.nupkg.sha512",
         "waher.content.markdown.wpf.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Xamarin/3.0.0": {
-      "sha512": "jydGN/8T9PdvLZCAEodcrf61WkdK2NLYtDVsNVMEdH1dPY68QOo3dxqVNE1mqbXU5LPqzTJ5wY0kMsmV8wt/iw==",
+    "Waher.Content.Markdown.Xamarin/3.0.1": {
+      "sha512": "Uis2k/5tQ2FiErsAvs9fXYWLahAXlORNO4q5yNlfDBQQ5tFr48DWxqpIxwZsl0aAR85JZ1xry5WtaxlSOCglTA==",
       "type": "package",
-      "path": "waher.content.markdown.xamarin/3.0.0",
+      "path": "waher.content.markdown.xamarin/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.dll",
-        "waher.content.markdown.xamarin.3.0.0.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Content.Markdown.Xamarin.xml",
+        "waher.content.markdown.xamarin.3.0.1.nupkg.sha512",
         "waher.content.markdown.xamarin.nuspec"
       ]
     },
-    "Waher.Content.Markdown.Xml/3.0.0": {
-      "sha512": "fx670VhfQSUWnthHRgWPcfCSwx9AoLEfwpMZtvzhRrSiOKxuy1QQAdPncG83LI7i6UmeYfRU10fItb+sWusd0w==",
+    "Waher.Content.Markdown.Xml/3.0.1": {
+      "sha512": "MQ77kEwTtxjDdvdG/6ZFNZd6aoODPSTiwayaWYlq3R5WX9n3vnzgcKk9zEagu9+D5yHwXbsDYx7ya66Nd4iSTQ==",
       "type": "package",
-      "path": "waher.content.markdown.xml/3.0.0",
+      "path": "waher.content.markdown.xml/3.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "lib/netstandard1.3/Waher.Content.Markdown.Xml.dll",
-        "waher.content.markdown.xml.3.0.0.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Content.Markdown.Xml.xml",
+        "waher.content.markdown.xml.3.0.1.nupkg.sha512",
         "waher.content.markdown.xml.nuspec"
       ]
     },
-    "Waher.Content.Xml/2.2.5": {
-      "sha512": "W2iagPcFkflX4M6OAS6YQwNCM/5PhZj7EBcntrCcQ/BpsoTER45/ujrZw7389RaCIYLx7Fam2TUlIXqXpug1eQ==",
+    "Waher.Content.Xml/2.2.6": {
+      "sha512": "l16OIubNgKtdwoDI6VdpofF9A5Rm/03Y3TIUnHsZ3emOCDpfTlOwCMIjRm3TF7qsgU6/G1lLOyw2B9EYFmQ7Bw==",
       "type": "package",
-      "path": "waher.content.xml/2.2.5",
+      "path": "waher.content.xml/2.2.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Content.Xml.dll",
-        "waher.content.xml.2.2.5.nupkg.sha512",
+        "waher.content.xml.2.2.6.nupkg.sha512",
         "waher.content.xml.nuspec"
       ]
     },
@@ -33201,10 +33464,10 @@
         "waher.events.statistics.nuspec"
       ]
     },
-    "Waher.Networking.HTTP.UWP/2.6.1": {
-      "sha512": "gkQ1z0fJFHsxqLQgR8pt5UwsPYIcuGUvExM8yWjZm250S0MAesoYlxDq2rn3UhPc/HfPCLwHOS2mpnSfc0Anhw==",
+    "Waher.Networking.HTTP.UWP/2.7.0": {
+      "sha512": "jNB1cOs3HdB5LB5O5E8u8EPb/wFEZJiYeK57JWsldhca9PzwTX1TPr7ewvMKrmWEYb6KG2tcJPMb9Nzrx/CCFQ==",
       "type": "package",
-      "path": "waher.networking.http.uwp/2.6.1",
+      "path": "waher.networking.http.uwp/2.7.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -33220,14 +33483,14 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.HTTP.UWP.pdb",
-        "waher.networking.http.uwp.2.6.1.nupkg.sha512",
+        "waher.networking.http.uwp.2.7.0.nupkg.sha512",
         "waher.networking.http.uwp.nuspec"
       ]
     },
-    "Waher.Networking.UWP/2.2.4": {
-      "sha512": "Wcqxe1kK4sW6DvsdrWkXmQhN3p+3cMQNaP3AsCmuNDNG+5r4lfwVcGVHsWCUszboUMy8m7esWD0uPUZk/UH5hA==",
+    "Waher.Networking.UWP/2.2.5": {
+      "sha512": "io9gYjv9wBAiGr0Izf3bhDc2y31DbMFEbAxaAFEN69oMUKUd8qgO9pbaGwjRRykCcmjAIHe181uotYeNYy3eJg==",
       "type": "package",
-      "path": "waher.networking.uwp/2.2.4",
+      "path": "waher.networking.uwp/2.2.5",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -33243,7 +33506,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Networking.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Networking.UWP.pdb",
-        "waher.networking.uwp.2.2.4.nupkg.sha512",
+        "waher.networking.uwp.2.2.5.nupkg.sha512",
         "waher.networking.uwp.nuspec"
       ]
     },
@@ -33284,10 +33547,10 @@
         "waher.persistence.nuspec"
       ]
     },
-    "Waher.Persistence.FilesLW/1.11.5": {
-      "sha512": "mRG1XNAqCe8ihNr2byObsO4M4xgrEZuaMN7Jl7Y8TCN6pK7vqkc/T8Hi2R0ySy4DWOMMcAeUrI5LRLFTXmwuQA==",
+    "Waher.Persistence.FilesLW/1.11.6": {
+      "sha512": "qZcBdRS2Btc2g+cYiJSaonLh0lKX8/tzPyE2+R3g7/dEcx42GpAoMEDGTI025pvJ0o48XfqZXV3VnKkEBXm8rQ==",
       "type": "package",
-      "path": "waher.persistence.fileslw/1.11.5",
+      "path": "waher.persistence.fileslw/1.11.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -33295,7 +33558,7 @@
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.dll",
         "lib/netstandard1.3/Waher.Persistence.FilesLW.xml",
-        "waher.persistence.fileslw.1.11.5.nupkg.sha512",
+        "waher.persistence.fileslw.1.11.6.nupkg.sha512",
         "waher.persistence.fileslw.nuspec"
       ]
     },
@@ -33313,17 +33576,17 @@
         "waher.persistence.serialization.nuspec"
       ]
     },
-    "Waher.Runtime.Cache/1.0.6": {
-      "sha512": "UOcyRy6hXy7+/KImU7dvgpr2b+d51OLMP7vaKLZFLQXTr8BlCBIubP/A2n5KDbyPr/9Zr/5gbzWgEBRlelMpzA==",
+    "Waher.Runtime.Cache/1.0.7": {
+      "sha512": "oZ1YVg4oh49yXiDkoQjFBiTS43C1zZNe6W4qZ/1mz8viXWnde3d4H78UbNEGzHbD2mmqC+//e98jkPm+SoNFcg==",
       "type": "package",
-      "path": "waher.runtime.cache/1.0.6",
+      "path": "waher.runtime.cache/1.0.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Runtime.Cache.dll",
-        "waher.runtime.cache.1.0.6.nupkg.sha512",
+        "waher.runtime.cache.1.0.7.nupkg.sha512",
         "waher.runtime.cache.nuspec"
       ]
     },
@@ -33341,17 +33604,17 @@
         "waher.runtime.inventory.nuspec"
       ]
     },
-    "Waher.Runtime.Profiling/1.0.7": {
-      "sha512": "vSE+zZWX/rUUbHVVWDwvhhTN+rfuvebCPPSRobWzf7X7e22WyNNkRL1fbMQ88zUz0JdBjW4uC6KmsyAj+fPkNw==",
+    "Waher.Runtime.Profiling/1.0.8": {
+      "sha512": "SJA8gqWPJxpb6XigexvWtWdlmZygfBlLh9WCDTBVsb94BC8HM2kiXnYqGcl2oe6ETPfmegV45awUsisdk1w4Sw==",
       "type": "package",
-      "path": "waher.runtime.profiling/1.0.7",
+      "path": "waher.runtime.profiling/1.0.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Runtime.Profiling.dll",
-        "waher.runtime.profiling.1.0.7.nupkg.sha512",
+        "waher.runtime.profiling.1.0.8.nupkg.sha512",
         "waher.runtime.profiling.nuspec"
       ]
     },
@@ -33412,31 +33675,31 @@
         "waher.runtime.threading.nuspec"
       ]
     },
-    "Waher.Script/2.6.6": {
-      "sha512": "WSDiYmjhksqVd1F/pOPbhZbf3d3YojShOiJ99k17gRi3Ml4UujPLeeMpuFguXUOacjYRZt1iKzuNEMwQ7Mp0Xg==",
+    "Waher.Script/2.6.7": {
+      "sha512": "dyJ0i7fSp/IWPL2w74w5v2akvgfhpkfOpbNaPhMYVdHg62z7UuGkxb8zZoKyRbNFYDBMhCL9upD6ZwFOpnjRlg==",
       "type": "package",
-      "path": "waher.script/2.6.6",
+      "path": "waher.script/2.6.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Script.dll",
-        "waher.script.2.6.6.nupkg.sha512",
+        "waher.script.2.6.7.nupkg.sha512",
         "waher.script.nuspec"
       ]
     },
-    "Waher.Script.Graphs/2.1.5": {
-      "sha512": "YgtVn7HC4gGpqvPwUU0FJk6+lc176K5yC3H4TY+A2lj0ONo6ny2mQRNM0l7mSitElJ8sKQR2dziO8zzsbuBueA==",
+    "Waher.Script.Graphs/2.1.6": {
+      "sha512": "W/TeSu4v05lkrUStnDpk7pAJfoD0eHa1Fv36EACSeH+EevNAXCzWtr+VJQ6hVUc/xkSQKdOy9IgtO9lqV/fSPg==",
       "type": "package",
-      "path": "waher.script.graphs/2.1.5",
+      "path": "waher.script.graphs/2.1.6",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Script.Graphs.dll",
-        "waher.script.graphs.2.1.5.nupkg.sha512",
+        "waher.script.graphs.2.1.6.nupkg.sha512",
         "waher.script.graphs.nuspec"
       ]
     },
@@ -33468,10 +33731,10 @@
         "waher.security.jws.nuspec"
       ]
     },
-    "Waher.Security.JWT.UWP/1.3.9": {
-      "sha512": "a1Wqeig2Pp9BUeYw3TCiGr36EBX+1V9Z7E0n0C/+yP6si50/hVVs0BoZwYZpISGhgQRdZJKlCIeLTzCD4L307Q==",
+    "Waher.Security.JWT.UWP/1.3.10": {
+      "sha512": "2EjOGCN6tQDlKhAuT/4r5SqySzE586AMCai1F0c7EtQkRf1G5Q6XzOrvamnJJprZgMIgWC7QwdZyRi3KqsdAGQ==",
       "type": "package",
-      "path": "waher.security.jwt.uwp/1.3.9",
+      "path": "waher.security.jwt.uwp/1.3.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -33487,7 +33750,7 @@
         "runtimes/win10-x64/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.dll",
         "runtimes/win10-x86/lib/uap10.0/Waher.Security.JWT.UWP.pdb",
-        "waher.security.jwt.uwp.1.3.9.nupkg.sha512",
+        "waher.security.jwt.uwp.1.3.10.nupkg.sha512",
         "waher.security.jwt.uwp.nuspec"
       ]
     },
@@ -33553,23 +33816,23 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.14",
-      "SkiaSharp >= 2.88.7",
-      "Waher.Content >= 2.6.8",
+      "SkiaSharp >= 2.88.8",
+      "Waher.Content >= 2.6.9",
       "Waher.Content.Images >= 2.1.6",
-      "Waher.Content.Markdown >= 3.0.0",
-      "Waher.Content.Markdown.Web.UWP >= 3.0.0",
+      "Waher.Content.Markdown >= 3.0.1",
+      "Waher.Content.Markdown.Web.UWP >= 3.0.1",
       "Waher.Events >= 1.1.3",
-      "Waher.Networking.HTTP.UWP >= 2.6.1",
-      "Waher.Networking.UWP >= 2.2.4",
+      "Waher.Networking.HTTP.UWP >= 2.7.0",
+      "Waher.Networking.UWP >= 2.2.5",
       "Waher.Persistence >= 1.10.1",
-      "Waher.Persistence.FilesLW >= 1.11.5",
+      "Waher.Persistence.FilesLW >= 1.11.6",
       "Waher.Runtime.Inventory >= 1.1.5",
       "Waher.Runtime.Settings >= 1.0.10",
-      "Waher.Script >= 2.6.6",
-      "Waher.Script.Graphs >= 2.1.5",
+      "Waher.Script >= 2.6.7",
+      "Waher.Script.Graphs >= 2.1.6",
       "Waher.Security >= 1.0.8",
       "Waher.Security.JWS >= 1.0.8",
-      "Waher.Security.JWT.UWP >= 1.3.9",
+      "Waher.Security.JWT.UWP >= 1.3.10",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
     "UAP,Version=v10.0.10586": []
@@ -33605,23 +33868,23 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.14, )",
-      "SkiaSharp": "[2.88.7, )",
-      "Waher.Content": "[2.6.8, )",
+      "SkiaSharp": "[2.88.8, )",
+      "Waher.Content": "[2.6.9, )",
       "Waher.Content.Images": "[2.1.6, )",
-      "Waher.Content.Markdown": "[3.0.0, )",
-      "Waher.Content.Markdown.Web.UWP": "[3.0.0, )",
+      "Waher.Content.Markdown": "[3.0.1, )",
+      "Waher.Content.Markdown.Web.UWP": "[3.0.1, )",
       "Waher.Events": "[1.1.3, )",
-      "Waher.Networking.HTTP.UWP": "[2.6.1, )",
-      "Waher.Networking.UWP": "[2.2.4, )",
+      "Waher.Networking.HTTP.UWP": "[2.7.0, )",
+      "Waher.Networking.UWP": "[2.2.5, )",
       "Waher.Persistence": "[1.10.1, )",
-      "Waher.Persistence.FilesLW": "[1.11.5, )",
+      "Waher.Persistence.FilesLW": "[1.11.6, )",
       "Waher.Runtime.Inventory": "[1.1.5, )",
       "Waher.Runtime.Settings": "[1.0.10, )",
-      "Waher.Script": "[2.6.6, )",
-      "Waher.Script.Graphs": "[2.1.5, )",
+      "Waher.Script": "[2.6.7, )",
+      "Waher.Script.Graphs": "[2.1.6, )",
       "Waher.Security": "[1.0.8, )",
       "Waher.Security.JWS": "[1.0.8, )",
-      "Waher.Security.JWT.UWP": "[1.3.9, )",
+      "Waher.Security.JWT.UWP": "[1.3.10, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },
     "frameworks": {
