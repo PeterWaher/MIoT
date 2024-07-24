@@ -54,7 +54,7 @@ namespace SensorHttp
 		private Timer sampleTimer = null;
 		private HttpServer httpServer = null;
 		private readonly IUserSource users = new Users();
-		private readonly JwtFactory tokenFactory = new JwtFactory();
+		private readonly JwtFactory tokenFactory = JwtFactory.CreateHmacSha256();
 		private JwtAuthentication tokenAuthentication;
 
 		private const int windowSize = 10;
@@ -82,7 +82,7 @@ namespace SensorHttp
 		public App()
 		{
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
+			this.Suspending += this.OnSuspending;
 		}
 
 		/// <summary>
@@ -99,7 +99,7 @@ namespace SensorHttp
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
 
-				rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += this.OnNavigationFailed;
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
 				{
@@ -145,11 +145,11 @@ namespace SensorHttp
 					typeof(Graph).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				this.db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
-				Database.Register(db);
-				await db.RepairIfInproperShutdown(null);
-				await db.Start();
+				Database.Register(this.db);
+				await this.db.RepairIfInproperShutdown(null);
+				await this.db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -805,7 +805,7 @@ namespace SensorHttp
 				SKRect Rect;
 				SKPath Path = new SKPath();
 				SKShader Gradient = SKShader.CreateSweepGradient(new SKPoint(NeedleX0, NeedleY0),
-					new SKColor[] { (lastMotion.HasValue && lastMotion.Value ? SKColors.Green : SKColors.Black), SKColors.White },
+					new SKColor[] { (this.lastMotion.HasValue && this.lastMotion.Value ? SKColors.Green : SKColors.Black), SKColors.White },
 					new float[] { 0, 1 });
 				SKPaint GaugeBackground = new SKPaint()
 				{
@@ -948,8 +948,8 @@ namespace SensorHttp
 				this.arduinoUsb = null;
 			}
 
-			db?.Stop()?.Wait();
-			db?.Flush()?.Wait();
+			this.db?.Stop()?.Wait();
+			this.db?.Flush()?.Wait();
 
 			Log.Terminate();
 
