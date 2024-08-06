@@ -27,4 +27,4 @@ The following projects are included:
 |      11 | Product Lifecycle                                 | [SensorXmpp2](SensorXmpp2)<br/>[ActuatorXmpp2](ActuatorXmpp2)                                            |
 |      12 | Concentrators and Bridges                         | [ConcentratorXmpp](ConcentratorXmpp)<br/>[ConcentratorXmpp2](ConcentratorXmpp2)                          |
 |      13 | Using an Internet of Things Service Platform      | [Waher.Things.Arduino](https://github.com/PeterWaher/IoTGateway/tree/master/Things/Waher.Things.Arduino) |
-|      14 | IoT Harmonization                                 | [IEEE XMPP IoT Interfaces](https://gitlab.com/IEEE-SA/XMPPI/IoT)                                         |
+|      14 | IoT Harmonization                                 | [Neuro-Foundation IoT Interfaces](https://neuro-foundation.io)                                           |
