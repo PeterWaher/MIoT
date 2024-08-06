@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2026
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirstApp", "FirstApp\FirstApp.csproj", "{A9C79400-5DE3-4328-B715-E53542D05682}"
 EndProject
@@ -38,6 +38,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActuatorXmpp2", "ActuatorXmpp2\ActuatorXmpp2.csproj", "{80EF32D4-B8AF-4DA7-80BD-1F9E0AA91383}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcentratorXmpp2", "ConcentratorXmpp2\ConcentratorXmpp2.csproj", "{FAE35382-3AE0-4808-AED8-F34C49DEA4FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7206640F-5617-462F-8D02-1BBE6D367C4C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
