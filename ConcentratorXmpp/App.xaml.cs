@@ -141,6 +141,13 @@ namespace ConcentratorXmpp
 		{
 			try
 			{
+				// Exception types that are logged with an elevated type.
+				Log.RegisterAlertExceptionType(true,
+					typeof(OutOfMemoryException),
+					typeof(StackOverflowException),
+					typeof(AccessViolationException),
+					typeof(InsufficientMemoryException));
+
 				Log.Informational("Starting application.");
 
 				instance = this;

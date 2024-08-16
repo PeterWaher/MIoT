@@ -106,7 +106,15 @@ namespace Sensor
 		{
 			try
 			{
+				// Exception types that are logged with an elevated type.
+				Log.RegisterAlertExceptionType(true,
+					typeof(OutOfMemoryException),
+					typeof(StackOverflowException),
+					typeof(AccessViolationException),
+					typeof(InsufficientMemoryException));
+
 				Log.Informational("Starting application.");
+				
 				Types.Initialize(
 					typeof(FilesProvider).GetTypeInfo().Assembly,
 					typeof(ObjectSerializer).GetTypeInfo().Assembly,    // Waher.Persistence.Serialization was broken out of Waher.Persistence.FilesLW after the publishing of the MIoT book.
