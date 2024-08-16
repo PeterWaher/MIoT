@@ -87,7 +87,7 @@ namespace SensorXmpp
 		public App()
 		{
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
+			this.Suspending += this.OnSuspending;
 		}
 
 		/// <summary>
@@ -104,7 +104,7 @@ namespace SensorXmpp
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
 
-				rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += this.OnNavigationFailed;
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
 				{
@@ -149,11 +149,11 @@ namespace SensorXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				this.db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
-				Database.Register(db);
-				await db.RepairIfInproperShutdown(null);
-				await db.Start();
+				Database.Register(this.db);
+				await this.db.RepairIfInproperShutdown(null);
+				await this.db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -331,7 +331,7 @@ namespace SensorXmpp
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 		}
 
@@ -512,7 +512,7 @@ namespace SensorXmpp
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			};
 
@@ -965,7 +965,7 @@ namespace SensorXmpp
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 		}
 
@@ -994,14 +994,14 @@ namespace SensorXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
-								if (e2.HasFeature(ProvisioningClient.NamespaceProvisioningDevice))
+								if (e2.HasAnyFeature(ProvisioningClient.NamespacesProvisioningDevice))
 								{
 									Log.Informational("Provisioning server found.", Item2.JID);
 									this.UseProvisioningServer(Item2.JID, OwnerJid);
 									await RuntimeSettings.SetAsync("ProvisioningServer.JID", Item2.JID);
 								}
 
-								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
+								if (e2.HasAnyFeature(ThingRegistryClient.NamespacesDiscovery))
 								{
 									Log.Informational("Thing registry found.", Item2.JID);
 
@@ -1011,7 +1011,7 @@ namespace SensorXmpp
 							}
 							catch (Exception ex)
 							{
-								Log.Critical(ex);
+								Log.Exception(ex);
 							}
 						}, Item);
 					}
@@ -1066,7 +1066,7 @@ namespace SensorXmpp
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 
@@ -1079,7 +1079,7 @@ namespace SensorXmpp
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 			}
@@ -1203,13 +1203,13 @@ namespace SensorXmpp
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					});
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			}
 		}
@@ -1246,7 +1246,7 @@ namespace SensorXmpp
 
 						if (string.IsNullOrEmpty(e.OwnerJid))
 						{
-							string ClaimUrl = registryClient.EncodeAsIoTDiscoURI(MetaInfo);
+							string ClaimUrl = this.registryClient.EncodeAsIoTDiscoURI(MetaInfo);
 							string FilePath = ApplicationData.Current.LocalFolder.Path + Path.DirectorySeparatorChar + "Sensor.iotdisco";
 
 							Log.Informational("Registration successful.");
@@ -1268,7 +1268,7 @@ namespace SensorXmpp
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			}, null);
 		}
@@ -1301,7 +1301,7 @@ namespace SensorXmpp
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				}, null);
 			}
@@ -1363,8 +1363,8 @@ namespace SensorXmpp
 				this.arduinoUsb = null;
 			}
 
-			db?.Stop()?.Wait();
-			db?.Flush()?.Wait();
+			this.db?.Stop()?.Wait();
+			this.db?.Flush()?.Wait();
 
 			Log.Terminate();
 

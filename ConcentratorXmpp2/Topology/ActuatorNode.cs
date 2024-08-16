@@ -91,7 +91,7 @@ namespace ConcentratorXmpp.Topology
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					})
 			});
@@ -154,7 +154,7 @@ namespace ConcentratorXmpp.Topology
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 
 			return Task.CompletedTask;

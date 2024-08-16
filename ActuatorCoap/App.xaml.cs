@@ -194,7 +194,7 @@ namespace ActuatorCoap
 							}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					};
 
@@ -278,7 +278,7 @@ namespace ActuatorCoap
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				}, Notifications.Acknowledged, "Digital Output.", null, null,
 					new int[] { PlainText.ContentFormatCode });

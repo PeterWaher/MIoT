@@ -70,7 +70,7 @@ namespace ControllerXmpp
 		public App()
 		{
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
+			this.Suspending += this.OnSuspending;
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace ControllerXmpp
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
 
-				rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += this.OnNavigationFailed;
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
 				{
@@ -132,11 +132,11 @@ namespace ControllerXmpp
 					typeof(Waher.Script.Persistence.SQL.Select).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				this.db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
-				Database.Register(db);
-				await db.RepairIfInproperShutdown(null);
-				await db.Start();
+				Database.Register(this.db);
+				await this.db.RepairIfInproperShutdown(null);
+				await this.db.Start();
 
 				this.deviceId = await RuntimeSettings.GetAsync("DeviceId", string.Empty);
 				if (string.IsNullOrEmpty(this.deviceId))
@@ -175,16 +175,16 @@ namespace ControllerXmpp
 					};
 					this.xmppClient.OnStateChanged += this.StateChanged;
 					this.xmppClient.OnConnectionError += this.ConnectionError;
-					this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
-					this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
-					this.xmppClient.OnRosterItemRemoved += XmppClient_OnRosterItemRemoved;
+					this.xmppClient.OnRosterItemAdded += this.XmppClient_OnRosterItemAdded;
+					this.xmppClient.OnRosterItemUpdated += this.XmppClient_OnRosterItemUpdated;
+					this.xmppClient.OnRosterItemRemoved += this.XmppClient_OnRosterItemRemoved;
 					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 					this.xmppClient.Connect();
 				}
 
-				this.secondTimer = new Timer(SecondTimerCallback, null, 1000, 1000);
+				this.secondTimer = new Timer(this.SecondTimerCallback, null, 1000, 1000);
 			}
 			catch (Exception ex)
 			{
@@ -225,9 +225,9 @@ namespace ControllerXmpp
 
 						this.xmppClient.OnStateChanged += this.TestConnectionStateChanged;
 						this.xmppClient.OnConnectionError += this.ConnectionError;
-						this.xmppClient.OnRosterItemAdded += XmppClient_OnRosterItemAdded;
-						this.xmppClient.OnRosterItemUpdated += XmppClient_OnRosterItemUpdated;
-						this.xmppClient.OnRosterItemRemoved += XmppClient_OnRosterItemRemoved;
+						this.xmppClient.OnRosterItemAdded += this.XmppClient_OnRosterItemAdded;
+						this.xmppClient.OnRosterItemUpdated += this.XmppClient_OnRosterItemUpdated;
+						this.xmppClient.OnRosterItemRemoved += this.XmppClient_OnRosterItemRemoved;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
 						this.xmppClient.Connect();
@@ -239,7 +239,7 @@ namespace ControllerXmpp
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 		}
 
@@ -408,7 +408,7 @@ namespace ControllerXmpp
 				return Task.CompletedTask;
 			};
 
-			this.xmppClient.OnPresence += XmppClient_OnPresence;
+			this.xmppClient.OnPresence += this.XmppClient_OnPresence;
 
 			this.bobClient = new BobClient(this.xmppClient, Path.Combine(Path.GetTempPath(), "BitsOfBinary"));
 			this.chatServer = new ChatServer(this.xmppClient, this.bobClient, this.sensorServer);
@@ -522,7 +522,7 @@ namespace ControllerXmpp
 							{
 								Item Item2 = (Item)e2.State;
 
-								if (e2.HasFeature(ThingRegistryClient.NamespaceDiscovery))
+								if (e2.HasAnyFeature(ThingRegistryClient.NamespacesDiscovery))
 								{
 									Log.Informational("Thing registry found.", Item2.JID);
 
@@ -532,7 +532,7 @@ namespace ControllerXmpp
 							}
 							catch (Exception ex)
 							{
-								Log.Critical(ex);
+								Log.Exception(ex);
 							}
 						}, Item);
 					}
@@ -675,13 +675,13 @@ namespace ControllerXmpp
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					});
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			}
 		}
@@ -709,7 +709,7 @@ namespace ControllerXmpp
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			}, null);
 		}
@@ -737,7 +737,7 @@ namespace ControllerXmpp
 
 		private void FindFriends(MetaDataTag[] MetaInfo)
 		{
-			double ms = (DateTime.Now - lastFindFriends).TotalMilliseconds;
+			double ms = (DateTime.Now - this.lastFindFriends).TotalMilliseconds;
 			if (ms < 60000)     // Call at most once a minute
 			{
 				int msi = (int)Math.Ceiling(60000 - ms);
@@ -754,7 +754,7 @@ namespace ControllerXmpp
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				}, null, msi, Timeout.Infinite);
 
@@ -1057,9 +1057,9 @@ namespace ControllerXmpp
 						new Waher.Content.Duration(false, 0, 0, 0, 0, 0, 1),
 						new Waher.Content.Duration(false, 0, 0, 0, 0, 1, 0), true);
 
-					this.subscription.OnStateChanged += Subscription_OnStateChanged;
-					this.subscription.OnFieldsReceived += Subscription_OnFieldsReceived;
-					this.subscription.OnErrorsReceived += Subscription_OnErrorsReceived;
+					this.subscription.OnStateChanged += this.Subscription_OnStateChanged;
+					this.subscription.OnFieldsReceived += this.Subscription_OnFieldsReceived;
+					this.subscription.OnErrorsReceived += this.Subscription_OnErrorsReceived;
 				}
 				else if (SensorItem.State == SubscriptionState.From || SensorItem.State == SubscriptionState.None)
 				{
@@ -1135,7 +1135,7 @@ namespace ControllerXmpp
 							MainPage.Instance.RelayUpdated(Output);
 						}
 						else if ((Actuator.State == SubscriptionState.From || Actuator.State == SubscriptionState.None) &&
-							(DateTime.Now - lastRequestActuator).TotalHours >= 1.0)
+							(DateTime.Now - this.lastRequestActuator).TotalHours >= 1.0)
 						{
 							this.xmppClient.RequestPresenceSubscription(this.actuatorJid);
 							this.lastRequestActuator = DateTime.Now;
@@ -1270,8 +1270,8 @@ namespace ControllerXmpp
 			this.secondTimer?.Dispose();
 			this.secondTimer = null;
 
-			db?.Stop()?.Wait();
-			db?.Flush()?.Wait();
+			this.db?.Stop()?.Wait();
+			this.db?.Flush()?.Wait();
 
 			Log.Terminate();
 

@@ -186,7 +186,7 @@ namespace ActuatorMqtt
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					};
 
@@ -239,7 +239,7 @@ namespace ActuatorMqtt
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 
@@ -279,7 +279,7 @@ namespace ActuatorMqtt
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 		}
 

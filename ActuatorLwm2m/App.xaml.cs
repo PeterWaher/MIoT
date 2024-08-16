@@ -206,7 +206,7 @@ namespace ActuatorLwm2m
 							}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					};
 
@@ -290,7 +290,7 @@ namespace ActuatorLwm2m
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				}, Notifications.Acknowledged, "Digital Output.", null, null,
 					new int[] { PlainText.ContentFormatCode });
@@ -313,7 +313,7 @@ namespace ActuatorLwm2m
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 
@@ -325,7 +325,7 @@ namespace ActuatorLwm2m
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 
@@ -353,7 +353,7 @@ namespace ActuatorLwm2m
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					}, DateTime.Now.AddMinutes(15), null);
 				};
@@ -392,7 +392,7 @@ namespace ActuatorLwm2m
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 

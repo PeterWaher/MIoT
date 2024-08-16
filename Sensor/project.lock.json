@@ -2609,16 +2609,20 @@
           }
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -5426,16 +5430,20 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -8246,16 +8254,20 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -11039,16 +11051,20 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -13868,16 +13884,20 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -16661,16 +16681,20 @@
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -19490,16 +19514,20 @@
           "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "Waher.Events/1.1.3": {
+      "Waher.Events/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
         },
         "compile": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard1.3/Waher.Events.dll": {}
+          "lib/netstandard1.3/Waher.Events.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Waher.Persistence/1.10.1": {
@@ -29479,17 +29507,18 @@
         "system.xml.xmlserializer.nuspec"
       ]
     },
-    "Waher.Events/1.1.3": {
-      "sha512": "A/iT6q8o2v0LNy/aAVguZBCWbAe6iKj9UdUTtnyI3A1hqAUWTCBXbgYxylJPZbL4MkvyUGDprC52sN+kidYVew==",
+    "Waher.Events/1.2.0": {
+      "sha512": "TTnrcovV+Z8usXCXFLGRfrTbUNiQDZ9WCAv9hbDyFhekLgsVhlObkXvx4jzSLGJRFxBHE57XQ36jMi762hfW+w==",
       "type": "package",
-      "path": "waher.events/1.1.3",
+      "path": "waher.events/1.2.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "Icon_64x64.png",
         "LICENSE.txt",
         "lib/netstandard1.3/Waher.Events.dll",
-        "waher.events.1.1.3.nupkg.sha512",
+        "lib/netstandard1.3/Waher.Events.xml",
+        "waher.events.1.2.0.nupkg.sha512",
         "waher.events.nuspec"
       ]
     },
@@ -29632,7 +29661,7 @@
   "projectFileDependencyGroups": {
     "": [
       "Microsoft.NETCore.UniversalWindowsPlatform >= 6.2.14",
-      "Waher.Events >= 1.1.3",
+      "Waher.Events >= 1.2.0",
       "Waher.Persistence.FilesLW >= 1.11.7",
       "Windows-Remote-Arduino >= 1.4.0"
     ],
@@ -29669,7 +29698,7 @@
     },
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": "[6.2.14, )",
-      "Waher.Events": "[1.1.3, )",
+      "Waher.Events": "[1.2.0, )",
       "Waher.Persistence.FilesLW": "[1.11.7, )",
       "Windows-Remote-Arduino": "[1.4.0, )"
     },

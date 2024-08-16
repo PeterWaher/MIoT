@@ -38,7 +38,7 @@ namespace ActuatorLwm2m.IPSO
 				}
 				catch (Exception ex)
 				{
-					Log.Critical(ex);
+					Log.Exception(ex);
 				}
 			
 				return Task.CompletedTask;

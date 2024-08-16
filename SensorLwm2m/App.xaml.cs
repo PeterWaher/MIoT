@@ -348,7 +348,7 @@ namespace SensorLwm2m
 						}
 						catch (Exception ex)
 						{
-							Log.Critical(ex);
+							Log.Exception(ex);
 						}
 					}, DateTime.Now.AddMinutes(15), null);
 				};
@@ -387,7 +387,7 @@ namespace SensorLwm2m
 					}
 					catch (Exception ex)
 					{
-						Log.Critical(ex);
+						Log.Exception(ex);
 					}
 				};
 
@@ -811,7 +811,7 @@ namespace SensorLwm2m
 			}
 			catch (Exception ex)
 			{
-				Log.Critical(ex);
+				Log.Exception(ex);
 			}
 		}
 
