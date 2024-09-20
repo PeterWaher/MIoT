@@ -191,58 +191,58 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content">
-      <Version>2.6.11</Version>
+      <Version>2.6.12</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Markdown">
-      <Version>3.1.0</Version>
+      <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Content.Xml">
-      <Version>2.3.1</Version>
+      <Version>2.3.2</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Chat.UWP">
       <Version>2.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Concentrator.UWP">
-      <Version>3.0.1</Version>
+      <Version>3.2.0</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Control.UWP">
-      <Version>3.0.0</Version>
+      <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PEP.UWP">
-      <Version>2.0.5</Version>
+      <Version>2.0.6</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Provisioning.UWP">
-      <Version>3.0.0</Version>
+      <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.PubSub.UWP">
-      <Version>2.0.7</Version>
+      <Version>2.0.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.Sensor.UWP">
-      <Version>3.0.0</Version>
+      <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Networking.XMPP.UWP">
-      <Version>3.0.0</Version>
+      <Version>3.2.0</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.11.7</Version>
+      <Version>1.11.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script">
-      <Version>2.6.9</Version>
+      <Version>2.6.10</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Graphs">
-      <Version>2.1.6</Version>
+      <Version>2.1.7</Version>
     </PackageReference>
     <PackageReference Include="Waher.Script.Persistence">
-      <Version>2.5.0</Version>
+      <Version>2.5.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Things">
-      <Version>2.0.0</Version>
+      <Version>2.0.1</Version>
     </PackageReference>
     <PackageReference Include="Windows-Remote-Arduino">
       <Version>1.4.0</Version>

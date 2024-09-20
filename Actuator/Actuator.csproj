@@ -168,10 +168,10 @@
       <Version>6.2.14</Version>
     </PackageReference>
     <PackageReference Include="Waher.Events">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="Waher.Persistence.FilesLW">
-      <Version>1.11.7</Version>
+      <Version>1.11.8</Version>
     </PackageReference>
     <PackageReference Include="Waher.Runtime.Settings">
       <Version>1.1.1</Version>
