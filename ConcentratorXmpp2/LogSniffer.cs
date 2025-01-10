@@ -3,66 +3,69 @@ using System.Text;
 using System.Threading.Tasks;
 using Waher.Events;
 using Waher.Networking.Sniffers;
+using Waher.Networking.Sniffers.Model;
 
 namespace ActuatorHttp
 {
 	public class LogSniffer : SnifferBase
 	{
-		public override Task Error(DateTime _, string Error)
+		public override Task Process(SnifferError Event)
 		{
-			Log.Error(Error);
+			Log.Error(Event.Text);
 			return Task.CompletedTask;
 		}
 
-		public override Task Exception(DateTime _, string Exception)
+		public override Task Process(SnifferException Event)
 		{
-			Log.Critical(Exception);
+			Log.Critical(Event.Text);
 			return Task.CompletedTask;
 		}
 
-		public override Task Information(DateTime _, string Comment)
+		public override Task Process(SnifferInformation Event)
 		{
-			Log.Informational(Comment);
+			Log.Informational(Event.Text);
 			return Task.CompletedTask;
 		}
 
-		public override Task ReceiveBinary(DateTime _, byte[] Data)
+		public override Task Process(SnifferRxBinary Event)
 		{
-			Log.Informational("Rx: " + ToString(Data));
+			Log.Informational("Rx: " + ToString(Event.Data, Event.Offset, Event.Count));
 			return Task.CompletedTask;
 		}
 
-		public override Task ReceiveText(DateTime _, string Text)
+		public override Task Process(SnifferRxText Event)
 		{
-			Log.Informational("Rx: " + Text);
+			Log.Informational("Rx: " + Event.Text);
 			return Task.CompletedTask;
 		}
 
-		public override Task TransmitBinary(DateTime _, byte[] Data)
+		public override Task Process(SnifferTxBinary Event)
 		{
-			Log.Informational("Tx: " + ToString(Data));
+			Log.Informational("Tx: " + ToString(Event.Data, Event.Offset, Event.Count));
 			return Task.CompletedTask;
 		}
 
-		public override Task TransmitText(DateTime _, string Text)
+		public override Task Process(SnifferTxText Event)
 		{
-			Log.Informational("Tx: " + Text);
+			Log.Informational("Tx: " + Event.Text);
 			return Task.CompletedTask;
 		}
 
-		public override Task Warning(DateTime _, string Warning)
+		public override Task Process(SnifferWarning Event)
 		{
-			Log.Warning(Warning);
+			Log.Warning(Event.Text);
 			return Task.CompletedTask;
 		}
 
-		private static string ToString(byte[] Data)
+		private static string ToString(byte[] Data, int Offset, int Count)
 		{
 			StringBuilder sb = new StringBuilder();
 			bool First = true;
 
-			foreach (byte b in Data)
+			while (Count-- > 0)
 			{
+				byte b = Data[Offset++];
+
 				if (First)
 					First = false;
 				else

@@ -39,6 +39,7 @@ using Waher.Things;
 using Waher.Things.SensorData;
 
 using SensorXmpp.History;
+using Waher.Networking.XMPP.Events;
 
 namespace SensorXmpp
 {
@@ -271,7 +272,7 @@ namespace SensorXmpp
 					this.xmppClient.OnConnectionError += this.ConnectionError;
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-					this.xmppClient.Connect();
+					await this.xmppClient.Connect();
 				}
 			}
 			catch (Exception ex)
@@ -309,7 +310,7 @@ namespace SensorXmpp
 					case ContentDialogResult.Primary:
 						if (this.xmppClient != null)
 						{
-							this.xmppClient.Dispose();
+							await this.xmppClient.DisposeAsync();
 							this.xmppClient = null;
 						}
 
@@ -329,7 +330,7 @@ namespace SensorXmpp
 						this.xmppClient.OnConnectionError += this.ConnectionError;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-						this.xmppClient.Connect();
+						await this.xmppClient.Connect();
 						break;
 
 					case ContentDialogResult.Secondary:
@@ -397,7 +398,7 @@ namespace SensorXmpp
 
 					if (e.IsIncluded(FieldType.Historical))
 					{
-						e.ReportFields(false, Fields);      // Allows for immediate response of momentary values.
+						await e.ReportFields(false, Fields);      // Allows for immediate response of momentary values.
 						Fields.Clear();
 
 						foreach (LastMinute Rec in await Database.Find<LastMinute>(new FilterAnd(
@@ -407,7 +408,7 @@ namespace SensorXmpp
 						{
 							if (Fields.Count > 50)
 							{
-								e.ReportFields(false, Fields);
+								await e.ReportFields(false, Fields);
 								Fields.Clear();
 							}
 
@@ -438,7 +439,7 @@ namespace SensorXmpp
 
 						if (Fields.Count > 0)
 						{
-							e.ReportFields(false, Fields);
+							await e.ReportFields(false, Fields);
 							Fields.Clear();
 						}
 
@@ -449,7 +450,7 @@ namespace SensorXmpp
 						{
 							if (Fields.Count > 50)
 							{
-								e.ReportFields(false, Fields);
+								await e.ReportFields(false, Fields);
 								Fields.Clear();
 							}
 
@@ -485,7 +486,7 @@ namespace SensorXmpp
 						{
 							if (Fields.Count > 50)
 							{
-								e.ReportFields(false, Fields);
+								await e.ReportFields(false, Fields);
 								Fields.Clear();
 							}
 
@@ -515,7 +516,7 @@ namespace SensorXmpp
 						}
 					}
 
-					e.ReportFields(true, Fields);
+					await e.ReportFields(true, Fields);
 				}
 				catch (Exception ex)
 				{
@@ -533,7 +534,11 @@ namespace SensorXmpp
 					return Task.CompletedTask;
 				};
 
-				this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
+				this.xmppClient.OnPasswordChanged += (Sender, e) =>
+				{
+					Log.Informational("Password changed.", this.xmppClient.BareJID);
+					return Task.CompletedTask;
+				};
 
 				this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
 				{
@@ -648,7 +653,7 @@ namespace SensorXmpp
 
 		private async Task QueryVCardHandler(object Sender, IqEventArgs e)
 		{
-			e.IqResult(await this.GetVCardXml());
+			await e.IqResult(await this.GetVCardXml());
 		}
 
 		private async Task SetVCard()
@@ -657,7 +662,7 @@ namespace SensorXmpp
 
 			// XEP-0054 - vcard-temp: http://xmpp.org/extensions/xep-0054.html
 
-			this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
+			await this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
 			{
 				if (e.Ok)
 					Log.Informational("vCard successfully set.");
@@ -967,7 +972,7 @@ namespace SensorXmpp
 				if (Timestamp.Second == 0 && this.xmppClient != null &&
 					(this.xmppClient.State == XmppState.Error || this.xmppClient.State == XmppState.Offline))
 				{
-					this.xmppClient.Reconnect();
+					await this.xmppClient.Reconnect();
 				}
 			}
 			catch (Exception ex)
@@ -991,7 +996,7 @@ namespace SensorXmpp
 			{
 				Log.Informational("Searching for Thing Registry and Provisioning Server.");
 
-				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
+				await this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
 					foreach (Item Item in e.Items)
 					{
@@ -1046,6 +1051,7 @@ namespace SensorXmpp
 				this.provisioningClient.CacheCleared += (sender, e) =>
 				{
 					Log.Informational("Rule cache cleared.");
+					return Task.CompletedTask;
 				};
 				
 				this.AttachFeatures();
@@ -1242,7 +1248,7 @@ namespace SensorXmpp
 			Array.Resize<MetaDataTag>(ref MetaInfo, c + 1);
 			MetaInfo[c] = new MetaDataStringTag("KEY", Key);
 
-			this.registryClient.RegisterThing(false, MetaInfo, async (sender, e) =>
+			await this.registryClient.RegisterThing(false, MetaInfo, async (sender, e) =>
 			{
 				try
 				{
@@ -1289,7 +1295,7 @@ namespace SensorXmpp
 				Log.Informational("Updating registration of device.",
 					new KeyValuePair<string, object>("Owner", OwnerJid));
 
-				this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
+				await this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
 				{
 					try
 					{
@@ -1347,8 +1353,11 @@ namespace SensorXmpp
 			this.sensorServer?.Dispose();
 			this.sensorServer = null;
 
-			this.xmppClient?.Dispose();
-			this.xmppClient = null;
+			if (!(this.xmppClient is null))
+			{
+				this.xmppClient.DisposeAsync().Wait();
+				this.xmppClient = null;
+			}
 
 			this.sampleTimer?.Dispose();
 			this.sampleTimer = null;
@@ -1373,7 +1382,7 @@ namespace SensorXmpp
 			this.db?.Stop()?.Wait();
 			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

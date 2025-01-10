@@ -50,13 +50,13 @@ namespace SensorLwm2m.IPSO
 				this.Add(this.sensorType);
 		}
 
-		public override void AfterRegister(Lwm2mClient Client)
+		public override async Task AfterRegister(Lwm2mClient Client)
 		{
-			base.AfterRegister(Client);
+			await base.AfterRegister(Client);
 
-			this.TriggerAll(new TimeSpan(0, 1, 0));
-			this.state.TriggerAll(new TimeSpan(0, 1, 0));
-			this.counter.TriggerAll(new TimeSpan(0, 1, 0));
+			await this.TriggerAll(new TimeSpan(0, 1, 0));
+			await this.state.TriggerAll(new TimeSpan(0, 1, 0));
+			await this.counter.TriggerAll(new TimeSpan(0, 1, 0));
 		}
 
 		public void Set(bool Value)

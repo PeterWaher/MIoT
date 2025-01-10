@@ -143,7 +143,7 @@ namespace ConcentratorXmpp.Topology
 
 				if (Request.IsIncluded(FieldType.Historical))
 				{
-					Request.ReportFields(false, Fields);      // Allows for immediate response of momentary values.
+					await Request.ReportFields(false, Fields);      // Allows for immediate response of momentary values.
 					Fields.Clear();
 
 					foreach (LastMinute Rec in await Database.Find<LastMinute>(new FilterAnd(
@@ -153,7 +153,7 @@ namespace ConcentratorXmpp.Topology
 					{
 						if (Fields.Count > 50)
 						{
-							Request.ReportFields(false, Fields);
+							await Request.ReportFields(false, Fields);
 							Fields.Clear();
 						}
 
@@ -184,7 +184,7 @@ namespace ConcentratorXmpp.Topology
 
 					if (Fields.Count > 0)
 					{
-						Request.ReportFields(false, Fields);
+						await Request.ReportFields(false, Fields);
 						Fields.Clear();
 					}
 
@@ -195,7 +195,7 @@ namespace ConcentratorXmpp.Topology
 					{
 						if (Fields.Count > 50)
 						{
-							Request.ReportFields(false, Fields);
+							await Request.ReportFields(false, Fields);
 							Fields.Clear();
 						}
 
@@ -231,7 +231,7 @@ namespace ConcentratorXmpp.Topology
 					{
 						if (Fields.Count > 50)
 						{
-							Request.ReportFields(false, Fields);
+							await Request.ReportFields(false, Fields);
 							Fields.Clear();
 						}
 
@@ -261,11 +261,11 @@ namespace ConcentratorXmpp.Topology
 					}
 				}
 
-				Request.ReportFields(true, Fields);
+				await Request.ReportFields(true, Fields);
 			}
 			catch (Exception ex)
 			{
-				Request.ReportErrors(true, new ThingError(this, ex.Message));
+				await Request.ReportErrors(true, new ThingError(this, ex.Message));
 			}
 		}
 	}

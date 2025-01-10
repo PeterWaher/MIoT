@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Waher.Events;
 using Waher.Runtime.Language;
 using Waher.Things;
 using Waher.Things.SourceEvents;
@@ -25,7 +26,7 @@ namespace ConcentratorXmpp.Topology
 
 		public IEnumerable<INode> RootNodes => new INode[] { ActuatorNode, SensorNode };
 
-		public event SourceEventEventHandler OnEvent;
+		public event EventHandlerAsync<SourceEvent> OnEvent;
 
 		public Task<bool> CanViewAsync(RequestOrigin Caller)
 		{

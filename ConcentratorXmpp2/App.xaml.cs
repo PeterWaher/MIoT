@@ -41,6 +41,7 @@ using Waher.Things.SensorData;
 
 using ConcentratorXmpp.History;
 using ConcentratorXmpp.Topology;
+using Waher.Networking.XMPP.Events;
 
 namespace ConcentratorXmpp
 {
@@ -300,7 +301,7 @@ namespace ConcentratorXmpp
 					this.xmppClient.OnConnectionError += this.ConnectionError;
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-					this.xmppClient.Connect();
+					await this.xmppClient.Connect();
 				}
 			}
 			catch (Exception ex)
@@ -338,7 +339,7 @@ namespace ConcentratorXmpp
 					case ContentDialogResult.Primary:
 						if (this.xmppClient != null)
 						{
-							this.xmppClient.Dispose();
+							await this.xmppClient.DisposeAsync();
 							this.xmppClient = null;
 						}
 
@@ -358,7 +359,7 @@ namespace ConcentratorXmpp
 						this.xmppClient.OnConnectionError += this.ConnectionError;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-						this.xmppClient.Connect();
+						await this.xmppClient.Connect();
 						break;
 
 					case ContentDialogResult.Secondary:
@@ -391,7 +392,7 @@ namespace ConcentratorXmpp
 			return Task.CompletedTask;
 		}
 
-		private void AttachFeatures()
+		private async Task AttachFeatures()
 		{
 			if (this.concentratorServer != null)
 			{
@@ -399,7 +400,7 @@ namespace ConcentratorXmpp
 				this.concentratorServer = null;
 			}
 
-			this.concentratorServer = new ConcentratorServer(this.xmppClient, this.registryClient, this.provisioningClient, new MeteringTopology());
+			this.concentratorServer = await ConcentratorServer.Create(this.xmppClient, this.registryClient, this.provisioningClient, new MeteringTopology());
 
 			if (this.newXmppClient)
 			{
@@ -411,7 +412,11 @@ namespace ConcentratorXmpp
 					return Task.CompletedTask;
 				};
 
-				this.xmppClient.OnPasswordChanged += (Sender, e) => Log.Informational("Password changed.", this.xmppClient.BareJID);
+				this.xmppClient.OnPasswordChanged += (Sender, e) =>
+				{
+					Log.Informational("Password changed.", this.xmppClient.BareJID);
+					return Task.CompletedTask;
+				};
 
 				this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
 				{
@@ -520,7 +525,7 @@ namespace ConcentratorXmpp
 
 		private async Task QueryVCardHandler(object Sender, IqEventArgs e)
 		{
-			e.IqResult(await this.GetVCardXml());
+			await e.IqResult(await this.GetVCardXml());
 		}
 
 		private async Task SetVCard()
@@ -529,7 +534,7 @@ namespace ConcentratorXmpp
 
 			// XEP-0054 - vcard-temp: http://xmpp.org/extensions/xep-0054.html
 
-			this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
+			await this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
 			{
 				if (e.Ok)
 					Log.Informational("vCard successfully set.");
@@ -840,7 +845,7 @@ namespace ConcentratorXmpp
 				if (Timestamp.Second == 0 && this.xmppClient != null &&
 					(this.xmppClient.State == XmppState.Error || this.xmppClient.State == XmppState.Offline))
 				{
-					this.xmppClient.Reconnect();
+					await this.xmppClient.Reconnect();
 				}
 			}
 			catch (Exception ex)
@@ -878,14 +883,14 @@ namespace ConcentratorXmpp
 
 			if (!string.IsNullOrEmpty(ThingRegistryJid) && !string.IsNullOrEmpty(ProvisioningJid))
 			{
-				this.UseProvisioningServer(ProvisioningJid, OwnerJid);
+				await this.UseProvisioningServer(ProvisioningJid, OwnerJid);
 				await this.RegisterDevice(ThingRegistryJid, OwnerJid);
 			}
 			else
 			{
 				Log.Informational("Searching for Thing Registry and Provisioning Server.");
 
-				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
+				await this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
 					foreach (Item Item in e.Items)
 					{
@@ -898,7 +903,7 @@ namespace ConcentratorXmpp
 								if (e2.HasAnyFeature(ProvisioningClient.NamespacesProvisioningDevice))
 								{
 									Log.Informational("Provisioning server found.", Item2.JID);
-									this.UseProvisioningServer(Item2.JID, OwnerJid);
+									await this.UseProvisioningServer(Item2.JID, OwnerJid);
 									await RuntimeSettings.SetAsync("ProvisioningServer.JID", Item2.JID);
 								}
 
@@ -923,7 +928,7 @@ namespace ConcentratorXmpp
 			}
 		}
 
-		private void UseProvisioningServer(string JID, string OwnerJid)
+		private async Task UseProvisioningServer(string JID, string OwnerJid)
 		{
 			if (this.provisioningClient is null ||
 				this.provisioningClient.ProvisioningServerAddress != JID ||
@@ -940,9 +945,10 @@ namespace ConcentratorXmpp
 				this.provisioningClient.CacheCleared += (sender, e) =>
 				{
 					Log.Informational("Rule cache cleared.");
+					return Task.CompletedTask;
 				};
 
-				this.AttachFeatures();
+				await this.AttachFeatures();
 			}
 		}
 
@@ -1162,7 +1168,7 @@ namespace ConcentratorXmpp
 			Array.Resize<MetaDataTag>(ref MetaInfo, c + 1);
 			MetaInfo[c] = new MetaDataStringTag("KEY", Key);
 
-			this.registryClient.RegisterThing(false, NodeID, SourceID, MetaInfo, async (sender, e) =>
+			await this.registryClient.RegisterThing(false, NodeID, SourceID, MetaInfo, async (sender, e) =>
 			{
 				try
 				{
@@ -1314,7 +1320,7 @@ namespace ConcentratorXmpp
 			this.concentratorServer?.Dispose();
 			this.concentratorServer = null;
 
-			this.xmppClient?.Dispose();
+			this.xmppClient?.DisposeAsync().Wait();
 			this.xmppClient = null;
 
 			this.sampleTimer?.Dispose();
@@ -1340,7 +1346,7 @@ namespace ConcentratorXmpp
 			this.db?.Stop()?.Wait();
 			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

@@ -772,7 +772,7 @@ namespace SensorHttp
 			byte[] Binary = Data.ToArray();
 
 			Response.ContentType = "image/jpeg";
-			await Response.Write(Binary);
+			await Response.Write(true, Binary);
 		}
 
 		private async Task ReturnMomentaryAsWebp(HttpRequest Request, HttpResponse Response)
@@ -782,7 +782,7 @@ namespace SensorHttp
 			byte[] Binary = Data.ToArray();
 
 			Response.ContentType = "image/webp";
-			await Response.Write(Binary);
+			await Response.Write(true, Binary);
 		}
 
 		private SKImage GenerateGauge(HttpRequestHeader Header)
@@ -958,7 +958,7 @@ namespace SensorHttp
 			this.db?.Stop()?.Wait();
 			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

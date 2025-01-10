@@ -284,7 +284,10 @@ namespace ActuatorHttp
 						if (!req.HasData)
 							throw new BadRequestException();
 
-						if (!(await req.DecodeDataAsync() is string s) || !CommonTypes.TryParse(s, out bool OutputValue))
+						ContentResponse Content = await req.DecodeDataAsync();
+						Content.AssertOk();
+
+						if (!(Content.Decoded is string s) || !CommonTypes.TryParse(s, out bool OutputValue))
 							throw new BadRequestException();
 
 						if (req.Header.Accept != null)
@@ -579,7 +582,7 @@ namespace ActuatorHttp
 			this.db?.Stop()?.Wait();
 			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

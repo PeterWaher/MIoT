@@ -31,6 +31,7 @@ using Waher.Runtime.Inventory;
 using Waher.Runtime.Settings;
 using Waher.Things;
 using Waher.Things.SensorData;
+using Waher.Networking.XMPP.Events;
 
 namespace ControllerXmpp
 {
@@ -188,7 +189,7 @@ namespace ControllerXmpp
 					this.AttachFeatures();
 
 					Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-					this.xmppClient.Connect();
+					await this.xmppClient.Connect();
 				}
 
 				this.secondTimer = new Timer(this.SecondTimerCallback, null, 1000, 1000);
@@ -214,7 +215,7 @@ namespace ControllerXmpp
 					case ContentDialogResult.Primary:
 						if (this.xmppClient != null)
 						{
-							this.xmppClient.Dispose();
+							await this.xmppClient.DisposeAsync();
 							this.xmppClient = null;
 						}
 
@@ -237,7 +238,7 @@ namespace ControllerXmpp
 						this.xmppClient.OnRosterItemRemoved += this.XmppClient_OnRosterItemRemoved;
 
 						Log.Informational("Connecting to " + this.xmppClient.Host + ":" + this.xmppClient.Port.ToString());
-						this.xmppClient.Connect();
+						await this.xmppClient.Connect();
 						break;
 
 					case ContentDialogResult.Secondary:
@@ -383,30 +384,27 @@ namespace ControllerXmpp
 			this.xmppClient.OnPasswordChanged += (Sender, e) =>
 			{
 				Log.Informational("Password changed.", this.xmppClient.BareJID);
+				return Task.CompletedTask;
 			};
 
 			this.xmppClient.OnPresenceSubscribe += (Sender, e) =>
 			{
 				Log.Informational("Accepting friendship request.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-				return Task.CompletedTask;
+				return e.Accept();
 			};
 
 			this.xmppClient.OnPresenceUnsubscribe += (Sender, e) =>
 			{
 				Log.Informational("Friendship removed.", this.xmppClient.BareJID, e.From);
-				e.Accept();
-				return Task.CompletedTask;
+				return e.Accept();
 			};
 
-			this.xmppClient.OnPresenceSubscribed += (Sender, e) =>
+			this.xmppClient.OnPresenceSubscribed += async (Sender, e) =>
 			{
 				Log.Informational("Friendship request accepted.", this.xmppClient.BareJID, e.From);
 
 				if (string.Compare(e.FromBareJID, this.sensorJid, true) == 0)
-					this.SubscribeToSensorData();
-
-				return Task.CompletedTask;
+					await this.SubscribeToSensorData();
 			};
 
 			this.xmppClient.OnPresenceUnsubscribed += (Sender, e) =>
@@ -460,7 +458,7 @@ namespace ControllerXmpp
 
 		private async Task QueryVCardHandler(object Sender, IqEventArgs e)
 		{
-			e.IqResult(await this.GetVCardXml());
+			await e.IqResult(await this.GetVCardXml());
 		}
 
 		private async Task SetVCard()
@@ -469,7 +467,7 @@ namespace ControllerXmpp
 
 			// XEP-0054 - vcard-temp: http://xmpp.org/extensions/xep-0054.html
 
-			this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
+			await this.xmppClient.SendIqSet(string.Empty, await this.GetVCardXml(), (sender, e) =>
 			{
 				if (e.Ok)
 					Log.Informational("vCard successfully set.");
@@ -519,7 +517,7 @@ namespace ControllerXmpp
 			{
 				Log.Informational("Searching for Thing Registry.");
 
-				this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
+				await this.xmppClient.SendServiceItemsDiscoveryRequest(this.xmppClient.Domain, (sender, e) =>
 				{
 					foreach (Item Item in e.Items)
 					{
@@ -706,7 +704,7 @@ namespace ControllerXmpp
 						Log.Informational("Registration successful.");
 
 						await RuntimeSettings.SetAsync("ThingRegistry.Location", true);
-						this.FindFriends(MetaInfo);
+						await this.FindFriends(MetaInfo);
 					}
 					else
 					{
@@ -725,7 +723,7 @@ namespace ControllerXmpp
 		{
 			Log.Informational("Updating registration of device.");
 
-			this.registryClient.UpdateThing(MetaInfo, (sender, e) =>
+			this.registryClient.UpdateThing(MetaInfo, async (sender, e) =>
 			{
 				if (e.Ok)
 					Log.Informational("Registration update successful.");
@@ -735,14 +733,12 @@ namespace ControllerXmpp
 					this.RegisterDevice(MetaInfo);
 				}
 
-				this.FindFriends(MetaInfo);
-
-				return Task.CompletedTask;
+				await this.FindFriends(MetaInfo);
 
 			}, null);
 		}
 
-		private void FindFriends(MetaDataTag[] MetaInfo)
+		private async Task FindFriends(MetaDataTag[] MetaInfo)
 		{
 			double ms = (DateTime.Now - this.lastFindFriends).TotalMilliseconds;
 			if (ms < 60000)     // Call at most once a minute
@@ -752,12 +748,12 @@ namespace ControllerXmpp
 
 				Log.Informational("Delaying search " + msi.ToString() + " ms.");
 
-				Timer = new Timer((P) =>
+				Timer = new Timer(async (P) =>
 				{
 					try
 					{
 						Timer?.Dispose();
-						this.FindFriends(MetaInfo);
+						await this.FindFriends(MetaInfo);
 					}
 					catch (Exception ex)
 					{
@@ -790,7 +786,7 @@ namespace ControllerXmpp
 			}
 
 			if (!string.IsNullOrEmpty(this.sensorJid))
-				this.SubscribeToSensorData();
+				await this.SubscribeToSensorData();
 
 			if (string.IsNullOrEmpty(this.sensorJid) || string.IsNullOrEmpty(this.actuatorJid))
 			{
@@ -822,7 +818,7 @@ namespace ControllerXmpp
 
 				Log.Informational("Searching for MIoT devices in my vicinity.");
 
-				this.registryClient.Search(0, 100, Search.ToArray(), (sender, e) =>
+				await this.registryClient.Search(0, 100, Search.ToArray(), (sender, e) =>
 				{
 					Log.Informational(e.Things.Length.ToString() + (e.More ? "+" : string.Empty) + " things found.");
 
@@ -984,7 +980,7 @@ namespace ControllerXmpp
 				Task.Run(this.RegisterDevice);
 		}
 
-		private Task XmppClient_OnRosterItemUpdated(object _, RosterItem Item)
+		private async Task XmppClient_OnRosterItemUpdated(object _, RosterItem Item)
 		{
 			bool IsSensor;
 
@@ -998,9 +994,7 @@ namespace ControllerXmpp
 				this.FriendshipLost(Item);
 			}
 			else if (IsSensor)
-				this.SubscribeToSensorData();
-
-			return Task.CompletedTask;
+				await this.SubscribeToSensorData();
 		}
 
 		private Task XmppClient_OnRosterItemAdded(object _, RosterItem Item)
@@ -1016,7 +1010,7 @@ namespace ControllerXmpp
 			return Task.CompletedTask;
 		}
 
-		private Task XmppClient_OnPresence(object Sender, PresenceEventArgs e)
+		private async Task XmppClient_OnPresence(object Sender, PresenceEventArgs e)
 		{
 			Log.Informational("Presence received.", e.Availability.ToString(), e.From);
 
@@ -1024,13 +1018,11 @@ namespace ControllerXmpp
 				string.Compare(e.FromBareJID, this.sensorJid, true) == 0 &&
 				e.IsOnline)
 			{
-				this.SubscribeToSensorData();
+				await this.SubscribeToSensorData();
 			}
-
-			return Task.CompletedTask;
 		}
 
-		private void SubscribeToSensorData()
+		private async Task SubscribeToSensorData()
 		{
 			RosterItem SensorItem;
 
@@ -1048,13 +1040,13 @@ namespace ControllerXmpp
 
 					if (this.subscription != null)
 					{
-						this.subscription.Unsubscribe();
+						await this.subscription.Unsubscribe();
 						this.subscription = null;
 					}
 
 					Log.Informational("Subscribing to events.", SensorItem.LastPresenceFullJid);
 
-					this.subscription = this.sensorClient.Subscribe(SensorItem.LastPresenceFullJid,
+					this.subscription = await this.sensorClient.Subscribe(SensorItem.LastPresenceFullJid,
 						Nodes, FieldType.Momentary, new FieldSubscriptionRule[]
 						{
 							new FieldSubscriptionRule("Light", this.light, 1),
@@ -1071,7 +1063,7 @@ namespace ControllerXmpp
 				else if (SensorItem.State == SubscriptionState.From || SensorItem.State == SubscriptionState.None)
 				{
 					Log.Informational("Requesting presence subscription.", this.sensorJid);
-					this.xmppClient.RequestPresenceSubscription(this.sensorJid);
+					await this.xmppClient.RequestPresenceSubscription(this.sensorJid);
 				}
 			}
 		}
@@ -1164,52 +1156,59 @@ namespace ControllerXmpp
 			return Task.CompletedTask;
 		}
 
-		private void SecondTimerCallback(object State)
+		private async void SecondTimerCallback(object State)
 		{
-			DateTime Now = DateTime.Now;
-			double SecondsSinceLastEvent = Math.Min(
-				(Now - this.lastEventFields).TotalSeconds,
-				(Now - this.lastEventErrors).TotalSeconds);
-			double SecondsSinceLastOutput = (Now - this.lastOutput).TotalSeconds;
-			RosterItem Item;
-			bool Search = false;
-
-			if (this.subscription != null && SecondsSinceLastEvent > 70)
-				this.SubscribeToSensorData();
-			else if (SecondsSinceLastEvent > 60 * 60 * 24)
+			try
 			{
-				if (!string.IsNullOrEmpty(this.sensorJid))
+				DateTime Now = DateTime.Now;
+				double SecondsSinceLastEvent = Math.Min(
+					(Now - this.lastEventFields).TotalSeconds,
+					(Now - this.lastEventErrors).TotalSeconds);
+				double SecondsSinceLastOutput = (Now - this.lastOutput).TotalSeconds;
+				RosterItem Item;
+				bool Search = false;
+
+				if (this.subscription != null && SecondsSinceLastEvent > 70)
+					await this.SubscribeToSensorData();
+				else if (SecondsSinceLastEvent > 60 * 60 * 24)
 				{
-					Item = this.xmppClient[this.sensorJid];
+					if (!string.IsNullOrEmpty(this.sensorJid))
+					{
+						Item = this.xmppClient[this.sensorJid];
 
-					this.sensor = null;
-					this.sensorJid = null;
+						this.sensor = null;
+						this.sensorJid = null;
 
-					if (Item != null)
-						this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name, this.RemoveReference(Item.Groups, "Sensor"));
+						if (Item != null)
+							await this.xmppClient.UpdateRosterItem(this.sensorJid, Item.Name, this.RemoveReference(Item.Groups, "Sensor"));
+					}
+
+					Search = true;
 				}
 
-				Search = true;
-			}
-
-			if (SecondsSinceLastOutput > 60 * 60 * 24)
-			{
-				if (!string.IsNullOrEmpty(this.actuatorJid))
+				if (SecondsSinceLastOutput > 60 * 60 * 24)
 				{
-					Item = this.xmppClient[this.actuatorJid];
+					if (!string.IsNullOrEmpty(this.actuatorJid))
+					{
+						Item = this.xmppClient[this.actuatorJid];
 
-					this.actuator = null;
-					this.actuatorJid = null;
+						this.actuator = null;
+						this.actuatorJid = null;
 
-					if (Item != null)
-						this.xmppClient.UpdateRosterItem(this.actuatorJid, Item.Name, this.RemoveReference(Item.Groups, "Actuator"));
+						if (Item != null)
+							await this.xmppClient.UpdateRosterItem(this.actuatorJid, Item.Name, this.RemoveReference(Item.Groups, "Actuator"));
+					}
+
+					Search = true;
 				}
 
-				Search = true;
+				if (Search)
+					await this.RegisterDevice();
 			}
-
-			if (Search)
-				Task.Run(this.RegisterDevice);
+			catch (Exception ex)
+			{
+				Log.Exception(ex);
+			}
 		}
 
 		private string[] RemoveReference(string[] Groups, string Prefix)
@@ -1271,7 +1270,7 @@ namespace ControllerXmpp
 			this.controlClient?.Dispose();
 			this.controlClient = null;
 
-			this.xmppClient?.Dispose();
+			this.xmppClient?.DisposeAsync().Wait();
 			this.xmppClient = null;
 
 			this.secondTimer?.Dispose();
@@ -1280,7 +1279,7 @@ namespace ControllerXmpp
 			this.db?.Stop()?.Wait();
 			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

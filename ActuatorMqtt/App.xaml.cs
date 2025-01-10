@@ -60,7 +60,7 @@ namespace ActuatorMqtt
 		public App()
 		{
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
+			this.Suspending += this.OnSuspending;
 		}
 
 		/// <summary>
@@ -77,7 +77,7 @@ namespace ActuatorMqtt
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
 
-				rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += this.OnNavigationFailed;
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
 				{
@@ -123,11 +123,11 @@ namespace ActuatorMqtt
 					typeof(RuntimeSettings).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				this.db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
-				Database.Register(db);
-				await db.RepairIfInproperShutdown(null);
-				await db.Start();
+				Database.Register(this.db);
+				await this.db.RepairIfInproperShutdown(null);
+				await this.db.Start();
 
 #if GPIO
 				gpio = GpioController.GetDefault();
@@ -354,7 +354,7 @@ namespace ActuatorMqtt
 			if (instance == this)
 				instance = null;
 
-			this.mqttClient?.Dispose();
+			this.mqttClient?.DisposeAsync().Wait();
 			this.mqttClient = null;
 
 			this.reconnectionTimer?.Dispose();
@@ -381,10 +381,10 @@ namespace ActuatorMqtt
 				this.arduinoUsb = null;
 			}
 #endif
-			db?.Stop()?.Wait();
-			db?.Flush()?.Wait();
+			this.db?.Stop()?.Wait();
+			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

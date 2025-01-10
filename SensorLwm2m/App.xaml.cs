@@ -86,7 +86,7 @@ namespace SensorLwm2m
 		public App()
 		{
 			this.InitializeComponent();
-			this.Suspending += OnSuspending;
+			this.Suspending += this.OnSuspending;
 		}
 
 		/// <summary>
@@ -103,7 +103,7 @@ namespace SensorLwm2m
 				// Create a Frame to act as the navigation context and navigate to the first page
 				rootFrame = new Frame();
 
-				rootFrame.NavigationFailed += OnNavigationFailed;
+				rootFrame.NavigationFailed += this.OnNavigationFailed;
 
 				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
 				{
@@ -153,11 +153,11 @@ namespace SensorLwm2m
 					typeof(Lwm2mClient).GetTypeInfo().Assembly,
 					typeof(App).GetTypeInfo().Assembly);
 
-				db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
+				this.db = await FilesProvider.CreateAsync(Windows.Storage.ApplicationData.Current.LocalFolder.Path +
 					Path.DirectorySeparatorChar + "Data", "Default", 8192, 1000, 8192, Encoding.UTF8, 10000);
-				Database.Register(db);
-				await db.RepairIfInproperShutdown(null);
-				await db.Start();
+				Database.Register(this.db);
+				await this.db.RepairIfInproperShutdown(null);
+				await this.db.Start();
 
 				DeviceInformationCollection Devices = await UsbSerial.listAvailableDevicesAsync();
 				DeviceInformation DeviceInfo = this.FindDevice(Devices, "Arduino", "USB Serial Device");
@@ -318,7 +318,7 @@ namespace SensorLwm2m
 
 				this.momentaryResource?.TriggerAll(new TimeSpan(0, 0, 5));
 
-				this.lwm2mClient = new Lwm2mClient("MIoT:Sensor:" + this.deviceId, this.coapEndpoint,
+				this.lwm2mClient = await Lwm2mClient.Create("MIoT:Sensor:" + this.deviceId, this.coapEndpoint,
 					new Lwm2mSecurityObject(),
 					new Lwm2mServerObject(),
 					new Lwm2mAccessControlObject(),
@@ -336,11 +336,13 @@ namespace SensorLwm2m
 				this.lwm2mClient.OnStateChanged += (sender, e) =>
 				{
 					Log.Informational("LWM2M state changed to " + this.lwm2mClient.State.ToString() + ".");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnBootstrapCompleted += (sender, e) =>
 				{
 					Log.Informational("Bootstrap procedure completed.");
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnBootstrapFailed += (sender, e) =>
@@ -358,6 +360,8 @@ namespace SensorLwm2m
 							Log.Exception(ex);
 						}
 					}, DateTime.Now.AddMinutes(15), null);
+				
+					return Task.CompletedTask;
 				};
 
 				this.lwm2mClient.OnRegistrationSuccessful += (sender, e) =>
@@ -866,10 +870,10 @@ namespace SensorLwm2m
 				this.arduinoUsb = null;
 			}
 
-			db?.Stop()?.Wait();
-			db?.Flush()?.Wait();
+			this.db?.Stop()?.Wait();
+			this.db?.Flush()?.Wait();
 
-			Log.Terminate();
+			Log.TerminateAsync().Wait();
 
 			deferral.Complete();
 		}

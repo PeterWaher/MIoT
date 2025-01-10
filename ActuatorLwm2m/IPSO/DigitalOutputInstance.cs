@@ -29,16 +29,7 @@ namespace ActuatorLwm2m.IPSO
 				this.state.TriggerAll();
 				this.TriggerAll();
 
-				try
-				{
-					this.OnRemoteUpdate?.Invoke(this, e);
-				}
-				catch (Exception ex)
-				{
-					Log.Exception(ex);
-				}
-			
-				return Task.CompletedTask;
+				return this.OnRemoteUpdate.Raise(this, e);
 			};
 
 			this.Add(this.state);
@@ -47,19 +38,19 @@ namespace ActuatorLwm2m.IPSO
 				this.Add(this.applicationType);
 		}
 
-		public event CoapRequestEventHandler OnRemoteUpdate = null;
+		public event EventHandlerAsync<CoapRequestEventArgs> OnRemoteUpdate = null;
 
 		public bool Value
 		{
 			get { return this.state.BooleanValue.HasValue && this.state.BooleanValue.Value; }
 		}
 
-		public override void AfterRegister(Lwm2mClient Client)
+		public override async Task AfterRegister(Lwm2mClient Client)
 		{
-			base.AfterRegister(Client);
+			await base.AfterRegister(Client);
 
-			this.TriggerAll(new TimeSpan(0, 1, 0));
-			this.state.TriggerAll(new TimeSpan(0, 1, 0));
+			await this.TriggerAll(new TimeSpan(0, 1, 0));
+			await this.state.TriggerAll(new TimeSpan(0, 1, 0));
 		}
 
 		public void Set(bool Value)
