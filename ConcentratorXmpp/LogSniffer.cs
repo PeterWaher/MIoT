@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using Waher.Events;
 using Waher.Networking.Sniffers;
@@ -9,6 +8,8 @@ namespace ActuatorHttp
 {
 	public class LogSniffer : SnifferBase
 	{
+		public override BinaryPresentationMethod BinaryPresentationMethod => BinaryPresentationMethod.Hexadecimal;
+
 		public override Task Process(SnifferError Event)
 		{
 			Log.Error(Event.Text);
