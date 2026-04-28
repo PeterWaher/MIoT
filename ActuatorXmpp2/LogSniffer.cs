@@ -9,6 +9,11 @@ namespace ActuatorHttp
 {
 	public class LogSniffer : SnifferBase
 	{
+		public LogSniffer()
+			: base(nameof(LogSniffer))
+		{
+		}
+
 		public override BinaryPresentationMethod BinaryPresentationMethod => BinaryPresentationMethod.Hexadecimal;
 
 		public override Task Process(SnifferError Event, CancellationToken Cancel)

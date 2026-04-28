@@ -842,12 +842,17 @@ namespace SensorHttp
 				Gradient.Dispose();
 				Path.Dispose();
 
-				SKPaint Font = new SKPaint()
+				SKPaint Pen = new SKPaint()
 				{
 					IsAntialias = true,
-					Color = SKColors.Black,
-					HintingLevel = SKPaintHinting.Full,
-					TextSize = Height * 0.05f
+					Color = SKColors.Black
+				};
+
+				SKFont Font = new SKFont()
+				{
+					Hinting = SKFontHinting.Full,
+					Size = Height * 0.05f,
+					Typeface = SKTypeface.Default
 				};
 
 				SKPaint Needle = new SKPaint()
@@ -880,7 +885,7 @@ namespace SensorHttp
 					Canvas.Translate(LabelX, LabelY);
 					Canvas.RotateDegrees(LabelDeg);
 					Canvas.Translate(-TextWidth * 0.5f, -TextHeight * 0.5f);
-					Canvas.DrawText(s, 0, 0, Font);
+					Canvas.DrawText(s, 0, 0, Font, Pen);
 					Canvas.ResetMatrix();
 				}
 
@@ -932,7 +937,7 @@ namespace SensorHttp
 			if (instance == this)
 				instance = null;
 
-			this.httpServer?.Dispose();
+			this.httpServer.DisposeAsync().Wait();
 			this.httpServer = null;
 
 			this.sampleTimer?.Dispose();

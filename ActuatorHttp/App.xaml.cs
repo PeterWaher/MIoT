@@ -555,7 +555,7 @@ namespace ActuatorHttp
 			if (instance == this)
 				instance = null;
 
-			this.httpServer?.Dispose();
+			this.httpServer.DisposeAsync().Wait();
 			this.httpServer = null;
 
 #if GPIO
