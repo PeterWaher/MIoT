@@ -38,6 +38,7 @@ using Waher.Script;
 using Waher.Security;
 using Waher.Security.JWS;
 using Waher.Security.JWT;
+using Waher.Content.Markdown.Web.WebScript;
 
 namespace ActuatorHttp
 {
@@ -382,6 +383,15 @@ namespace ActuatorHttp
 
 				}, true, false, true);
 
+				// Protecting Markdown resources:
+				if (!MarkdownCodec.IsRawEncodingAllowedLocked)
+					MarkdownCodec.AllowRawEncoding(false, true);
+				HttpFolderResource.ProtectContentType(MarkdownCodec.ContentType);
+
+				// Protecting web-script resources:
+				if (!WsCodec.IsRawEncodingAllowedLocked)
+					WsCodec.AllowRawEncoding(false, true);
+				HttpFolderResource.ProtectContentType(WsCodec.ContentType);
 			}
 			catch (Exception ex)
 			{

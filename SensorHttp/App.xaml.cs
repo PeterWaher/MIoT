@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Microsoft.Maker.RemoteWiring;
+using Microsoft.Maker.Serial;
+using SensorHttp.History;
+using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -6,23 +10,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Core;
-using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-using Windows.Devices.Enumeration;
-using Windows.Storage;
-using Microsoft.Maker.RemoteWiring;
-using Microsoft.Maker.Serial;
-using SkiaSharp;
 using Waher.Content;
 using Waher.Content.Images;
 using Waher.Content.Markdown;
 using Waher.Content.Markdown.Web;
+using Waher.Content.Markdown.Web.WebScript;
 using Waher.Events;
 using Waher.Networking.HTTP;
 using Waher.Persistence;
@@ -36,8 +28,15 @@ using Waher.Script.Graphs;
 using Waher.Security;
 using Waher.Security.JWS;
 using Waher.Security.JWT;
-
-using SensorHttp.History;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.Devices.Enumeration;
+using Windows.Storage;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace SensorHttp
 {
@@ -354,6 +353,15 @@ namespace SensorHttp
 
 				}, true, false, true);
 
+				// Protecting Markdown resources:
+				if (!MarkdownCodec.IsRawEncodingAllowedLocked)
+					MarkdownCodec.AllowRawEncoding(false, true);
+				HttpFolderResource.ProtectContentType(MarkdownCodec.ContentType);
+
+				// Protecting web-script resources:
+				if (!WsCodec.IsRawEncodingAllowedLocked)
+					WsCodec.AllowRawEncoding(false, true);
+				HttpFolderResource.ProtectContentType(WsCodec.ContentType);	
 			}
 			catch (Exception ex)
 			{
