@@ -338,6 +338,8 @@ namespace SensorCoap
 		public class User : IUser
 		{
 			public string UserName => "MIoT";
+			public string FederatedUserName => this.UserName;
+			public string FriendlyName => this.UserName;
 			public string PasswordHash => instance.CalcHash("rox");
 			public string PasswordHashType => "SHA-256";
 

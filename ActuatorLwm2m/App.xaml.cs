@@ -193,13 +193,13 @@ namespace ActuatorLwm2m
 							Log.Informational("Device ready.");
 
 							this.arduino.pinMode(13, PinMode.OUTPUT);    // Onboard LED.
-								this.arduino.digitalWrite(13, PinState.HIGH);
+							this.arduino.digitalWrite(13, PinState.HIGH);
 
 							this.arduino.pinMode(8, PinMode.INPUT);      // PIR sensor (motion detection).
 
-								this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
+							this.arduino.pinMode(9, PinMode.OUTPUT);     // Relay.
 
-								this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
+							this.output = await RuntimeSettings.GetAsync("Actuator.Output", false);
 							this.arduino.digitalWrite(9, this.output.Value ? PinState.HIGH : PinState.LOW);
 
 							this.digitalOutput0?.Set(this.output.Value);
@@ -210,7 +210,7 @@ namespace ActuatorLwm2m
 								new KeyValuePair<string, object>("Output", this.output.Value));
 
 							this.arduino.pinMode("A0", PinMode.ANALOG); // Light sensor.
-							}
+						}
 						catch (Exception ex)
 						{
 							Log.Exception(ex);
@@ -365,7 +365,7 @@ namespace ActuatorLwm2m
 							Log.Exception(ex);
 						}
 					}, DateTime.Now.AddMinutes(15), null);
-				
+
 					return Task.CompletedTask;
 				};
 
@@ -469,6 +469,8 @@ namespace ActuatorLwm2m
 		public class User : IUser
 		{
 			public string UserName => "MIoT";
+			public string FederatedUserName => this.UserName;
+			public string FriendlyName => this.UserName;
 			public string PasswordHash => instance.CalcHash("rox");
 			public string PasswordHashType => "SHA-256";
 

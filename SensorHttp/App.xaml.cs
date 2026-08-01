@@ -53,7 +53,7 @@ namespace SensorHttp
 		private Timer sampleTimer = null;
 		private HttpServer httpServer = null;
 		private readonly IUserSource users = new Users();
-		private readonly JwtFactory tokenFactory = JwtFactory.CreateHmacSha256();
+		private JwtFactory tokenFactory;
 		private JwtAuthentication tokenAuthentication;
 
 		private const int windowSize = 10;
@@ -226,6 +226,7 @@ namespace SensorHttp
 
 				Log.Informational("Device ID: " + this.deviceId);
 
+				this.tokenFactory = JwtFactory.CreateHmacSha256(this.deviceId);
 				this.tokenAuthentication = new JwtAuthentication(this.deviceId, this.users, this.tokenFactory);
 
 				this.httpServer = new HttpServer();
@@ -401,6 +402,8 @@ namespace SensorHttp
 		public class User : IUser
 		{
 			public string UserName => "MIoT";
+			public string FederatedUserName => this.UserName;
+			public string FriendlyName => this.UserName;
 			public string PasswordHash => instance.CalcHash("rox");
 			public string PasswordHashType => "SHA-256";
 
